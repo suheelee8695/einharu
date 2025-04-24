@@ -10,95 +10,101 @@ body {
   background: #fff;
 }
 
-/* wrapper is fluid but caps at 1440px */
+/* wrapper caps at 1440px */
 .wrapper {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
+  position: relative;
 }
 
-/* header stays on top */
+/* header: transparent, logo 120px from left */
 .header {
-  height: 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5rem;                  /* 80px */
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  background: #fff;
+  padding: 0 1.25rem 0 7.5rem;    /* right 20px, left 120px */
+  background: transparent;
   z-index: 10;
-  position: relative;
 }
 
-.logo {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.176px;
-  color: #000;
+/* logo SVG sizing */
+.logo img {
+  display: block;
+  height: 2.5rem;                /* 40px */
+  width: auto;
 }
 
-/* main area: text + hero side by side */
+/* main wrapper */
 .main {
-  display: flex;
   position: relative;
+  display: flex;
+  min-height: 100vh;             /* full viewport height */
 }
 
-/* text block */
+/* text block: 120px from left, 146px from top */
 .content {
-  flex: 1;
-  padding: 16px 20px 0;
+  margin-left: 7.5rem;           /* 120px */
+  margin-top: 15rem;         
+  max-width: 487px;
+  z-index: 20;
 }
 
 .content h1 {
-  font-size: 16px;
+  font-size: 1rem;               /* 16px */
   font-weight: 600;
-  line-height: 20px;
+  line-height: 1.25rem;          /* 20px */
   letter-spacing: -0.176px;
   color: #000;
 }
 
 .content p {
-  margin-top: 12px;
-  font-size: 12px;
+  margin-top: 0.75rem;           /* 12px */
+  font-size: 0.75rem;            /* 12px */
   font-weight: 400;
-  line-height: 20px;
+  line-height: 1.25rem;          /* 20px */
   letter-spacing: -0.132px;
   color: #909090;
-  max-width: 487px; /* from your Figma */
 }
 
-/* hero image container */
+/* hero image: fixed width + full viewport height */
 .hero-container {
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 606px;
-  /* image is 606×909 → aspect 606/909 ≈ 0.667 */
-  aspect-ratio: 606 / 909;
+  height: 100vh;
   background: url('images/hero.png') center/cover no-repeat;
-  position: relative;
-  top: -34px; /* overlaps header */
   z-index: 0;
 }
 
-/* responsive ↓ */
+/* tablet scaling */
 @media (max-width: 1024px) {
   .hero-container {
-    width: 40vw;         /* scale down on tablets */
+    width: 40vw;
     max-width: 606px;
+    height: 100vh;
   }
-  .content p {
+  .content {
     max-width: 60vw;
   }
 }
 
+/* mobile stack */
 @media (max-width: 768px) {
   .main {
     flex-direction: column;
   }
-
   .hero-container {
-    width: 100%;         /* full-bleed on mobile */
-    top: 0;              /* no overlap */
+    position: relative;
+    width: 100%;
+    height: auto;                /* let image define its own height */
   }
-
   .content {
-    padding-top: 20px;   /* a bit more breathing room */
+    margin: 2rem 1rem 0;          /* adjust for smaller screens */
   }
 }
