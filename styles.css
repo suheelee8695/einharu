@@ -18,16 +18,15 @@ body {
   position: relative;
 }
 
-/* header: transparent, logo 120px from left */
+/* header: transparent on desktop */
 .header {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
-  height: 5rem;                  /* 80px */
+  height: 5rem;                       /* 80px */
   display: flex;
   align-items: center;
-  padding: 0 1.25rem 0 7.5rem;    /* right 20px, left 120px */
+  padding: 0 1.25rem 0 7.5rem;        /* right 20px, left 120px */
   background: transparent;
   z-index: 10;
 }
@@ -35,7 +34,7 @@ body {
 /* logo SVG sizing */
 .logo img {
   display: block;
-  height: 2.5rem;                /* 40px */
+  height: 2.5rem;                     /* 40px */
   width: auto;
 }
 
@@ -43,68 +42,106 @@ body {
 .main {
   position: relative;
   display: flex;
-  min-height: 100vh;             /* full viewport height */
-}
-
-/* text block: 120px from left, 146px from top */
-.content {
-  margin-left: 7.5rem;           /* 120px */
-  margin-top: 15rem;         
-  max-width: 487px;
-  z-index: 20;
-}
-
-.content h1 {
-  font-size: 1rem;               /* 16px */
-  font-weight: 600;
-  line-height: 1.25rem;          /* 20px */
-  letter-spacing: -0.176px;
-  color: #000;
-}
-
-.content p {
-  margin-top: 0.75rem;           /* 12px */
-  font-size: 0.75rem;            /* 12px */
-  font-weight: 400;
-  line-height: 1.25rem;          /* 20px */
-  letter-spacing: -0.132px;
-  color: #909090;
+  min-height: 100vh;                  /* full viewport height */
 }
 
 /* hero image: fixed width + full viewport height */
 .hero-container {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0; right: 0;
   width: 606px;
   height: 100vh;
   background: url('images/hero.png') center/cover no-repeat;
   z-index: 0;
 }
 
-/* tablet scaling */
+/* text block: 120px from left, 146px from top */
+.content {
+  margin-left: 7.5rem;                /* 120px */
+  margin-top: 9.125rem;               /* 146px */
+  max-width: 487px;
+  z-index: 20;
+  text-align: left;
+}
+.content h1 {
+  font-size: 1rem;                    /* 16px */
+  font-weight: 600;
+  line-height: 1.25rem;               /* 20px */
+  letter-spacing: -0.176px;
+  color: #000;
+}
+.content p {
+  margin-top: 0.75rem;                /* 12px */
+  font-size: 0.75rem;                 /* 12px */
+  font-weight: 400;
+  line-height: 1.25rem;               /* 20px */
+  letter-spacing: -0.132px;
+  color: #909090;
+}
+
+/* ────────── TABLET (≤1024px) ────────── */
 @media (max-width: 1024px) {
-  .hero-container {
-    width: 40vw;
-    max-width: 606px;
-    height: 100vh;
+  /* header: white bg + logo centered */
+  .header {
+    background: #fff;
+    justify-content: center;
+    padding: 0;
   }
+
+  /* stack image then content, center, with 32px gap */
+  .main {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  /* hero first in flow */
+  .hero-container {
+    order: 1;
+    position: relative;
+    width: 100%;
+    height: 60vh;                     /* 60% of viewport height */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 0; right: 0;
+  }
+
+  /* content below image, centered */
   .content {
-    max-width: 60vw;
+    order: 2;
+    margin: 0 auto;
+    width: calc(100% - 64px);         /* full minus 32px each side */
+    max-width: none;
+    padding: 0;
+    text-align: center;
   }
 }
 
-/* mobile stack */
+/* ────────── MOBILE (≤768px) ────────── */
 @media (max-width: 768px) {
+  /* header: logo centered, 16px side padding */
+  .header {
+    padding: 0 16px;
+  }
+
+  /* smaller gap between image & content */
   .main {
-    flex-direction: column;
+    gap: 16px;
   }
+
+  /* hero stays 60vh, still first */
   .hero-container {
-    position: relative;
-    width: 100%;
-    height: auto;                /* let image define its own height */
+    order: 1;
+    height: 60vh;
   }
+
+  /* content below hero, centered with 16px margins */
   .content {
-    margin: 2rem 1rem 0;          /* adjust for smaller screens */
+    order: 2;
+    margin: 0 auto;
+    width: calc(100% - 32px);         /* full minus 16px each side */
+    padding: 0;
+    text-align: center;
   }
 }
