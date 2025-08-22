@@ -1,93 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>einHARU studio — Coming Soon</title>
-    <meta
-      name="description"
-      content="einHARU studio brings handpicked, timeless fashion from independent Korean designers to Europe—minimal elegance, comfort, and quiet boldness."
-    />
-    <link rel="canonical" href="https://einharu.com/" />
-
-    <!-- Open Graph -->
-    <meta property="og:title"       content="einHARU studio — Coming Soon" />
-    <meta
-      property="og:description"
-      content="Handpicked Korean fashion from independent designers in Seoul—minimal elegance, comfort, and quiet boldness—landing soon in Europe."
-    />
-    <meta property="og:url"         content="https://einharu.com/" />
-    <meta property="og:image"       content="https://einharu.com/images/og-image.png" />
-
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- favicons -->
-    <link rel="icon"              href="favicon.ico" />
-    <link rel="icon" sizes="32x32" href="images/favicon-32x32.png" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="images/apple-touch-icon.png"
-    />
-
-    <!-- JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "einHARU studio",
-      "url": "https://einharu.com",
-      "logo": "https://einharu.com/images/logo.svg",
-      "description": "einHARU studio brings handpicked, timeless fashion from independent Korean designers to Europe—minimal elegance, comfort, and quiet boldness."
+<head>
+  <meta charset="UTF-8">
+  <title>einHaru Collective — Editorial Hero</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Ovo&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
     }
-    </script>
 
-    <!-- Google Analytics (replace with your ID) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z42LZ4WR68"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Z42LZ4WR68');
-    </script>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: 'Ovo', serif;
+      background: white;
+      overflow: hidden;
+    }
 
-    <!-- your CSS -->
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <header class="header">
-        <div class="logo">
-          <img src="images/Logo.svg" alt="einHARU studio logo" />
-        </div>
-      </header>
+    .container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
 
-      <main class="main">
-        <div class="content">
-          <h1>Coming Soon — einHARU studio</h1>
-          <p>
-            Where Seoul’s style meets Europe’s streets<br />
-            We’re almost ready to open our digital doors.<br />
-            einHARU studio brings handpicked, timeless fashion from
-            independent Korean designers to Europe. Rooted in Seoul’s
-            creative energy and reimagined for the modern European
-            wardrobe, our pieces blend minimal elegance, comfort, and
-            quiet boldness.<br />
-            This is just the beginning — our curated collections are on
-            their way.
-          </p>
-        </div>
+    .absolute {
+      position: absolute;
+      object-fit: cover;
+      object-position: center;
+    }
 
-        <div class="hero-container"></div>
-      </main>
+    .left-bottom {
+      width: 24.37vw;
+      height: 66.6vh;
+      left: 0;
+      top: 35.37vh;
+    }
+
+    .left-top {
+      width: 28.9vw;
+      height: 42.35vh;
+      left: 24.37vw;
+      top: 0;
+    }
+
+    .white-column {
+      width: 28.9vw;
+      height: 64.65vh;
+      left: 24.37vw;
+      top: 35.37vh;
+      background: white;
+    }
+
+    .right-tall {
+      width: 46.7vw;
+      height: 121.4vh;
+      left: 53.3vw;
+      top: 0;
+    }
+
+    .center-logo {
+      width: 22.63vw;
+      left: 27.56vw;
+      top: 43.61vh;
+    }
+
+    .header-logo {
+      width: 7.06vw;
+      left: 2.08vw;
+      top: 2.32vh;
+    }
+
+    .center-note {
+      width: 28.9vw;
+      left: 24.37vw;
+      top: 88.9vh;
+      font-size: 0.81vw;
+      text-align: center;
+      color: #535353;
+      position: absolute;
+    }
+
+    .center-note span:first-child {
+      color: #8796AC;
+    }
+
+    .intro-copy {
+      width: 19.45vw;
+      left: 2.08vw;
+      top: 10.12vh;
+      font-size: 0.81vw;
+      color: #8796AC;
+      white-space: pre-line;
+      position: absolute;
+    }
+
+    .disclosure {
+      width: 31.9vw;
+      left: 99.71vw;
+      top: 49.78vh;
+      transform: rotate(90deg);
+      transform-origin: top left;
+      font-size: 0.58vw;
+      color: #8796AC;
+      text-align: right;
+      position: absolute;
+    }
+
+    .mobile-wrapper {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      html, body {
+        overflow: auto;
+      }
+
+      .container {
+        display: none;
+      }
+
+      .mobile-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .mobile-header,
+      .mobile-footer {
+        background: white;
+        padding: 24px 16px;
+        text-align: center;
+      }
+
+      .mobile-header img {
+        width: 50%;
+        margin: 0 auto 20px;
+        display: block;
+      }
+
+      .mobile-intro {
+        font-size: 16px;
+        color: #8796AC;
+        white-space: pre-line;
+        line-height: 1.5;
+      }
+
+      .mobile-images img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .mobile-footer .mobile-note {
+        font-size: 16px;
+        color: #535353;
+        line-height: 1.5;
+      }
+
+      .mobile-footer .mobile-note span:first-child {
+        color: #8796AC;
+      }
+
+      .mobile-footer img {
+        display: none;
+      }
+
+      .mobile-disclosure {
+        font-size: 14px;
+        color: #8796AC;
+        text-align: center;
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Desktop Layout -->
+<div class="container">
+
+  <img src="images/einharu01.png" alt="einHaru editorial image left bottom"
+       class="absolute left-bottom" loading="lazy" decoding="async" />
+
+  <img src="images/einharu02.png" alt="einHaru editorial image left top"
+       class="absolute left-top" loading="lazy" decoding="async" />
+
+  <div class="absolute white-column"></div>
+
+  <img src="images/einharu03.png" alt="einHaru editorial image right tall"
+       class="absolute right-tall" loading="lazy" decoding="async" />
+
+  <div class="absolute center-logo">
+    <img src="images/einharulogo.svg" alt="einHaru logo" style="width:100%;">
+  </div>
+
+  <div class="absolute header-logo">
+    <img src="images/einharuheaderlogo.svg" alt="einHaru Collective header logo" style="width:100%;">
+  </div>
+
+  <div class="center-note">
+    <span>This is just the beginning.</span><br>
+    The einHaru Collective will soon reveal its first curated items
+  </div>
+
+  <div class="intro-copy">
+    Our name reflects our philosophy:
+    ein (German): “one / unique” — precision, individuality, a singular vision.
+    Haru 하루 (Korean): “day / flow of time” — renewal, freshness, the beauty of daily wear.
+    Together, einHaru represents “one unique day” — a reminder that fashion should be both timeless and ever-renewing, grounding your everyday in quiet confidence.
+  </div>
+
+  <div class="disclosure">
+    Currently sourcing — model images are AI-generated, other visuals created by us.
+  </div>
+</div>
+
+<!-- Mobile Layout -->
+<div class="mobile-wrapper">
+  <div class="mobile-header">
+    <img src="images/einharulogo.svg" alt="einHaru logo">
+    <div class="mobile-intro">
+      Our name reflects our philosophy:
+      ein (German): “one / unique” — precision, individuality, a singular vision.
+      Haru 하루 (Korean): “day / flow of time” — renewal, freshness, the beauty of daily wear.
+      Together, einHaru represents “one unique day” — a reminder that fashion should be both timeless and ever-renewing, grounding your everyday in quiet confidence.
     </div>
-  </body>
+  </div>
+
+  <div class="mobile-images">
+    <img src="images/einharu02.png" alt="einHaru editorial image left top">
+    <img src="images/einharu01.png" alt="einHaru editorial image left bottom">
+    <img src="images/einharu03.png" alt="einHaru editorial image right tall">
+  </div>
+
+  <div class="mobile-footer">
+    <div class="mobile-note">
+      <span>This is just the beginning.</span><br>
+      The einHaru Collective will soon reveal its first curated items
+    </div>
+  </div>
+
+  <div class="mobile-disclosure">
+    Currently sourcing — model images are AI-generated, other visuals created by us.
+  </div>
+</div>
+
+</body>
 </html>
