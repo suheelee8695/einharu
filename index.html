@@ -2,254 +2,345 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>einHaru Collective — Editorial Hero</title>
+  <title>einHaru Collective</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Ovo&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
       font-family: 'Ovo', serif;
       background: white;
-      overflow: hidden;
+      font-size: 16px;
+      width: 100%;
+      height: 100%;
     }
 
+    /* DESKTOP STYLES */
     .container {
-      position: fixed;
-      top: 0;
-      left: 0;
+      position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
     }
 
-    .absolute {
+    .block {
       position: absolute;
+      overflow: hidden;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .block img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: top;
+      display: block;
     }
 
-    .left-bottom {
-      width: 24.37vw;
-      height: 66.6vh;
-      left: 0;
-      top: 35.37vh;
+    .block1 {
+      left: 0%;
+      top: 0%;
+      width: 33.08%;
+      height: 47.3%;
+      padding: 0 4.63%;
+      display: flex;
+      align-items: center;
     }
 
-    .left-top {
-      width: 28.9vw;
-      height: 42.35vh;
-      left: 24.37vw;
-      top: 0;
+    .block2 {
+      left: 33.08%;
+      top: 0%;
+      width: 33.84%;
+      height: 47.3%;
     }
 
-    .white-column {
-      width: 28.9vw;
-      height: 64.65vh;
-      left: 24.37vw;
-      top: 35.37vh;
+    .block3 {
+      left: 66.92%;
+      top: 0%;
+      width: 33.08%;
+      height: 47.3%;
       background: white;
     }
 
-    .right-tall {
-      width: 46.7vw;
-      height: 121.4vh;
-      left: 53.3vw;
-      top: 0;
+    .block4 {
+      left: 0%;
+      top: 47.17%;
+      width: 33.2%;
+      height: 52.6%;
     }
 
-    .center-logo {
-      width: 22.63vw;
-      left: 27.56vw;
-      top: 43.61vh;
+    .block5 {
+      left: 33.2%;
+      top: 47.17%;
+      width: 33.8%;
+      height: 52.6%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
-    .header-logo {
-      width: 7.06vw;
-      left: 2.08vw;
-      top: 2.32vh;
+    .block6 {
+      left: 66.92%;
+      top: 47.17%;
+      width: 33.08%;
+      height: 52.6%;
     }
 
-    .center-note {
-      width: 28.9vw;
-      left: 24.37vw;
-      top: 88.9vh;
-      font-size: 0.81vw;
+    .block5 .logo {
+      display: block;
+      width: 50%;
+      max-width: 200px;
+      height: auto;
+    }
+
+    .block5 .note {
+      margin-top: 5rem;
       text-align: center;
+      font-size: 1rem;
       color: #535353;
+    }
+
+    .intro-text {
+      font-size: 0.875rem;
+      color: #A7B6CC;
+      line-height: 1.4;
+      padding-top: 4rem;
+    }
+
+    .header {
       position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4.6%;
+      background: transparent;
+      z-index: 10;
     }
 
-    .center-note span:first-child {
-      color: #8796AC;
+    .header .logo {
+      height: 40px;
+      width: auto;
     }
 
-    .intro-copy {
-      width: 19.45vw;
-      left: 2.08vw;
-      top: 10.12vh;
-      font-size: 0.81vw;
-      color: #8796AC;
-      white-space: pre-line;
-      position: absolute;
+    .instagram-btn {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      color: #A7B6CC;
+      font-size: 1rem;
+      cursor: pointer;
     }
 
-    .disclosure {
-      width: 31.9vw;
-      left: 99.71vw;
-      top: 49.78vh;
-      transform: rotate(90deg);
-      transform-origin: top left;
-      font-size: 0.58vw;
-      color: #8796AC;
-      text-align: right;
-      position: absolute;
+    .instagram-btn img {
+      width: 2rem;
+      height: 2rem;
+      margin-right: 0.5rem;
     }
 
-    .mobile-wrapper {
+    /* MOBILE STYLES */
+    .mobile-container {
       display: none;
     }
 
     @media (max-width: 768px) {
-      html, body {
-        overflow: auto;
-      }
+      .container { display: none; }
+      .mobile-container { display: block; overflow-y: auto; }
 
-      .container {
-        display: none;
-      }
-
-      .mobile-wrapper {
+      .mobile-header {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .mobile-header .logo {
+        height: 2rem;
+        cursor: pointer;
+      }
+
+      .mobile-header .instagram-btn {
+        display: flex;
+        align-items: center;
+        background: none;
+        border: none;
+        color: #A7B6CC;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .mobile-header .instagram-btn img {
+        width: 2rem;
+        height: 2rem;
+        margin-right: 0.5rem;
+      }
+
+      .mobile-block {
         width: 100%;
+        position: relative;
+        margin-bottom: 2rem;
       }
 
-      .mobile-header,
-      .mobile-footer {
-        background: white;
-        padding: 24px 16px;
-        text-align: center;
-      }
-
-      .mobile-header img {
-        width: 50%;
-        margin: 0 auto 20px;
-        display: block;
-      }
-
-      .mobile-intro {
-        font-size: 16px;
-        color: #8796AC;
-        white-space: pre-line;
-        line-height: 1.5;
-      }
-
-      .mobile-images img {
+      .mobile-block img {
         width: 100%;
         height: auto;
-        display: block;
+        object-fit: cover;
       }
 
-      .mobile-footer .mobile-note {
-        font-size: 16px;
+      .mobile-block.first-image {
+        margin-top: -80px;
+        z-index: 1;
+      }
+
+      .mobile-block.logo-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 1.5rem 4rem;
+        gap: 3rem;
+      }
+
+      .mobile-logo-img {
+        width: 70%;
+        max-width: 200px;
+        height: auto;
+      }
+
+      .mobile-note {
+        font-size: 0.875rem;
         color: #535353;
-        line-height: 1.5;
-      }
-
-      .mobile-footer .mobile-note span:first-child {
-        color: #8796AC;
-      }
-
-      .mobile-footer img {
-        display: none;
-      }
-
-      .mobile-disclosure {
-        font-size: 14px;
-        color: #8796AC;
         text-align: center;
-        padding: 20px 16px;
+        line-height: 1.4;
+      }
+
+      .mobile-block.text-block {
+        padding: 1rem 4rem 2rem;
+      }
+
+      .mobile-text-block {
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: #A7B6CC;
+        white-space: pre-line;
+      }
+
+      .mobile-rotated-note {
+        position: absolute;
+        bottom: 10%;
+        right: 10%;
+        transform: rotate(90deg);
+        transform-origin: right bottom;
+        color: #A7B6CC;
+        font-size: 0.6rem;
+        white-space: nowrap;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- Desktop Layout -->
-<div class="container">
+  <!-- DESKTOP VERSION -->
+  <div class="container">
+    <div class="header">
+      <img src="images/einharuheaderlogo.svg" alt="einHaru header logo" class="logo">
+      <button class="instagram-btn" onclick="window.open('https://www.instagram.com/einharucollective','_blank')">
+        <img src="images/instaicon.svg" alt="Instagram icon">
+        Connect with us
+      </button>
+    </div>
 
-  <img src="images/einharu01.png" alt="einHaru editorial image left bottom"
-       class="absolute left-bottom" loading="lazy" decoding="async" />
+    <div class="block block1">
+      <div class="intro-text">
+        Our name reflects our philosophy:<br>
+        ein (German): “one / unique” — precision, individuality, a singular vision.<br>
+        Haru 하루 (Korean): “day / flow of time” — renewal, freshness, the beauty of daily wear.<br>
+        Together, einHaru represents “one unique day” — a reminder that fashion should be both timeless and ever-renewing, grounding your everyday in quiet confidence.<br>
+        We are currently curating and sourcing carefully selected designer wholesale brands from Korea, building a collective that values quality, consistency, and style that lasts beyond a season.
+      </div>
+    </div>
 
-  <img src="images/einharu02.png" alt="einHaru editorial image left top"
-       class="absolute left-top" loading="lazy" decoding="async" />
+    <div class="block block2">
+      <img src="images/einharu02.png" alt="Model in white dress">
+    </div>
 
-  <div class="absolute white-column"></div>
+    <div class="block block3"></div>
 
-  <img src="images/einharu03.png" alt="einHaru editorial image right tall"
-       class="absolute right-tall" loading="lazy" decoding="async" />
+    <div class="block block4">
+      <img src="images/einharu01.png" alt="Model in black outfit">
+    </div>
 
-  <div class="absolute center-logo">
-    <img src="images/einharulogo.svg" alt="einHaru logo" style="width:100%;">
-  </div>
+    <div class="block block5">
+      <img src="images/einharulogo.svg" alt="einHaru logo" class="logo">
+      <div class="note">
+        This is just the beginning.<br>
+        The einHaru Collective will soon reveal its first curated items
+      </div>
+    </div>
 
-  <div class="absolute header-logo">
-    <img src="images/einharuheaderlogo.svg" alt="einHaru Collective header logo" style="width:100%;">
-  </div>
-
-  <div class="center-note">
-    <span>This is just the beginning.</span><br>
-    The einHaru Collective will soon reveal its first curated items
-  </div>
-
-  <div class="intro-copy">
-    Our name reflects our philosophy:
-    ein (German): “one / unique” — precision, individuality, a singular vision.
-    Haru 하루 (Korean): “day / flow of time” — renewal, freshness, the beauty of daily wear.
-    Together, einHaru represents “one unique day” — a reminder that fashion should be both timeless and ever-renewing, grounding your everyday in quiet confidence.
-  </div>
-
-  <div class="disclosure">
-    Currently sourcing — model images are AI-generated, other visuals created by us.
-  </div>
-</div>
-
-<!-- Mobile Layout -->
-<div class="mobile-wrapper">
-  <div class="mobile-header">
-    <img src="images/einharulogo.svg" alt="einHaru logo">
-    <div class="mobile-intro">
-      Our name reflects our philosophy:
-      ein (German): “one / unique” — precision, individuality, a singular vision.
-      Haru 하루 (Korean): “day / flow of time” — renewal, freshness, the beauty of daily wear.
-      Together, einHaru represents “one unique day” — a reminder that fashion should be both timeless and ever-renewing, grounding your everyday in quiet confidence.
+    <div class="block block6">
+      <img src="images/einharu03.png" alt="Model in leather jacket">
     </div>
   </div>
 
-  <div class="mobile-images">
-    <img src="images/einharu02.png" alt="einHaru editorial image left top">
-    <img src="images/einharu01.png" alt="einHaru editorial image left bottom">
-    <img src="images/einharu03.png" alt="einHaru editorial image right tall">
-  </div>
+  <!-- MOBILE VERSION -->
+  <div class="mobile-container" id="mobilePage">
+    <div class="mobile-header">
+      <img src="images/einharuheaderlogo.svg" alt="einHaru logo" class="logo" onclick="document.getElementById('mobilePage').scrollTo({ top: 0, behavior: 'smooth' });">
+      <button class="instagram-btn" onclick="window.open('https://www.instagram.com/einharucollective','_blank')">
+        <img src="images/instaicon.svg" alt="Instagram icon">
+        Connect with us
+      </button>
+    </div>
 
-  <div class="mobile-footer">
-    <div class="mobile-note">
-      <span>This is just the beginning.</span><br>
-      The einHaru Collective will soon reveal its first curated items
+    <div class="mobile-block first-image">
+      <img src="images/einharu02.png" alt="Model in white dress">
+    </div>
+
+    <div class="mobile-block logo-block">
+      <img src="images/einharulogo.svg" alt="einHaru logo" class="mobile-logo-img">
+      <div class="mobile-note">
+        This is just the beginning.<br>
+        The einHaru Collective will soon reveal its<br>
+        first curated items
+      </div>
+    </div>
+
+    <div class="mobile-block">
+      <img src="images/einharu01.png" alt="Model in black outfit">
+    </div>
+
+    <div class="mobile-block text-block">
+      <div class="mobile-text-block">
+        Our name reflects our philosophy:
+        ein (German): “one / unique” — precision, individuality, a singular vision.
+        Haru 하루 (Korean): “day / flow of time” — renewal, freshness, the beauty of daily wear.
+        Together, einHaru represents “one unique day” — a reminder that fashion should be both timeless and ever-renewing, grounding your everyday in quiet confidence.
+        We are currently curating and sourcing carefully selected designer wholesale brands from Korea, building a collective that values quality, consistency, and style that lasts beyond a season.
+      </div>
+    </div>
+
+    <div class="mobile-block">
+      <img src="images/einharu03.png" alt="Model in leather jacket">
+      <div class="mobile-rotated-note">
+        Currently sourcing — model images are AI‑generated, other visuals created by us.
+      </div>
     </div>
   </div>
-
-  <div class="mobile-disclosure">
-    Currently sourcing — model images are AI-generated, other visuals created by us.
-  </div>
-</div>
 
 </body>
 </html>
