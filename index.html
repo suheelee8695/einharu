@@ -57,9 +57,17 @@
       object-position: top;
       display: block;
     }
-    .block:hover img {
-  transform: scale(1.03);
-  transition: transform 0.5s ease;
+    .block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: object-position 3s ease;
+  display: block;
+}
+
+.block:hover img {
+  object-position: bottom;
 }
 
     .block1 {
