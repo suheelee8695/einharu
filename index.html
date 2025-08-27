@@ -35,6 +35,20 @@
       cursor: pointer;
       transition: background 0.3s;
     }
+    .block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(167, 182, 204, 0);
+  transition: background 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.block:hover::after {
+  background: rgba(167, 182, 204, 0.1);
+}
+
 
     .block img {
       width: 100%;
@@ -43,6 +57,10 @@
       object-position: top;
       display: block;
     }
+    .block:hover img {
+  transform: scale(1.03);
+  transition: transform 0.5s ease;
+}
 
     .block1 {
       left: 0%;
