@@ -198,7 +198,10 @@
     @media (max-width: 768px) {
       .container { display: none; }
       .mobile-container { display: block; overflow-y: auto; }
-
+      .instagram-btn .btn-text {
+        display: none;
+      }
+    
       .mobile-header {
         display: flex;
         justify-content: space-between;
@@ -306,7 +309,7 @@
       <img src="images/einharuheaderlogo.svg" alt="einHaru header logo" class="logo">
       <button class="instagram-btn" onclick="window.open('https://www.instagram.com/einharucollective','_blank')">
         <img src="images/instaicon.svg" alt="Instagram icon">
-        Connect with us
+        <span class="btn-text">Connect with us</span>
       </button>
     </div>
 
@@ -349,7 +352,7 @@
       <img src="images/einharuheaderlogo.svg" alt="einHaru logo" class="logo" onclick="document.getElementById('mobilePage').scrollTo({ top: 0, behavior: 'smooth' });">
       <button class="instagram-btn" onclick="window.open('https://www.instagram.com/einharucollective','_blank')">
         <img src="images/instaicon.svg" alt="Instagram icon">
-        Connect with us
+        <span class="btn-text">Connect with us</span> 
       </button>
     </div>
 
