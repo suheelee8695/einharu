@@ -1,0 +1,17 @@
+# netlify.toml
+
+[build]
+  # Your site is static, everything (index.html, product.html, etc.) is in root
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# CORS headers for functions (so frontend JS can call them)
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, GET, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Stripe-Signature"
