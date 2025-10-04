@@ -72,7 +72,19 @@ img {
   .site-header {
     padding: 16px;
   }
+
+  .product-detail-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gallery,
+  .sticky-panel {
+    flex: 1 1 100%;
+    width: 100%;
+  }
 }
+
 .icon-btn {
   all: unset; /* resets all UA styles safely */
   position: relative;
@@ -844,3 +856,40 @@ button.icon-btn::-moz-focus-inner {
 .status-list{display:grid;gap:6px;font-size:14px;}
 .status-list strong{font-weight:600;}
 
+/* ---- iOS Safari blue tint fix (buttons, dropdown/accordion) ---- */
+button,
+.accordion-trigger,
+summary,
+select {
+  -webkit-appearance: none; /* strip native iOS styling */
+  appearance: none;
+  background: transparent;  /* keep your minimalist look */
+  color: var(--ink);         /* match your theme text color */
+  border: none;              /* your buttons already use custom styles */
+}
+
+/* remove blue tap flash */
+button,
+a,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* keep clear, brand-consistent focus states for accessibility */
+button:focus-visible,
+.accordion-trigger:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--muted);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* keep your accordion +/– icon tidy when state changes (optional) */
+.accordion-trigger .accordion-icon {
+  display: inline-block;
+  transition: transform .25s ease;
+}
+.accordion[open] .accordion-icon,
+.accordion-trigger[aria-expanded="true"] .accordion-icon {
+  transform: rotate(45deg); /* + becomes × */
+}
