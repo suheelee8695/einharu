@@ -22,18 +22,22 @@
     </div>
   </header>
 
-  <main class="product-detail-main" style="max-width: 800px;">
-    <h1>Thank you — your order is confirmed.</h1>
-    <p id="status" style="margin-top:8px;">Loading your receipt…</p>
+  <main class="status-page">
+  <div class="status-wrap">
+    <div class="status-eyebrow">Order Confirmed</div>
+    <h1 class="status-title">Thank you — your order is confirmed.</h1>
+    <p id="status" class="status-desc">Loading your receipt…</p>
 
-    <section class="product-section" id="order-summary" hidden>
+    <section id="order-summary" class="status-card" hidden>
       <h3>Order Summary</h3>
-      <div id="summary-body" class="product-info-text"></div>
-      <div style="margin-top:16px;">
-        <a href="index.html" class="button-primary" style="display:inline-block;text-decoration:none;">Continue shopping</a>
+      <div id="summary-body" class="status-list"></div>
+      <div class="status-actions">
+        <a href="index.html" class="button-primary">Continue shopping</a>
       </div>
     </section>
-  </main>
+  </div>
+</main>
+
 
   <footer class="site-footer">
     <div class="footer-content">

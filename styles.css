@@ -830,3 +830,17 @@ button.icon-btn::-moz-focus-inner {
   }
 }
 
+
+/* Status (success / cancel) pages */
+.status-page{min-height:calc(100vh - 160px);display:grid;place-items:center;padding:24px var(--gutter);}
+.status-wrap{width:min(720px,100%);text-align:center;}
+.status-eyebrow{font:600 12px/1 Inter,system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.status-title{font:700 clamp(22px,3vw,32px)/1.15 Inter,system-ui;color:var(--ink);margin:0 0 8px;letter-spacing:-.2px;}
+.status-desc{margin:0 0 20px;color:var(--ink);opacity:.9;}
+.status-actions{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;}
+.status-actions a.button-primary,.status-actions a.button-secondary{min-width:220px;text-decoration:none;}
+.status-card{text-align:left;border:1px solid #eee;border-radius:12px;padding:16px;margin-top:20px;background:#fff;}
+.status-card h3{font:600 14px/1 Inter,system-ui;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px;}
+.status-list{display:grid;gap:6px;font-size:14px;}
+.status-list strong{font-weight:600;}
+
