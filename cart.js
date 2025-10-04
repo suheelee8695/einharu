@@ -91,8 +91,7 @@
 
     try {
       // Call your Netlify Function on the SAME origin
-const base = (window.EH_BACKEND || location.origin).replace(/\/$/, '');
-const res = await fetch(`${base}/create-checkout-session`, {
+      const res = await fetch('/.netlify/functions/create-checkout-session', {
          method: 'POST',
          headers: { 'Content-Type': 'application/json' },
          body: JSON.stringify({

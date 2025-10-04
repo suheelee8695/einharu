@@ -66,7 +66,7 @@
 
     try {
       const BACKEND = window.EH_BACKEND = location.origin;
-      const res = await fetch(`${BACKEND}/checkout-session/${encodeURIComponent(sessionId)}`);
+      const res = await fetch(`/.netlify/functions/checkout-session?id=${encodeURIComponent(sessionId)}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || 'Failed to load session.');
 
