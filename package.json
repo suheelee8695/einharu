@@ -1,0 +1,27 @@
+{
+  "name": "einharu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cart.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "commonjs",
+    "url": "git+https://github.com/suheelee8695/einharu.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/suheelee8695/einharu/issues"
+  },
+  "homepage": "https://github.com/suheelee8695/einharu#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "stripe": "^19.0.0"
+  }
+}

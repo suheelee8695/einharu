@@ -1,0 +1,161 @@
+<!-- product.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title id="page-title">Product – einHaru Collective</title>
+  <meta name="description" content="" id="meta-description">
+  <link rel="canonical" href="" id="canonical-link">
+  <meta property="og:type" content="product">
+  <meta property="og:url" content="" id="og-url">
+  <meta property="og:title" content="" id="og-title">
+  <meta property="og:description" content="" id="og-desc">
+  <meta property="og:image" content="" id="og-image">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.ico">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Ovo&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body class="product-page">
+  <!-- banner, header etc. if present -->
+<div class="site-banner" role="status" aria-live="polite" id="site-banner">
+  <div class="banner-text" id="banner-text">
+    Free shipping within Germany on orders over €100.
+  </div>
+  <button class="banner-close" aria-label="Dismiss banner" id="banner-close">×</button>
+</div>
+<header class="site-header">
+  <a href="index.html" class="site-logo" aria-label="einHaru Collective">
+    <img src="images/einharuheaderlogo.svg" alt="einHaru Collective logo">
+  </a>
+
+  <div class="header-actions">
+      <a class="icon-btn" href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="images/instaicon.svg" alt="Instagram icon" width="32" height="32" loading="lazy" />
+      </a>
+
+    <!-- Cart / Bag -->
+    <button class="icon-btn" type="button" aria-label="Open bag" data-cart-open>
+        <img src="images/shoppingbag.svg" alt="Shopping bag" width="32" height="32" loading="lazy" />
+        <span class="badge" data-cart-count>0</span>
+      </button>
+  </div>
+</header>
+
+  <main class="product-detail-main">
+    <div class="product-breadcrumb">
+      <a href="index.html">Home</a> / <span id="breadcrumb-title"></span>
+      <button id="back-button" class="back-btn" aria-label="Go back">← Back</button>
+    </div>
+
+    <div class="product-detail-content">
+      <div class="gallery" id="product-image-gallery">
+        <div class="main-image-wrapper">
+          <img id="main-image" src="" alt="" loading="lazy">
+        </div>
+      </div>
+
+      <div class="info-panel sticky-panel">
+        <div class="brand-name" id="product-brand">einHaru Collective</div>
+        <h1 id="product-title"></h1>
+        <div class="price-line">
+          <span class="price-label">Price:</span>
+          <span id="product-price"></span>
+        </div>
+
+        <p class="description" id="product-description"></p>
+        <div class="thumb-list" role="tablist" aria-label="Product image thumbnails">
+          <!-- thumbnails injected -->
+        </div>
+        <div id="product-sizes-text" class="size-text"></div>
+       <form id="add-to-cart-form"
+              class="buy-form"
+              data-endpoint="http://localhost:4242/create-checkout-session">
+          <!-- Size (hidden: one size for all) -->
+          <div class="visually-hidden">
+            
+            </select>
+          </div>
+
+  <div class="button-group">
+    <!-- Stripe Checkout submit -->
+    <button id="buy-button" type="submit" class="button-primary">
+      Buy Now
+    </button>
+
+    <!-- Client-side cart (does not submit the form) -->
+    <button type="button" class="button-secondary" data-add-to-cart>
+      Add to Bag
+    </button>
+
+   
+  </div>
+</form>
+
+
+
+
+<section class="accordion" id="accordion-measurements">
+  <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="section-measurements">
+    <span><img src="images/infoicon.svg" alt="" width="16" height="16"> Measurement</span>
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-panel" id="section-measurements" hidden>
+    <div id="product-measurements" class="product-info-text"></div>
+  </div>
+</section>
+
+<section class="accordion" id="accordion-materials">
+  <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="section-materials">
+    <span><img src="images/infoicon.svg" alt="" width="16" height="16"> Material & Care Guide</span>
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-panel" id="section-materials" hidden>
+    <div id="product-materials" class="product-info-text"></div>
+    <div id="product-care" class="product-info-text"></div>
+  </div>
+</section>
+
+      </div>
+    </div>
+
+    <div id="sticky-cta-container" class="sticky-cta"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        © <span id="year2"></span> einHaru Collective
+      </div>
+      <div class="footer-right">
+        <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:einharu@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+<div class="cart-overlay" data-cart-overlay hidden></div>
+  <aside class="cart-drawer" data-cart-drawer hidden aria-hidden="true" aria-label="Shopping bag" role="dialog">
+    <header class="cart-drawer__header">
+      <h2>Bag</h2>
+      <button class="cart-close" aria-label="Close bag" data-cart-close>&times;</button>
+    </header>
+    <div class="cart-drawer__list" data-cart-list></div>
+    <footer class="cart-drawer__footer">
+      <div class="cart-subtotal"><span>Subtotal</span><strong data-cart-subtotal>€0</strong></div>
+      <button class="button-primary" data-cart-checkout>Go to checkout</button>
+      <button class="button-secondary" data-cart-continue>Continue shopping</button>
+    </footer>
+  </aside>
+
+  <!-- Scripts -->
+   <script>
+window.EH_BACKEND = location.origin;
+</script>
+  <script src="cart.js" defer></script>
+  <script src="script.js"></script>
+</body>
+</html>

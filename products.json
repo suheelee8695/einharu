@@ -1,0 +1,797 @@
+[
+  {
+    "id": "item-01",
+    "title": "Vegan Leather Glossy Trench Coat - Brown",
+    "price": 169,
+    "stock": 1,
+    "category": "collection",
+    "brand": "Commonrare",
+    "currency": "EUR",
+    "sizes": "Oversized fit - Works well EU 36-42 ",
+    "defaultSize": "Oversized fit – EU 36–42",
+    "sizeDetails": [
+      "Chest: 65 cm",
+      "Collar to Cuff: 74 cm",
+      "Total Length: 118 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion1-1.png",
+    "images": [
+      "images/fashion1-1.png",
+      "images/fashion1-2.png",
+      "images/fashion1-3.png"
+    ],
+    "description": "A modern reimagining of the classic trench, this glossy vegan leather coat is designed to bring effortless edge to any look. Its sleek, elongated silhouette and subtle shine make it a statement outerwear piece for both day and evening styling. Structured yet flexible, it captures a refined balance of sharp tailoring and contemporary ease. Made in Korea.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not wash",
+      "Do not bleach",
+      "Do not tumble dry",
+      "Cool iron if needed"
+    ],
+    "stripePriceId": "price_1SE4IDFPNKTl6gGpguBOowG9"
+  },
+  {
+    "id": "item-02",
+    "title": "Bralette-Layered Stripe Shirt",
+    "price": 125,
+    "stock": 2,
+    "category": "collection",
+    "brand": "Londonflat",
+    "currency": "EUR",
+    "sizes": "Oversized fit - Works well EU 36-42 ",
+    "defaultSize": "Oversized fit – EU 36–42",
+    "sizeDetails": [
+      "Size: Oversized fit - Works well EU 36-42",
+      "Shoulder: 54 cm",
+      "Chest: 68 cm",
+      "Sleeve Length: 59 cm",
+      "Total Length: 73 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "measurements": {
+      "bust": "90 cm",
+      "length": "110 cm"
+    },
+    "cover": "images/fashion2-1.png",
+    "images": [
+      "images/fashion2-1.png",
+      "images/fashion2-2.png",
+      "images/fashion2-3.png"
+    ],
+    "description": "A statement piece from Korean designer label Londonflat, this stripe shirt redefines layering with its built-in bralette detail. The sharp vertical stripes and structured silhouette balance modern tailoring with playful edge, making it versatile enough to wear on its own or styled under outerwear. Designed to stand out while maintaining everyday wearability, it’s a refined yet bold addition to your wardrobe.",
+    "materials": [
+      "Cotton 72%",
+      "Nylon 25%",
+      "Spandex 3%"
+    ],
+    "care": [
+      "Machine wash cold",
+      "Do not bleach, soak or rub",
+      "Turn inside out and wash with similar colors",
+      "Warm iron on reverse side",
+      "Do not iron over prints",
+      "If needed, dry clean"
+    ],
+    "stripePriceId": "price_1SE4IFFPNKTl6gGphE5adT1F"
+  },
+  {
+    "id": "item-03",
+    "title": "Washed Grey Raw-Edge Denim Trousers",
+    "price": 54,
+    "stock": 0,
+    "category": "vintage",
+    "brand": "Vintage",
+    "currency": "EUR",
+    "sizes": "Size: Best fits EU 36-38",
+    "defaultSize": "Best fits EU 36-38",
+    "sizeDetails": [
+      "Waist: 36 cm (without stretch)",
+      "Waist to Crotch seam: 32 cm",
+      "Hip: 51 cm",
+      "Length: 100 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "measurements": {
+      "shoulder": "52 cm",
+      "length": "78 cm"
+    },
+    "cover": "images/fashion3-1.png",
+    "images": [
+      "images/fashion3-1.png",
+      "images/fashion3-2.png"
+      
+    ],
+    "description": "Washed grey denim trousers with a raw-edge finish that lends a deconstructed, contemporary feel. Designed in a versatile mid-rise fit, the washed tone makes them easy to pair with both sharp tailoring and relaxed casuals. The raw hem adds a subtle rebellious edge to a timeless silhouette.",
+    "materials": [
+      "Cotton 75%",
+      "Polyester 17%",
+      "Rayon 8%"
+    ],
+    "care": [
+      "Hand wash at 30°C",
+      "Do not bleach",
+      "Iron low",
+      "Do not tumble dry",
+      "Dry clean not recommended"
+    ],
+    "stripePriceId": "price_1SE4IGFPNKTl6gGpa6nu0FKo"
+  },
+  {
+    "id": "item-04",
+    "title": "Draped Layered Top",
+    "price": 30,
+    "stock": 0,
+    "category": "collection",
+    "brand": "Sobae",
+    "currency": "EUR",
+    "sizes": "Best fits EU 34-38",
+    "defaultSize": "Best fits EU 36-38",
+    "sizeDetails": [
+      "Chest: 49 cm (stretched)",
+      "Side Chest Length: 38 cm (without stretch)",
+      "Length without string: 37cm String: adjustable",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion4-1.png",
+    "images": [
+      "images/fashion4-1.png",
+      "images/fashion4-2.png"
+      
+    ],
+    "description": "A fluid layered top with natural draping, offering movement and elegance in every angle. Designed with subtle asymmetry, it creates dimension while keeping a clean, minimalist silhouette. Ideal for pairing with tailored trousers or flowing skirts, this piece adds understated sophistication to everyday and evening looks. Made in Korea.",
+    "materials": [
+      "Rayon 70%",
+      "Nylon 30%"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not bleach or soak",
+      "Do not tumble dry",
+      "Turn inside out and wash dark colors separately",
+      "Do not iron over prints"
+    ],
+    "stripePriceId": "price_1SE4IHFPNKTl6gGpk7u8dGd0"
+  },
+  {
+    "id": "item-05",
+    "title": "Sheer Contrast Button-Up Shirt",
+    "price": 55,
+    "stock": 1,
+    "category": "vintage",
+    "brand": "Vintage",
+    "currency": "EUR",
+    "sizes": "Best fits EU 34-38",
+    "defaultSize": "Best fits EU 34-38",
+    "sizeDetails": [
+      "Shoulder: 40 cm",
+      "Chest: 48 cm",
+      "Waist: 38 cm",
+      "Sleeve: 59 cm",
+      "Length: 62 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion5-1.png",
+    "images": [
+      "images/fashion5-1.png",
+      "images/fashion5-2.png"
+      
+    ],
+    "description": "A vintage button-up shirt featuring a sheer overlay with bold contrast detailing, creating a unique play of transparency and texture. Lightweight and breathable, it offers a structured yet fluid silhouette that works perfectly layered over simple tanks or styled solo for a statement look. Originally sourced from Japan, this piece carries an understated elegance with a distinct edge.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Hand wash cold",
+      "Do not bleach",
+      "Do not tumble dry",
+      "Line dry in shade"
+    ],
+    "stripePriceId": "price_1SE4IIFPNKTl6gGpFeiYGuV5"
+  },
+  {
+    "id": "item-06",
+    "title": "Vegan Leather V-Neck Sleeveless Dress",
+    "price": 75,
+    "stock": 2,
+    "category": "collection",
+    "brand": "Commonrare",
+    "currency": "EUR",
+    "sizes": "Fitted cut · Best EU 36–38",
+    "defaultSize": "Best EU 36–38",
+    "sizeDetails": [
+      "Stretch band at back",
+      "Shoulder: 35 cm",
+      "Chest: 49 cm",
+      "Waist: 43 cm (without stretch)",
+      "Total length: 85 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion6-1.png",
+    "images": [
+      "images/fashion6-1.png",
+      "images/fashion6-2.png"
+      
+    ],
+    "description": "A sleek sleeveless dress crafted from smooth vegan leather with a flattering V-neckline. Its minimalist silhouette brings modern elegance to your wardrobe, perfect for both day and evening wear. Made in Korea.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not wash",
+      "Do not bleach",
+      "Do not tumble dry",
+      "Cool iron if needed"
+    ],
+    "stripePriceId": "price_1SE4IJFPNKTl6gGphAn99UZz"
+  },
+  {
+    "id": "item-07",
+    "title": "Utility Strap Cargo Pants",
+    "price": 63,
+    "stock": 1,
+    "category": "vintage",
+    "brand": "Vintage",
+    "currency": "EUR",
+    "sizes": "Relaxed cargo fit · Best EU 36–38",
+    "defaultSize": "Best EU 36–38",
+    "sizeDetails": [
+      "Stretch waist",
+      "Waist: 36 cm (without stretch)",
+      "Waist to Crotch seam: 32 cm",
+      "Hip: 51 cm",
+      "Length: 105 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion7-1.png",
+    "images": [
+      "images/fashion7-1.png",
+      "images/fashion7-2.png"
+      
+    ],
+    "description": "A statement cargo pant with bold utility-inspired details, featuring multiple straps, oversized pockets, and a structured wide-leg silhouette. Designed for both function and edge, this piece blends streetwear practicality with an elevated, fashion-forward style. Found in Japan, this vintage item carries unique character and versatility for styling across seasons.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Hand wash cold (30°C)",
+      "Do not bleach",
+      "Iron on low if needed",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SE4IKFPNKTl6gGpcq7ZTstQ"
+  },
+  {
+    "id": "item-08",
+    "title": "Compact Leather Tote",
+    "price": 65,
+    "stock": 1,
+    "category": "vintage",
+    "brand": "Vintage",
+    "currency": "EUR",
+    "sizes": "Free Size",
+    "defaultSize": "Free Size",
+    "sizeDetails": [
+      "Top Width: 37 cm",
+      "Height: 18.5 cm",
+      "Depth: 11 cm",
+      "Handle Drop: 12 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion8-1.png",
+    "images": [
+      "images/fashion8-1.png",
+      "images/fashion8-2.png"
+      
+    ],
+    "description": "A timeless vintage tote sourced from Japan, crafted in 100% genuine leather with a glossy, textured finish. Its structured rectangular base and wide opening make it both stylish and practical — offering ample space for daily essentials while maintaining an elegant silhouette.",
+    "materials": [
+      "Leather 100%"
+    ],
+    "care": [
+      "Wipe gently with a soft cloth",
+      "Store in a dust bag when not in use",
+      "Avoid direct sunlight and moisture for prolonged periods"
+    ],
+    "stripePriceId": "price_1SE4ILFPNKTl6gGpF0KE5PLh"
+  },
+  {
+    "id": "item-09",
+    "title": "Sleeveless Shirt Dress with Tulle Overlay",
+    "price": 82,
+    "stock": 1,
+    "category": "vintage",
+    "brand": "Vintage",
+    "currency": "EUR",
+    "sizes": "Free Size",
+    "defaultSize": "Free Size",
+    "sizeDetails": [
+      "Shoulder: 41 cm",
+      "Chest: 58 cm",
+      "Total length: 118 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion9-1.png",
+    "images": [
+      "images/fashion9-1.png",
+      "images/fashion9-2.png"
+      
+    ],
+    "description": "A statement piece that blends classic tailoring with romantic texture. This sleeveless shirt dress features a crisp, structured bodice contrasted with tiered tulle overlays, creating light volume and graceful movement. The button-down front keeps it versatile—wear it as a standalone dress or layer it open over trousers for a contemporary look.",
+    "materials": [
+      "100% Polyester"
+    ],
+    "care": [
+      "Hand wash cold or dry clean recommended",
+      "Do not tumble dry",
+      "Cool iron with press cloth if needed"
+    ],
+    "stripePriceId": "price_1SE4IMFPNKTl6gGpXLEkl7n6"
+  },
+  {
+    "id": "item-10",
+    "title": "Crinkle-Texture Button Shirt",
+    "price": 42,
+    "stock": 1,
+    "category": "vintage",
+    "brand": "Vintage",
+    "currency": "EUR",
+    "sizes": "Slim fit · Best EU 34–36",
+    "defaultSize": "Best EU 34–36",
+    "sizeDetails": [
+      "Shoulder: 34 cm",
+      "Chest: 42 cm",
+      "Waist: 35 cm",
+      "Total length: 58 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion10-1.png",
+    "images": [
+      "images/fashion10-1.png",
+      "images/fashion10-2.png"
+      
+    ],
+    "description": "A lightweight vintage shirt featuring a naturally crinkled finish that gives it a dimensional, lived-in look. Designed with chest pockets and flared cuffs, it combines structure with subtle fluidity for a versatile silhouette. Its textured surface makes it low-maintenance and wrinkle-resistant, perfect for layering or wearing as a statement top. Originally made in Japan.",
+    "materials": [
+      "Cotton blend"
+    ],
+    "care": [
+      "Hand wash cold (30°C)",
+      "Do not bleach",
+      "Do not tumble dry",
+      "Iron on low if needed",
+      "Professional dry clean recommended"
+    ],
+    "stripePriceId": "price_1SE4INFPNKTl6gGp8wwbSxZD"
+  },
+  {
+    "id": "item-11",
+    "title": "Barrel-Shaped Wide-Leg Trousers - Ivory",
+    "price": 89,
+    "stock": 1,
+    "category": "collection",
+    "brand": "HELDER",
+    "currency": "EUR",
+    "sizes": "Wide barrel fit · Best EU 38–40",
+    "defaultSize": "Best EU 38–40",
+    "sizeDetails": [
+      "Waist: 39 cm",
+      "Hip: 55 cm",
+      "Waist to Crotch seam: 35 cm",
+      "Thigh Width: 37 cm",
+      "Total length: 109 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion11-1.png",
+    "images": [
+      "images/fashion11-1.png",
+      "images/fashion11-2.png"
+      
+    ],
+    "description": "Contemporary wide-leg trousers with a sculptural barrel silhouette. Crafted from breathable cotton, these trousers balance volume with structure, making them an effortless statement piece for everyday wear. Designed to sit high at the waist with a relaxed drape through the leg for a modern yet versatile look. Made in Korea.",
+    "materials": [
+      "100% Cotton"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not bleach",
+      "Cool iron with press cloth",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SE4IOFPNKTl6gGpIslkFRZ4"
+  },
+  {
+    "id": "item-12",
+    "title": "3D Textured Ruffle Shirt",
+    "price": 59,
+    "stock": 1,
+    "category": "vintage",
+    "brand": "Vintage",
+    "currency": "EUR",
+    "sizes": "Stretch fabric · Fits XS–L (EU 34–40)",
+    "defaultSize": "Fits XS–L (EU 34–40)",
+    "sizeDetails": [
+      "Length: 53 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion12-1.png",
+    "images": [
+      "images/fashion12-1.png",
+      "images/fashion12-2.png"
+      
+    ],
+    "description": "Vintage 3D Textured Ruffle Shirt sourced in Japan and made in Korea. Designed in pleated stretch fabric that molds to the body, featuring sculptural ruffles and a timeless black finish.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Hand wash cold (max 30°C)",
+      "Do not bleach",
+      "Iron low if needed",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SE4IPFPNKTl6gGpeBIWMirP"
+  },
+  {
+    "id": "item-13",
+    "title": "Draped Scarf-Knit Long Sleeve - Grey",
+    "price": 67,
+    "stock": 1,
+    "category": "collection",
+    "brand": "MU:I",
+    "currency": "EUR",
+    "sizes": "Relaxed fit · Works EU 36–40",
+    "defaultSize": "Best EU 36–40",
+    "sizeDetails": [
+      "Shoulder: 46 cm",
+      "Chest: 52 cm",
+      "Sleeve Length: 58 cm",
+      "Total length: 57 cm",
+      "Scarf: 126 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion13-1.png",
+    "images": [
+      "images/fashion13-1.png",
+      "images/fashion13-1.png"
+      
+    ],
+    "description": "An elevated essential for transitional dressing, this draped knit long sleeve is designed with an attached scarf detail that falls naturally along the neckline for a soft, effortless drape. Its fluid silhouette makes it easy to layer, while the lightweight knit ensures comfort and versatility across seasons. Perfect for pairing with wide-leg trousers or layered under outerwear, this piece blends minimal design with subtle detail, offering a timeless addition to your wardrobe.",
+    "materials": [
+      ""
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not wash or bleach",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SE4IQFPNKTl6gGpuBnkFKSL"
+  },
+  {
+    "id": "item-14",
+    "title": "Fluid Wide-Leg Pants - Dark Blue",
+    "price": 40,
+    "stock": 1,
+    "category": "collection",
+    "brand": "untold",
+    "currency": "EUR",
+    "sizes": "Comfort fit · Best EU 36–38",
+    "defaultSize": "Best EU 36–38",
+    "sizeDetails": [
+      "Waist: 34 cm (without stretch)",
+      "Hip: 60 cm",
+      "Waist to Crotch seam: 29 cm",
+      "Thigh Width: 43 cm",
+      "Hem Width: 34 cm",
+      "Total Length: 102 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion14-1.png",
+    "images": [
+      "images/fashion14-1.png",
+      "images/fashion14-2.png"
+      
+    ],
+    "description": "The mid-rise fit and wide-leg cut create a timeless, relaxed shape that pairs seamlessly with everything from minimal tanks to tailored outerwear. Side pockets add practicality, while the lightweight construction makes them versatile for both casual and elevated styling.",
+    "materials": [
+      "88% Rayon, 12% Polyester"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not bleach",
+      "Cool iron with press cloth if needed",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SE4IRFPNKTl6gGpL4TCtT8f"
+  },
+  {
+    "id": "item-15",
+    "title": "Mesh Cropped Tank - Wine",
+    "price": 22,
+    "stock": 1,
+    "category": "collection",
+    "brand": "TEXTURE",
+    "currency": "EUR",
+    "sizes": "Cropped fit · Best EU 34–36",
+    "defaultSize": "Best EU 34–36",
+    "sizeDetails": [
+      "Shoulder: 25 cm",
+      "Chest: 31 cm",
+      "Hem: 32 cm",
+      "Length: 31 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion15-1.png",
+    "images": [
+      "images/fashion15-1.png",
+      "images/fashion15-2.png"
+      
+    ],
+    "description": [
+      "A sleek cropped tank available in a rich wine tone or a clean white finish. Designed with minimal lines and subtle transparency, it’s the perfect layering piece to wear under blazers, over bralettes, or styled solo for a bold look. Its structured cropped silhouette adds a modern edge to both casual and evening outfits.\n\nMade in Korea\nAvailable in Wine or White\nStructured cropped fit with subtle transparency"
+    ],
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not tumble dry",
+      "Line dry in shade",
+      "Do not bleach"
+    ],
+    "stripePriceId": "price_1SE4ISFPNKTl6gGpDbJMTEiZ"
+  },
+  {
+    "id": "item-16",
+    "title": "Mesh Sheer Long Sleeve",
+    "price": 32,
+    "stock": 2,
+    "category": "collection",
+    "brand": "Plover",
+    "currency": "EUR",
+    "sizes": "Sheer fitted look · Best EU 36–38",
+    "defaultSize": "Best EU 36–38",
+    "sizeDetails": [
+      "Sleeve Length: 66 cm",
+      "Total Length: 51 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion16-1.png",
+    "images": [
+      "images/fashion16-1.png",
+      "images/fashion16-1.png"
+      
+    ],
+    "description": [
+      "A sheer layering piece with a modern twist — this mesh long sleeve features a natural crinkled texture that adds depth and movement. Lightweight yet eye-catching, it’s designed to elevate simple outfits or create bold layered looks. Perfect for styling with bralettes, slip dresses, or structured outerwear.\n\nMade in Korea\nLightweight mesh fabric with crinkled finish\nSlim, sheer silhouette with stretch"
+    ],
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Dry cleanable",
+      "Cool iron with press cloth",
+      "Do not tumble dry or wring",
+      "Wash dark colors separately"
+    ],
+    "stripePriceId": "price_1SE4ITFPNKTl6gGp44nhOu0g"
+  },
+  {
+    "id": "item-17",
+    "title": "Textured Leather Tote Bag",
+    "price": 69,
+    "stock": 1,
+    "category": "vintage",
+    "brand": "Vintage",
+    "currency": "EUR",
+    "sizes": "Free Size",
+    "defaultSize": "Free Size",
+    "sizeDetails": [
+      "Top Width: 43 cm",
+      "height: 30 cm",
+      "Depth: 9 cm",
+      "Handle Drop: 28 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion17-1.png",
+    "images": [
+      "images/fashion17-1.png",
+      "images/fashion17-2.png"
+  
+    ],
+    "description": "A rare vintage tote sourced from Japan, crafted in genuine textured leather. This timeless piece offers both durability and understated sophistication, making it a versatile addition to everyday and evening looks. The structured silhouette is balanced with a soft leather finish, carrying subtle character from its vintage origin.",
+    "materials": [
+      "Leather 100%"
+    ],
+    "care": [
+      "Wipe clean with a damp cloth. Store in a dust bag when not in use."
+    ],
+    "stripePriceId": "price_1SE4IUFPNKTl6gGpoQMBbL9W"
+  },
+  {
+    "id": "item-18",
+    "title": "Vegan Leather Glossy Trench Coat - Black",
+    "price": 169,
+    "stock": 1,
+    "category": "collection",
+    "brand": "Commonrare",
+    "currency": "EUR",
+    "sizes": "Oversized fit - Works well EU 36-42 ",
+    "defaultSize": "Oversized fit – EU 36–42",
+    "sizeDetails": [
+      "Chest: 65 cm",
+      "Collar to Cuff: 74 cm",
+      "Total Length: 118 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion18-1.png",
+    "images": [
+      "images/fashion18-1.png",
+      "images/fashion18-2.png"
+
+    ],
+    "description": "A modern reimagining of the classic trench, this glossy vegan leather coat is designed to bring effortless edge to any look. Its sleek, elongated silhouette and subtle shine make it a statement outerwear piece for both day and evening styling. Structured yet flexible, it captures a refined balance of sharp tailoring and contemporary ease. Made in Korea.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not wash",
+      "Do not bleach",
+      "Do not tumble dry",
+      "Cool iron if needed"
+    ],
+    "stripePriceId": "price_1SEScJFPNKTl6gGpgzgmncCt"
+  },
+{
+    "id": "item-19",
+    "title": "Mesh Cropped Tank - White",
+    "price": 22,
+    "stock": 1,
+    "category": "collection",
+    "brand": "TEXTURE",
+    "currency": "EUR",
+    "sizes": "Cropped fit · Best EU 34–36",
+    "defaultSize": "Best EU 34–36",
+    "sizeDetails": [
+      "Shoulder: 25 cm",
+      "Chest: 31 cm",
+      "Hem: 32 cm",
+      "Length: 31 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion19-1.png",
+    "images": [
+      "images/fashion19-1.png",
+      "images/fashion19-2.png"
+      
+    ],
+    "description": [
+      "A sleek cropped tank available in a rich wine tone or a clean white finish. Designed with minimal lines and subtle transparency, it’s the perfect layering piece to wear under blazers, over bralettes, or styled solo for a bold look. Its structured cropped silhouette adds a modern edge to both casual and evening outfits.\n\nMade in Korea\nAvailable in Wine or White\nStructured cropped fit with subtle transparency"
+    ],
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not tumble dry",
+      "Line dry in shade",
+      "Do not bleach"
+    ],
+    "stripePriceId": "price_1SESewFPNKTl6gGplhKM8Jax"
+  },
+{
+    "id": "item-20",
+    "title": "Fluid Wide-Leg Pants - Brown",
+    "price": 40,
+    "stock": 1,
+    "category": "collection",
+    "brand": "untold",
+    "currency": "EUR",
+    "sizes": "Comfort fit · Best EU 36–38",
+    "defaultSize": "Best EU 36–38",
+    "sizeDetails": [
+      "Waist: 34 cm (without stretch)",
+      "Hip: 60 cm",
+      "Waist to Crotch seam: 29 cm",
+      "Thigh Width: 43 cm",
+      "Hem Width: 34 cm",
+      "Total Length: 102 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion20-1.png",
+    "images": [
+      "images/fashion20-1.png",
+      "images/fashion20-2.png"
+      
+    ],
+    "description": "The mid-rise fit and wide-leg cut create a timeless, relaxed shape that pairs seamlessly with everything from minimal tanks to tailored outerwear. Side pockets add practicality, while the lightweight construction makes them versatile for both casual and elevated styling.",
+    "materials": [
+      "88% Rayon, 12% Polyester"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not bleach",
+      "Cool iron with press cloth if needed",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SESgTFPNKTl6gGpr0Stqv8B"
+  },
+  {
+    "id": "item-21",
+    "title": "Barrel-Shaped Wide-Leg Trousers - Black",
+    "price": 89,
+    "stock": 1,
+    "category": "collection",
+    "brand": "HELDER",
+    "currency": "EUR",
+    "sizes": "Wide barrel fit · Best EU 38–40",
+    "defaultSize": "Best EU 38–40",
+    "sizeDetails": [
+      "Waist: 39 cm",
+      "Hip: 55 cm",
+      "Waist to Crotch seam: 35 cm",
+      "Thigh Width: 37 cm",
+      "Total length: 109 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion21-1.png",
+    "images": [
+      "images/fashion21-1.png",
+      "images/fashion21-2.png"
+      
+    ],
+    "description": "Contemporary wide-leg trousers with a sculptural barrel silhouette. Crafted from breathable cotton, these trousers balance volume with structure, making them an effortless statement piece for everyday wear. Designed to sit high at the waist with a relaxed drape through the leg for a modern yet versatile look. Made in Korea.",
+    "materials": [
+      "100% Cotton"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not bleach",
+      "Cool iron with press cloth",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SEShTFPNKTl6gGp8xtzUhnX"
+  },
+  {
+    "id": "item-22",
+    "title": "Draped Scarf-Knit Long Sleeve - Black",
+    "price": 67,
+    "stock": 1,
+    "category": "collection",
+    "brand": "MU:I",
+    "currency": "EUR",
+    "sizes": "Relaxed fit · Works EU 36–40",
+    "defaultSize": "Best EU 36–40",
+    "sizeDetails": [
+      "Shoulder: 46 cm",
+      "Chest: 52 cm",
+      "Sleeve Length: 58 cm",
+      "Total length: 57 cm",
+      "Scarf: 126 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion22-1.png",
+    "images": [
+      "images/fashion22-1.png",
+      "images/fashion22-1.png"
+      
+    ],
+    "description": "An elevated essential for transitional dressing, this draped knit long sleeve is designed with an attached scarf detail that falls naturally along the neckline for a soft, effortless drape. Its fluid silhouette makes it easy to layer, while the lightweight knit ensures comfort and versatility across seasons. Perfect for pairing with wide-leg trousers or layered under outerwear, this piece blends minimal design with subtle detail, offering a timeless addition to your wardrobe.",
+    "materials": [
+      ""
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not wash or bleach",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SESkdFPNKTl6gGpOq2wO1EU"
+  }
+
+
+]

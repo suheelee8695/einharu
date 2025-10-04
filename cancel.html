@@ -1,0 +1,47 @@
+<!-- cancel.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Payment Canceled — einHaru</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="site-logo" aria-label="einHaru Collective">
+      <img src="images/einharuheaderlogo.svg" alt="einHaru Collective logo" />
+    </a>
+    <div class="header-actions">
+      <a class="icon-btn" href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="images/instaicon.svg" alt="Instagram icon" width="32" height="32" loading="lazy" />
+      </a>
+    </div>
+  </header>
+
+  <main class="product-detail-main" style="max-width: 800px;">
+    <h1>Your payment wasn’t completed.</h1>
+    <p>If this was a mistake, you can try checkout again or go back to your bag.</p>
+    <div class="button-group" style="max-width:360px;">
+      <a href="index.html" class="button-secondary" style="text-align:center; text-decoration:none; line-height:48px;">Back to shop</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">© <span id="year2"></span> einHaru Collective</div>
+      <div class="footer-right">
+        <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:einharu@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('year2');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>

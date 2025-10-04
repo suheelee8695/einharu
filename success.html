@@ -1,0 +1,113 @@
+<!-- success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Order Confirmed — einHaru</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="site-logo" aria-label="einHaru Collective">
+      <img src="images/einharuheaderlogo.svg" alt="einHaru Collective logo" />
+    </a>
+    <div class="header-actions">
+      <a class="icon-btn" href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="images/instaicon.svg" alt="Instagram icon" width="32" height="32" loading="lazy" />
+      </a>
+      <a class="icon-btn" href="index.html" aria-label="Back to shop">
+        <img src="images/shoppingbag.svg" alt="Back to shop" width="32" height="32" loading="lazy" />
+      </a>
+    </div>
+  </header>
+
+  <main class="product-detail-main" style="max-width: 800px;">
+    <h1>Thank you — your order is confirmed.</h1>
+    <p id="status" style="margin-top:8px;">Loading your receipt…</p>
+
+    <section class="product-section" id="order-summary" hidden>
+      <h3>Order Summary</h3>
+      <div id="summary-body" class="product-info-text"></div>
+      <div style="margin-top:16px;">
+        <a href="index.html" class="button-primary" style="display:inline-block;text-decoration:none;">Continue shopping</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">© <span id="year2"></span> einHaru Collective</div>
+      <div class="footer-right">
+        <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:einharu@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // keep year current
+  document.addEventListener('DOMContentLoaded', () => {
+    const y = document.getElementById('year2');
+    if (y) y.textContent = new Date().getFullYear();
+  });
+
+  (async () => {
+    const q = new URLSearchParams(location.search);
+    const sessionId = q.get('session_id');
+    const statusEl = document.getElementById('status');
+    const wrap = document.getElementById('order-summary');
+    const body = document.getElementById('summary-body');
+
+    if (!sessionId) {
+      statusEl.textContent = "We couldn't find your session. If you paid, you'll receive an email receipt.";
+      return;
+    }
+
+    try {
+      const BACKEND = window.EH_BACKEND = location.origin;
+      const res = await fetch(`${BACKEND}/checkout-session/${encodeURIComponent(sessionId)}`);
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || 'Failed to load session.');
+
+      const formatMoney = (cents, cur) =>
+        new Intl.NumberFormat('de-DE', {
+          style: 'currency',
+          currency: (cur || 'eur').toUpperCase()
+        }).format((cents || 0) / 100);
+
+      const email = data.customer_details?.email || '—';
+      const total = formatMoney(data.amount_total, data.currency);
+
+      let html = `
+        <div><strong>Order ID:</strong> ${data.id}</div>
+        <div><strong>Status:</strong> ${data.payment_status}</div>
+        <div><strong>Email:</strong> ${email}</div>
+        <div><strong>Total:</strong> ${total}</div>
+        <div style="margin-top:12px;"><strong>Items</strong></div>
+      `;
+
+      (data.line_items || []).forEach((li) => {
+        const unit = li.unit_amount != null ? formatMoney(li.unit_amount, data.currency) : '—';
+        const lineTotal = formatMoney(li.amount_total, li.currency || data.currency);
+        html += `
+          <div style="padding-left:12px;">
+            ${li.description} — Qty ${li.quantity} — ${unit} (Line: ${lineTotal})
+          </div>`;
+      });
+
+      body.innerHTML = html;
+      statusEl.textContent = 'Payment received. We’re preparing your order.';
+      wrap.hidden = false;
+
+      // Optional: clear local cart storage on success
+      try { localStorage.removeItem('eh_cart_v1'); } catch (_) {}
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = 'Could not load your receipt. Check your email for the Stripe receipt.';
+    }
+  })();
+</script>
+
+</body>
+</html>

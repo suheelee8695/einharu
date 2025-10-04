@@ -1,404 +1,305 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>einHaru Collective</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Ovo&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <meta charset="utf-8" />
+  <title>einHaru Collective — Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Canonical & SEO -->
+<link rel="canonical" href="https://einharu.com/" />
+<meta name="description" content="einHaru Collective – minimal editorial fashion from Seoul & Tokyo, curated in Europe." />
 
-    html, body {
-      font-family: 'Ovo', serif;
-      background: white;
-      font-size: 16px;
-      width: 100%;
-      height: 100%;
-    }
+<!-- Open Graph (Facebook, Instagram, WhatsApp, LinkedIn etc.) -->
+<meta property="og:title" content="einHaru Collective — Seoul & Tokyo, selected for you." />
+<meta property="og:description" content="A handpicked mix of Korean and Japanese pieces — timeless, versatile, limited runs." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://einharu.com/" />
+<meta property="og:image" content="https://einharu.com/images/og-home.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 
-    .container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
 
-    .block {
-      position: absolute;
-      overflow: hidden;
-      background: transparent;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
 
-    .block::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(167, 182, 204, 0);
-      transition: background 0.3s ease;
-      z-index: 1;
-      pointer-events: none;
-    }
+  <link rel="icon" href="favicon.ico" />
+  <link rel="manifest" href="site.webmanifest" />
 
-    .block:hover::after {
-      background: rgba(167, 182, 204, 0.1);
-    }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- Preconnect to gstatic for faster font loading -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Ovo&display=swap" rel="stylesheet" />
 
-    .block img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top;
-      transition: object-position 3s ease;
-      display: block;
-    }
+  <!-- Icons font (Material Symbols if you need it) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
-    .block:hover img {
-      object-position: bottom;
-    }
-
-    .block1 {
-      left: 0%;
-      top: 0%;
-      width: 33.08%;
-      height: 47.3%;
-      padding: 0 4.63%;
-      display: flex;
-      align-items: center;
-    }
-
-    .block2 {
-      left: 33.08%;
-      top: 0%;
-      width: 33.84%;
-      height: 47.3%;
-    }
-
-    .block3 {
-      left: 66.92%;
-      top: 0%;
-      width: 33.08%;
-      height: 47.3%;
-      background: white;
-    }
-
-    .block4 {
-      left: 0%;
-      top: 47.17%;
-      width: 33.2%;
-      height: 52.6%;
-    }
-
-    .block5 {
-      left: 33.2%;
-      top: 47.17%;
-      width: 33.8%;
-      height: 52.6%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .block6 {
-      left: 66.92%;
-      top: 47.17%;
-      width: 33.08%;
-      height: 52.6%;
-    }
-
-    .block5 .logo {
-      display: block;
-      width: 50%;
-      max-width: 200px;
-      height: auto;
-    }
-
-    .block5 .note {
-      margin-top: 5rem;
-      text-align: center;
-      font-size: .75rem;
-      color: #535353;
-    }
-
-    .intro-text {
-      font-size: 0.75rem;
-      color: #A7B6CC;
-      line-height: 1.2;
-      padding-top: 4rem;
-    }
-
-    .header {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 4.6%;
-      background: transparent;
-      z-index: 10;
-    }
-
-    .header .logo {
-      height: 40px;
-      width: auto;
-    }
-
-    .instagram-btn {
-      display: flex;
-      align-items: center;
-      background: none;
-      border: none;
-      color: #A7B6CC;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .instagram-btn img {
-      width: 2rem;
-      height: 2rem;
-      margin-right: 0.5rem;
-    }
-
-    /* Mobile Styles */
-    .mobile-container {
-      display: none;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeZoom {
-      from {
-        opacity: 0;
-        transform: scale(1.1);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .container { display: none; }
-      .mobile-container { display: block; overflow-y: auto; }
-      .instagram-btn .btn-text {
-        display: none;
-      }
-    
-      .mobile-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-        position: relative;
-        z-index: 2;
-      }
-
-      .mobile-header .logo {
-        height: 2rem;
-        cursor: pointer;
-      }
-
-      .mobile-header .instagram-btn {
-        display: flex;
-        align-items: center;
-        background: none;
-        border: none;
-        color: #A7B6CC;
-        font-size: 1rem;
-        cursor: pointer;
-      }
-
-      .mobile-header .instagram-btn img {
-        width: 2rem;
-        height: 2rem;
-        margin-right: 0.5rem;
-      }
-
-      .mobile-block {
-        width: 100%;
-        position: relative;
-        margin-bottom: 2rem;
-        opacity: 0;
-        animation: fadeUp 0.8s ease forwards;
-        animation-delay: var(--delay, 0s);
-      }
-
-      .mobile-block img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-      }
-
-      .mobile-block.first-image {
-        margin-top: -80px;
-        z-index: 1;
-      }
-
-      .mobile-block.logo-block {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 4rem 1.5rem 4rem;
-        gap: 3rem;
-        animation: fadeZoom 1s ease forwards;
-        opacity: 0;
-        animation-delay: 0.2s;
-      }
-
-      .mobile-logo-img {
-        width: 70%;
-        max-width: 200px;
-        height: auto;
-      }
-
-      .mobile-note {
-        font-size: 0.875rem;
-        color: #535353;
-        text-align: center;
-        line-height: 1.4;
-      }
-
-      .mobile-block.text-block {
-        padding: 1rem 4rem 2rem;
-      }
-
-      .mobile-text-block {
-        font-size: 0.875rem;
-        line-height: 1.6;
-        color: #A7B6CC;
-        white-space: pre-line;
-      }
-
-      .mobile-rotated-note {
-        position: absolute;
-        bottom: 10%;
-        right: 10%;
-        transform: rotate(90deg);
-        transform-origin: right bottom;
-        color: #A7B6CC;
-        font-size: 0.6rem;
-        white-space: nowrap;
-      }
-    }
-  </style>
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z42LZ4WR68"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Z42LZ4WR68');
-</script>
 <body>
-
-  <!-- DESKTOP VERSION -->
-  <div class="container">
-    <div class="header">
-      <img src="images/einharuheaderlogo.svg" alt="einHaru header logo" class="logo">
-      <button class="instagram-btn" onclick="window.open('https://www.instagram.com/einharucollective','_blank')">
-        <img src="images/instaicon.svg" alt="Instagram icon">
-        <span class="btn-text">Connect with us</span>
-      </button>
+  <!-- Site banner -->
+  <div class="site-banner" role="status" aria-live="polite" id="site-banner">
+    <div class="banner-text" id="banner-text">
+      Free shipping within Germany on orders over €100.
     </div>
-
-    <div class="block block1">
-      <div class="intro-text">
-        Our name reflects our philosophy:<br>
-        ein (German): “one / unique” — precision, individuality, a singular vision.<br>
-        Haru 하루 (Korean): “day / flow of time” — renewal, freshness, the beauty of daily wear.<br>
-        Together, einHaru represents “one unique day” — a reminder that fashion should be both timeless and ever-renewing, grounding your everyday in quiet confidence.
-        We are currently curating and sourcing carefully selected designer wholesale brands from Korea, building a collective that values quality, consistency, and style that lasts beyond a season.
-      </div>
-    </div>
-
-    <div class="block block2">
-      <img src="images/einharu02.png" alt="Model in white dress">
-    </div>
-
-    <div class="block block3"></div>
-
-    <div class="block block4">
-      <img src="images/einharu01.png" alt="Model in black outfit">
-    </div>
-
-    <div class="block block5">
-      <img src="images/einharulogo.svg" alt="einHaru logo" class="logo">
-      <div class="note">
-        This is just the beginning.<br>
-        The einHaru Collective will soon reveal its first curated items
-      </div>
-    </div>
-
-    <div class="block block6">
-      <img src="images/einharu03.png" alt="Model in leather jacket">
-    </div>
+    <button class="banner-close" aria-label="Dismiss banner" id="banner-close">×</button>
   </div>
 
-  <!-- MOBILE VERSION -->
-  <div class="mobile-container" id="mobilePage">
-    <div class="mobile-header">
-      <img src="images/einharuheaderlogo.svg" alt="einHaru logo" class="logo" onclick="document.getElementById('mobilePage').scrollTo({ top: 0, behavior: 'smooth' });">
-      <button class="instagram-btn" onclick="window.open('https://www.instagram.com/einharucollective','_blank')">
-        <img src="images/instaicon.svg" alt="Instagram icon">
-        <span class="btn-text">Connect with us</span> 
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="site-logo" aria-label="einHaru Collective">
+      <img src="images/einharuheaderlogo.svg" alt="einHaru Collective logo" />
+    </a>
+
+    <div class="header-actions">
+      <!-- Instagram -->
+      <a class="icon-btn" href="https://www.instagram.com/einharucollective"
+         target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="images/instaicon.svg" alt="Instagram icon" width="32" height="32" loading="lazy" />
+      </a>
+
+      <!-- Cart / Bag -->
+      <button class="icon-btn" type="button" aria-label="Open bag" data-cart-open>
+        <img src="images/shoppingbag.svg" alt="Shopping bag" width="32" height="32" loading="lazy" />
+        <span class="badge" data-cart-count>0</span>
       </button>
     </div>
+  </header>
 
-    <div class="mobile-block first-image" style="--delay: 0s;">
-      <img src="images/einharu02.png" alt="Model in white dress">
-    </div>
-
-    <div class="mobile-block logo-block" style="--delay: 0.2s;">
-      <img src="images/einharulogo.svg" alt="einHaru logo" class="mobile-logo-img">
-      <div class="mobile-note">
-        This is just the beginning.<br>
-        The einHaru Collective will soon reveal its<br>
-        first curated items
+  <!-- Main -->
+  <main class="homepage">
+    <section class="hero">
+      <div class="hero-text">
+        <h1 class="hero-title">From Seoul & Tokyo — Selected for You.</h1>
+        <p class="hero-sub">
+          A handpicked mix of Korean and Japanese pieces — timeless, versatile, and thoughtfully curated.
+          Each style is available in limited runs, exclusively through our Vinted store.
+        </p>
       </div>
-    </div>
+    </section>
+    
+    <!-- Filters -->
+    <section class="filter-tabs" role="tablist" aria-label="Filter Products">
+      <button class="filter-tab active" data-filter="all" aria-pressed="true">View All</button>
+      <button class="filter-tab" data-filter="collection" aria-pressed="false">einHaru Collection</button>
+      <button class="filter-tab" data-filter="vintage" aria-pressed="false">einHaru Vintage</button>
+    </section>
 
-    <div class="mobile-block" style="--delay: 0.4s;">
-      <img src="images/einharu01.png" alt="Model in black outfit">
-    </div>
+    <!-- Product grid (filled by JS) -->
+    <section class="product-grid" aria-label="Product grid">
+      <!-- Cards injected by script.js -->
+    </section>
+  </main>
 
-    <div class="mobile-block text-block" style="--delay: 0.6s;">
-      <div class="mobile-text-block">
-        Our name reflects our philosophy:
-        ein (German): “one / unique” — precision, individuality, a singular vision.
-        Haru 하루 (Korean): “day / flow of time” — renewal, freshness, the beauty of daily wear.
-        Together, einHaru represents “one unique day” — a reminder that fashion should be both timeless and ever-renewing, grounding your everyday in quiet confidence.
-        We are currently curating and sourcing carefully selected designer wholesale brands from Korea, building a collective that values quality, consistency, and style that lasts beyond a season.
-      </div>
-    </div>
 
-    <div class="mobile-block" style="--delay: 0.8s;">
-      <img src="images/einharu03.png" alt="Model in leather jacket">
-      <div class="mobile-rotated-note">
-        Currently sourcing — model images are AI‑generated, other visuals created by us.
+<!-- Homepage FAQ using existing accordion classes -->
+<section id="homepage-faq" aria-labelledby="faq-title" class="homepage-faq">
+<section id="faq" class="homepage-faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="accordion" id="faq-1">
+    <button class="accordion-trigger" aria-expanded="false" aria-controls="panel-1" id="trigger-1">
+      <span>Where does einHaru Collective ship from?</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-panel" id="panel-1" role="region" aria-labelledby="trigger-1" hidden>
+      <div class="accordion-content">
+        <p>All orders are prepared and shipped from Berlin, Germany. Each piece is sourced from independent Korean and Japanese designers and delivered within Europe through tracked shipping services.</p>
       </div>
     </div>
   </div>
 
+  <div class="accordion" id="faq-2">
+    <button class="accordion-trigger" aria-expanded="false" aria-controls="panel-2" id="trigger-2">
+      <span>How do I choose my size?</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-panel" id="panel-2" role="region" aria-labelledby="trigger-2" hidden>
+      <div class="accordion-content">
+        <p>Each product page includes detailed measurements in centimeters and fit notes. You can check our <a href="size-guide.html">Size Guide</a> for EU conversions. Our silhouettes follow Korean and Japanese minimal fits—if you’re between sizes, we recommend sizing up for comfort.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion" id="faq-3">
+    <button class="accordion-trigger" aria-expanded="false" aria-controls="panel-3" id="trigger-3">
+      <span>Are the clothes authentic Korean and Japanese designs?</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-panel" id="panel-3" role="region" aria-labelledby="trigger-3" hidden>
+      <div class="accordion-content">
+        <p>Yes. einHaru Collective curates authentic pieces from independent labels and studios in Seoul and Tokyo. Each style reflects a balance between everyday wearability and refined, minimal aesthetics.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion" id="faq-4">
+    <button class="accordion-trigger" aria-expanded="false" aria-controls="panel-4" id="trigger-4">
+      <span>How do I purchase an item?</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-panel" id="panel-4" role="region" aria-labelledby="trigger-4" hidden>
+      <div class="accordion-content">
+        <p>Simply click “Buy Now” on any product page. Payments are securely processed through Stripe, and you’ll receive an instant confirmation email once your order is complete.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion" id="faq-5">
+    <button class="accordion-trigger" aria-expanded="false" aria-controls="panel-5" id="trigger-5">
+      <span>Do you ship internationally?</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-panel" id="panel-5" role="region" aria-labelledby="trigger-5" hidden>
+      <div class="accordion-content">
+        <p>We currently ship within the European Union and the United Kingdom. For international requests outside Europe, please contact us at <a href="mailto:einharu@gmail.com">einharu@gmail.com</a> for availability and custom shipping quotes.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion" id="faq-6">
+    <button class="accordion-trigger" aria-expanded="false" aria-controls="panel-6" id="trigger-6">
+      <span>Will you restock sold-out items?</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-panel" id="panel-6" role="region" aria-labelledby="trigger-6" hidden>
+      <div class="accordion-content">
+        <p>Most styles are released in limited quantities. We occasionally restock core pieces or introduce new colorways. Follow us on <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener">Instagram</a> for collection updates and restock news.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion" id="faq-7">
+    <button class="accordion-trigger" aria-expanded="false" aria-controls="panel-7" id="trigger-7">
+      <span>Do you offer sustainable or slow-fashion options?</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-panel" id="panel-7" role="region" aria-labelledby="trigger-7" hidden>
+      <div class="accordion-content">
+        <p>Yes. einHaru Collective supports small-batch production and conscious sourcing. </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Structured data for Google FAQ rich results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where does einHaru Collective ship from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All orders are prepared and shipped from Berlin, Germany. Each piece is sourced from independent Korean and Japanese designers and delivered within Europe through tracked shipping services."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I choose my size?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each product page includes detailed measurements in centimeters and fit notes. For EU conversions, see our Size Guide. Our silhouettes follow Korean and Japanese minimal fits—if you’re between sizes, we recommend sizing up for comfort."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the clothes authentic Korean and Japanese designs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. einHaru Collective curates authentic pieces from independent labels and studios in Seoul and Tokyo. Each style reflects a balance between everyday wearability and refined, minimal aesthetics."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I purchase an item?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply click 'Buy Now' on any product page. Payments are securely processed through Stripe, and you’ll receive an instant confirmation email once your order is complete."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you ship internationally?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We currently ship within the European Union and the United Kingdom. For international requests outside Europe, please contact us for availability and custom shipping quotes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will you restock sold-out items?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most styles are released in limited quantities. We occasionally restock core pieces or introduce new colorways. Follow us on Instagram for collection updates and restock news."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer sustainable or slow-fashion options?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. einHaru Collective supports small-batch production and conscious sourcing. "
+        }
+      }
+    ]
+  }
+  </script>
+</section>
+
+</section>
+     <!-- AI-friendly TL;DR (subtle & user-visible) -->
+<section class="ai-summary" aria-labelledby="summary-heading">
+  <p id="summary-heading" class="ai-tldr subtle">
+    einHaru curates minimalist Korean & Japanese ready-to-wear — small-batch seasonal pieces, EU shipping from Germany, and clear size guides for European fits.
+  </p>
+</section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        © <span id="year2"></span> einHaru Collective
+      </div>
+      <div class="footer-right">
+        <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener" aria-label="einHaru Instagram">Instagram</a>
+        <a href="mailto:einharu@gmail.com" aria-label="Email us">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mini-cart drawer + overlay -->
+  <div class="cart-overlay" data-cart-overlay hidden></div>
+  <aside class="cart-drawer" data-cart-drawer hidden aria-hidden="true" aria-label="Shopping bag" role="dialog">
+    <header class="cart-drawer__header">
+      <h2>Bag</h2>
+      <button class="cart-close" aria-label="Close bag" data-cart-close>&times;</button>
+    </header>
+    <div class="cart-drawer__list" data-cart-list></div>
+    <footer class="cart-drawer__footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <strong data-cart-subtotal>€0</strong>
+      </div>
+      <button class="button-primary" data-cart-checkout>Go to checkout</button>
+      <button class="button-secondary" data-cart-continue>Continue shopping</button>
+    </footer>
+  </aside>
+
+  <!-- Scripts: order matters -->
+  <script>
+    // keep year current
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('year2');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+  <script>
+  window.EH_BACKEND = location.origin;
+</script>
+  <script src="cart.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

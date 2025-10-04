@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://einharu.com/sitemap.xml
+Host: einharu.com
