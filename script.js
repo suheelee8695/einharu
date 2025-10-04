@@ -12,7 +12,6 @@
 
   /*** CONFIG ***/
   const PRODUCTS_JSON = 'products.json';
-  // const STRIPE_ENDPOINT = 'http://localhost:4242/create-checkout-session'; // optional
   const CACHE_BUST = 'no-store'; // dev cache behaviour
 
   /*** HELPERS ***/
@@ -242,7 +241,7 @@
         buyForm.getAttribute('data-endpoint') ||
         (window.EH_BACKEND
           ? `${window.EH_BACKEND.replace(/\/$/, '')}/create-checkout-session`
-          : (typeof STRIPE_ENDPOINT !== 'undefined' ? STRIPE_ENDPOINT : 'http://localhost:4242/create-checkout-session'));
+          : (typeof STRIPE_ENDPOINT !== 'undefined' ? STRIPE_ENDPOINT : '/.netlify/functions/create-checkout-session'));
 
       buyForm.addEventListener('submit', async (e) => {
         e.preventDefault();
