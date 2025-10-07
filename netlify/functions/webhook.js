@@ -6,12 +6,16 @@ exports.handler = async (event) => {
   const sig = event.headers['stripe-signature'];
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
+  // 1) Get the exact raw body Stripe signed (decode if Netlify set base64)
+  const rawBody = event.isBase64Encoded
+    ? Buffer.from(event.body, 'base64')
+    : Buffer.from(event.body || '', 'utf8');
+
   let stripeEvent;
   try {
-    // IMPORTANT: event.body must be the raw string (Netlify provides this by default)
-    stripeEvent = stripe.webhooks.constructEvent(event.body, sig, webhookSecret);
+    stripeEvent = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
+    console.error('[webhook] signature verification failed:', err.message);
     return { statusCode: 400, body: `Webhook Error: ${err.message}` };
   }
 
@@ -20,37 +24,46 @@ exports.handler = async (event) => {
       case 'checkout.session.completed': {
         const session = stripeEvent.data.object;
 
-        // Get purchased line items so we know which Price IDs were bought
+        // (Optional) Only proceed when actually paid (defensive for async methods)
+        if (session.payment_status && session.payment_status !== 'paid') {
+          console.log('[webhook] session completed but not paid, skipping:', session.id, session.payment_status);
+          break;
+        }
+
+        // 2) Fetch the line items -> get Price IDs
         const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 100 });
         const purchasedPriceIds = (lineItems.data || [])
           .map(li => li.price?.id)
           .filter(Boolean);
 
-        // Persist: mark those Price IDs as sold in Netlify Blobs
-        const store = getStore({ name: 'inventory' }); // creates a logical store called "inventory"
+        if (!purchasedPriceIds.length) {
+          console.warn('[webhook] no price ids found for session:', session.id);
+          break;
+        }
+
+        // 3) Write to the SAME store/key your reader uses
+        const store = getStore({ name: 'inventory' });
         const key = 'sold.json';
 
-        // read current (if any)
-        let current = {};
-        try {
-          current = await store.get(key, { type: 'json' }) || {};
-        } catch (_) { current = {}; }
-
-        // set sold flags
+        const current = (await store.get(key, { type: 'json' })) || {};
         for (const pid of purchasedPriceIds) current[pid] = true;
 
         await store.setJSON(key, current);
-        console.log('[webhook] sold updated:', purchasedPriceIds);
+        console.log('[webhook] sold updated:', { sessionId: session.id, purchasedPriceIds });
         break;
       }
       default:
-        // ignore other events
+        // ignore other events to keep logs quiet
         break;
     }
 
-    return { statusCode: 200, body: JSON.stringify({ received: true }) };
+    return {
+      statusCode: 200,
+      headers: { 'content-type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({ ok: true }),
+    };
   } catch (err) {
-    console.error('Webhook handler failed:', err);
+    console.error('[webhook] handler failed:', err);
     return { statusCode: 500, body: 'Webhook handler failed.' };
   }
 };
