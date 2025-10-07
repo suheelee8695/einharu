@@ -56,7 +56,7 @@ exports.handler = async (event) => {
 
     // 🔐 쿠폰/국가 환경변수
     const VALID_COUPONS = (process.env.COUPON_CODES || '')
-      .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);   // e.g. ['EINHARUDELIVERY01']
+      .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);   
 
     const FREE_COUNTRIES = (process.env.FREE_SHIP_COUNTRIES || '')
       .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);   // e.g. ['DE'] (비우면 전체 허용)
