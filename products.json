@@ -791,7 +791,41 @@
       "Do not tumble dry"
     ],
     "stripePriceId": "price_1SESkdFPNKTl6gGpOq2wO1EU"
+  },
+{
+    "id": "item-23",
+    "title": "Draped Scarf-Knit Long Sleeve - Black",
+    "price": 1,
+    "stock": 1,
+    "category": "collection",
+    "brand": "MU:I",
+    "currency": "EUR",
+    "sizes": "Relaxed fit · Works EU 36–40",
+    "defaultSize": "Best EU 36–40",
+    "sizeDetails": [
+      "Shoulder: 46 cm",
+      "Chest: 52 cm",
+      "Sleeve Length: 58 cm",
+      "Total length: 57 cm",
+      "Scarf: 126 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion22-1.png",
+    "images": [
+      "images/fashion22-1.png",
+      "images/fashion22-1.png"
+      
+    ],
+    "description": "An elevated essential for transitional dressing, this draped knit long sleeve is designed with an attached scarf detail that falls naturally along the neckline for a soft, effortless drape. Its fluid silhouette makes it easy to layer, while the lightweight knit ensures comfort and versatility across seasons. Perfect for pairing with wide-leg trousers or layered under outerwear, this piece blends minimal design with subtle detail, offering a timeless addition to your wardrobe.",
+    "materials": [
+      "Wool 100%"
+    ],
+    "care": [
+      "Dry clean only",
+      "Do not wash or bleach",
+      "Do not tumble dry"
+    ],
+    "stripePriceId": "price_1SFX0yFPNKTl6gGpYekFawzB"
   }
-
 
 ]

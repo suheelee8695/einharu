@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="info-panel sticky-panel">
+      <div class="info-panel sticky-panel" data-product-info>
         <div class="brand-name" id="product-brand">einHaru Collective</div>
         <h1 id="product-title"></h1>
         <div class="price-line">
@@ -146,8 +146,20 @@
     <div class="cart-drawer__list" data-cart-list></div>
     <footer class="cart-drawer__footer">
       <div class="cart-subtotal"><span>Subtotal</span><strong data-cart-subtotal>€0</strong></div>
+      <div class="cart-promo">
+  <label for="cart-promo-input" class="visually-hidden">Promo code</label>
+  <input id="cart-promo-input" data-cart-promo-input placeholder="Promo code" autocomplete="off" class="promo-input">
+  <a href="#" data-cart-apply-promo class="promo-apply-link" role="button" aria-label="Apply promo code">Apply</a>
+
+  <div class="promo-note" data-cart-promo-note hidden>
+    Applied: <strong data-cart-promo-code></strong>
+    <button type="button" data-cart-remove-promo class="promo-remove">Remove</button>
+  </div>
+</div>
+
       <button class="button-primary" data-cart-checkout>Go to checkout</button>
       <button class="button-secondary" data-cart-continue>Continue shopping</button>
+
     </footer>
   </aside>
 

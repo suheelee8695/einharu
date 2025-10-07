@@ -26,6 +26,199 @@
     if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
     return res.json();
   }
+  /** Promo code UI wiring (safe on any page) */
+function wirePromoUI() {
+  // Look for the input and button; if not present, just exit silently.
+  const input = document.querySelector('#promo-code');              // <-- your input
+  const btn   = document.querySelector('[data-apply-promo]');       // <-- your Apply button
+
+  if (!input || !btn) {
+    // Not all pages have promo UI, so that's okay.
+    return;
+  }
+
+  // Pre-fill from sessionStorage if user had applied before
+  const saved = sessionStorage.getItem('promo_code') || '';
+  if (saved && !input.value) input.value = saved;
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const code = (input.value || '').trim();
+    sessionStorage.setItem('promo_code', code);
+    // Optional: tiny UI feedback
+    btn.setAttribute('aria-live', 'polite');
+    btn.textContent = code ? 'Applied' : 'Apply';
+    // Optional: console marker to verify it ran
+    console.log('[promo] stored promo_code =', code);
+  });
+}
+
+/*** MOBILE PDP HELPERS ***/
+function injectMobilePdpStyles(){
+  if (document.getElementById('eh-mobile-pdp-css')) return;
+  const css = `
+  @media (max-width:768px){
+    :root{
+      --eh-top-offset: 0px;            /* 헤더+브레드크럼 높이 (JS가 셋팅) */
+      --eh-sticky-h: 64px;             /* 하단 buy now 높이 */
+      --eh-aspect-w: 3;                /* ← 기본 규격: 3:4 */
+      --eh-aspect-h: 4;
+      --eh-inner-pad: 16px;
+    }
+
+    /* 풀블리드 유틸리티 */
+    .eh-fullbleed{ width:100vw; margin-left:50%; transform:translateX(-50%); }
+    .eh-inner{ padding-left:var(--eh-inner-pad); padding-right:var(--eh-inner-pad); }
+
+    /* Breadcrumb (상단 고정 + 풀블리드) */
+    .eh-bc{ position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid #eee; }
+    .eh-bc .trail{ display:flex; gap:6px; white-space:nowrap; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; }
+    .eh-bc .trail::-webkit-scrollbar{ display:none; }
+    .eh-bc .current{ max-width:56vw; overflow:hidden; text-overflow:ellipsis; display:inline-block; }
+    .eh-bc{ composes: eh-fullbleed; }
+    .eh-bc .trail{ composes: eh-inner; }
+
+    /* ===== 모바일 갤러리: 기본 규격 3:4 프레임 =====
+       - 높이 = min(뷰포트-상단오프셋, 3:4 비율 높이)
+       - 필요시 cover로 바꾸면 ‘자동 크롭’ 일관 높이 유지
+    */
+    body.eh-pdp-mobile .eh-gallery{
+      composes: eh-fullbleed;
+      position:relative;
+      height: min(
+        calc(100svh - var(--eh-top-offset)),
+        calc(100vw * (var(--eh-aspect-h) / var(--eh-aspect-w)))
+      );
+      background:#fff;
+    }
+    body.eh-pdp-mobile .eh-track{
+      height:100%; display:flex; overflow-x:auto; overflow-y:hidden;
+      scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    }
+    body.eh-pdp-mobile .eh-slide{
+      flex:0 0 100vw; height:100%;
+      scroll-snap-align:center; display:grid; place-items:center;
+      background:#efefef;                  /* 제품 배경 캔버스 */
+    }
+    body.eh-pdp-mobile .eh-slide img{
+      width:100%; height:100%;
+      object-fit: contain;                  /* ← 기본: 전체가 보이게 */
+      object-position:center;
+      display:block; margin:0;
+    }
+    /* 만약 ‘잘라서 통일’을 원하면 위 한 줄을 다음으로 변경
+       object-fit: cover; background:#efefef; */
+
+    /* 인디케이터 오버레이 */
+    body.eh-pdp-mobile .eh-dots{
+      position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+      display:inline-flex; gap:6px; z-index:60;
+    }
+    body.eh-pdp-mobile .eh-dots button{
+      width:6px; height:6px; border-radius:999px; border:0; background:#C9D1E4;
+    }
+    body.eh-pdp-mobile .eh-dots button[aria-current="true"]{ background:#535353; }
+
+    /* 원래 이미지/썸네일은 모바일에서 숨김 */
+    body.eh-pdp-mobile .eh-hide-mobile{ display:none !important; }
+
+    /* Info 섹션: 풀블리드 + 내부 패딩 + sticky 버튼 피하기 */
+    body.eh-pdp-mobile [data-product-info]{
+      composes: eh-fullbleed eh-inner;
+      padding-bottom: calc(24px + var(--eh-sticky-h));
+      background:#fff;
+    }
+
+    .buy-now-sticky, .sticky-atc{ z-index:70; }
+  }`;
+  const style = document.createElement('style');
+  style.id = 'eh-mobile-pdp-css';
+  style.textContent = css;
+  document.head.appendChild(style);
+}
+
+
+function initMobileGallery(product, opts={}){
+  // 1) 환경
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  if (!isMobile || !product?.images?.length) return;
+
+  document.body.classList.add('eh-pdp-mobile');
+  injectMobilePdpStyles();
+
+  // 2) 원본 이미지 영역(있으면) 숨김 표시용 클래스 부여
+  const originalImageWrap =
+    document.querySelector('#product-image-gallery') ||
+    document.querySelector('.product-images') ||
+    document.querySelector('[data-product-images]');
+  if (originalImageWrap) originalImageWrap.classList.add('eh-hide-mobile');
+
+  const thumbs = document.querySelector('.thumb-list');
+  if (thumbs) thumbs.classList.add('eh-hide-mobile');
+
+  const singleMain = document.querySelector('#main-image');
+  if (singleMain) singleMain.classList.add('eh-hide-mobile');
+
+  // 3) 갤러리 DOM 구성 (상단에 삽입)
+  const host = document.querySelector('.product-detail-main') || document.body;
+  const gallery = document.createElement('section');
+  gallery.className = 'eh-gallery';
+  const track = document.createElement('div'); track.className = 'eh-track';
+  const dots  = document.createElement('div'); dots.className  = 'eh-dots';
+
+  // 슬라이드 생성
+  product.images.forEach((src, i) => {
+    const slide = document.createElement('figure');
+    slide.className = 'eh-slide';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `${product.title || 'Product'} image ${i+1}`;
+    img.loading = 'lazy';
+    slide.appendChild(img);
+    track.appendChild(slide);
+
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Go to image ${i+1}`);
+    dot.addEventListener('click', () => track.scrollTo({ left: i * window.innerWidth, behavior: 'smooth' }));
+    dots.appendChild(dot);
+  });
+
+  gallery.appendChild(track);
+  gallery.appendChild(dots);
+  // 갤러리 DOM 구성 이후의 삽입 위치를 '브레드크럼 바로 아래'로
+const bcWrap = document.querySelector('.product-breadcrumb');
+if (bcWrap) {
+  bcWrap.insertAdjacentElement('afterend', gallery);
+} else {
+  // 혹시 브레드크럼이 없으면 기존 방식으로 상단에 삽입
+  host.prepend(gallery);
+}
+
+// 헤더/배너/브레드크럼 실제 높이를 합산해서 CSS 변수로 내려 보내기 (여백 보정)
+const headerH = document.querySelector('.site-header')?.offsetHeight || 0;
+const bannerH = document.querySelector('#site-banner')?.offsetHeight || 0;
+const bcH     = bcWrap?.offsetHeight || 0;
+document.documentElement.style.setProperty('--eh-top', `${headerH + bannerH + bcH}px`);
+
+
+  // 인디케이터 활성화
+  const setActive = () => {
+    const idx = Math.round(track.scrollLeft / window.innerWidth);
+    Array.from(dots.children).forEach((d,k)=> d.toggleAttribute('aria-current', k===idx));
+  };
+  setActive();
+  track.addEventListener('scroll', () => requestAnimationFrame(setActive));
+  window.addEventListener('resize', setActive);
+
+  // 4) 모바일 breadcrumb 말줄임을 위한 title 동기화(선택)
+  const bc = document.querySelector('#breadcrumb-title');
+  if (bc && product.title) {
+    const full = product.title.trim();
+    bc.textContent = full.length > 50 ? full.slice(0,47) + '…' : full; // 모바일에서만 살짝 단축
+    bc.title = full;
+  }
+}
 
   /*** SEO ***/
   function injectSchema(product) {
@@ -159,6 +352,7 @@
     // Meta & schema
     setMeta(product);
     injectSchema(product);
+    initMobileGallery(product);
 
     // Static UI
     $('#breadcrumb-title') && ($('#breadcrumb-title').textContent = product.title || '');
@@ -246,14 +440,18 @@
       buyForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (Number(product.stock ?? 0) <= 0) return alert('This item is sold out.');
-
+        const promo =
+    (sessionStorage.getItem('promo_code') || document.querySelector('#promo-code')?.value || '').trim();  // ⬅
+  const shipping_country = 'DE';
         try {
           const res = await fetch(endpoint, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               items: [{ price: product.stripePriceId, quantity: 1 }],
-              customer_email: ''
+              customer_email: '',
+              promo_code: (sessionStorage.getItem('promo_code') || '').trim(),
+              shipping_country: 'DE'
             })
           });
           const data = await res.json();
@@ -290,75 +488,80 @@
     }
 
    /*** GALLERY ***/
-const thumbsContainer = $('.thumb-list');
-const mainImg = $('#main-image');
+/*** GALLERY (desktop only; mobile uses horizontal gallery) ***/
+const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-if (thumbsContainer && mainImg) {
-  let current = 0;
-  const fullGallery = $('#product-image-gallery');
+if (!isMobile) {
+  const thumbsContainer = $('.thumb-list');
+  const mainImg = $('#main-image');
 
-  function updateMain(index) {
-    current = index;
+  if (thumbsContainer && mainImg) {
+    let current = 0;
+    const fullGallery = $('#product-image-gallery'); // ← 한 번만 선언
 
-    // 1) Replace the single main image (if you show one)
-    const url = product.images?.[index];
-    if (url) {
-      mainImg.src = url;
-      mainImg.alt = `${product.title || 'Product'} — view ${index + 1}`;
-    }
+    function updateMain(index) {
+      current = index;
 
-    // 2) Scroll the full gallery strip to the correct slide (if present)
-    if (fullGallery) {
-      const target = fullGallery.querySelector(`#image-${index}`);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      // 1) Replace the single main image (if you show one)
+      const url = product.images?.[index];
+      if (url) {
+        mainImg.src = url;
+        mainImg.alt = `${product.title || 'Product'} — view ${index + 1}`;
       }
-    }
 
-    // 3) Thumb states
-    $$('.thumb-list button', thumbsContainer).forEach((btn, idx) => {
-      btn.setAttribute('aria-pressed', String(idx === index));
-    });
-  }
+      // 2) Scroll the full gallery strip to the correct slide (if present)
+      if (fullGallery) {
+        const target = fullGallery.querySelector(`#image-${index}`);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
 
-  // Build thumbs
-  (product.images || []).forEach((imgUrl, idx) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'thumb';
-    btn.setAttribute('aria-pressed', 'false');
-    btn.setAttribute('data-index', String(idx));
-    btn.innerHTML = `<img src="${imgUrl}" alt="${product.title} — view ${idx + 1}" loading="lazy">`;
-    btn.addEventListener('click', () => updateMain(idx));
-    btn.addEventListener('keydown', (e) => { if (e.key === 'Enter') updateMain(idx); });
-    thumbsContainer.appendChild(btn);
-  });
-
-  // Build full gallery strip (if you use it)
-  if (fullGallery && Array.isArray(product.images)) {
-    fullGallery.innerHTML = '';
-    product.images.forEach((url, idx) => {
-      const img = document.createElement('img');
-      img.src = url;
-      img.alt = `${product.title} image ${idx + 1}`;
-      img.id = `image-${idx}`;
-      img.className = 'full-product-image';
-      img.loading = 'lazy';
-      fullGallery.appendChild(img);
-    });
-  }
-
-  updateMain(0);
-
-
-
-      // Keyboard arrows
-      document.addEventListener('keydown', (e) => {
-        if (!product.images?.length) return;
-        if (e.key === 'ArrowRight') updateMain((current + 1) % product.images.length);
-        if (e.key === 'ArrowLeft') updateMain((current - 1 + product.images.length) % product.images.length);
+      // 3) Thumb states
+      $$('.thumb-list button', thumbsContainer).forEach((btn, idx) => {
+        btn.setAttribute('aria-pressed', String(idx === index));
       });
     }
+
+    // Build thumbs
+    (product.images || []).forEach((imgUrl, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'thumb';
+      btn.setAttribute('aria-pressed', 'false');
+      btn.setAttribute('data-index', String(idx));
+      btn.innerHTML = `<img src="${imgUrl}" alt="${product.title} — view ${idx + 1}" loading="lazy">`;
+      btn.addEventListener('click', () => updateMain(idx));
+      btn.addEventListener('keydown', (e) => { if (e.key === 'Enter') updateMain(idx); });
+      thumbsContainer.appendChild(btn);
+    });
+
+    // Build full gallery strip (if you use it)
+    if (fullGallery && Array.isArray(product.images)) {
+      fullGallery.innerHTML = '';
+      product.images.forEach((url, idx) => {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = `${product.title} image ${idx + 1}`;
+        img.id = `image-${idx}`;
+        img.className = 'full-product-image';
+        img.loading = 'lazy';
+        fullGallery.appendChild(img);
+      });
+    }
+
+    updateMain(0);
+
+    // Keyboard arrows (desktop only)
+    document.addEventListener('keydown', (e) => {
+      if (!product.images?.length) return;
+      if (e.key === 'ArrowRight') updateMain((current + 1) % product.images.length);
+      if (e.key === 'ArrowLeft')  updateMain((current - 1 + product.images.length) % product.images.length);
+    });
+  }
+}
+
+
 
     /*** STICKY CTA (mobile) ***/
     const stickyHost = $('#sticky-cta-container');
@@ -402,7 +605,7 @@ if (thumbsContainer && mainImg) {
       sessionStorage.setItem('bannerDismissed', 'true');
     });
 
-    textEl.textContent = 'Free shipping within Germany on orders over €100.';
+    textEl.textContent = 'Free shipping within EU on orders over €100.';
   }
 
   /*** INIT ***/
@@ -413,6 +616,7 @@ if (thumbsContainer && mainImg) {
 
     window.Cart?.init?.();
     initBanner();
+    wirePromoUI();
 
     let products;
     try {

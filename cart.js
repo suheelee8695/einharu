@@ -15,6 +15,17 @@
     const max = Math.min(stock, 9); // cap at 9
     return stock === 0 ? 0 : Math.max(1, Math.min(Number(q) || 1, max));
   };
+// --- Promo code localStorage helpers (no validation here; server decides) ---
+const COUPON_KEY = 'eh_coupon';
+const getCoupon = () => {
+  try { return (localStorage.getItem(COUPON_KEY) || '').trim(); } catch (_) { return ''; }
+};
+const setCoupon = (code) => {
+  try {
+    if (code && code.trim()) localStorage.setItem(COUPON_KEY, code.trim());
+    else localStorage.removeItem(COUPON_KEY);
+  } catch (_) {}
+};
 
   // ---- storage
   const save = () => localStorage.setItem(STORAGE, JSON.stringify(state.items));
@@ -88,6 +99,7 @@
     const rawSubtotal = subtotal();
     if (!Number.isFinite(rawSubtotal) || rawSubtotal <= 0) return toast('Your bag is empty.');
     const subtotalCents = Math.round(rawSubtotal * 100);
+    const promoCode = getCoupon();
 
     try {
       // Call your Netlify Function on the SAME origin
@@ -98,7 +110,8 @@
            items,
            customer_email: email,
            shipping_country: selectedCountry,
-           subtotal_cents: subtotalCents
+           subtotal_cents: subtotalCents,
+            promo_code: promoCode || null
          })
        });
 
@@ -122,6 +135,13 @@
     els.count = document.querySelector('[data-cart-count]');
     els.checkout = document.querySelector('[data-cart-checkout]');
     els.cont = document.querySelector('[data-cart-continue]');
+      // --- Promo UI elements ---
+  els.promoInput  = document.querySelector('[data-cart-promo-input]');
+  els.promoApply  = document.querySelector('[data-cart-apply-promo]');
+  els.promoNote   = document.querySelector('[data-cart-promo-note]');
+  els.promoCode   = document.querySelector('[data-cart-promo-code]');
+  els.promoRemove = document.querySelector('[data-cart-remove-promo]');
+
   }
 
   function bindUI() {
@@ -131,6 +151,19 @@
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
     els.checkout?.addEventListener('click', ()=>checkout());
     els.cont?.addEventListener('click', close);
+    // ---- Promo: apply/remove
+els.promoApply?.addEventListener('click', (e) => {
+  e.preventDefault();                
+  const raw = (els.promoInput?.value || '').trim();
+  if (!raw) { toast?.('Enter a promo code.'); return; }
+  setCoupon(raw);                    
+  reflectPromo();
+});
+els.promoRemove?.addEventListener('click', () => {
+  setCoupon('');
+  reflectPromo();
+});
+
   }
 
   function trapFocus(e) {
@@ -249,11 +282,32 @@
   }
 
   function toast(msg){ console.warn(msg); /* hook UI here */ }
+  function reflectPromo() {
+  const code = getCoupon();
+  if (!els.promoNote || !els.promoCode || !els.promoInput) return;
 
-  function init(){
-    cacheEls(); load(); bindUI(); render();
-    window.addEventListener('storage', (e)=>{ if(e.key===STORAGE) { load(); render(); }});
+  if (code) {
+    els.promoNote.hidden = false;
+    els.promoCode.textContent = code;
+    els.promoInput.value = code;
+  } else {
+    els.promoNote.hidden = true;
+    els.promoCode.textContent = '';
+    els.promoInput.value = '';
   }
+}
+  function init(){
+  cacheEls(); load(); bindUI(); render();
+  reflectPromo(); // ← 추가: 처음 열릴 때 UI 반영
 
+  // 다른 탭/창에서 쿠폰이나 카트가 바뀌면 동기화
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE || e.key === 'eh_coupon') {
+      load(); render(); reflectPromo();
+    }
+  });
+}
+
+  
   window.Cart = { init, add, removeAt, updateQty, getItems:()=>state.items.slice(), count, subtotal, checkout };
 })();

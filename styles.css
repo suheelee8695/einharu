@@ -893,3 +893,253 @@ summary:focus-visible {
 .accordion-trigger[aria-expanded="true"] .accordion-icon {
   transform: rotate(45deg); /* + becomes × */
 }
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.remove-link { background:none; border:none; padding:0; text-decoration:underline; cursor:pointer; }
+
+:root { --ink: #535353; --control-h: 48px; } /* 필요시 조정 */
+
+.cart-promo {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap; /* 작을 때 줄바꿈 */
+}
+
+.promo-input {
+  flex: 1;
+  height: var(--control-h);
+  padding: 0 12px;
+  border: 1px solid #E5E7EB;      /* 은은한 그레이 보더 */
+  border-radius: 10px;
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+}
+.promo-input:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.promo-apply-link {
+  line-height: var(--control-h);
+  height: var(--control-h);
+  font-weight: 600;
+  color: var(--ink);               /* 파랑 X, 브랜드 블랙톤 */
+  cursor: pointer;
+  padding: 0 6px;                  /* 클릭 영역 확보 */
+  border-radius: 6px;
+}
+.promo-apply-link:hover { opacity: .85; }
+.promo-apply-link:focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.promo-note {
+  width: 100%;
+  font-size: 14px;
+  color: var(--ink);
+}
+.promo-remove {
+  background: none; border: 0; padding: 0;
+  text-decoration: underline; color: var(--ink); cursor: pointer;
+  margin-left: 8px;
+}
+
+/* 접근성용 */
+.visually-hidden {
+  position: absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+/* ===== 모바일 전용 스타일 ===== */
+@media (max-width: 768px) {
+  /* 1) Breadcrumb: 한 줄/가로스크롤/말줄임 */
+  .breadcrumb, nav[aria-label="Breadcrumb"] {
+    position: sticky; top: 0; z-index: 15;
+    background: #fff; border-bottom: 1px solid #eee;
+    padding: 8px 12px;
+  }
+  .breadcrumb .trail, nav[aria-label="Breadcrumb"] > * {
+    display: flex; align-items: center; gap: 6px;
+    overflow-x: auto; white-space: nowrap;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .breadcrumb .trail::-webkit-scrollbar { display: none; }
+  .breadcrumb .current, .breadcrumb [data-bc-current] {
+    max-width: 52vw; overflow: hidden; text-overflow: ellipsis; display: inline-block;
+  }
+
+  /* 2) 갤러리: 화면 가득 가로 슬라이드 */
+  body.pdp-mobile .pdp-gallery {
+    position: relative;
+    height: calc(100svh - 48px); /* 상단 breadcrumb 높이에 맞춰 조정 */
+    background: #fff;
+  }
+  body.pdp-mobile .pdp-track {
+    height: 100%;
+    display: flex;
+    overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.pdp-mobile .pdp-slide {
+    flex: 0 0 100vw; height: 100%;
+    scroll-snap-align: center;
+    display: grid; place-items: center;
+    background: #fff;
+  }
+  body.pdp-mobile .pdp-slide img {
+    width: 100%; height: 100%; object-fit: contain;
+  }
+
+  /* 스크롤 힌트(양쪽 그라데이션) */
+  body.pdp-mobile .pdp-hint {
+    position: absolute; top: 0; bottom: 0; width: 44px; z-index: 5; pointer-events: none;
+    background: linear-gradient(to right, rgba(255,255,255,.9), rgba(255,255,255,0));
+  }
+  body.pdp-mobile .pdp-hint--left { left: 0; transform: scaleX(-1); display: none; }
+  body.pdp-mobile .pdp-hint--right { right: 0; }
+
+  /* 인디케이터 점 */
+  body.pdp-mobile .pdp-dots {
+    position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
+    display: inline-flex; gap: 6px; z-index: 6;
+  }
+  body.pdp-mobile .pdp-dots button {
+    width: 6px; height: 6px; border-radius: 999px; border: 0;
+    background: #C9D1E4;
+  }
+  body.pdp-mobile .pdp-dots button[aria-current="true"] { background: #535353; }
+
+  /* 정보 섹션은 갤러리 아래로 자연스럽게 등장 */
+  body.pdp-mobile .pdp-info { padding: 16px 16px 96px; background:#fff; }
+
+  /* 기존 sticky buy 버튼과 충돌 방지 */
+  :root { --sticky-buy-h: 64px; } /* 실제 높이에 맞춰 조정 */
+  body.pdp-mobile .pdp-info { padding-bottom: calc(24px + var(--sticky-buy-h)); }
+  .buy-now-sticky, .sticky-atc { z-index: 40; }
+
+  /* 기존 이미지 리스트는 모바일에선 숨김 (JS로 갤러리 생성 후) */
+  body.pdp-mobile .product-images--original { display: none !important; }
+}
+/* ===== 모바일 PDP 보정 ===== */
+@media (max-width: 768px) {
+  /* ① 브레드크럼을 상단 고정 + 말줄임 */
+  .product-breadcrumb {
+    position: sticky;
+    top: 0;                 /* 배너/헤더 위에는 이미 포함되어 있으니 0 */
+    z-index: 20;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 8px 12px;
+    margin: 0 0 8px 0;
+  }
+  .product-breadcrumb #breadcrumb-title {
+    display: inline-block;
+    max-width: 55vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+  }
+
+  /* ② 갤러리: 실제 상단 높이만큼 뺀 만큼만 세로 높이 확보 + 풀블리드 */
+  body.eh-pdp-mobile .eh-gallery {
+    height: calc(100svh - var(--eh-top, 0px));
+    width: 100vw;
+    /* product-detail-main의 좌우 padding을 제거해 ‘풀블리드’ */
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+  }
+
+  /* ③ 하단 점(인디케이터)을 이미지 위에 겹치게 조금 위로 */
+  body.eh-pdp-mobile .eh-dots {
+    bottom: 16px; /* 기존 12px → 조금 올림 */
+  }
+}
+/* === einHaru mobile PDP fixes (full-bleed + uniform image height) === */
+@media (max-width: 768px) {
+  /* 0) product-detail 컨테이너의 좌우 패딩 제거: 내부 섹션이 직접 패딩을 가짐 */
+  body.eh-pdp-mobile .product-detail-main {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* 1) Breadcrumb: 상단 고정 + 풀블리드(좌우 여백 제거) */
+  body.eh-pdp-mobile .product-breadcrumb {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+
+    /* full-bleed trick */
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    /* 내부 여백만 얇게 */
+    padding: 8px 12px;
+    margin-bottom: 0;
+  }
+  body.eh-pdp-mobile .product-breadcrumb #breadcrumb-title {
+    display: inline-block;
+    max-width: 56vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+  }
+
+  /* 2) 갤러리: 브레드크럼 높이만큼 뺀 화면높이 사용 + 풀블리드 */
+  body.eh-pdp-mobile .eh-gallery {
+    height: calc(100svh - var(--eh-top, 0px));
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+  }
+
+  /* 3) 스크롤 인디케이터는 이미지 위에 겹치게 */
+  body.eh-pdp-mobile .eh-dots { bottom: 14px; }
+
+  /* 4) 정보 섹션: 풀블리드 + 내부 패딩, sticky CTA 높이만큼 하단 여백 */
+  body.eh-pdp-mobile [data-product-info] {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 16px;
+    padding-bottom: calc(24px + var(--eh-sticky-h, 64px));
+    background: #fff;
+  }
+
+  /* 5) 모바일 이미지 높이 통일 (자동 크롭) */
+  body.eh-pdp-mobile .eh-slide { background: #efefef; }
+  body.eh-pdp-mobile .eh-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* ← contain → cover 로 변경하여 높이 통일 */
+    object-position: center;
+    display: block;
+  }
+}
+/* === einHaru mobile PDP micro-fixes === */
+@media (max-width: 768px) {
+  /* 1) kill default figure margins so no extra gaps appear */
+  body.eh-pdp-mobile .eh-slide { margin: 0; }
+
+  /* 2) make sure the gallery is tight to the breadcrumb */
+  body.eh-pdp-mobile .product-breadcrumb { margin-bottom: 0; }
+  body.eh-pdp-mobile .eh-gallery { margin-top: 0; padding-top: 0; }
+
+  /* 3) breadcrumb: single-line with ellipsis */
+  body.eh-pdp-mobile .product-breadcrumb #breadcrumb-title {
+    display: inline-block;
+    max-width: 56vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+  }
+
+  /* 4) keep image fully visible (no cropping) and dots overlayed */
+  body.eh-pdp-mobile .eh-slide img { object-fit: contain; }
+  body.eh-pdp-mobile .eh-dots { bottom: 14px; }
+}
+

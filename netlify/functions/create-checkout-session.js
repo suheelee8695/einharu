@@ -1,13 +1,19 @@
 // netlify/functions/create-checkout-session.js
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// Flat €5 shipping; free over €100 (like your server.js)
+// Flat €5 shipping; free over €100 + free by coupon (server-side validation)
 exports.handler = async (event) => {
   try {
     if (event.httpMethod !== 'POST') {
       return { statusCode: 405, body: 'Method Not Allowed' };
     }
-    const { items, title, price, email, customer_email } = JSON.parse(event.body || '{}');
+
+    // 프론트에서 보내는 값
+    const {
+      items, title, price, email, customer_email,
+      promo_code = '',
+      shipping_country = 'DE'
+    } = JSON.parse(event.body || '{}');
 
     // Build line_items & subtotal (cents)
     let line_items = [];
@@ -48,13 +54,34 @@ exports.handler = async (event) => {
       }];
     }
 
-    const showFree = subtotal >= 10000;
+    // 🔐 쿠폰/국가 환경변수
+    const VALID_COUPONS = (process.env.COUPON_CODES || '')
+      .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);   // e.g. ['EINHARUDELIVERY01']
+
+    const FREE_COUNTRIES = (process.env.FREE_SHIP_COUNTRIES || '')
+      .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);   // e.g. ['DE'] (비우면 전체 허용)
+
+    // 쿠폰 검증(백엔드 전용)
+    const code = (typeof promo_code === 'string' ? promo_code : '').trim().toUpperCase();
+    const couponValid = !!code && VALID_COUPONS.includes(code);
+
+    const shipCountry = (shipping_country || 'DE').toUpperCase();
+    const countryOk  = !FREE_COUNTRIES.length || FREE_COUNTRIES.includes(shipCountry);
+
+    // (옵션) 유효기간/최소금액 조건 추가 지점
+    const notExpired = true;   // Date.now() <= new Date('2025-12-31T23:59:59Z').getTime()
+    const meetsMin   = true;   // typeof subtotal === 'number' ? subtotal >= 3000 : true
+
+    const allowFreeByCoupon = couponValid && countryOk && notExpired && meetsMin;
+    const showFreeThreshold = subtotal >= 10000; // €100 이상 무료
+
+    // 🚚 배송 옵션
     const shipping_options = [
       {
         shipping_rate_data: {
           display_name: 'Standard Shipping',
           type: 'fixed_amount',
-          fixed_amount: { amount: 500, currency: 'eur' },
+          fixed_amount: { amount: 500, currency: 'eur' }, // €5.00 (원하면 590=€5.90)
           delivery_estimate: {
             minimum: { unit: 'business_day', value: 2 },
             maximum: { unit: 'business_day', value: 7 }
@@ -62,10 +89,14 @@ exports.handler = async (event) => {
         }
       }
     ];
-    if (showFree) {
+
+    // ✅ 무료옵션은 쿠폰 OR 임계값 중 하나라도 만족 시 "한 번만" 추가
+    if (allowFreeByCoupon || showFreeThreshold) {
       shipping_options.push({
         shipping_rate_data: {
-          display_name: 'Free Shipping (orders over €100)',
+          display_name: allowFreeByCoupon
+            ? 'Free Shipping (coupon)'
+            : 'Free Shipping (orders over €100)',
           type: 'fixed_amount',
           fixed_amount: { amount: 0, currency: 'eur' },
           delivery_estimate: {
@@ -91,13 +122,18 @@ exports.handler = async (event) => {
         ]
       },
       shipping_options,
+      // allow_promotion_codes: true, // (상품 금액 할인코드 허용; 배송쿠폰과는 별개. 필요 시 주석 해제)
       success_url: `${CLIENT_ORIGIN}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${CLIENT_ORIGIN}/cancel.html`
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ url: session.url, id: session.id, _debug: { subtotal, showFree } })
+      body: JSON.stringify({
+        url: session.url,
+        id: session.id,
+        _debug: { subtotal, allowFreeByCoupon, showFreeThreshold, shipCountry, code }
+      })
     };
   } catch (e) {
     console.error('create-checkout-session error', e);
