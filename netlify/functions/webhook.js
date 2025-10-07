@@ -1,4 +1,5 @@
 // netlify/functions/webhook.js
+exports.config = { body: 'raw' };
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { getStore } = require('@netlify/blobs');
 
