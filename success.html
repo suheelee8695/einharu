@@ -103,7 +103,10 @@
       body.innerHTML = html;
       statusEl.textContent = 'Payment received. We’re preparing your order.';
       wrap.hidden = false;
-
+       try {
+        await fetch(`/.netlify/functions/confirm-session-inventory?id=${encodeURIComponent(sessionId)}`, { cache: 'no-store' });
+      } catch (_) {}
+      
       // Optional: clear local cart storage on success
       try { localStorage.removeItem('eh_cart_v1'); } catch (_) {}
     } catch (err) {
