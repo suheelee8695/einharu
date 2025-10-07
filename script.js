@@ -625,6 +625,21 @@ if (!isMobile) {
       console.error(err);
       return;
     }
+// after: products = await fetchJSON(PRODUCTS_JSON);
+let soldMap = {};
+try {
+  const r = await fetch('/.netlify/functions/get-inventory', { cache: 'no-store' });
+  if (r.ok) soldMap = (await r.json()).sold || {};
+} catch (_) { /* ignore */ }
+
+// Mark sold items by stripePriceId
+if (Array.isArray(products)) {
+  products = products.map(p => (p.stripePriceId && soldMap[p.stripePriceId]) ? { ...p, stock: 0 } : p);
+} else if (products && typeof products === 'object') {
+  Object.values(products).forEach(p => {
+    if (p.stripePriceId && soldMap[p.stripePriceId]) p.stock = 0;
+  });
+}
 
     const path = location.pathname;
     if (path.includes('product.html')) renderProductPage(products);
