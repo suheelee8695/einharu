@@ -1,28 +1,28 @@
 // netlify/functions/get-inventory.js
 const { getStore } = require('@netlify/blobs');
-console.log('[inventory] sold count:', Object.keys(sold || {}).length);
 
 exports.handler = async () => {
+  let sold = {}; // default so we never crash
+
   try {
-    const store = getStore({ name: 'inventory' });
-    const sold = (await store.get('sold.json', { type: 'json' })) || {};
-    return {
-      statusCode: 200,
-      headers: {
-        'content-type': 'application/json; charset=utf-8',
-        'cache-control': 'no-store, must-revalidate',
-      },
-      body: JSON.stringify({ sold }),
-    };
+    // Use the named store exactly like the other functions
+    const store = getStore('inventory'); // <- not { name: 'inventory' }
+    const json = await store.get('sold.json', { type: 'json' });
+    sold = json || {};
+
+    // Log only AFTER sold is assigned
+    console.log('[inventory] sold count:', Object.keys(sold).length);
   } catch (e) {
-    console.error('get-inventory error', e);
-    return {
-      statusCode: 200,
-      headers: {
-        'content-type': 'application/json; charset=utf-8',
-        'cache-control': 'no-store, must-revalidate',
-      },
-      body: JSON.stringify({ sold: {} }),
-    };
+    console.error('[inventory] error:', e && e.message);
+    // fall through returning empty map
   }
+
+  return {
+    statusCode: 200,
+    headers: {
+      'content-type': 'application/json; charset=utf-8',
+      'cache-control': 'no-store, must-revalidate',
+    },
+    body: JSON.stringify({ sold }),
+  };
 };
