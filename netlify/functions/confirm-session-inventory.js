@@ -19,6 +19,7 @@ exports.handler = async (event) => {
     if (!purchasedPriceIds.length) {
       return { statusCode: 200, body: JSON.stringify({ ok: true, skipped: 'no_line_items' }) };
     }
+console.log('[confirm] id:', id, 'purchasedPriceIds:', purchasedPriceIds);
 
     // Write to the SAME blob your frontend reads: inventory/sold.json
     const store = getStore({ name: 'inventory' });

@@ -41,6 +41,8 @@ exports.handler = async (event) => {
           console.warn('[webhook] no price ids found for session:', session.id);
           break;
         }
+console.log('[webhook] event:', stripeEvent.type, 'session:', session.id);
+console.log('[webhook] purchasedPriceIds:', purchasedPriceIds);
 
         // 3) Write to the SAME store/key your reader uses
         const store = getStore({ name: 'inventory' });

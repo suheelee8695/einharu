@@ -1,5 +1,6 @@
 // netlify/functions/get-inventory.js
 const { getStore } = require('@netlify/blobs');
+console.log('[inventory] sold count:', Object.keys(sold || {}).length);
 
 exports.handler = async () => {
   try {
