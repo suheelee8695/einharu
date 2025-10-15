@@ -1,20 +1,23 @@
 // netlify/functions/get-inventory.js
 const { getStore } = require('@netlify/blobs');
 
+function getInventoryStoreStrict() {
+  const siteID = process.env.NETLIFY_SITE_ID;
+  const token  = process.env.NETLIFY_BLOBS_TOKEN;
+  if (!siteID || !token) {
+    throw new Error(`Missing Blobs config. Have NETLIFY_SITE_ID=${!!siteID} NETLIFY_BLOBS_TOKEN=${!!token}`);
+  }
+  return getStore({ name: 'inventory', siteID, token });
+}
+
 exports.handler = async () => {
-  let sold = {}; // default so we never crash
-
+  let sold = {};
   try {
-    // Use the named store exactly like the other functions
-    const store = getStore('inventory'); // <- not { name: 'inventory' }
-    const json = await store.get('sold.json', { type: 'json' });
-    sold = json || {};
-
-    // Log only AFTER sold is assigned
+    const store = getInventoryStoreStrict();
+    sold = (await store.get('sold.json', { type: 'json' })) || {};
     console.log('[inventory] sold count:', Object.keys(sold).length);
   } catch (e) {
     console.error('[inventory] error:', e && e.message);
-    // fall through returning empty map
   }
 
   return {
