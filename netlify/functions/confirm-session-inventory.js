@@ -3,12 +3,15 @@ const { getStore } = require('@netlify/blobs');
 
 exports.handler = async (event) => {
   try {
-    // CHANGE 1: accept both ?id= and ?session_id=
+    // accept both ?id= and ?session_id=
     const qs = event.queryStringParameters || {};
     const id = qs.id || qs.session_id;
     if (!id) return { statusCode: 400, body: 'Missing session id' };
 
-    console.log('[confirm] starting', { sessionId: id, keyPrefix: (process.env.STRIPE_SECRET_KEY || '').slice(0,7) + '…' });
+    console.log('[confirm] start', {
+      sessionId: id,
+      keyPrefix: (process.env.STRIPE_SECRET_KEY || '').slice(0,7) + '…',
+    });
 
     const session = await stripe.checkout.sessions.retrieve(id);
     console.log('[confirm] payment_status:', session.payment_status);
@@ -33,8 +36,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // CHANGE 2: unify blobs call
-    const store = getStore('inventory');
+    const store = getStore('inventory'); // unified form
     const key = 'sold.json';
     const current = (await store.get(key, { type: 'json' })) || {};
     for (const pid of purchasedPriceIds) current[pid] = true;
@@ -46,12 +48,18 @@ exports.handler = async (event) => {
       body: JSON.stringify({ ok: true, marked: purchasedPriceIds }),
     };
   } catch (e) {
-    console.error('[confirm] error', {
+    const payload = {
       message: e && e.message,
       type: e && e.type,
       code: e && e.code,
       statusCode: e && e.statusCode,
-    });
-    return { statusCode: 500, body: 'Failed to confirm inventory' };
+    };
+    console.error('[confirm] error', payload);
+    // For debugging, return JSON (switch back to 500 later if you want)
+    return {
+      statusCode: 200,
+      headers: { 'content-type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({ ok: false, error: payload }),
+    };
   }
 };
