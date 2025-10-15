@@ -45,7 +45,7 @@ console.log('[webhook] event:', stripeEvent.type, 'session:', session.id);
 console.log('[webhook] purchasedPriceIds:', purchasedPriceIds);
 
         // 3) Write to the SAME store/key your reader uses
-        const store = getStore({ name: 'inventory' });
+        const store = getStore('inventory');
         const key = 'sold.json';
 
         const current = (await store.get(key, { type: 'json' })) || {};
