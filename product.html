@@ -19,8 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Ovo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-</head>
-<!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z42LZ4WR68"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -29,6 +28,8 @@
 
   gtag('config', 'G-Z42LZ4WR68');
 </script>
+</head>
+
 <body class="product-page">
   <!-- banner, header etc. if present -->
 <div class="site-banner" role="status" aria-live="polite" id="site-banner">
@@ -80,15 +81,17 @@
         <div class="thumb-list" role="tablist" aria-label="Product image thumbnails">
           <!-- thumbnails injected -->
         </div>
-        <div id="product-sizes-text" class="size-text"></div>
+        <!-- Compact Size UI -->
+<div id="product-sizes" class="size-box" hidden>
+  <div class="size-box-title">Size</div>
+  <div class="size-chip-row" id="size-chip-row"></div>
+  <div class="size-note" id="size-note"></div>
+</div>
+
        <form id="add-to-cart-form"
               class="buy-form"
               data-endpoint="/.netlify/functions/create-checkout-session">
-          <!-- Size (hidden: one size for all) -->
-          <div class="visually-hidden">
-            
-            </select>
-          </div>
+         
 
   <div class="button-group">
     <!-- Stripe Checkout submit -->

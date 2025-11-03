@@ -26,6 +26,89 @@
     if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
     return res.json();
   }
+// PDP Size overrides (for multi-size exceptions)
+const SIZE_OVERRIDES = {
+  // Barrel Pants — Ivory
+  'item-11': { options: ['S','M'], disabled: ['S'], default: 'M',
+               note: 'Model wore S (sold out). M in stock.' },
+  // Barrel Pants — Black
+  'item-21': { options: ['S','M'], disabled: ['S'], default: 'M',
+               note: 'Model wore S (sold out). M in stock.' }
+};
+
+function renderSizeUI(product){
+  const box  = document.querySelector('#product-sizes');
+  const row  = document.querySelector('#size-chip-row');
+  const note = document.querySelector('#size-note');
+  if (!box || !row) return;
+
+  row.innerHTML = '';
+  if (note) note.textContent = '';
+
+  // Prefer per-product JSON, then overrides
+  const ov = SIZE_OVERRIDES[product.id];
+  const hasData = Array.isArray(product.sizeOptions) && product.sizeOptions.length > 0;
+
+  const options  = hasData ? product.sizeOptions : (ov?.options || null);
+  const disabled = new Set(hasData ? (product.sizeDisabled || []) : (ov?.disabled || []));
+  let   selected = hasData
+    ? (product.sizeDefault || product.sizeOptions.find(s => !disabled.has(s)) || product.sizeOptions[0])
+    : (ov?.default || (options && options.find(s => !disabled.has(s))));
+
+  const fitDetail =
+    (typeof product.fitNote === 'string' && product.fitNote.trim()) ||
+    (typeof product.sizes   === 'string' && product.sizes.trim()) || '';
+
+  // ===== One-size (no options) → show as selected & available (not disabled) =====
+  if (!options) {
+    const label =
+      (typeof product.defaultSize === 'string' && product.defaultSize.trim()) || 'One Size';
+
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'size-chip is-static';
+    chip.setAttribute('aria-pressed', 'true');       // looks selected
+    chip.textContent = label;
+    row.appendChild(chip);
+
+    // store for cart/checkout meta
+    try { sessionStorage.setItem('eh_selected_size_' + product.id, label); } catch(e){}
+
+    if (fitDetail && note) { note.textContent = fitDetail; note.hidden = false; }
+    box.hidden = false;
+    return;
+  }
+
+  // ===== Multi-size (interactive) =====
+  options.forEach(sz => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'size-chip';
+    btn.textContent = sz;
+
+    if (disabled.has(sz)) {
+      btn.setAttribute('aria-disabled', 'true');     // greyed/dashed
+    } else {
+      if (sz === selected) btn.setAttribute('aria-pressed', 'true');
+      btn.addEventListener('click', () => {
+        [...row.querySelectorAll('.size-chip[aria-pressed="true"]')]
+          .forEach(el => el.removeAttribute('aria-pressed'));
+        btn.setAttribute('aria-pressed', 'true');
+        selected = sz;
+        try { sessionStorage.setItem('eh_selected_size_' + product.id, selected); } catch(e){}
+      });
+    }
+    row.appendChild(btn);
+  });
+
+  try { sessionStorage.setItem('eh_selected_size_' + product.id, selected || ''); } catch(e){}
+  if (fitDetail && note) { note.textContent = fitDetail; note.hidden = false; }
+  box.hidden = false;
+}
+
+
+ 
+
   /** Promo code UI wiring (safe on any page) */
 function wirePromoUI() {
   // Look for the input and button; if not present, just exit silently.
@@ -199,7 +282,8 @@ if (bcWrap) {
 const headerH = document.querySelector('.site-header')?.offsetHeight || 0;
 const bannerH = document.querySelector('#site-banner')?.offsetHeight || 0;
 const bcH     = bcWrap?.offsetHeight || 0;
-document.documentElement.style.setProperty('--eh-top', `${headerH + bannerH + bcH}px`);
+document.documentElement.style.setProperty('--eh-top-offset', `${headerH + bannerH + bcH}px`);
+
 
 
   // 인디케이터 활성화
@@ -403,22 +487,29 @@ document.documentElement.style.setProperty('--eh-top', `${headerH + bannerH + bc
     const vintedCta = $('[data-vinted-cta]');
     const buyForm   = $('#add-to-cart-form');
     const addBtn    = $('[data-add-to-cart]');
-    const sizeTextEl = $('#product-sizes-text');
-
     const stock = Number(product.stock ?? 0);
-    const soldOut = stock <= 0;
+const soldOut = stock <= 0;
 
-    // Single-size value (display only)
-    const oneSize = (typeof product.defaultSize === 'string' && product.defaultSize.trim())
-      ? product.defaultSize.trim()
-      : 'Free';
-    if (sizeTextEl) sizeTextEl.innerHTML = `<strong>Size:</strong> ${oneSize}`;
+// Render the new Size UI (one-size = non-interactive; Barrel Pants S disabled / M preselected)
+renderSizeUI(product);
+
 
     const buyBtn = (buyForm && (buyForm.querySelector('button[type="submit"], [data-buy-now]'))) || $('#buy-button');
     if (!product.sellOnVintedOnly && soldOut) {
       if (addBtn) { addBtn.disabled = true; addBtn.textContent = 'Sold out'; addBtn.classList.add('btn-disabled'); }
       if (buyBtn) { buyBtn.disabled = true; buyBtn.textContent = 'Sold out'; buyBtn.classList.add('btn-disabled'); }
     }
+function getChosenSize(product) {
+  const ov = SIZE_OVERRIDES[product.id];
+  if (ov) {
+    try { return sessionStorage.getItem('eh_selected_size_' + product.id) || ov.default || ''; }
+    catch(_) { return ov.default || ''; }
+  }
+  // fallback for one-size items
+  return (typeof product.defaultSize === 'string' && product.defaultSize.trim())
+    ? product.defaultSize.trim()
+    : 'One Size';
+}
 
     // Vinted-only flow
     if (product.sellOnVintedOnly && product.vintedUrl) {
@@ -476,7 +567,7 @@ document.documentElement.style.setProperty('--eh-top', `${headerH + bannerH + bc
           title: product.title,
           price: Number(product.price),
           currency: product.currency || 'EUR',
-          size: oneSize,        // used internally; no selector
+          size: getChosenSize(product),        
           qty: 1,
           image: product.cover || (product.images && product.images[0]) || '',
           stripePriceId: product.stripePriceId,

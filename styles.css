@@ -1143,3 +1143,19 @@ summary:focus-visible {
   body.eh-pdp-mobile .eh-dots { bottom: 14px; }
 }
 
+/* === PDP: Size box (compact, consistent) === */
+.size-box { margin-top: 14px; }
+.size-box-title { font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+.size-chip-row { display: grid; grid-template-columns: repeat(4, minmax(44px, 1fr)); gap: 8px; }
+.size-chip {
+  display: grid; place-items: center;
+  height: 40px; border: 1px solid #E5E7EB; border-radius: 6px;
+  font: 600 13px/1 Inter, system-ui; color: var(--ink, #111);
+  user-select: none; background: #fff;
+}
+.size-chip[aria-pressed="true"] { border-color: var(--ink, #111); }
+.size-chip[aria-disabled="true"] {
+  color: #9AA2AE; border-style: dashed; background: #F7F7F7; pointer-events: none;
+}
+.size-note { margin-top: 6px; font-size: 12px; color: var(--muted, #6b7280); }
+
