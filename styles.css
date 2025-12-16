@@ -346,9 +346,11 @@ button.icon-btn::-moz-focus-inner {
 }
 @media (max-width: 600px) {
   .product-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
   }
 }
+
 /* === Product Detail Page Styles === */
 .product-detail-main {
   max-width: var(--max);
