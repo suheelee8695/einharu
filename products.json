@@ -1,5 +1,80 @@
 [
   {
+    "id": "item-23",
+    "title": "Soft Volume Gathered Dress – Black",
+    "price": 62,
+    "stock": 1,
+    "category": "collection",
+    "brand": "YON",
+    "currency": "EUR",
+    "fitNote": "Works well EU 34–38. ",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Shoulder: 37.5 cm",
+      "Sleeve Length: 61 cm",
+      "Gathered waist: 46 cm",
+      "Total Length: 125 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion23-5.jpg",
+    "images": [
+      "images/fashion23-5.jpg",
+      "images/fashion23-6.jpg",
+      "images/fashion23-7.jpg",
+      "images/fashion23-8.jpg"
+    ],
+    "description": "A structured sheer layering dress with an intentionally oversized fit. The bodice is clean and relaxed, while the gathered waist creates soft volume and shape. Subtle folding at the sleeves adds a curved, sculptural line through the arms, giving the piece a defined yet effortless look. Made from lightweight, semi-sheer fabric, this dress is designed for layering rather than wearing on its own. Style it over skirts, trousers, or dresses to add texture and depth to your outfit",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Hand wash only",
+      "Do not bleach",
+      "Do not tumble dry",
+      "Hang to dry",
+      "Dry clean possible",
+      "Cool iron if needed",
+      "Avoid direct sunlight when drying"
+    ],
+    "stripePriceId": "price_1SexfuFPNKTl6gGpmsHzzoLL"
+  },
+  {
+    "id": "item-24",
+    "title": "Crinkled Tiered Long Skirt – Black",
+    "price": 48,
+    "stock": 1,
+    "category": "collection",
+    "brand": "YON",
+    "currency": "EUR",
+    "fitNote": "Works well EU 34–36. ",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Waist: 32 cm (without streching band)",
+      "Total Length: 93 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion24-5.jpg",
+    "images": [
+      "images/fashion24-5.jpg",
+      "images/fashion24-6.jpg",
+      "images/fashion24-7.jpg"
+    ],
+    "description": "A textured long skirt crafted from a thin, lightweight fabric with a subtle coated feel and gentle sheen. The natural crinkled finish adds depth and movement, while the tiered construction creates soft volume without weight. Designed with an elastic waistband for everyday comfort.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Hand wash recommended",
+      "Wash separately using a laundry net",
+      "Do not bleach",
+      "Do not tumble dry",
+      "Hang or lay flat to dry",
+      "Dry clean possible",
+      "Do not iron or steam"
+    ],
+    "stripePriceId": "price_1SexduFPNKTl6gGp5dM0JOxc"
+  },
+  {
     "id": "item-01",
     "title": "Vegan Leather Glossy Trench Coat - Brown",
     "price": 169,
