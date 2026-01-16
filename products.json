@@ -92,7 +92,7 @@
     "category": "collection",
     "brand": "YON",
     "currency": "EUR",
-    "fitNote": "Works well EU 34–38. ",
+    "fitNote": "Works well EU 34–36. ",
     "defaultSize": "One Size",
     "sizeDetails": [
       "Shoulder: 37.5 cm",
@@ -101,12 +101,14 @@
       "Total Length: 125 cm",
       "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
     ],
-    "cover": "images/fashion23-5.jpg",
+    "cover": "images/fashion23-1.jpg",
     "images": [
+      "images/fashion23-1.jpg",
+      "images/fashion23-2.jpg",
+      "images/fashion23-3.jpg",
+      "images/fashion23-4.jpg",
       "images/fashion23-5.jpg",
-      "images/fashion23-6.jpg",
-      "images/fashion23-7.jpg",
-      "images/fashion23-8.jpg"
+      "images/fashion23-6.jpg"
     ],
     "description": "A structured sheer layering dress with an intentionally oversized fit. The bodice is clean and relaxed, while the gathered waist creates soft volume and shape. Subtle folding at the sleeves adds a curved, sculptural line through the arms, giving the piece a defined yet effortless look. Made from lightweight, semi-sheer fabric, this dress is designed for layering rather than wearing on its own. Style it over skirts, trousers, or dresses to add texture and depth to your outfit",
     "materials": [
