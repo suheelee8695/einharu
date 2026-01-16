@@ -1,4 +1,43 @@
 [
+      {
+    "id": "item-27",
+    "title": "Double-Layer Sheer Mesh Long Sleeve – Blue",
+    "price": 45,
+    "stock": 1,
+    "category": "collection",
+    "brand": "YON",
+    "currency": "EUR",
+    "fitNote": "Works well EU 34–38. ",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Shoulder: 51 cm",
+      "Sleeve Length: 58 cm",
+      "Length: 60 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion27-1.jpg",
+    "images": [
+      "images/fashion27-1.jpg",
+      "images/fashion27-2.jpg",
+      "images/fashion27-3.jpg",
+      "images/fashion27-4.jpg",
+      "images/fashion27-5.jpg"
+    ],
+    "description": "A lightweight sheer mesh top featuring two connected layers with a softly gathered texture that creates depth and fluid movement. The cropped length and relaxed long sleeves keep the silhouette light and modern, while the layered construction offers subtle coverage without heaviness.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Hand wash cold recommended",
+      "Do not bleach",
+      "Do not tumble dry",
+      "Ironing is allowed at low temperature",
+      "Dry clean possible",
+      "Avoid friction and pulling",
+      "Handle with care, delicate fabric"
+    ],
+    "stripePriceId": "price_1SqInLFPNKTl6gGpG2EwqlIP"
+  },
     {
     "id": "item-26",
     "title": "Double-Layer Sheer Mesh Long Sleeve – Black",
