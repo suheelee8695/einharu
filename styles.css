@@ -392,6 +392,9 @@ button.icon-btn::-moz-focus-inner {
   flex-direction: column;
 }
 .main-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
 }
 .sticky-panel {
@@ -417,6 +420,8 @@ button.icon-btn::-moz-focus-inner {
 }
 .main-image-wrapper img {
   width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
   object-fit: cover;
   object-position: center;
   transition: object-position 3s ease;
