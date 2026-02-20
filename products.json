@@ -1,5 +1,51 @@
 [
-      {
+{
+    "id": "item-28",
+    "title": "Zip-Front Detachable Dungaree Dress",
+    "price": 49,
+    "stock": 1,
+    "category": "collection",
+    "brand": "AIC.",
+    "currency": "EUR",
+    "fitNote": "Works well EU 34–36.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Chest: 43 cm",
+      "Front zipper to zipper:23.5 cm",
+      "Skirt Length when attached: 91 cm",
+      "Measurements are taken flat (in cm). Please note that a 1–3 cm difference may occur depending on the measuring method and person."
+    ],
+    "cover": "images/fashion28-1.jpg",
+    "images": [
+      "images/fashion28-1.jpg",
+      "images/fashion28-2.jpg",
+      "images/fashion28-3.jpg",
+      "images/fashion28-4.jpg",
+      "images/fashion28-5.jpg",
+      "images/fashion28-6.jpg",
+      "images/fashion28-7.jpg",
+      "images/fashion28-8.jpg",
+      "images/fashion28-9.jpg",
+      "images/fashion28-10.jpg"
+    ],
+    "description": "A versatile layered piece designed for everyday styling. This dress features a structured zip-front dungaree-style top paired with a lightweight sheer skirt. The skirt is attached with button hooks and can be fully removed, allowing you to style the top separately. The upper bodice offers a clean, structured fit with subtle hardware details, while the sheer skirt adds movement and dimension without being overly revealing. Wear it as a full layered dress or detach the skirt and style the top with trousers or denim. Practical, minimal, and easy to wear.",
+    "materials": [
+      "Bodice: 70% Polyester, 30% Nylon",
+      "Skirt: 100% Nylon"
+    ],
+    "care": [
+      "Machine washable – gentle cycle",
+      "Use laundry bag",
+      "Do not bleach",
+      "Mild spin only",
+      "Low iron (use pressing cloth)",
+      "Dry cleaning allowed",
+      "Wet cleaning allowed"
+    ],
+    "stripePriceId": "price_1T2s2VFPNKTl6gGpZH20kr2P"
+  },
+
+  {
     "id": "item-27",
     "title": "Double-Layer Sheer Mesh Long Sleeve – Blue",
     "price": 45,
