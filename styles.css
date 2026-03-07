@@ -2137,6 +2137,106 @@ button.icon-btn::-moz-focus-inner {
   }
 }
 
+/* Discovery page */
+.discovery-editorial {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body-font, Inter), sans-serif;
+}
+
+.discovery-container {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.discovery-hero {
+  padding-top: 84px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid #ececec;
+}
+
+.discovery-eyebrow {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.discovery-hero h1 {
+  margin: 14px 0 16px;
+  font-size: clamp(32px, 4.4vw, 56px);
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+.discovery-lead {
+  margin: 0;
+  max-width: 760px;
+  color: var(--ink);
+  opacity: 0.86;
+  line-height: 1.9;
+}
+
+.discovery-section {
+  padding-top: 44px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid #ececec;
+}
+
+.discovery-section h2 {
+  margin: 0 0 14px;
+  font-size: clamp(24px, 2.8vw, 36px);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.discovery-section p {
+  margin: 0 0 14px;
+  color: var(--ink);
+  opacity: 0.86;
+  line-height: 1.85;
+}
+
+.discovery-section p:last-child {
+  margin-bottom: 0;
+}
+
+.discovery-faqlike .discovery-copy p {
+  margin: 0 0 14px;
+  color: #666;
+  line-height: 1.8;
+}
+
+.discovery-faqlike .discovery-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.discovery-faqlike .discovery-copy a {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .discovery-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .discovery-hero {
+    padding-top: 52px;
+    padding-bottom: 36px;
+  }
+
+  .discovery-section {
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
+}
+
 /* FAQ page */
 .faq-editorial {
   background: var(--bg);
@@ -3715,6 +3815,19 @@ textarea:focus-visible,
 
 .product-page .trust-strip .trust-item:last-child {
   border-right: 0;
+}
+
+.product-page .product-discovery-link {
+  margin: 0 0 18px;
+  font-size: 12px;
+  color: #7c7c7c;
+  letter-spacing: 0.03em;
+}
+
+.product-page .product-discovery-link a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .product-page .accordion-panel .product-info-text {
