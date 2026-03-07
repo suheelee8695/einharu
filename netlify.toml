@@ -8,6 +8,16 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+[[redirects]]
+  from = "/products/:slug"
+  to = "/product.html?slug=:slug"
+  status = 200
+
+[[redirects]]
+  from = "/de/products/:slug"
+  to = "/de/product.html?slug=:slug"
+  status = 200
+
 # CORS headers for functions (so frontend JS can call them)
 [[headers]]
   for = "/.netlify/functions/*"

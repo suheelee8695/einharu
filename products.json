@@ -44,7 +44,8 @@
     ],
     "stripePriceId": "price_1T2s2VFPNKTl6gGpZH20kr2P",
     "productType": "dresses",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "zip-front-detachable-dungaree-dress"
   },
   {
     "id": "item-27",
@@ -85,7 +86,8 @@
     ],
     "stripePriceId": "price_1SqInLFPNKTl6gGpG2EwqlIP",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "double-layer-sheer-mesh-long-sleeve-blue"
   },
   {
     "id": "item-26",
@@ -127,7 +129,8 @@
     ],
     "stripePriceId": "price_1SppQAFPNKTl6gGpRhuFWtR8",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "double-layer-sheer-mesh-long-sleeve-black"
   },
   {
     "id": "item-25",
@@ -174,7 +177,8 @@
     ],
     "stripePriceId": "price_1SpRGCFPNKTl6gGpLnXdjUNC",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "mesh-long-sleeve-and-layering-tube-set"
   },
   {
     "id": "item-23",
@@ -217,7 +221,8 @@
     ],
     "stripePriceId": "price_1SexfuFPNKTl6gGpmsHzzoLL",
     "productType": "dresses",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "soft-volume-gathered-dress-black"
   },
   {
     "id": "item-24",
@@ -259,7 +264,8 @@
     ],
     "stripePriceId": "price_1SexduFPNKTl6gGp5dM0JOxc",
     "productType": "skirts",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "crinkled-tiered-long-skirt-black"
   },
   {
     "id": "item-01",
@@ -299,7 +305,8 @@
     ],
     "stripePriceId": "price_1SE4IDFPNKTl6gGpguBOowG9",
     "productType": "outerwear",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "vegan-leather-glossy-trench-coat-brown"
   },
   {
     "id": "item-02",
@@ -351,7 +358,8 @@
     ],
     "stripePriceId": "price_1SE4IFFPNKTl6gGphE5adT1F",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "bralette-layered-stripe-shirt"
   },
   {
     "id": "item-03",
@@ -399,7 +407,8 @@
     ],
     "stripePriceId": "price_1SE4IGFPNKTl6gGpa6nu0FKo",
     "productType": "pants",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "washed-grey-raw-edge-denim-trousers"
   },
   {
     "id": "item-04",
@@ -441,7 +450,8 @@
     ],
     "stripePriceId": "price_1SE4IHFPNKTl6gGpk7u8dGd0",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "draped-layered-top"
   },
   {
     "id": "item-05",
@@ -483,7 +493,8 @@
     ],
     "stripePriceId": "price_1SE4IIFPNKTl6gGpFeiYGuV5",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "sheer-contrast-button-up-shirt"
   },
   {
     "id": "item-06",
@@ -526,7 +537,8 @@
     ],
     "stripePriceId": "price_1SE4IJFPNKTl6gGphAn99UZz",
     "productType": "dresses",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "vegan-leather-v-neck-sleeveless-dress"
   },
   {
     "id": "item-07",
@@ -568,7 +580,8 @@
     ],
     "stripePriceId": "price_1SE4IKFPNKTl6gGpcq7ZTstQ",
     "productType": "pants",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "utility-strap-cargo-pants"
   },
   {
     "id": "item-08",
@@ -605,7 +618,8 @@
     ],
     "stripePriceId": "price_1SE4ILFPNKTl6gGpF0KE5PLh",
     "productType": "accessories",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "compact-leather-tote"
   },
   {
     "id": "item-09",
@@ -645,7 +659,8 @@
     ],
     "stripePriceId": "price_1SE4IMFPNKTl6gGpXLEkl7n6",
     "productType": "dresses",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "sleeveless-shirt-dress-with-tulle-overlay"
   },
   {
     "id": "item-10",
@@ -686,7 +701,8 @@
     ],
     "stripePriceId": "price_1SE4INFPNKTl6gGp8wwbSxZD",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "crinkle-texture-button-shirt"
   },
   {
     "id": "item-11",
@@ -728,7 +744,8 @@
     ],
     "stripePriceId": "price_1SE4IOFPNKTl6gGpIslkFRZ4",
     "productType": "pants",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "barrel-shaped-wide-leg-trousers-ivory"
   },
   {
     "id": "item-12",
@@ -766,7 +783,8 @@
     ],
     "stripePriceId": "price_1SE4IPFPNKTl6gGpeBIWMirP",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "3d-textured-ruffle-shirt"
   },
   {
     "id": "item-13",
@@ -806,7 +824,8 @@
     ],
     "stripePriceId": "price_1SE4IQFPNKTl6gGpuBnkFKSL",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "draped-scarf-knit-long-sleeve-grey"
   },
   {
     "id": "item-14",
@@ -848,7 +867,8 @@
     ],
     "stripePriceId": "price_1SE4IRFPNKTl6gGpL4TCtT8f",
     "productType": "pants",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "fluid-wide-leg-pants-dark-blue"
   },
   {
     "id": "item-15",
@@ -891,7 +911,8 @@
     ],
     "stripePriceId": "price_1SE4ISFPNKTl6gGpDbJMTEiZ",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "mesh-cropped-tank-wine"
   },
   {
     "id": "item-16",
@@ -931,7 +952,8 @@
     ],
     "stripePriceId": "price_1SE4ITFPNKTl6gGp44nhOu0g",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "mesh-sheer-long-sleeve"
   },
   {
     "id": "item-17",
@@ -967,7 +989,8 @@
     ],
     "stripePriceId": "price_1SE4IUFPNKTl6gGpoQMBbL9W",
     "productType": "accessories",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "textured-leather-tote-bag"
   },
   {
     "id": "item-18",
@@ -1009,7 +1032,8 @@
     ],
     "stripePriceId": "price_1SEScJFPNKTl6gGpgzgmncCt",
     "productType": "outerwear",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "vegan-leather-glossy-trench-coat-black"
   },
   {
     "id": "item-19",
@@ -1053,7 +1077,8 @@
     ],
     "stripePriceId": "price_1SESewFPNKTl6gGplhKM8Jax",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "mesh-cropped-tank-white"
   },
   {
     "id": "item-20",
@@ -1096,7 +1121,8 @@
     ],
     "stripePriceId": "price_1SESgTFPNKTl6gGpr0Stqv8B",
     "productType": "pants",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "fluid-wide-leg-pants-brown"
   },
   {
     "id": "item-21",
@@ -1140,7 +1166,8 @@
     ],
     "stripePriceId": "price_1SEShTFPNKTl6gGp8xtzUhnX",
     "productType": "pants",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "barrel-shaped-wide-leg-trousers-black"
   },
   {
     "id": "item-22",
@@ -1180,7 +1207,8 @@
     ],
     "stripePriceId": "price_1SESkdFPNKTl6gGpOq2wO1EU",
     "productType": "tops",
-    "releaseStatus": "available"
+    "releaseStatus": "available",
+    "slug": "draped-scarf-knit-long-sleeve-black"
   },
   {
     "id": "item-cs-02",
@@ -1218,7 +1246,8 @@
       "Dry flat"
     ],
     "productType": "pants",
-    "releaseStatus": "coming_soon"
+    "releaseStatus": "coming_soon",
+    "slug": "beaker-pants"
   },
   {
     "id": "item-cs-03",
@@ -1257,7 +1286,8 @@
       "Low iron"
     ],
     "productType": "tops",
-    "releaseStatus": "coming_soon"
+    "releaseStatus": "coming_soon",
+    "slug": "bijo-shirt"
   },
   {
     "id": "item-cs-04",
@@ -1295,6 +1325,7 @@
       "Do not tumble dry"
     ],
     "productType": "tops",
-    "releaseStatus": "coming_soon"
+    "releaseStatus": "coming_soon",
+    "slug": "shearling-wrap-shirt"
   }
 ]

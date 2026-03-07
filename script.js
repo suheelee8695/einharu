@@ -1,6 +1,6 @@
 /* script.js — einHaru site core (no size selector)
    - Homepage grid (from products.json)
-   - Product detail by ?id=
+   - Product detail by ?slug= or ?id=
    - Single-size display only (no selector)
    - Gallery + keyboard nav
    - Meta/OG + Schema injection
@@ -69,6 +69,27 @@
   const fmtPrice = (n, currency = 'EUR') =>
     new Intl.NumberFormat('de-DE', { style: 'currency', currency }).format(Number(n || 0));
   const getQuery = (k) => new URLSearchParams(location.search).get(k);
+  const getProductPath = (product) => {
+    const slug = String(product?.slug || '').trim();
+    if (slug) {
+      const isLocalDev =
+        location.protocol === 'file:' ||
+        location.hostname === 'localhost' ||
+        location.hostname === '127.0.0.1';
+      if (isLocalDev) {
+        return `product.html?slug=${encodeURIComponent(slug)}`;
+      }
+      const isDe = location.pathname.toLowerCase().startsWith('/de/');
+      return isDe ? `/de/products/${encodeURIComponent(slug)}` : `/products/${encodeURIComponent(slug)}`;
+    }
+    const id = String(product?.id || '').trim();
+    return `product.html?id=${encodeURIComponent(id)}`;
+  };
+  const getAbsoluteProductUrl = (product) => {
+    const path = getProductPath(product);
+    if (!path) return location.href;
+    return new URL(path, location.origin).toString();
+  };
   const getProductState = (product) => {
     if ((product?.releaseStatus || '').toLowerCase() === 'coming_soon') return 'coming_soon';
     if (Number(product?.stock ?? 0) <= 0) return 'sold_out';
@@ -448,7 +469,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       brand: product.brand || 'einHaru Collective',
       offers: {
         '@type': 'Offer',
-        url: location.href,
+        url: getAbsoluteProductUrl(product),
         priceCurrency: product.currency || 'EUR',
         price: String(product.price ?? ''),
         availability: (Number(product.stock ?? 0) > 0)
@@ -475,11 +496,12 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     };
 
     set('meta[name="description"]', 'content', descText);
-    set('link[rel="canonical"]', 'href', location.href);
+    const productUrl = getAbsoluteProductUrl(product);
+    set('link[rel="canonical"]', 'href', productUrl);
     set('meta[property="og:title"]', 'content', titleText);
     set('meta[property="og:description"]', 'content', descText);
     set('meta[property="og:type"]', 'content', 'website');
-    set('meta[property="og:url"]', 'content', location.href);
+    set('meta[property="og:url"]', 'content', productUrl);
     if (img) set('meta[property="og:image"]', 'content', img);
   }
 
@@ -605,7 +627,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           card.addEventListener('blur', stopCycle);
         }
 
-        const go = () => location.assign(`product.html?id=${encodeURIComponent(prod.id)}`);
+        const go = () => location.assign(getProductPath(prod));
         card.addEventListener('click', go);
         card.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
 
@@ -642,7 +664,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           </div>
         `;
 
-        const go = () => location.assign(`product.html?id=${encodeURIComponent(prod.id)}`);
+        const go = () => location.assign(getProductPath(prod));
         row.addEventListener('click', go);
         row.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
         targetList.appendChild(row);
@@ -718,16 +740,20 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
 
   /*** PRODUCT PAGE ***/
   function renderProductPage(products) {
-    const id = getQuery('id');
-    if (!id) return;
+    const slug = String(getQuery('slug') || '').trim();
+    const id = String(getQuery('id') || '').trim();
+    if (!slug && !id) return;
 
     const product = Array.isArray(products)
-      ? products.find((p) => p.id === id)
-      : (products && products[id]);
+      ? products.find((p) => (slug ? p.slug === slug : p.id === id))
+      : (products && (
+          (slug ? Object.values(products).find((p) => p?.slug === slug) : null) ||
+          (id ? products[id] : null)
+        ));
 
     const main = $('.product-detail-main') || document.body;
     if (!product) {
-      console.warn('Product not found for id:', id);
+      console.warn('Product not found for params:', { slug, id });
       main.innerHTML = `<p>${t('productNotFound')}. <a href="index.html">${t('backToShop')}</a></p>`;
       return;
     }
@@ -1119,8 +1145,12 @@ if (Array.isArray(products)) {
     }
 
     const path = location.pathname.toLowerCase();
+    const params = new URLSearchParams(location.search);
+    const hasProductParam = params.has('id') || params.has('slug');
+    const isProductsPath = /\/(de\/)?products\//.test(path);
+    const isProductPage = path.includes('product.html') || isProductsPath || hasProductParam;
     const isComingSoonPage = path.includes('coming-soon');
-    if (path.includes('product.html')) renderProductPage(products);
+    if (isProductPage) renderProductPage(products);
     else if (isComingSoonPage) renderHomepage(products, 'coming_soon');
     else renderHomepage(products, 'available');
   }
