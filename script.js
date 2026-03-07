@@ -1062,9 +1062,14 @@ if (!isMobile) {
             clone.style.width = '100%';
             if (clone.tagName === 'A') clone.rel = 'noopener noreferrer';
             if (clone.tagName === 'BUTTON' && buyForm) {
+              clone.type = 'button';
               clone.addEventListener('click', (e) => {
                 e.preventDefault();
-                buyForm.requestSubmit?.() || buyForm.submit();
+                if (typeof buyForm.requestSubmit === 'function') {
+                  buyForm.requestSubmit();
+                } else {
+                  buyForm.submit();
+                }
               });
             }
             stickyHost.appendChild(clone);
