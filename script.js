@@ -198,15 +198,6 @@ function injectMobilePdpStyles(){
     /* 만약 ‘잘라서 통일’을 원하면 위 한 줄을 다음으로 변경
        object-fit: cover; background:#efefef; */
 
-    /* 인디케이터 오버레이 */
-    body.eh-pdp-mobile .eh-dots{
-      display:none;
-    }
-    body.eh-pdp-mobile .eh-dots button{
-      width:8px; height:8px; border-radius:999px; border:0; background:#9ea9bd;
-    }
-    body.eh-pdp-mobile .eh-dots button[aria-current="true"]{ background:#535353; }
-
     body.eh-pdp-mobile .eh-swipe-hint{
       position:absolute; left:50%; bottom:60px; transform:translateX(-50%);
       font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
@@ -283,7 +274,6 @@ function initMobileGallery(product, opts={}){
   const gallery = document.createElement('section');
   gallery.className = 'eh-gallery';
   const track = document.createElement('div'); track.className = 'eh-track';
-  const dots  = document.createElement('div'); dots.className  = 'eh-dots';
   const hint = document.createElement('div');
   hint.className = 'eh-swipe-hint';
   hint.textContent = '← swipe →';
@@ -320,18 +310,12 @@ function initMobileGallery(product, opts={}){
 
     track.appendChild(slide);
 
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.setAttribute('aria-label', `Go to image ${i+1}`);
-    dot.addEventListener('click', () => goToIndex(i));
-    dots.appendChild(dot);
   });
 
   gallery.appendChild(track);
   gallery.appendChild(leftArrow);
   gallery.appendChild(rightArrow);
   gallery.appendChild(hint);
-  gallery.appendChild(dots);
   // 갤러리 DOM 구성 이후의 삽입 위치를 '브레드크럼 바로 아래'로
 const bcWrap = document.querySelector('.product-breadcrumb');
 if (bcWrap) {
@@ -358,7 +342,6 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
   // 인디케이터/네비 상태 활성화
   const setActive = () => {
     const idx = getIndex();
-    Array.from(dots.children).forEach((d,k)=> d.toggleAttribute('aria-current', k===idx));
     leftArrow.classList.toggle('is-disabled', idx <= 0);
     rightArrow.classList.toggle('is-disabled', idx >= totalSlides - 1);
   };
