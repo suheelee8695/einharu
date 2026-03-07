@@ -20,6 +20,7 @@
       outOfStock: 'This item is out of stock.',
       promoEnter: 'Enter a promo code.',
       productNotFound: 'Product not found.',
+      productNotFoundDesc: 'The URL may be outdated or the product is no longer available.',
       backToShop: 'Back to shop',
       badgeComingSoon: 'COMING SOON',
       badgeSoldOut: 'SOLD OUT',
@@ -41,6 +42,7 @@
       outOfStock: 'Dieser Artikel ist ausverkauft.',
       promoEnter: 'Bitte gib einen Rabattcode ein.',
       productNotFound: 'Produkt nicht gefunden.',
+      productNotFoundDesc: 'Die URL ist eventuell veraltet oder das Produkt ist nicht mehr verfügbar.',
       backToShop: 'Zurück zum Shop',
       badgeComingSoon: 'BALD VERFUEGBAR',
       badgeSoldOut: 'AUSVERKAUFT',
@@ -759,7 +761,19 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     const main = $('.product-detail-main') || document.body;
     if (!product) {
       console.warn('Product not found for params:', { slug, id });
-      main.innerHTML = `<p>${t('productNotFound')}. <a href="index.html">${t('backToShop')}</a></p>`;
+      const homeHref = LANG === 'de' ? '/de/' : '/';
+      main.innerHTML = `
+        <section class="status-page" aria-live="polite">
+          <div class="status-wrap">
+            <div class="status-eyebrow">404</div>
+            <h1 class="status-title">${t('productNotFound')}</h1>
+            <p class="status-desc">${t('productNotFoundDesc')}</p>
+            <div class="status-actions">
+              <a href="${homeHref}" class="button-primary">${t('backToShop')}</a>
+            </div>
+          </div>
+        </section>
+      `;
       return;
     }
 
