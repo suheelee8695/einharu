@@ -115,6 +115,12 @@
       : `/product.html?id=${encodeURIComponent(id)}`;
   };
   const getAbsoluteProductUrl = (product) => {
+    const urlSlug = String(getQuery('slug') || getSlugFromPathname() || '').trim();
+    if (urlSlug) {
+      const isDe = location.pathname.toLowerCase().startsWith('/de/');
+      const cleanPath = isDe ? `/de/${encodeURIComponent(urlSlug)}` : `/${encodeURIComponent(urlSlug)}`;
+      return new URL(cleanPath, location.origin).toString();
+    }
     const path = getProductPath(product);
     if (!path) return location.href;
     return new URL(path, location.origin).toString();
@@ -517,6 +523,8 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
   function injectSchema(product) {
     if (!product) return;
     const productUrl = getAbsoluteProductUrl(product);
+    const isDe = location.pathname.toLowerCase().startsWith('/de/');
+    const homeUrl = isDe ? 'https://www.einharu.com/de/' : 'https://www.einharu.com/';
     const asAbs = (u) => {
       try { return new URL(u, location.origin).toString(); } catch (_) { return u; }
     };
@@ -525,8 +533,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     const availability = (Number(product.stock ?? 0) > 0)
       ? 'https://schema.org/InStock'
       : 'https://schema.org/OutOfStock';
-    const ld = {
-      '@context': 'https://schema.org/',
+    const productLd = {
       '@type': 'Product',
       '@id': `${productUrl}#product`,
       sku: product.id,
@@ -550,6 +557,56 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         availability
       }
     };
+
+    const rawCategory = String(product?.productType || product?.category || '').trim();
+    const hasCategory = rawCategory && !['all', 'new-arrivals'].includes(rawCategory.toLowerCase());
+    const categoryLabel = hasCategory
+      ? rawCategory
+          .replace(/[-_]/g, ' ')
+          .replace(/\b\w/g, (ch) => ch.toUpperCase())
+      : '';
+    const categorySlug = hasCategory
+      ? encodeURIComponent(rawCategory.toLowerCase().replace(/\s+/g, '-'))
+      : '';
+
+    const breadcrumbItems = [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        item: {
+          '@id': homeUrl,
+          name: isDe ? 'Startseite' : 'Home'
+        }
+      }
+    ];
+    if (hasCategory) {
+      breadcrumbItems.push({
+        '@type': 'ListItem',
+        position: 2,
+        item: {
+          '@id': `${homeUrl}#category-${categorySlug}`,
+          name: categoryLabel
+        }
+      });
+    }
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      position: hasCategory ? 3 : 2,
+      item: {
+        '@id': productUrl,
+        name: product.title || (isDe ? 'Produkt' : 'Product')
+      }
+    });
+
+    const breadcrumbLd = {
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems
+    };
+
+    const ld = {
+      '@context': 'https://schema.org',
+      '@graph': [productLd, breadcrumbLd]
+    };
     let s = document.getElementById('eh-product-jsonld');
     if (!s) {
       s = document.createElement('script');
@@ -561,7 +618,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
   }
 
   function setMeta(product) {
-    const titleText = product?.title ? `${product.title} – einHaru Collective` : 'einHaru Collective';
+    const titleText = product?.title ? `${product.title} | einHaru Collective` : 'einHaru Collective';
     const descText = (Array.isArray(product?.description) ? product.description.join(' ') : product?.description) || 'Quiet daily wear from Berlin & Seoul.';
     const img = (product?.images || [])[0];
 

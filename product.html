@@ -6,6 +6,20 @@
   <title id="page-title">Product – einHaru Collective</title>
   <meta name="description" content="" id="meta-description">
   <link rel="canonical" href="" id="canonical-link">
+  <script>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var slug = (params.get('slug') || '').trim();
+        if (!slug) return;
+        var canonical = 'https://www.einharu.com/' + encodeURIComponent(slug);
+        var link = document.getElementById('canonical-link') || document.querySelector('link[rel="canonical"]');
+        if (link) link.setAttribute('href', canonical);
+        var og = document.getElementById('og-url') || document.querySelector('meta[property="og:url"]');
+        if (og) og.setAttribute('content', canonical);
+      } catch (_) {}
+    })();
+  </script>
   <meta property="og:type" content="product">
   <meta property="og:url" content="" id="og-url">
   <meta property="og:title" content="" id="og-title">
