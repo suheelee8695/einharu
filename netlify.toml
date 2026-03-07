@@ -10,12 +10,52 @@
 
 [[redirects]]
   from = "/products/:slug"
-  to = "/product.html?slug=:slug"
-  status = 200
+  to = "/:slug"
+  status = 301
 
 [[redirects]]
   from = "/de/products/:slug"
-  to = "/de/product.html?slug=:slug"
+  to = "/de/:slug"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/returns"
+  to = "/returns.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/editorial"
+  to = "/editorial.html"
+  status = 200
+
+[[redirects]]
+  from = "/coming-soon"
+  to = "/coming-soon.html"
+  status = 200
+
+[[redirects]]
+  from = "/cancel"
+  to = "/cancel.html"
+  status = 200
+
+[[redirects]]
+  from = "/success"
+  to = "/success.html"
   status = 200
 
 [[redirects]]
@@ -29,8 +69,43 @@
   status = 200
 
 [[redirects]]
+  from = "/de/about"
+  to = "/de/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/faq"
+  to = "/de/faq.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/returns"
+  to = "/de/returns.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/privacy"
+  to = "/de/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/editorial"
+  to = "/de/editorial.html"
+  status = 200
+
+[[redirects]]
   from = "/events"
   to = "/events/"
+  status = 200
+
+[[redirects]]
+  from = "/de/:slug"
+  to = "/de/product.html?slug=:slug"
+  status = 200
+
+[[redirects]]
+  from = "/:slug"
+  to = "/product.html?slug=:slug"
   status = 200
 
 # CORS headers for functions (so frontend JS can call them)

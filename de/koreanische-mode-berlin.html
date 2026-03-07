@@ -136,7 +136,7 @@
           .slice(0, 8);
         mount.innerHTML = picks.map((p) => {
           const img = (p.images && p.images[0]) || p.cover || '';
-          const href = p.slug ? `/de/product.html?slug=${encodeURIComponent(p.slug)}` : `/de/product.html?id=${encodeURIComponent(p.id)}`;
+          const href = p.slug ? `/de/${encodeURIComponent(p.slug)}` : `/de/product.html?id=${encodeURIComponent(p.id)}`;
           return `
             <article class="product-card" role="article">
               <a href="${href}" aria-label="${p.title}">

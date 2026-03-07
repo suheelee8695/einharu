@@ -320,6 +320,46 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
   }
 });
 
+// Pretty product URL support for non-Netlify runtimes (local/Express).
+// Keeps clean URLs working:
+//   /:slug            -> /product.html?slug=:slug (served as product.html)
+//   /de/:slug         -> /de/product.html?slug=:slug
+// Also preserves legacy /products/:slug links via redirect.
+const RESERVED_SLUGS = new Set([
+  'health', 'create-checkout-session', 'checkout-session', 'webhook',
+  'netlify', 'images', 'events', 'de',
+  'index', 'index.html', 'about', 'about.html', 'faq', 'faq.html',
+  'returns', 'returns.html', 'privacy', 'privacy.html', 'editorial', 'editorial.html',
+  'coming-soon', 'coming-soon.html', 'cancel', 'cancel.html', 'success', 'success.html',
+  'product', 'product.html', 'korean-fashion-berlin', 'korean-fashion-berlin.html',
+  'minimalist-fashion-berlin', 'minimalist-fashion-berlin.html',
+  'seoul-berlin-minimalist-style-guide', 'seoul-berlin-minimalist-style-guide.html',
+  'robots.txt', 'sitemap.xml', 'site.webmanifest', 'favicon.ico'
+]);
+const isLikelyProductSlug = (slug) => {
+  const s = String(slug || '').toLowerCase().trim();
+  if (!s) return false;
+  if (s.includes('.') || s.includes('/')) return false;
+  return !RESERVED_SLUGS.has(s);
+};
+
+app.get('/products/:slug', (req, res) => {
+  res.redirect(301, `/${encodeURIComponent(req.params.slug)}`);
+});
+app.get('/de/products/:slug', (req, res) => {
+  res.redirect(301, `/de/${encodeURIComponent(req.params.slug)}`);
+});
+
+app.get('/de/:slug', (req, res, next) => {
+  if (!isLikelyProductSlug(req.params.slug)) return next();
+  return res.sendFile(path.resolve(__dirname, 'de', 'product.html'));
+});
+
+app.get('/:slug', (req, res, next) => {
+  if (!isLikelyProductSlug(req.params.slug)) return next();
+  return res.sendFile(path.resolve(__dirname, 'product.html'));
+});
+
 // 7) start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

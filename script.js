@@ -1,6 +1,6 @@
 /* script.js — einHaru site core (no size selector)
    - Homepage grid (from products.json)
-   - Product detail by ?slug= or ?id=
+   - Product detail by clean /:slug or ?slug= or ?id=
    - Single-size display only (no selector)
    - Gallery + keyboard nav
    - Meta/OG + Schema injection
@@ -71,21 +71,48 @@
   const fmtPrice = (n, currency = 'EUR') =>
     new Intl.NumberFormat('de-DE', { style: 'currency', currency }).format(Number(n || 0));
   const getQuery = (k) => new URLSearchParams(location.search).get(k);
+  const RESERVED_SLUGS = new Set([
+    '', 'de', 'products', 'events', 'images', 'netlify',
+    'index', 'index.html', 'about', 'about.html', 'faq', 'faq.html',
+    'returns', 'returns.html', 'privacy', 'privacy.html',
+    'product', 'product.html', 'editorial', 'editorial.html',
+    'coming-soon', 'coming-soon.html', 'cancel', 'cancel.html',
+    'success', 'success.html', '404', '404.html',
+    'minimalist-fashion-berlin', 'minimalist-fashion-berlin.html',
+    'seoul-berlin-minimalist-style-guide', 'seoul-berlin-minimalist-style-guide.html',
+    'korean-fashion-berlin', 'korean-fashion-berlin.html',
+    'koreanische-mode-berlin', 'koreanische-mode-berlin.html',
+    'robots.txt', 'sitemap.xml', 'site.webmanifest', 'favicon.ico'
+  ]);
   const getSlugFromPathname = () => {
-    const path = String(location.pathname || '').toLowerCase();
-    const m = path.match(/^\/(?:de\/)?products\/([^/?#]+)\/?$/);
-    return m ? decodeURIComponent(m[1]) : '';
+    const raw = String(location.pathname || '');
+    const path = raw.toLowerCase().replace(/\/+$/, '');
+    if (!path || path === '/') return '';
+    const parts = path.split('/').filter(Boolean);
+    if (!parts.length) return '';
+    const isDe = parts[0] === 'de';
+    let candidate = '';
+    if (isDe) {
+      if (parts.length === 2) candidate = parts[1]; // /de/:slug
+      else if (parts.length === 3 && parts[1] === 'products') candidate = parts[2]; // /de/products/:slug
+    } else {
+      if (parts.length === 1) candidate = parts[0]; // /:slug
+      else if (parts.length === 2 && parts[0] === 'products') candidate = parts[1]; // /products/:slug
+    }
+    if (!candidate || candidate.includes('.') || RESERVED_SLUGS.has(candidate)) return '';
+    return decodeURIComponent(candidate);
   };
   const getProductPath = (product) => {
     const slug = String(product?.slug || '').trim();
     if (slug) {
       const isDe = location.pathname.toLowerCase().startsWith('/de/');
-      return isDe
-        ? `/de/product.html?slug=${encodeURIComponent(slug)}`
-        : `product.html?slug=${encodeURIComponent(slug)}`;
+      return isDe ? `/de/${encodeURIComponent(slug)}` : `/${encodeURIComponent(slug)}`;
     }
     const id = String(product?.id || '').trim();
-    return `product.html?id=${encodeURIComponent(id)}`;
+    const isDe = location.pathname.toLowerCase().startsWith('/de/');
+    return isDe
+      ? `/de/product.html?id=${encodeURIComponent(id)}`
+      : `/product.html?id=${encodeURIComponent(id)}`;
   };
   const getAbsoluteProductUrl = (product) => {
     const path = getProductPath(product);
@@ -833,16 +860,19 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       return;
     }
 
-    // Keep EN/DE switcher page-to-page on PDP (preserve slug/id query).
+    // Keep EN/DE switcher page-to-page on PDP (preserve slug/id query fallback).
     const langLinks = $$('.language-switcher a');
     if (langLinks.length) {
-      const query = slug
-        ? `slug=${encodeURIComponent(slug)}`
-        : `id=${encodeURIComponent(id)}`;
       langLinks.forEach((a) => {
         const label = (a.textContent || '').trim().toLowerCase();
-        if (label === 'de') a.setAttribute('href', `/de/product.html?${query}`);
-        if (label === 'en') a.setAttribute('href', `/product.html?${query}`);
+        if (slug) {
+          if (label === 'de') a.setAttribute('href', `/de/${encodeURIComponent(slug)}`);
+          if (label === 'en') a.setAttribute('href', `/${encodeURIComponent(slug)}`);
+        } else {
+          const query = `id=${encodeURIComponent(id)}`;
+          if (label === 'de') a.setAttribute('href', `/de/product.html?${query}`);
+          if (label === 'en') a.setAttribute('href', `/product.html?${query}`);
+        }
       });
     }
 
@@ -1240,8 +1270,19 @@ if (Array.isArray(products)) {
     const path = location.pathname.toLowerCase();
     const params = new URLSearchParams(location.search);
     const hasProductParam = params.has('id') || params.has('slug');
+    const pathnameSlug = getSlugFromPathname();
     const isProductsPath = /\/(de\/)?products\//.test(path);
-    const isProductPage = path.includes('product.html') || isProductsPath || hasProductParam;
+    const hasProductDom = !!(
+      document.querySelector('[data-product-info]') ||
+      document.querySelector('#product-title') ||
+      document.querySelector('#add-to-cart-form')
+    );
+    const isProductPage = hasProductDom && (
+      path.includes('product.html') ||
+      isProductsPath ||
+      hasProductParam ||
+      !!pathnameSlug
+    );
     const isComingSoonPage = path.includes('coming-soon');
     if (isProductPage) renderProductPage(products);
     else if (isComingSoonPage) renderHomepage(products, 'coming_soon');
