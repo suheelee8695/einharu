@@ -69,6 +69,11 @@
   const fmtPrice = (n, currency = 'EUR') =>
     new Intl.NumberFormat('de-DE', { style: 'currency', currency }).format(Number(n || 0));
   const getQuery = (k) => new URLSearchParams(location.search).get(k);
+  const getSlugFromPathname = () => {
+    const path = String(location.pathname || '').toLowerCase();
+    const m = path.match(/^\/(?:de\/)?products\/([^/?#]+)\/?$/);
+    return m ? decodeURIComponent(m[1]) : '';
+  };
   const getProductPath = (product) => {
     const slug = String(product?.slug || '').trim();
     if (slug) {
@@ -740,7 +745,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
 
   /*** PRODUCT PAGE ***/
   function renderProductPage(products) {
-    const slug = String(getQuery('slug') || '').trim();
+    const slug = String(getQuery('slug') || getSlugFromPathname() || '').trim();
     const id = String(getQuery('id') || '').trim();
     if (!slug && !id) return;
 
