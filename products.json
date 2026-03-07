@@ -1190,12 +1190,15 @@
     "category": "collection",
     "brand": "Londonflat",
     "currency": "EUR",
-    "fitNote": "Coming soon release item.",
+    "fitNote": "Model is 177 cm and wears size S.",
     "defaultSize": "One Size",
     "sizeDetails": [
-      "Waist: 34 cm",
-      "Hip: 50 cm",
-      "Length: 102 cm"
+      "Waist: 41 cm",
+      "Thigh: 29 cm",
+      "Hip: 53 cm",
+      "Rise: 32 cm",
+      "Hem: 28 cm",
+      "Length: 107 cm"
     ],
     "cover": "images/comingsoon01.webp",
     "images": [
@@ -1206,7 +1209,8 @@
     ],
     "description": "Relaxed beaker silhouette pants from Londonflat. Upcoming drop preview.",
     "materials": [
-      "Cotton blend"
+      "Wool 50%",
+      "Polyester 50%"
     ],
     "care": [
       "Hand wash cold",
@@ -1224,12 +1228,17 @@
     "category": "collection",
     "brand": "Londonflat",
     "currency": "EUR",
-    "fitNote": "Coming soon release item.",
+    "fitNote": "Model is 177 cm and wears size S.",
     "defaultSize": "One Size",
     "sizeDetails": [
-      "Shoulder: 48 cm",
-      "Chest: 56 cm",
-      "Length: 70 cm"
+      "Shoulder: 53 cm",
+      "Sleeve: 23 cm",
+      "Armhole: 65 cm",
+      "Cuff: 20 cm",
+      "Sleeve opening: 11 cm",
+      "Chest: 60 cm",
+      "Hem: 60 cm",
+      "Length: 71 cm"
     ],
     "cover": "images/comingsoon05.webp",
     "images": [
@@ -1239,7 +1248,8 @@
     ],
     "description": "Structured Londonflat shirt with clean proportions. Upcoming drop preview.",
     "materials": [
-      "Cotton 100%"
+      "Nylon 27%",
+      "Tencel 73%"
     ],
     "care": [
       "Machine wash cold",
@@ -1257,12 +1267,17 @@
     "category": "collection",
     "brand": "Londonflat",
     "currency": "EUR",
-    "fitNote": "Coming soon release item.",
+    "fitNote": "Model is 177 cm and wears size S.",
     "defaultSize": "One Size",
     "sizeDetails": [
-      "Shoulder: 50 cm",
-      "Chest: 58 cm",
-      "Length: 68 cm"
+      "Shoulder: 52 cm",
+      "Sleeve: 23.5 cm",
+      "Armhole: 63 cm",
+      "Cuff: 23.5 cm",
+      "Sleeve opening: 10.5 cm",
+      "Chest: 70 cm",
+      "Hem: 70 cm",
+      "Length: 79 cm"
     ],
     "cover": "images/comingsoon08.webp",
     "images": [
@@ -1272,7 +1287,7 @@
     ],
     "description": "Wrap-front shirt with shearling texture accents. Upcoming drop preview.",
     "materials": [
-      "Polyester blend"
+      "Polyester 100%"
     ],
     "care": [
       "Dry clean recommended",

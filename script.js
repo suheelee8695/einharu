@@ -548,6 +548,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       list.forEach((prod) => {
         const first = (prod.images && prod.images[0]) || prod.cover || '';
         const state = getProductState(prod);
+        const showPrice = state !== 'coming_soon';
         const badgeHtml = state === 'coming_soon'
           ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
           : (state === 'sold_out' ? `<span class="badge--soldout">${t('badgeSoldOut')}</span>` : '');
@@ -568,7 +569,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           <div class="card-info">
             <div class="card-brand">${brand}</div>
             <h2 class="card-title">${prod.title ?? ''}</h2>
-            <div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>
+            ${showPrice ? `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>` : ''}
           </div>
         `;
 
@@ -618,6 +619,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
 
       list.forEach((prod) => {
         const state = getProductState(prod);
+        const showPrice = state !== 'coming_soon';
         const img = (prod.images && prod.images[0]) || prod.cover || '';
         const badgeHtml = state === 'coming_soon'
           ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
@@ -636,7 +638,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           <div class="product-list-info">
             <div class="card-brand">${brand}</div>
             <h2 class="card-title">${prod.title ?? ''}</h2>
-            <div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>
+            ${showPrice ? `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>` : ''}
           </div>
         `;
 
