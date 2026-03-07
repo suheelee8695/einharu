@@ -742,9 +742,29 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
 
   /*** PRODUCT PAGE ***/
   function renderProductPage(products) {
+    const renderProductError = (titleText, descText) => {
+      const homeHref = LANG === 'de' ? '/de/' : '/';
+      const main = $('.product-detail-main') || document.body;
+      main.innerHTML = `
+        <section class="status-page" aria-live="polite">
+          <div class="status-wrap">
+            <div class="status-eyebrow">Product</div>
+            <h1 class="status-title">${titleText}</h1>
+            <p class="status-desc">${descText}</p>
+            <div class="status-actions">
+              <a href="${homeHref}" class="button-primary">${t('backToShop')}</a>
+            </div>
+          </div>
+        </section>
+      `;
+    };
+
     const slug = String(getQuery('slug') || getSlugFromPathname() || '').trim();
     const id = String(getQuery('id') || '').trim();
-    if (!slug && !id) return;
+    if (!slug && !id) {
+      renderProductError(t('productNotFound'), t('productNotFoundDesc'));
+      return;
+    }
 
     const product = Array.isArray(products)
       ? products.find((p) => (slug ? p.slug === slug : p.id === id))
@@ -753,22 +773,9 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           (id ? products[id] : null)
         ));
 
-    const main = $('.product-detail-main') || document.body;
     if (!product) {
       console.warn('Product not found for params:', { slug, id });
-      const homeHref = LANG === 'de' ? '/de/' : '/';
-      main.innerHTML = `
-        <section class="status-page" aria-live="polite">
-          <div class="status-wrap">
-            <div class="status-eyebrow">404</div>
-            <h1 class="status-title">${t('productNotFound')}</h1>
-            <p class="status-desc">${t('productNotFoundDesc')}</p>
-            <div class="status-actions">
-              <a href="${homeHref}" class="button-primary">${t('backToShop')}</a>
-            </div>
-          </div>
-        </section>
-      `;
+      renderProductError(t('productNotFound'), t('productNotFoundDesc'));
       return;
     }
 
