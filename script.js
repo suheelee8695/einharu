@@ -200,8 +200,7 @@ function injectMobilePdpStyles(){
 
     /* 인디케이터 오버레이 */
     body.eh-pdp-mobile .eh-dots{
-      position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
-      display:inline-flex; gap:6px; z-index:60;
+      display:none;
     }
     body.eh-pdp-mobile .eh-dots button{
       width:8px; height:8px; border-radius:999px; border:0; background:#9ea9bd;
