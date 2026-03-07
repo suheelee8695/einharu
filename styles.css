@@ -63,6 +63,29 @@ img {
   align-items: center;
   gap: 4px;
 }
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  margin-right: 14px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.language-switcher a {
+  color: #8b8b8b;
+  text-decoration: none;
+}
+.language-switcher a:hover,
+.language-switcher a:focus-visible {
+  color: var(--ink);
+}
+.language-switcher a.is-active {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .site-logo img {
   height: 40px;
   width: auto;
@@ -73,6 +96,11 @@ img {
 @media (max-width: 768px) {
   .site-header {
     padding: 16px;
+  }
+  .language-switcher {
+    margin-right: 8px;
+    gap: 8px;
+    font-size: 10px;
   }
 
   .product-detail-content {

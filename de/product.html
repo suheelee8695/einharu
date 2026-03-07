@@ -1,9 +1,9 @@
 <!-- product.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8">
-  <title id="page-title">Product – einHaru Collective</title>
+  <title id="page-title">Produkt – einHaru Collective</title>
   <meta name="description" content="" id="meta-description">
   <link rel="canonical" href="" id="canonical-link">
   <meta property="og:type" content="product">
@@ -16,11 +16,11 @@
   <link rel="alternate" hreflang="de" href="https://www.einharu.com/de/product.html">
   <link rel="alternate" hreflang="x-default" href="https://www.einharu.com/product.html">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="favicon.ico">
-  <link rel="manifest" href="site.webmanifest">
+  <link rel="icon" href="../favicon.ico">
+  <link rel="manifest" href="../site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Ovo&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
 
@@ -28,27 +28,27 @@
   <!-- banner, header etc. if present -->
 <div class="site-banner" role="status" aria-live="polite" id="site-banner">
   <div class="banner-text" id="banner-text">
-    Free shipping within Germany on orders over €100.
+    Kostenloser Versand innerhalb Deutschlands ab 100 €.
   </div>
-  <button class="banner-close" aria-label="Dismiss banner" id="banner-close">×</button>
+  <button class="banner-close" aria-label="Banner schliessen" id="banner-close">×</button>
 </div>
 <header class="site-header">
-  <a href="index.html" class="site-logo" aria-label="einHaru Collective">
-    <img src="images/einharuheaderlogo.svg" alt="einHaru Collective logo">
+  <a href="/de/" class="site-logo" aria-label="einHaru Collective">
+    <img src="../images/einharuheaderlogo.svg" alt="einHaru Collective logo">
   </a>
-  <div class="language-switcher" aria-label="Language switcher">
-    <a href="/" class="is-active" lang="en">EN</a>
-    <a href="/de/" lang="de">DE</a>
+  <div class="language-switcher" aria-label="Sprachauswahl">
+    <a href="/" lang="en">EN</a>
+        <a href="/de/" class="is-active" lang="de">DE</a>
   </div>
 
   <div class="header-actions">
       <a class="icon-btn" href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener" aria-label="Instagram">
-        <img src="images/instaicon.svg" alt="Instagram icon" width="32" height="32" loading="lazy" />
+        <img src="../images/instaicon.svg" alt="Instagram icon" width="32" height="32" loading="lazy" />
       </a>
 
-    <!-- Cart / Bag -->
-    <button class="icon-btn" type="button" aria-label="Open bag" data-cart-open>
-        <img src="images/shoppingbag.svg" alt="Shopping bag" width="32" height="32" loading="lazy" />
+    <!-- Cart / Warenkorb -->
+    <button class="icon-btn" type="button" aria-label="Warenkorb oeffnen" data-cart-open>
+        <img src="../images/shoppingbag.svg" alt="Warenkorb" width="32" height="32" loading="lazy" />
         <span class="badge" data-cart-count>0</span>
       </button>
   </div>
@@ -56,8 +56,8 @@
 
   <main class="product-detail-main">
     <div class="product-breadcrumb">
-      <a href="index.html">Home</a> / <span id="breadcrumb-title"></span>
-      <button id="back-button" class="back-btn" aria-label="Go back">← Back</button>
+      <a href="/de/">Startseite</a> / <span id="breadcrumb-title"></span>
+      <button id="back-button" class="back-btn" aria-label="Zurück">← Zurück</button>
     </div>
 
     <div class="product-detail-content">
@@ -70,24 +70,24 @@
       <div class="info-panel sticky-panel" data-product-info>
         <div class="product-meta-top">
           <div class="brand-name" id="product-brand">einHaru Collective</div>
-          <span id="product-collection" class="product-collection-tag">einHaru Collection</span>
+          <span id="product-collection" class="product-collection-tag">einHaru Kollektion</span>
         </div>
         <h1 id="product-title"></h1>
         <p id="product-subtitle" class="product-subtitle" hidden></p>
         <div class="price-line">
-          <span class="price-label">Price:</span>
+          <span class="price-label">Preis:</span>
           <span id="product-price"></span>
         </div>
-        <p class="product-tax-note">Incl. VAT · Free EU shipping on orders over €100</p>
+        <p class="product-tax-note">inkl. MwSt. · Kostenloser EU-Versand ab 100 €</p>
         <div id="shipping-nudge" class="shipping-nudge" aria-live="polite"></div>
         <div id="product-stock-state" class="stock-state" aria-live="polite"></div>
 
-        <div class="thumb-list" role="tablist" aria-label="Product image thumbnails">
+        <div class="thumb-list" role="tablist" aria-label="Produktbilder Vorschau">
           <!-- thumbnails injected -->
         </div>
-        <!-- Compact Size UI -->
+        <!-- Compact Größe UI -->
 <div id="product-sizes" class="size-box" hidden>
-  <div class="size-box-title">Size</div>
+  <div class="size-box-title">Größe</div>
   <div class="size-chip-row" id="size-chip-row"></div>
   <div class="size-note" id="size-note"></div>
 </div>
@@ -100,12 +100,12 @@
   <div class="button-group">
     <!-- Stripe Checkout submit -->
     <button id="buy-button" type="submit" class="button-primary">
-      Buy Now
+      Jetzt kaufen
     </button>
 
     <!-- Client-side cart (does not submit the form) -->
     <button type="button" class="button-secondary" data-add-to-cart>
-      Add to Bag
+      In den Warenkorb
     </button>
 
    
@@ -113,18 +113,18 @@
 </form>
 
 <section class="trust-strip" aria-label="Store assurances">
-  <div class="trust-item">Free EU Shipping Over €100</div>
-  <div class="trust-item">14-day Returns</div>
-  <div class="trust-item">Secure Stripe Checkout</div>
+  <div class="trust-item">Kostenloser EU-Versand ab 100 €</div>
+  <div class="trust-item">14 Tage Rückgabe</div>
+  <div class="trust-item">Sicherer Stripe-Checkout</div>
 </section>
 
 <p class="product-discovery-link">
-  Explore our editorial: <a href="minimalist-fashion-berlin.html">Minimalist Fashion in Berlin</a>
+  Unser Editorial: <a href="/minimalist-fashion-berlin.html">Minimalistische Mode in Berlin</a>
 </p>
 
 <section class="accordion" id="accordion-details">
   <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="section-details">
-    <span><img src="images/infoicon.svg" alt="" width="16" height="16"> Product Details</span>
+    <span><img src="../images/infoicon.svg" alt="" width="16" height="16"> Produktdetails</span>
     <span class="accordion-icon">+</span>
   </button>
   <div class="accordion-panel" id="section-details" hidden>
@@ -134,7 +134,7 @@
 
 <section class="accordion" id="accordion-measurements">
   <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="section-measurements">
-    <span><img src="images/infoicon.svg" alt="" width="16" height="16"> Measurement</span>
+    <span><img src="../images/infoicon.svg" alt="" width="16" height="16"> Masse</span>
     <span class="accordion-icon">+</span>
   </button>
   <div class="accordion-panel" id="section-measurements" hidden>
@@ -144,7 +144,7 @@
 
 <section class="accordion" id="accordion-materials">
   <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="section-materials">
-    <span><img src="images/infoicon.svg" alt="" width="16" height="16"> Material & Care Guide</span>
+    <span><img src="../images/infoicon.svg" alt="" width="16" height="16"> Material & Pflege</span>
     <span class="accordion-icon">+</span>
   </button>
   <div class="accordion-panel" id="section-materials" hidden>
@@ -161,49 +161,49 @@
 
   <footer class="site-footer" aria-label="Site footer">
     <div class="site-footer-main">
-      <a href="index.html" class="site-footer-brand" aria-label="einHaru Collective home">einHaru Collective</a>
-      <nav class="site-footer-nav" aria-label="Footer links">
-        <a href="about.html">About</a>
-        <a href="minimalist-fashion-berlin.html">Minimalist Fashion Berlin</a>
-        <a href="faq.html">FAQ</a>
-        <a href="returns.html">Returns</a>
-        <a href="privacy.html">Privacy</a>
+      <a href="/de/" class="site-footer-brand" aria-label="einHaru Collective home">einHaru Collective</a>
+      <nav class="site-footer-nav" aria-label="Footer-Links">
+        <a href="/de/about.html">Über uns</a>
+        <a href="/minimalist-fashion-berlin.html">Minimalistische Mode Berlin</a>
+        <a href="/de/faq.html">Häufige Fragen</a>
+        <a href="/de/returns.html">Rückgabe</a>
+        <a href="/de/privacy.html">Datenschutz</a>
         <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener">Instagram</a>
       </nav>
     </div>
   </footer>
-  <section class="cookie-bar" aria-label="Cookie notice">
+  <section class="cookie-bar" aria-label="Cookie-Hinweis">
     <p>
-      We use cookies to enhance your experience. By continuing to browse, you agree to our
-      <a href="privacy.html#cookies">Cookie Policy</a> and <a href="privacy.html">Privacy Policy</a>.
+      Wir verwenden Cookies, um dein Erlebnis zu verbessern. Mit der weiteren Nutzung stimmst du unserer
+      <a href="/de/privacy.html#cookies">Cookie-Richtlinie</a> und <a href="/de/privacy.html">Datenschutzerklaerung</a>.
     </p>
     <div class="cookie-bar-actions">
-      <button type="button" class="cookie-btn cookie-btn--ghost">Decline</button>
-      <button type="button" class="cookie-btn">Accept</button>
+      <button type="button" class="cookie-btn cookie-btn--ghost">Ablehnen</button>
+      <button type="button" class="cookie-btn">Akzeptieren</button>
     </div>
   </section>
 <div class="cart-overlay" data-cart-overlay hidden></div>
-  <aside class="cart-drawer" data-cart-drawer hidden aria-hidden="true" aria-label="Shopping bag" role="dialog">
+  <aside class="cart-drawer" data-cart-drawer hidden aria-hidden="true" aria-label="Warenkorb" role="dialog">
     <header class="cart-drawer__header">
-      <h2>Bag</h2>
-      <button class="cart-close" aria-label="Close bag" data-cart-close>&times;</button>
+      <h2>Warenkorb</h2>
+      <button class="cart-close" aria-label="Warenkorb schliessen" data-cart-close>&times;</button>
     </header>
     <div class="cart-drawer__list" data-cart-list></div>
     <footer class="cart-drawer__footer">
-      <div class="cart-subtotal"><span>Subtotal</span><strong data-cart-subtotal>€0</strong></div>
+      <div class="cart-subtotal"><span>Zwischensumme</span><strong data-cart-subtotal>€0</strong></div>
       <div class="cart-promo">
-  <label for="cart-promo-input" class="visually-hidden">Promo code</label>
-  <input id="cart-promo-input" data-cart-promo-input placeholder="Promo code" autocomplete="off" class="promo-input">
-  <a href="#" data-cart-apply-promo class="promo-apply-link" role="button" aria-label="Apply promo code">Apply</a>
+  <label for="cart-promo-input" class="visually-hidden">Rabattcode</label>
+  <input id="cart-promo-input" data-cart-promo-input placeholder="Rabattcode" autocomplete="off" class="promo-input">
+  <a href="#" data-cart-apply-promo class="promo-apply-link" role="button" aria-label="Rabattcode anwenden">Anwenden</a>
 
   <div class="promo-note" data-cart-promo-note hidden>
-    Applied: <strong data-cart-promo-code></strong>
-    <button type="button" data-cart-remove-promo class="promo-remove">Remove</button>
+    Aktiv: <strong data-cart-promo-code></strong>
+    <button type="button" data-cart-remove-promo class="promo-remove">Entfernen</button>
   </div>
 </div>
 
-      <button class="button-primary" data-cart-checkout>Go to checkout</button>
-      <button class="button-secondary" data-cart-continue>Continue shopping</button>
+      <button class="button-primary" data-cart-checkout>Zur Kasse</button>
+      <button class="button-secondary" data-cart-continue>Weiter einkaufen</button>
 
     </footer>
   </aside>
@@ -212,8 +212,8 @@
 <script>
 window.EH_BACKEND = location.origin;
 </script>
-  <script src="cart.js" defer></script>
-  <script src="script.js"></script>
-  <script src="cookie-consent.js" defer></script>
+  <script src="../cart.js" defer></script>
+  <script src="../script.js"></script>
+  <script src="../cookie-consent.js" defer></script>
 </body>
 </html>

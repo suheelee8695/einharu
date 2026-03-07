@@ -11,8 +11,57 @@
   'use strict';
 
   /*** CONFIG ***/
-  const PRODUCTS_JSON = 'products.json';
+  const PRODUCTS_JSON = '/products.json';
   const CACHE_BUST = 'no-store'; // dev cache behaviour
+  const LANG = (document.documentElement.lang || 'en').toLowerCase().startsWith('de') ? 'de' : 'en';
+  const I18N = {
+    en: {
+      bagEmpty: 'Your bag is empty.',
+      outOfStock: 'This item is out of stock.',
+      promoEnter: 'Enter a promo code.',
+      productNotFound: 'Product not found.',
+      backToShop: 'Back to shop',
+      badgeComingSoon: 'COMING SOON',
+      badgeSoldOut: 'SOLD OUT',
+      shippingNudge: (remaining) => `Add ${remaining} more for free EU shipping — you're nearly there.`,
+      shippingQualified: 'You qualify for free EU shipping.',
+      stockComing: 'Coming Soon',
+      stockSoldOut: 'Sold Out',
+      stockIn: 'In Stock',
+      availableSoon: 'Available Soon',
+      soldOut: 'Sold Out',
+      alertAvailableSoon: 'This item will be available soon.',
+      alertSoldOut: 'This item is sold out.',
+      alertCartUnavailable: 'Cart unavailable.',
+      alertMissingStripe: 'This item cannot be checked out yet (missing Stripe Price).',
+      banner: 'Free shipping within EU on orders over €100.'
+    },
+    de: {
+      bagEmpty: 'Dein Warenkorb ist leer.',
+      outOfStock: 'Dieser Artikel ist ausverkauft.',
+      promoEnter: 'Bitte gib einen Rabattcode ein.',
+      productNotFound: 'Produkt nicht gefunden.',
+      backToShop: 'Zurück zum Shop',
+      badgeComingSoon: 'BALD VERFUEGBAR',
+      badgeSoldOut: 'AUSVERKAUFT',
+      shippingNudge: (remaining) => `Noch ${remaining} bis zum kostenlosen EU-Versand — fast geschafft.`,
+      shippingQualified: 'Du qualifizierst dich für kostenlosen EU-Versand.',
+      stockComing: 'Bald verfuegbar',
+      stockSoldOut: 'Ausverkauft',
+      stockIn: 'Auf Lager',
+      availableSoon: 'Bald verfuegbar',
+      soldOut: 'Ausverkauft',
+      alertAvailableSoon: 'Dieser Artikel ist bald verfuegbar.',
+      alertSoldOut: 'Dieser Artikel ist ausverkauft.',
+      alertCartUnavailable: 'Warenkorb derzeit nicht verfuegbar.',
+      alertMissingStripe: 'Dieser Artikel kann derzeit nicht zur Kasse gehen.',
+      banner: 'Kostenloser Versand innerhalb der EU ab 100 €.'
+    }
+  };
+  const t = (key, ...args) => {
+    const val = I18N[LANG]?.[key] ?? I18N.en[key] ?? key;
+    return typeof val === 'function' ? val(...args) : val;
+  };
 
   /*** HELPERS ***/
   const $ = (sel, root = document) => root.querySelector(sel);
@@ -24,6 +73,21 @@
     if ((product?.releaseStatus || '').toLowerCase() === 'coming_soon') return 'coming_soon';
     if (Number(product?.stock ?? 0) <= 0) return 'sold_out';
     return 'available';
+  };
+  const normalizeAssetPath = (val) => {
+    if (typeof val !== 'string') return val;
+    const s = val.trim();
+    if (!s) return s;
+    if (/^(https?:)?\/\//i.test(s) || s.startsWith('data:') || s.startsWith('blob:')) return s;
+    if (s.startsWith('/')) return s;
+    return `/${s.replace(/^\.?\//, '')}`;
+  };
+  const normalizeProductAssets = (product) => {
+    if (!product || typeof product !== 'object') return product;
+    const next = { ...product };
+    if (typeof next.cover === 'string') next.cover = normalizeAssetPath(next.cover);
+    if (Array.isArray(next.images)) next.images = next.images.map((img) => normalizeAssetPath(img));
+    return next;
   };
 
   async function fetchJSON(url) {
@@ -485,8 +549,8 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         const first = (prod.images && prod.images[0]) || prod.cover || '';
         const state = getProductState(prod);
         const badgeHtml = state === 'coming_soon'
-          ? '<span class="badge--comingsoon">COMING SOON</span>'
-          : (state === 'sold_out' ? '<span class="badge--soldout">SOLD OUT</span>' : '');
+          ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
+          : (state === 'sold_out' ? `<span class="badge--soldout">${t('badgeSoldOut')}</span>` : '');
 
         const card = document.createElement('div');
         card.className = 'product-card';
@@ -500,7 +564,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         card.innerHTML = `
           <div class="card-image-wrapper">
             <img src="${first}" alt="${prod.title}" class="card-img primary" loading="lazy">
-            ${comingSoon ? '<span class="badge--comingsoon">COMING SOON</span>' : badgeHtml}
+            ${comingSoon ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>` : badgeHtml}
           </div>
           <div class="card-info">
             <div class="card-brand">${brand}</div>
@@ -557,8 +621,8 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         const state = getProductState(prod);
         const img = (prod.images && prod.images[0]) || prod.cover || '';
         const badgeHtml = state === 'coming_soon'
-          ? '<span class="badge--comingsoon">COMING SOON</span>'
-          : (state === 'sold_out' ? '<span class="badge--soldout">SOLD OUT</span>' : '');
+          ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
+          : (state === 'sold_out' ? `<span class="badge--soldout">${t('badgeSoldOut')}</span>` : '');
         const brand = prod.brand || ((prod.category || '').toLowerCase() === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
 
         const row = document.createElement('article');
@@ -678,7 +742,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     const main = $('.product-detail-main') || document.body;
     if (!product) {
       console.warn('Product not found for id:', id);
-      main.innerHTML = `<p>Product not found. <a href="index.html">Back to shop</a></p>`;
+      main.innerHTML = `<p>${t('productNotFound')}. <a href="index.html">${t('backToShop')}</a></p>`;
       return;
     }
 
@@ -712,9 +776,9 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       const remaining = Math.max(0, freeShippingThreshold - currentPrice);
       shippingNudge.classList.remove('shipping-nudge--qualified');
       if (remaining > 0) {
-        shippingNudge.textContent = `Add ${fmtPrice(remaining, product.currency || 'EUR')} more for free EU shipping — you're nearly there.`;
+        shippingNudge.textContent = t('shippingNudge', fmtPrice(remaining, product.currency || 'EUR'));
       } else {
-        shippingNudge.textContent = 'You qualify for free EU shipping.';
+        shippingNudge.textContent = t('shippingQualified');
         shippingNudge.classList.add('shipping-nudge--qualified');
       }
     }
@@ -722,13 +786,13 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     if (stockStateEl) {
       if (getProductState(product) === 'coming_soon') {
         stockStateEl.className = 'stock-state stock-state--coming';
-        stockStateEl.textContent = 'Coming Soon';
+        stockStateEl.textContent = t('stockComing');
       } else if (getProductState(product) === 'sold_out') {
         stockStateEl.className = 'stock-state stock-state--soldout';
-        stockStateEl.textContent = 'Sold Out';
+        stockStateEl.textContent = t('stockSoldOut');
       } else {
         stockStateEl.className = 'stock-state stock-state--in';
-        stockStateEl.textContent = 'In Stock';
+        stockStateEl.textContent = t('stockIn');
       }
     }
 
@@ -796,11 +860,11 @@ if (isComingSoon || isSoldOut) {
 
     const buyBtn = (buyForm && (buyForm.querySelector('button[type="submit"], [data-buy-now]'))) || $('#buy-button');
     if (!product.sellOnVintedOnly && isComingSoon) {
-      if (addBtn) { addBtn.disabled = true; addBtn.textContent = 'Available Soon'; addBtn.classList.add('btn-disabled'); }
-      if (buyBtn) { buyBtn.disabled = true; buyBtn.textContent = 'Available Soon'; buyBtn.classList.add('btn-disabled'); }
+      if (addBtn) { addBtn.disabled = true; addBtn.textContent = t('availableSoon'); addBtn.classList.add('btn-disabled'); }
+      if (buyBtn) { buyBtn.disabled = true; buyBtn.textContent = t('availableSoon'); buyBtn.classList.add('btn-disabled'); }
     } else if (!product.sellOnVintedOnly && isSoldOut) {
-      if (addBtn) { addBtn.disabled = true; addBtn.textContent = 'Sold Out'; addBtn.classList.add('btn-disabled'); }
-      if (buyBtn) { buyBtn.disabled = true; buyBtn.textContent = 'Sold Out'; buyBtn.classList.add('btn-disabled'); }
+      if (addBtn) { addBtn.disabled = true; addBtn.textContent = t('soldOut'); addBtn.classList.add('btn-disabled'); }
+      if (buyBtn) { buyBtn.disabled = true; buyBtn.textContent = t('soldOut'); buyBtn.classList.add('btn-disabled'); }
     }
 function getChosenSize(product) {
   const ov = SIZE_OVERRIDES[product.id];
@@ -833,8 +897,8 @@ function getChosenSize(product) {
 
       buyForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (isComingSoon) return alert('This item will be available soon.');
-        if (isSoldOut) return alert('This item is sold out.');
+        if (isComingSoon) return alert(t('alertAvailableSoon'));
+        if (isSoldOut) return alert(t('alertSoldOut'));
         const promo =
     (sessionStorage.getItem('promo_code') || document.querySelector('#promo-code')?.value || '').trim();  // ⬅
   const shipping_country = 'DE';
@@ -862,10 +926,10 @@ function getChosenSize(product) {
     // Add to bag (mini-cart)
     if (addBtn && !product.sellOnVintedOnly) {
       addBtn.addEventListener('click', () => {
-        if (isComingSoon) return alert('This item will be available soon.');
-        if (isSoldOut) return alert('This item is sold out.');
-        if (!window.Cart?.add) return alert('Cart unavailable.');
-        if (!product.stripePriceId) return alert('This item cannot be checked out yet (missing Stripe Price).');
+        if (isComingSoon) return alert(t('alertAvailableSoon'));
+        if (isSoldOut) return alert(t('alertSoldOut'));
+        if (!window.Cart?.add) return alert(t('alertCartUnavailable'));
+        if (!product.stripePriceId) return alert(t('alertMissingStripe'));
 
         Cart.add({
           id: product.id,
@@ -1001,7 +1065,7 @@ if (!isMobile) {
       sessionStorage.setItem('bannerDismissed', 'true');
     });
 
-    textEl.textContent = 'Free shipping within EU on orders over €100.';
+    textEl.textContent = t('banner');
   }
 
   function initStickyLayout() {
@@ -1058,6 +1122,15 @@ if (Array.isArray(products)) {
     if (p.stripePriceId && soldMap[p.stripePriceId]) p.stock = 0;
   });
 }
+
+    // Ensure product asset URLs (images/covers) resolve from site root for both / and /de pages.
+    if (Array.isArray(products)) {
+      products = products.map(normalizeProductAssets);
+    } else if (products && typeof products === 'object') {
+      Object.keys(products).forEach((k) => {
+        products[k] = normalizeProductAssets(products[k]);
+      });
+    }
 
     const path = location.pathname.toLowerCase();
     const isComingSoonPage = path.includes('coming-soon');

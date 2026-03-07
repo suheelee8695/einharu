@@ -1,6 +1,35 @@
 // cart.js
 (() => {
   const STORAGE = 'eh_cart_v1';
+  const LANG = (document.documentElement.lang || 'en').toLowerCase().startsWith('de') ? 'de' : 'en';
+  const I18N = {
+    en: {
+      outOfStock: 'This item is out of stock.',
+      reachedMax: 'Reached maximum quantity for this item.',
+      onlyStock: (title, stock) => `“${title}” has only ${stock} in stock.`,
+      bagEmpty: 'Your bag is empty.',
+      promoEnter: 'Enter a promo code.',
+      subtotal: 'Subtotal',
+      bag: 'Bag',
+      checkout: 'Go to checkout',
+      continueShopping: 'Continue shopping'
+    },
+    de: {
+      outOfStock: 'Dieser Artikel ist ausverkauft.',
+      reachedMax: 'Maximale Menge fuer diesen Artikel erreicht.',
+      onlyStock: (title, stock) => `„${title}“ ist nur noch ${stock}x verfuegbar.`,
+      bagEmpty: 'Dein Warenkorb ist leer.',
+      promoEnter: 'Bitte gib einen Rabattcode ein.',
+      subtotal: 'Zwischensumme',
+      bag: 'Warenkorb',
+      checkout: 'Zur Kasse',
+      continueShopping: 'Weiter einkaufen'
+    }
+  };
+  const t = (key, ...args) => {
+    const val = I18N[LANG]?.[key] ?? I18N.en[key] ?? key;
+    return typeof val === 'function' ? val(...args) : val;
+  };
   const els = {};
   const state = { items: [] }; // [{id,title,price,currency,size,qty,image,stripePriceId,stock?}]
   let lastFocused = null;
@@ -42,7 +71,7 @@ const setCoupon = (code) => {
   function add(item) {
     const incoming = { ...item, qty: Number(item.qty || 1), stock: getStock(item) };
     if (incoming.stock === 0) {
-      toast('This item is out of stock.');
+      toast(t('outOfStock'));
       return;
     }
     const k = key(incoming);
@@ -53,12 +82,12 @@ const setCoupon = (code) => {
       const desired = exist.qty + incoming.qty;
       const clamped = clampQty(exist, desired);
       if (clamped !== desired) {
-        // toast('Reached maximum quantity for this item.');
+        // toast(t('reachedMax'));
       }
       exist.qty = clamped;
     } else {
       incoming.qty = clampQty(incoming, incoming.qty);
-      if (incoming.qty === 0) { toast('This item is out of stock.'); return; }
+      if (incoming.qty === 0) { toast(t('outOfStock')); return; }
       state.items.push(incoming);
     }
     save(); render(); open();
@@ -86,7 +115,7 @@ const setCoupon = (code) => {
     for (const i of state.items) {
       const stock = getStock(i);
       if (i.qty > stock) {
-        toast(`“${i.title}” has only ${stock} in stock.`);
+        toast(t('onlyStock', i.title, stock));
         return;
       }
     }
@@ -152,10 +181,10 @@ const setCoupon = (code) => {
     els.checkout?.addEventListener('click', ()=>checkout());
     els.cont?.addEventListener('click', close);
     // ---- Promo: apply/remove
-els.promoApply?.addEventListener('click', (e) => {
+  els.promoApply?.addEventListener('click', (e) => {
   e.preventDefault();                
   const raw = (els.promoInput?.value || '').trim();
-  if (!raw) { toast?.('Enter a promo code.'); return; }
+  if (!raw) { toast?.(t('promoEnter')); return; }
   setCoupon(raw);                    
   reflectPromo();
 });
@@ -209,7 +238,7 @@ els.promoRemove?.addEventListener('click', () => {
 
     if (!els.list) return;
     if (!state.items.length) {
-      els.list.innerHTML = `<div class="empty">Your bag is empty.</div>`;
+      els.list.innerHTML = `<div class="empty">${t('bagEmpty')}</div>`;
       return;
     }
 
