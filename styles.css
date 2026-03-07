@@ -1200,6 +1200,7 @@ button.icon-btn::-moz-focus-inner {
   padding: 24px 24px 0;
 }
 
+
 .shop-sidebar {
   position: sticky;
   top: calc(var(--chrome-height, 84px) + ((100vh - var(--chrome-height, 84px) - 220px) / 2));

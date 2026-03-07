@@ -500,7 +500,6 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     const viewBtns = $$('[data-view-toggle]');
     const typeBtns = $$('[data-product-type]');
     const VIEW_KEY = 'eh_shop_view';
-    const tabs = $$('.filter-tab');
 
     let currentFilter = 'all';
     let currentProductType = 'new-arrivals';
@@ -533,7 +532,8 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       if (productTypeMode && productTypeMode !== 'new-arrivals') {
         result = result.filter((p) => {
           const type = (p.productType || p.type || '').toLowerCase();
-          return type === productTypeMode;
+          const category = (p.category || '').toLowerCase();
+          return type === productTypeMode || category === productTypeMode;
         });
       }
 
@@ -558,7 +558,6 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         card.setAttribute('role', 'button');
         card.setAttribute('aria-label', `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
         card.dataset.category = (prod.category || 'collection').toLowerCase();
-
         const brand = prod.brand || (card.dataset.category === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
 
         card.innerHTML = `
@@ -624,7 +623,6 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
           : (state === 'sold_out' ? `<span class="badge--soldout">${t('badgeSoldOut')}</span>` : '');
         const brand = prod.brand || ((prod.category || '').toLowerCase() === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
-
         const row = document.createElement('article');
         row.className = 'product-list-item';
         row.tabIndex = 0;
@@ -686,20 +684,6 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     };
 
     renderCards();
-
-    if (tabs.length) {
-      tabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-          currentFilter = (tab.dataset.filter || 'all').toLowerCase();
-          tabs.forEach((t) => {
-            const on = t === tab;
-            t.classList.toggle('active', on);
-            t.setAttribute('aria-pressed', String(on));
-          });
-          renderCards();
-        });
-      });
-    }
 
     if (typeBtns.length) {
       typeBtns.forEach((btn) => {
