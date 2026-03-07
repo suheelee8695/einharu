@@ -79,15 +79,10 @@
   const getProductPath = (product) => {
     const slug = String(product?.slug || '').trim();
     if (slug) {
-      const isLocalDev =
-        location.protocol === 'file:' ||
-        location.hostname === 'localhost' ||
-        location.hostname === '127.0.0.1';
-      if (isLocalDev) {
-        return `product.html?slug=${encodeURIComponent(slug)}`;
-      }
       const isDe = location.pathname.toLowerCase().startsWith('/de/');
-      return isDe ? `/de/products/${encodeURIComponent(slug)}` : `/products/${encodeURIComponent(slug)}`;
+      return isDe
+        ? `/de/product.html?slug=${encodeURIComponent(slug)}`
+        : `product.html?slug=${encodeURIComponent(slug)}`;
     }
     const id = String(product?.id || '').trim();
     return `product.html?id=${encodeURIComponent(id)}`;
