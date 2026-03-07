@@ -184,6 +184,7 @@ function injectMobilePdpStyles(){
       scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
     }
     body.eh-pdp-mobile .eh-slide{
+      position:relative;
       flex:0 0 100vw; height:100%;
       scroll-snap-align:center; display:grid; place-items:center;
       background:#efefef;                  /* 제품 배경 캔버스 */
@@ -203,9 +204,40 @@ function injectMobilePdpStyles(){
       display:inline-flex; gap:6px; z-index:60;
     }
     body.eh-pdp-mobile .eh-dots button{
-      width:6px; height:6px; border-radius:999px; border:0; background:#C9D1E4;
+      width:8px; height:8px; border-radius:999px; border:0; background:#9ea9bd;
     }
     body.eh-pdp-mobile .eh-dots button[aria-current="true"]{ background:#535353; }
+
+    body.eh-pdp-mobile .eh-swipe-hint{
+      position:absolute; left:50%; bottom:60px; transform:translateX(-50%);
+      font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+      color:#535353; opacity:0.7; pointer-events:none; z-index:66;
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    body.eh-pdp-mobile .eh-swipe-hint.is-hidden{
+      opacity:0; transform:translateX(-50%) translateY(6px);
+    }
+
+    body.eh-pdp-mobile .eh-gallery-arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:34px; height:34px; border-radius:999px;
+      border:1px solid rgba(83,83,83,0.18);
+      background:rgba(255,255,255,0.86);
+      color:#535353; font-size:16px; line-height:1;
+      display:grid; place-items:center; z-index:65;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+      transition: opacity .2s ease;
+    }
+    body.eh-pdp-mobile .eh-gallery-arrow--left{ left:10px; }
+    body.eh-pdp-mobile .eh-gallery-arrow--right{ right:10px; }
+    body.eh-pdp-mobile .eh-gallery-arrow.is-disabled{ opacity:0.28; }
+
+    body.eh-pdp-mobile .eh-tap-zone{
+      position:absolute; top:0; bottom:0; width:50%; z-index:62;
+      background:transparent;
+    }
+    body.eh-pdp-mobile .eh-tap-zone--left{ left:0; }
+    body.eh-pdp-mobile .eh-tap-zone--right{ right:0; }
 
     /* 원래 이미지/썸네일은 모바일에서 숨김 */
     body.eh-pdp-mobile .eh-hide-mobile{ display:none !important; }
@@ -253,6 +285,20 @@ function initMobileGallery(product, opts={}){
   gallery.className = 'eh-gallery';
   const track = document.createElement('div'); track.className = 'eh-track';
   const dots  = document.createElement('div'); dots.className  = 'eh-dots';
+  const hint = document.createElement('div');
+  hint.className = 'eh-swipe-hint';
+  hint.textContent = '← swipe →';
+  const leftArrow = document.createElement('button');
+  leftArrow.type = 'button';
+  leftArrow.className = 'eh-gallery-arrow eh-gallery-arrow--left';
+  leftArrow.setAttribute('aria-label', 'Previous image');
+  leftArrow.textContent = '‹';
+  const rightArrow = document.createElement('button');
+  rightArrow.type = 'button';
+  rightArrow.className = 'eh-gallery-arrow eh-gallery-arrow--right';
+  rightArrow.setAttribute('aria-label', 'Next image');
+  rightArrow.textContent = '›';
+  const totalSlides = product.images.length;
 
   // 슬라이드 생성
   product.images.forEach((src, i) => {
@@ -263,16 +309,29 @@ function initMobileGallery(product, opts={}){
     img.alt = `${product.title || 'Product'} image ${i+1}`;
     img.loading = 'lazy';
     slide.appendChild(img);
+
+    const tapLeft = document.createElement('div');
+    tapLeft.className = 'eh-tap-zone eh-tap-zone--left';
+    tapLeft.setAttribute('aria-hidden', 'true');
+    const tapRight = document.createElement('div');
+    tapRight.className = 'eh-tap-zone eh-tap-zone--right';
+    tapRight.setAttribute('aria-hidden', 'true');
+    slide.appendChild(tapLeft);
+    slide.appendChild(tapRight);
+
     track.appendChild(slide);
 
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.setAttribute('aria-label', `Go to image ${i+1}`);
-    dot.addEventListener('click', () => track.scrollTo({ left: i * window.innerWidth, behavior: 'smooth' }));
+    dot.addEventListener('click', () => goToIndex(i));
     dots.appendChild(dot);
   });
 
   gallery.appendChild(track);
+  gallery.appendChild(leftArrow);
+  gallery.appendChild(rightArrow);
+  gallery.appendChild(hint);
   gallery.appendChild(dots);
   // 갤러리 DOM 구성 이후의 삽입 위치를 '브레드크럼 바로 아래'로
 const bcWrap = document.querySelector('.product-breadcrumb');
@@ -290,15 +349,37 @@ const bcH     = bcWrap?.offsetHeight || 0;
 document.documentElement.style.setProperty('--eh-top-offset', `${headerH + bannerH + bcH}px`);
 
 
+  const getSlideWidth = () => Math.max(track.clientWidth || 0, 1);
+  const getIndex = () => Math.round(track.scrollLeft / getSlideWidth());
+  const goToIndex = (idx) => {
+    const safe = Math.min(Math.max(idx, 0), totalSlides - 1);
+    track.scrollTo({ left: safe * getSlideWidth(), behavior: 'smooth' });
+  };
 
-  // 인디케이터 활성화
+  // 인디케이터/네비 상태 활성화
   const setActive = () => {
-    const idx = Math.round(track.scrollLeft / window.innerWidth);
+    const idx = getIndex();
     Array.from(dots.children).forEach((d,k)=> d.toggleAttribute('aria-current', k===idx));
+    leftArrow.classList.toggle('is-disabled', idx <= 0);
+    rightArrow.classList.toggle('is-disabled', idx >= totalSlides - 1);
   };
   setActive();
   track.addEventListener('scroll', () => requestAnimationFrame(setActive));
   window.addEventListener('resize', setActive);
+
+  leftArrow.addEventListener('click', () => goToIndex(getIndex() - 1));
+  rightArrow.addEventListener('click', () => goToIndex(getIndex() + 1));
+
+  track.querySelectorAll('.eh-tap-zone--left').forEach((zone) => {
+    zone.addEventListener('click', () => goToIndex(getIndex() - 1));
+  });
+  track.querySelectorAll('.eh-tap-zone--right').forEach((zone) => {
+    zone.addEventListener('click', () => goToIndex(getIndex() + 1));
+  });
+
+  setTimeout(() => {
+    hint.classList.add('is-hidden');
+  }, 2000);
 
   // 4) 모바일 breadcrumb 말줄임을 위한 title 동기화(선택)
   const bc = document.querySelector('#breadcrumb-title');
