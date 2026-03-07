@@ -18,6 +18,21 @@
   to = "/de/product.html?slug=:slug"
   status = 200
 
+[[redirects]]
+  from = "/korean-fashion-berlin"
+  to = "/korean-fashion-berlin.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/koreanische-mode-berlin"
+  to = "/de/koreanische-mode-berlin.html"
+  status = 200
+
+[[redirects]]
+  from = "/events"
+  to = "/events/"
+  status = 200
+
 # CORS headers for functions (so frontend JS can call them)
 [[headers]]
   for = "/.netlify/functions/*"

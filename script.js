@@ -112,6 +112,33 @@
     if (Array.isArray(next.images)) next.images = next.images.map((img) => normalizeAssetPath(img));
     return next;
   };
+  const ALT_STYLE_BY_TYPE = {
+    en: {
+      tops: 'Seoul minimalist tailoring',
+      outerwear: 'oversized clean silhouette',
+      dresses: 'structured drape',
+      pants: 'wide-leg trousers minimal',
+      skirts: 'refined proportions',
+      accessories: 'small-run designer pieces',
+      vintage: 'quiet luxury minimal'
+    },
+    de: {
+      tops: 'minimalistische Seoul-Aesthetik',
+      outerwear: 'oversized Silhouette clean',
+      dresses: 'strukturierter Fall',
+      pants: 'Wide-Leg Hose minimalistisch',
+      skirts: 'praezise Proportionen',
+      accessories: 'Kleinserien Designer-Mode',
+      vintage: 'ruhiger Minimalismus'
+    }
+  };
+  const buildProductImageAlt = (product, viewIndex = 0) => {
+    const title = String(product?.title || (LANG === 'de' ? 'Produkt' : 'Product')).trim();
+    const type = String(product?.productType || product?.type || '').toLowerCase();
+    const styleLabel = ALT_STYLE_BY_TYPE[LANG]?.[type] || ALT_STYLE_BY_TYPE[LANG]?.tops;
+    if (LANG === 'de') return `${title}, ${styleLabel}, Ansicht ${Number(viewIndex) + 1}`;
+    return `${title}, ${styleLabel}, view ${Number(viewIndex) + 1}`;
+  };
 
   async function fetchJSON(url) {
     const res = await fetch(url, { cache: CACHE_BUST });
@@ -462,27 +489,48 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
   /*** SEO ***/
   function injectSchema(product) {
     if (!product) return;
+    const productUrl = getAbsoluteProductUrl(product);
+    const asAbs = (u) => {
+      try { return new URL(u, location.origin).toString(); } catch (_) { return u; }
+    };
+    const images = Array.isArray(product.images) ? product.images.filter(Boolean).map(asAbs) : [];
+    const desc = Array.isArray(product.description) ? product.description.join(' ') : (product.description || '');
+    const availability = (Number(product.stock ?? 0) > 0)
+      ? 'https://schema.org/InStock'
+      : 'https://schema.org/OutOfStock';
     const ld = {
       '@context': 'https://schema.org/',
       '@type': 'Product',
+      '@id': `${productUrl}#product`,
+      sku: product.id,
       name: product.title,
-      image: product.images || [],
-      description: product.description || '',
-      brand: product.brand || 'einHaru Collective',
+      image: images,
+      description: desc,
+      brand: {
+        '@type': 'Brand',
+        name: product.brand || 'einHaru Collective'
+      },
+      seller: {
+        '@type': 'Organization',
+        '@id': 'https://www.einharu.com/#organization',
+        name: 'einHaru Collective'
+      },
       offers: {
         '@type': 'Offer',
-        url: getAbsoluteProductUrl(product),
+        url: productUrl,
         priceCurrency: product.currency || 'EUR',
-        price: String(product.price ?? ''),
-        availability: (Number(product.stock ?? 0) > 0)
-          ? 'https://schema.org/InStock'
-          : 'https://schema.org/OutOfStock'
+        price: Number(product.price ?? 0).toFixed(2),
+        availability
       }
     };
-    const s = document.createElement('script');
-    s.type = 'application/ld+json';
+    let s = document.getElementById('eh-product-jsonld');
+    if (!s) {
+      s = document.createElement('script');
+      s.id = 'eh-product-jsonld';
+      s.type = 'application/ld+json';
+      document.head.appendChild(s);
+    }
     s.textContent = JSON.stringify(ld);
-    document.head.appendChild(s);
   }
 
   function setMeta(product) {
@@ -587,7 +635,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
 
         card.innerHTML = `
           <div class="card-image-wrapper">
-            <img src="${first}" alt="${prod.title}" class="card-img primary" loading="lazy">
+            <img src="${first}" alt="${buildProductImageAlt(prod, 0)}" class="card-img primary" loading="lazy">
             ${comingSoon ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>` : badgeHtml}
           </div>
           <div class="card-info">
@@ -614,14 +662,20 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
             if (timer) clearInterval(timer);
             timer = null;
             idx = 0;
-            if (primaryImg) primaryImg.src = images[0];
+            if (primaryImg) {
+              primaryImg.src = images[0];
+              primaryImg.alt = buildProductImageAlt(prod, 0);
+            }
           };
 
           card.addEventListener('mouseenter', () => {
             if (timer) return;
             timer = setInterval(() => {
               idx = (idx + 1) % images.length;
-              if (primaryImg) primaryImg.src = images[idx];
+              if (primaryImg) {
+                primaryImg.src = images[idx];
+                primaryImg.alt = buildProductImageAlt(prod, idx);
+              }
             }, 700);
           });
 
@@ -656,7 +710,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         row.setAttribute('aria-label', `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
         row.innerHTML = `
           <div class="product-list-thumb">
-            <img src="${img}" alt="${prod.title}" loading="lazy">
+            <img src="${img}" alt="${buildProductImageAlt(prod, 0)}" loading="lazy">
             ${badgeHtml}
           </div>
           <div class="product-list-info">
@@ -777,6 +831,19 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       console.warn('Product not found for params:', { slug, id });
       renderProductError(t('productNotFound'), t('productNotFoundDesc'));
       return;
+    }
+
+    // Keep EN/DE switcher page-to-page on PDP (preserve slug/id query).
+    const langLinks = $$('.language-switcher a');
+    if (langLinks.length) {
+      const query = slug
+        ? `slug=${encodeURIComponent(slug)}`
+        : `id=${encodeURIComponent(id)}`;
+      langLinks.forEach((a) => {
+        const label = (a.textContent || '').trim().toLowerCase();
+        if (label === 'de') a.setAttribute('href', `/de/product.html?${query}`);
+        if (label === 'en') a.setAttribute('href', `/product.html?${query}`);
+      });
     }
 
     // Meta & schema
@@ -999,7 +1066,7 @@ if (!isMobile) {
       const url = product.images?.[index];
       if (url) {
         mainImg.src = url;
-        mainImg.alt = `${product.title || 'Product'} — view ${index + 1}`;
+        mainImg.alt = buildProductImageAlt(product, index);
       }
 
       // 2) Scroll the full gallery strip to the correct slide (if present)
@@ -1023,7 +1090,7 @@ if (!isMobile) {
       btn.className = 'thumb';
       btn.setAttribute('aria-pressed', 'false');
       btn.setAttribute('data-index', String(idx));
-      btn.innerHTML = `<img src="${imgUrl}" alt="${product.title} — view ${idx + 1}" loading="lazy">`;
+      btn.innerHTML = `<img src="${imgUrl}" alt="${buildProductImageAlt(product, idx)}" loading="lazy">`;
       btn.addEventListener('click', () => updateMain(idx));
       btn.addEventListener('keydown', (e) => { if (e.key === 'Enter') updateMain(idx); });
       thumbsContainer.appendChild(btn);
@@ -1035,7 +1102,7 @@ if (!isMobile) {
       product.images.forEach((url, idx) => {
         const img = document.createElement('img');
         img.src = url;
-        img.alt = `${product.title} image ${idx + 1}`;
+        img.alt = buildProductImageAlt(product, idx);
         img.id = `image-${idx}`;
         img.className = 'full-product-image';
         img.loading = 'lazy';
