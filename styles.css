@@ -3882,3 +3882,40 @@ textarea:focus-visible,
     border-bottom: 0;
   }
 }
+
+/* Keep EN/DE visible on mobile headers across all pages */
+@media (max-width: 768px) {
+  .site-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .site-logo {
+    justify-self: start;
+    min-width: 0;
+  }
+
+  .site-logo img {
+    height: 34px;
+  }
+
+  .language-switcher {
+    display: inline-flex !important;
+    justify-self: center;
+    align-items: center;
+    margin: 0;
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    z-index: 2;
+  }
+
+  .header-actions {
+    justify-self: end;
+    gap: 2px;
+  }
+}
