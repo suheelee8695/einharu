@@ -19,15 +19,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Ovo&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z42LZ4WR68"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Z42LZ4WR68');
-</script>
 </head>
 
 <body class="product-page">
@@ -70,14 +61,20 @@
       </div>
 
       <div class="info-panel sticky-panel" data-product-info>
-        <div class="brand-name" id="product-brand">einHaru Collective</div>
+        <div class="product-meta-top">
+          <div class="brand-name" id="product-brand">einHaru Collective</div>
+          <span id="product-collection" class="product-collection-tag">einHaru Collection</span>
+        </div>
         <h1 id="product-title"></h1>
+        <p id="product-subtitle" class="product-subtitle" hidden></p>
         <div class="price-line">
           <span class="price-label">Price:</span>
           <span id="product-price"></span>
         </div>
+        <p class="product-tax-note">Incl. VAT · Free EU shipping on orders over €100</p>
+        <div id="shipping-nudge" class="shipping-nudge" aria-live="polite"></div>
+        <div id="product-stock-state" class="stock-state" aria-live="polite"></div>
 
-        <p class="description" id="product-description"></p>
         <div class="thumb-list" role="tablist" aria-label="Product image thumbnails">
           <!-- thumbnails injected -->
         </div>
@@ -108,8 +105,21 @@
   </div>
 </form>
 
+<section class="trust-strip" aria-label="Store assurances">
+  <div class="trust-item">Free EU Shipping Over €100</div>
+  <div class="trust-item">14-day Returns</div>
+  <div class="trust-item">Secure Stripe Checkout</div>
+</section>
 
-
+<section class="accordion" id="accordion-details">
+  <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="section-details">
+    <span><img src="images/infoicon.svg" alt="" width="16" height="16"> Product Details</span>
+    <span class="accordion-icon">+</span>
+  </button>
+  <div class="accordion-panel" id="section-details" hidden>
+    <div id="product-description" class="product-info-text"></div>
+  </div>
+</section>
 
 <section class="accordion" id="accordion-measurements">
   <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="section-measurements">
@@ -138,17 +148,28 @@
     <div id="sticky-cta-container" class="sticky-cta"></div>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-left">
-        © <span id="year2"></span> einHaru Collective
-      </div>
-      <div class="footer-right">
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="site-footer-main">
+      <a href="index.html" class="site-footer-brand" aria-label="einHaru Collective home">einHaru Collective</a>
+      <nav class="site-footer-nav" aria-label="Footer links">
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="returns.html">Returns</a>
+        <a href="privacy.html">Privacy</a>
         <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:einharu@gmail.com">Email</a>
-      </div>
+      </nav>
     </div>
   </footer>
+  <section class="cookie-bar" aria-label="Cookie notice">
+    <p>
+      We use cookies to enhance your experience. By continuing to browse, you agree to our
+      <a href="privacy.html#cookies">Cookie Policy</a> and <a href="privacy.html">Privacy Policy</a>.
+    </p>
+    <div class="cookie-bar-actions">
+      <button type="button" class="cookie-btn cookie-btn--ghost">Decline</button>
+      <button type="button" class="cookie-btn">Accept</button>
+    </div>
+  </section>
 <div class="cart-overlay" data-cart-overlay hidden></div>
   <aside class="cart-drawer" data-cart-drawer hidden aria-hidden="true" aria-label="Shopping bag" role="dialog">
     <header class="cart-drawer__header">
@@ -176,10 +197,11 @@
   </aside>
 
   <!-- Scripts -->
-   <script>
+<script>
 window.EH_BACKEND = location.origin;
 </script>
   <script src="cart.js" defer></script>
   <script src="script.js"></script>
+  <script src="cookie-consent.js" defer></script>
 </body>
 </html>

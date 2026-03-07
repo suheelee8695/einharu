@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>einHaru Collective — Coming Soon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Preview upcoming drops at einHaru Collective." />
+  <link rel="canonical" href="https://einharu.com/coming-soon.html" />
+  <meta property="og:title" content="einHaru Collective — Coming Soon" />
+  <meta property="og:description" content="Preview the next drop from einHaru Collective." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://einharu.com/coming-soon.html" />
+  <meta property="og:image" content="https://einharu.com/images/og-home.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Ovo&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="comingsoon-page">
+  <div class="site-banner" role="status" aria-live="polite" id="site-banner">
+    <div class="banner-text" id="banner-text">
+      Free shipping within EU on orders over €100.
+    </div>
+    <button class="banner-close" aria-label="Dismiss banner" id="banner-close">×</button>
+  </div>
+
+  <div class="site-chrome">
+    <header class="site-header">
+      <a href="index.html" class="site-logo" aria-label="einHaru Collective">
+        <img src="images/einharuheaderlogo.svg" alt="einHaru Collective logo" />
+      </a>
+      <div class="header-actions">
+        <a class="icon-btn" href="https://www.instagram.com/einharucollective"
+           target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="images/instaicon.svg" alt="Instagram icon" width="32" height="32" loading="lazy" />
+        </a>
+        <button class="icon-btn" type="button" aria-label="Open bag" data-cart-open>
+          <img src="images/shoppingbag.svg" alt="Shopping bag" width="32" height="32" loading="lazy" />
+          <span class="badge" data-cart-count>0</span>
+        </button>
+      </div>
+    </header>
+  </div>
+
+  <main class="homepage">
+    <div class="product-breadcrumb comingsoon-back">
+      <a href="index.html" class="back-btn" aria-label="Go back to shop">← Back</a>
+    </div>
+
+    <section class="shop-layout" aria-label="Coming soon products">
+      <section class="comingsoon-list" aria-label="Coming soon product list">
+        <div id="coming-soon-list" class="product-list" aria-label="Coming soon list view"></div>
+      </section>
+
+      <aside class="comingsoon-images" aria-label="Coming soon campaign images">
+        <img src="images/comingsoon01.webp" alt="Londonflat beaker pants look 01" loading="lazy" />
+        <img src="images/comingsoon02.webp" alt="Londonflat beaker pants look 02" loading="lazy" />
+        <img src="images/comingsoon03.webp" alt="Londonflat beaker pants look 03" loading="lazy" />
+        <img src="images/comingsoon04.webp" alt="Londonflat beaker pants look 04" loading="lazy" />
+        <img src="images/comingsoon05.webp" alt="Londonflat Bijo shirt look 05" loading="lazy" />
+        <img src="images/comingsoon06.webp" alt="Londonflat Bijo shirt look 06" loading="lazy" />
+        <img src="images/comingsoon07.webp" alt="Londonflat Bijo shirt look 07" loading="lazy" />
+        <img src="images/comingsoon08.webp" alt="Londonflat Shearling Wrap Shirt look 08" loading="lazy" />
+        <img src="images/comingsoon09.webp" alt="Londonflat Shearling Wrap Shirt look 09" loading="lazy" />
+        <img src="images/comingsoon10.webp" alt="Londonflat Shearling Wrap Shirt look 10" loading="lazy" />
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="site-footer-main">
+      <a href="index.html" class="site-footer-brand" aria-label="einHaru Collective home">einHaru Collective</a>
+      <nav class="site-footer-nav" aria-label="Footer links">
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="returns.html">Returns</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener" aria-label="einHaru Instagram">Instagram</a>
+      </nav>
+    </div>
+  </footer>
+  <section class="cookie-bar" aria-label="Cookie notice">
+    <p>
+      We use cookies to enhance your experience. By continuing to browse, you agree to our
+      <a href="privacy.html#cookies">Cookie Policy</a> and <a href="privacy.html">Privacy Policy</a>.
+    </p>
+    <div class="cookie-bar-actions">
+      <button type="button" class="cookie-btn cookie-btn--ghost">Decline</button>
+      <button type="button" class="cookie-btn">Accept</button>
+    </div>
+  </section>
+
+  <div class="cart-overlay" data-cart-overlay hidden></div>
+  <aside class="cart-drawer" data-cart-drawer hidden aria-hidden="true" aria-label="Shopping bag" role="dialog">
+    <header class="cart-drawer__header">
+      <h2>Bag</h2>
+      <button class="cart-close" aria-label="Close bag" data-cart-close>&times;</button>
+    </header>
+    <div class="cart-drawer__list" data-cart-list></div>
+    <footer class="cart-drawer__footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <strong data-cart-subtotal>€0</strong>
+      </div>
+      <div class="cart-promo">
+        <label for="cart-promo-input" class="visually-hidden">Promo code</label>
+        <input id="cart-promo-input" data-cart-promo-input placeholder="Promo code" autocomplete="off" class="promo-input">
+        <a href="#" data-cart-apply-promo class="promo-apply-link" role="button" aria-label="Apply promo code">Apply</a>
+        <div class="promo-note" data-cart-promo-note hidden>
+          Applied: <strong data-cart-promo-code></strong>
+          <button type="button" data-cart-remove-promo class="promo-remove">Remove</button>
+        </div>
+      </div>
+      <button class="button-primary" data-cart-checkout>Go to checkout</button>
+      <button class="button-secondary" data-cart-continue>Continue shopping</button>
+    </footer>
+  </aside>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const y = document.getElementById('year2');
+      if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+  <script>
+    window.EH_BACKEND = location.origin;
+  </script>
+  <script src="cart.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="cookie-consent.js" defer></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 [
-{
+  {
     "id": "item-28",
     "title": "Zip-Front Detachable Dungaree Dress",
     "price": 49,
@@ -42,9 +42,10 @@
       "Dry cleaning allowed",
       "Wet cleaning allowed"
     ],
-    "stripePriceId": "price_1T2s2VFPNKTl6gGpZH20kr2P"
+    "stripePriceId": "price_1T2s2VFPNKTl6gGpZH20kr2P",
+    "productType": "dresses",
+    "releaseStatus": "available"
   },
-
   {
     "id": "item-27",
     "title": "Double-Layer Sheer Mesh Long Sleeve – Blue",
@@ -82,9 +83,11 @@
       "Avoid friction and pulling",
       "Handle with care, delicate fabric"
     ],
-    "stripePriceId": "price_1SqInLFPNKTl6gGpG2EwqlIP"
+    "stripePriceId": "price_1SqInLFPNKTl6gGpG2EwqlIP",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
-    {
+  {
     "id": "item-26",
     "title": "Double-Layer Sheer Mesh Long Sleeve – Black",
     "price": 45,
@@ -122,7 +125,9 @@
       "Avoid friction and pulling",
       "Handle with care, delicate fabric"
     ],
-    "stripePriceId": "price_1SppQAFPNKTl6gGpRhuFWtR8"
+    "stripePriceId": "price_1SppQAFPNKTl6gGpRhuFWtR8",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-25",
@@ -167,7 +172,9 @@
       "Avoid friction and pulling",
       "Handle with care, delicate fabric"
     ],
-    "stripePriceId": "price_1SpRGCFPNKTl6gGpLnXdjUNC"
+    "stripePriceId": "price_1SpRGCFPNKTl6gGpLnXdjUNC",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-23",
@@ -208,7 +215,9 @@
       "Cool iron if needed",
       "Avoid direct sunlight when drying"
     ],
-    "stripePriceId": "price_1SexfuFPNKTl6gGpmsHzzoLL"
+    "stripePriceId": "price_1SexfuFPNKTl6gGpmsHzzoLL",
+    "productType": "dresses",
+    "releaseStatus": "available"
   },
   {
     "id": "item-24",
@@ -248,13 +257,15 @@
       "Dry clean possible",
       "Do not iron or steam"
     ],
-    "stripePriceId": "price_1SexduFPNKTl6gGp5dM0JOxc"
+    "stripePriceId": "price_1SexduFPNKTl6gGp5dM0JOxc",
+    "productType": "skirts",
+    "releaseStatus": "available"
   },
   {
     "id": "item-01",
     "title": "Vegan Leather Glossy Trench Coat - Brown",
     "price": 169,
-    "stock": 1,
+    "stock": 0,
     "category": "collection",
     "brand": "Commonrare",
     "currency": "EUR",
@@ -286,7 +297,9 @@
       "Do not tumble dry",
       "Cool iron if needed"
     ],
-    "stripePriceId": "price_1SE4IDFPNKTl6gGpguBOowG9"
+    "stripePriceId": "price_1SE4IDFPNKTl6gGpguBOowG9",
+    "productType": "outerwear",
+    "releaseStatus": "available"
   },
   {
     "id": "item-02",
@@ -336,7 +349,9 @@
       "Do not iron over prints",
       "If needed, dry clean"
     ],
-    "stripePriceId": "price_1SE4IFFPNKTl6gGphE5adT1F"
+    "stripePriceId": "price_1SE4IFFPNKTl6gGphE5adT1F",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-03",
@@ -382,7 +397,9 @@
       "Do not tumble dry",
       "Dry clean not recommended"
     ],
-    "stripePriceId": "price_1SE4IGFPNKTl6gGpa6nu0FKo"
+    "stripePriceId": "price_1SE4IGFPNKTl6gGpa6nu0FKo",
+    "productType": "pants",
+    "releaseStatus": "available"
   },
   {
     "id": "item-04",
@@ -422,7 +439,9 @@
       "Turn inside out and wash dark colors separately",
       "Do not iron over prints"
     ],
-    "stripePriceId": "price_1SE4IHFPNKTl6gGpk7u8dGd0"
+    "stripePriceId": "price_1SE4IHFPNKTl6gGpk7u8dGd0",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-05",
@@ -450,7 +469,7 @@
       "images/fashion5-4.jpg",
       "images/fashion5-5.jpg",
       "images/fashion5-6.jpg",
-      "images/fashion5-7.jpg"      
+      "images/fashion5-7.jpg"
     ],
     "description": "A vintage button-up shirt featuring a sheer overlay with bold contrast detailing, creating a unique play of transparency and texture. Lightweight and breathable, it offers a structured yet fluid silhouette that works perfectly layered over simple tanks or styled solo for a statement look. Originally sourced from Japan, this piece carries an understated elegance with a distinct edge.",
     "materials": [
@@ -462,7 +481,9 @@
       "Do not tumble dry",
       "Line dry in shade"
     ],
-    "stripePriceId": "price_1SE4IIFPNKTl6gGpFeiYGuV5"
+    "stripePriceId": "price_1SE4IIFPNKTl6gGpFeiYGuV5",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-06",
@@ -491,7 +512,6 @@
       "images/fashion6-5.jpg",
       "images/fashion6-6.jpg",
       "images/fashion6-7.jpg"
-      
     ],
     "description": "A sleek sleeveless dress crafted from smooth vegan leather with a flattering V-neckline. Its minimalist silhouette brings modern elegance to your wardrobe, perfect for both day and evening wear. Made in Korea.",
     "materials": [
@@ -504,7 +524,9 @@
       "Do not tumble dry",
       "Cool iron if needed"
     ],
-    "stripePriceId": "price_1SE4IJFPNKTl6gGphAn99UZz"
+    "stripePriceId": "price_1SE4IJFPNKTl6gGphAn99UZz",
+    "productType": "dresses",
+    "releaseStatus": "available"
   },
   {
     "id": "item-07",
@@ -533,7 +555,6 @@
       "images/fashion7-5.jpg",
       "images/fashion7-6.jpg",
       "images/fashion7-7.jpg"
-      
     ],
     "description": "A statement cargo pant with bold utility-inspired details, featuring multiple straps, oversized pockets, and a structured wide-leg silhouette. Designed for both function and edge, this piece blends streetwear practicality with an elevated, fashion-forward style. Found in Japan, this vintage item carries unique character and versatility for styling across seasons.",
     "materials": [
@@ -545,7 +566,9 @@
       "Iron on low if needed",
       "Do not tumble dry"
     ],
-    "stripePriceId": "price_1SE4IKFPNKTl6gGpcq7ZTstQ"
+    "stripePriceId": "price_1SE4IKFPNKTl6gGpcq7ZTstQ",
+    "productType": "pants",
+    "releaseStatus": "available"
   },
   {
     "id": "item-08",
@@ -570,7 +593,6 @@
       "images/fashion8-2.jpg",
       "images/fashion8-3.jpg",
       "images/fashion8-4.jpg"
-      
     ],
     "description": "A timeless vintage tote sourced from Japan, crafted in 100% genuine leather with a glossy, textured finish. Its structured rectangular base and wide opening make it both stylish and practical — offering ample space for daily essentials while maintaining an elegant silhouette.",
     "materials": [
@@ -581,7 +603,9 @@
       "Store in a dust bag when not in use",
       "Avoid direct sunlight and moisture for prolonged periods"
     ],
-    "stripePriceId": "price_1SE4ILFPNKTl6gGpF0KE5PLh"
+    "stripePriceId": "price_1SE4ILFPNKTl6gGpF0KE5PLh",
+    "productType": "accessories",
+    "releaseStatus": "available"
   },
   {
     "id": "item-09",
@@ -609,7 +633,6 @@
       "images/fashion9-6.jpg",
       "images/fashion9-7.jpg",
       "images/fashion9-8.jpg"
-      
     ],
     "description": "A statement piece that blends classic tailoring with romantic texture. This sleeveless shirt dress features a crisp, structured bodice contrasted with tiered tulle overlays, creating light volume and graceful movement. The button-down front keeps it versatile—wear it as a standalone dress or layer it open over trousers for a contemporary look.",
     "materials": [
@@ -620,7 +643,9 @@
       "Do not tumble dry",
       "Cool iron with press cloth if needed"
     ],
-    "stripePriceId": "price_1SE4IMFPNKTl6gGpXLEkl7n6"
+    "stripePriceId": "price_1SE4IMFPNKTl6gGpXLEkl7n6",
+    "productType": "dresses",
+    "releaseStatus": "available"
   },
   {
     "id": "item-10",
@@ -647,7 +672,6 @@
       "images/fashion10-4.jpg",
       "images/fashion10-5.jpg",
       "images/fashion10-6.jpg"
-      
     ],
     "description": "A lightweight vintage shirt featuring a naturally crinkled finish that gives it a dimensional, lived-in look. Designed with chest pockets and flared cuffs, it combines structure with subtle fluidity for a versatile silhouette. Its textured surface makes it low-maintenance and wrinkle-resistant, perfect for layering or wearing as a statement top. Originally made in Japan.",
     "materials": [
@@ -660,7 +684,9 @@
       "Iron on low if needed",
       "Professional dry clean recommended"
     ],
-    "stripePriceId": "price_1SE4INFPNKTl6gGp8wwbSxZD"
+    "stripePriceId": "price_1SE4INFPNKTl6gGp8wwbSxZD",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-11",
@@ -689,7 +715,6 @@
       "images/fashion11-5.jpg",
       "images/fashion11-6.jpg",
       "images/fashion11-7.jpg"
-      
     ],
     "description": "Contemporary wide-leg trousers with a sculptural barrel silhouette. Crafted from breathable cotton, these trousers balance volume with structure, making them an effortless statement piece for everyday wear. Designed to sit high at the waist with a relaxed drape through the leg for a modern yet versatile look. Made in Korea.",
     "materials": [
@@ -701,7 +726,9 @@
       "Cool iron with press cloth",
       "Do not tumble dry"
     ],
-    "stripePriceId": "price_1SE4IOFPNKTl6gGpIslkFRZ4"
+    "stripePriceId": "price_1SE4IOFPNKTl6gGpIslkFRZ4",
+    "productType": "pants",
+    "releaseStatus": "available"
   },
   {
     "id": "item-12",
@@ -726,7 +753,6 @@
       "images/fashion12-5.jpg",
       "images/fashion12-6.jpg",
       "images/fashion12-7.jpg"
-      
     ],
     "description": "Vintage 3D Textured Ruffle Shirt sourced in Japan and made in Korea. Designed in pleated stretch fabric that molds to the body, featuring sculptural ruffles and a timeless black finish.",
     "materials": [
@@ -738,7 +764,9 @@
       "Iron low if needed",
       "Do not tumble dry"
     ],
-    "stripePriceId": "price_1SE4IPFPNKTl6gGpeBIWMirP"
+    "stripePriceId": "price_1SE4IPFPNKTl6gGpeBIWMirP",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-13",
@@ -766,7 +794,6 @@
       "images/fashion13-4.jpg",
       "images/fashion13-5.jpg",
       "images/fashion13-6.jpg"
-      
     ],
     "description": "An elevated essential for transitional dressing, this draped knit long sleeve is designed with an attached scarf detail that falls naturally along the neckline for a soft, effortless drape. Its fluid silhouette makes it easy to layer, while the lightweight knit ensures comfort and versatility across seasons. Perfect for pairing with wide-leg trousers or layered under outerwear, this piece blends minimal design with subtle detail, offering a timeless addition to your wardrobe.",
     "materials": [
@@ -777,7 +804,9 @@
       "Do not wash or bleach",
       "Do not tumble dry"
     ],
-    "stripePriceId": "price_1SE4IQFPNKTl6gGpuBnkFKSL"
+    "stripePriceId": "price_1SE4IQFPNKTl6gGpuBnkFKSL",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-14",
@@ -806,7 +835,6 @@
       "images/fashion14-4.jpg",
       "images/fashion14-5.jpg",
       "images/fashion14-6.jpg"
-      
     ],
     "description": "The mid-rise fit and wide-leg cut create a timeless, relaxed shape that pairs seamlessly with everything from minimal tanks to tailored outerwear. Side pockets add practicality, while the lightweight construction makes them versatile for both casual and elevated styling.",
     "materials": [
@@ -818,7 +846,9 @@
       "Cool iron with press cloth if needed",
       "Do not tumble dry"
     ],
-    "stripePriceId": "price_1SE4IRFPNKTl6gGpL4TCtT8f"
+    "stripePriceId": "price_1SE4IRFPNKTl6gGpL4TCtT8f",
+    "productType": "pants",
+    "releaseStatus": "available"
   },
   {
     "id": "item-15",
@@ -846,7 +876,6 @@
       "images/fashion15-5.jpg",
       "images/fashion15-6.jpg",
       "images/fashion15-7.jpg"
-      
     ],
     "description": [
       "A sleek cropped tank available in a rich wine tone or a clean white finish. Designed with minimal lines and subtle transparency, it’s the perfect layering piece to wear under blazers, over bralettes, or styled solo for a bold look. Its structured cropped silhouette adds a modern edge to both casual and evening outfits.\n\nMade in Korea\nAvailable in Wine or White\nStructured cropped fit with subtle transparency"
@@ -860,7 +889,9 @@
       "Line dry in shade",
       "Do not bleach"
     ],
-    "stripePriceId": "price_1SE4ISFPNKTl6gGpDbJMTEiZ"
+    "stripePriceId": "price_1SE4ISFPNKTl6gGpDbJMTEiZ",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-16",
@@ -885,7 +916,6 @@
       "images/fashion16-4.jpg",
       "images/fashion16-5.jpg",
       "images/fashion16-6.jpg"
-      
     ],
     "description": [
       "A sheer layering piece with a modern twist — this mesh long sleeve features a natural crinkled texture that adds depth and movement. Lightweight yet eye-catching, it’s designed to elevate simple outfits or create bold layered looks. Perfect for styling with bralettes, slip dresses, or structured outerwear.\n\nMade in Korea\nLightweight mesh fabric with crinkled finish\nSlim, sheer silhouette with stretch"
@@ -899,7 +929,9 @@
       "Do not tumble dry or wring",
       "Wash dark colors separately"
     ],
-    "stripePriceId": "price_1SE4ITFPNKTl6gGp44nhOu0g"
+    "stripePriceId": "price_1SE4ITFPNKTl6gGp44nhOu0g",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
   {
     "id": "item-17",
@@ -924,7 +956,7 @@
       "images/fashion17-2.jpg",
       "images/fashion17-3.jpg",
       "images/fashion17-4.jpg",
-      "images/fashion17-5.jpg"  
+      "images/fashion17-5.jpg"
     ],
     "description": "A rare vintage tote sourced from Japan, crafted in genuine textured leather. This timeless piece offers both durability and understated sophistication, making it a versatile addition to everyday and evening looks. The structured silhouette is balanced with a soft leather finish, carrying subtle character from its vintage origin.",
     "materials": [
@@ -933,7 +965,9 @@
     "care": [
       "Wipe clean with a damp cloth. Store in a dust bag when not in use."
     ],
-    "stripePriceId": "price_1SE4IUFPNKTl6gGpoQMBbL9W"
+    "stripePriceId": "price_1SE4IUFPNKTl6gGpoQMBbL9W",
+    "productType": "accessories",
+    "releaseStatus": "available"
   },
   {
     "id": "item-18",
@@ -961,7 +995,6 @@
       "images/fashion18-6.jpg",
       "images/fashion18-7.jpg",
       "images/fashion18-8.jpg"
-
     ],
     "description": "A modern reimagining of the classic trench, this glossy vegan leather coat is designed to bring effortless edge to any look. Its sleek, elongated silhouette and subtle shine make it a statement outerwear piece for both day and evening styling. Structured yet flexible, it captures a refined balance of sharp tailoring and contemporary ease. Made in Korea.",
     "materials": [
@@ -974,9 +1007,11 @@
       "Do not tumble dry",
       "Cool iron if needed"
     ],
-    "stripePriceId": "price_1SEScJFPNKTl6gGpgzgmncCt"
+    "stripePriceId": "price_1SEScJFPNKTl6gGpgzgmncCt",
+    "productType": "outerwear",
+    "releaseStatus": "available"
   },
-{
+  {
     "id": "item-19",
     "title": "Mesh Cropped Tank - White",
     "price": 22,
@@ -1003,7 +1038,6 @@
       "images/fashion19-6.jpg",
       "images/fashion19-7.jpg",
       "images/fashion19-8.jpg"
-      
     ],
     "description": [
       "A sleek cropped tank available in a rich wine tone or a clean white finish. Designed with minimal lines and subtle transparency, it’s the perfect layering piece to wear under blazers, over bralettes, or styled solo for a bold look. Its structured cropped silhouette adds a modern edge to both casual and evening outfits.\n\nMade in Korea\nAvailable in Wine or White\nStructured cropped fit with subtle transparency"
@@ -1017,9 +1051,11 @@
       "Line dry in shade",
       "Do not bleach"
     ],
-    "stripePriceId": "price_1SESewFPNKTl6gGplhKM8Jax"
+    "stripePriceId": "price_1SESewFPNKTl6gGplhKM8Jax",
+    "productType": "tops",
+    "releaseStatus": "available"
   },
-{
+  {
     "id": "item-20",
     "title": "Fluid Wide-Leg Pants - Brown",
     "price": 40,
@@ -1047,7 +1083,6 @@
       "images/fashion20-5.jpg",
       "images/fashion20-6.jpg",
       "images/fashion20-7.jpg"
-      
     ],
     "description": "The mid-rise fit and wide-leg cut create a timeless, relaxed shape that pairs seamlessly with everything from minimal tanks to tailored outerwear. Side pockets add practicality, while the lightweight construction makes them versatile for both casual and elevated styling.",
     "materials": [
@@ -1059,7 +1094,9 @@
       "Cool iron with press cloth if needed",
       "Do not tumble dry"
     ],
-    "stripePriceId": "price_1SESgTFPNKTl6gGpr0Stqv8B"
+    "stripePriceId": "price_1SESgTFPNKTl6gGpr0Stqv8B",
+    "productType": "pants",
+    "releaseStatus": "available"
   },
   {
     "id": "item-21",
@@ -1101,7 +1138,9 @@
       "Cool iron with press cloth",
       "Do not tumble dry"
     ],
-    "stripePriceId": "price_1SEShTFPNKTl6gGp8xtzUhnX"
+    "stripePriceId": "price_1SEShTFPNKTl6gGp8xtzUhnX",
+    "productType": "pants",
+    "releaseStatus": "available"
   },
   {
     "id": "item-22",
@@ -1129,7 +1168,6 @@
       "images/fashion22-4.jpg",
       "images/fashion22-5.jpg",
       "images/fashion22-6.jpg"
-      
     ],
     "description": "An elevated essential for transitional dressing, this draped knit long sleeve is designed with an attached scarf detail that falls naturally along the neckline for a soft, effortless drape. Its fluid silhouette makes it easy to layer, while the lightweight knit ensures comfort and versatility across seasons. Perfect for pairing with wide-leg trousers or layered under outerwear, this piece blends minimal design with subtle detail, offering a timeless addition to your wardrobe.",
     "materials": [
@@ -1140,8 +1178,108 @@
       "Do not wash or bleach",
       "Do not tumble dry"
     ],
-    "stripePriceId": "price_1SESkdFPNKTl6gGpOq2wO1EU"
+    "stripePriceId": "price_1SESkdFPNKTl6gGpOq2wO1EU",
+    "productType": "tops",
+    "releaseStatus": "available"
+  },
+  {
+    "id": "item-cs-02",
+    "title": "Beaker Pants",
+    "price": 0,
+    "stock": 0,
+    "category": "collection",
+    "brand": "Londonflat",
+    "currency": "EUR",
+    "fitNote": "Coming soon release item.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Waist: 34 cm",
+      "Hip: 50 cm",
+      "Length: 102 cm"
+    ],
+    "cover": "images/comingsoon01.webp",
+    "images": [
+      "images/comingsoon01.webp",
+      "images/comingsoon02.webp",
+      "images/comingsoon03.webp",
+      "images/comingsoon04.webp"
+    ],
+    "description": "Relaxed beaker silhouette pants from Londonflat. Upcoming drop preview.",
+    "materials": [
+      "Cotton blend"
+    ],
+    "care": [
+      "Hand wash cold",
+      "Do not bleach",
+      "Dry flat"
+    ],
+    "productType": "pants",
+    "releaseStatus": "coming_soon"
+  },
+  {
+    "id": "item-cs-03",
+    "title": "Bijo Shirt",
+    "price": 0,
+    "stock": 0,
+    "category": "collection",
+    "brand": "Londonflat",
+    "currency": "EUR",
+    "fitNote": "Coming soon release item.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Shoulder: 48 cm",
+      "Chest: 56 cm",
+      "Length: 70 cm"
+    ],
+    "cover": "images/comingsoon05.webp",
+    "images": [
+      "images/comingsoon05.webp",
+      "images/comingsoon06.webp",
+      "images/comingsoon07.webp"
+    ],
+    "description": "Structured Londonflat shirt with clean proportions. Upcoming drop preview.",
+    "materials": [
+      "Cotton 100%"
+    ],
+    "care": [
+      "Machine wash cold",
+      "Do not bleach",
+      "Low iron"
+    ],
+    "productType": "tops",
+    "releaseStatus": "coming_soon"
+  },
+  {
+    "id": "item-cs-04",
+    "title": "Shearling Wrap Shirt",
+    "price": 0,
+    "stock": 0,
+    "category": "collection",
+    "brand": "Londonflat",
+    "currency": "EUR",
+    "fitNote": "Coming soon release item.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Shoulder: 50 cm",
+      "Chest: 58 cm",
+      "Length: 68 cm"
+    ],
+    "cover": "images/comingsoon08.webp",
+    "images": [
+      "images/comingsoon08.webp",
+      "images/comingsoon09.webp",
+      "images/comingsoon10.webp"
+    ],
+    "description": "Wrap-front shirt with shearling texture accents. Upcoming drop preview.",
+    "materials": [
+      "Polyester blend"
+    ],
+    "care": [
+      "Dry clean recommended",
+      "Do not bleach",
+      "Do not tumble dry"
+    ],
+    "productType": "tops",
+    "releaseStatus": "coming_soon"
   }
-
-
 ]

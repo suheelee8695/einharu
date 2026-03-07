@@ -39,15 +39,28 @@
 </main>
 
 
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-left">© <span id="year2"></span> einHaru Collective</div>
-      <div class="footer-right">
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="site-footer-main">
+      <a href="index.html" class="site-footer-brand" aria-label="einHaru Collective home">einHaru Collective</a>
+      <nav class="site-footer-nav" aria-label="Footer links">
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="returns.html">Returns</a>
+        <a href="privacy.html">Privacy</a>
         <a href="https://www.instagram.com/einharucollective" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:einharu@gmail.com">Email</a>
-      </div>
+      </nav>
     </div>
   </footer>
+  <section class="cookie-bar" aria-label="Cookie notice">
+    <p>
+      We use cookies to enhance your experience. By continuing to browse, you agree to our
+      <a href="privacy.html#cookies">Cookie Policy</a> and <a href="privacy.html">Privacy Policy</a>.
+    </p>
+    <div class="cookie-bar-actions">
+      <button type="button" class="cookie-btn cookie-btn--ghost">Decline</button>
+      <button type="button" class="cookie-btn">Accept</button>
+    </div>
+  </section>
 
   <script>
   // keep year current

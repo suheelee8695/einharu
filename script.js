@@ -20,6 +20,11 @@
   const fmtPrice = (n, currency = 'EUR') =>
     new Intl.NumberFormat('de-DE', { style: 'currency', currency }).format(Number(n || 0));
   const getQuery = (k) => new URLSearchParams(location.search).get(k);
+  const getProductState = (product) => {
+    if ((product?.releaseStatus || '').toLowerCase() === 'coming_soon') return 'coming_soon';
+    if (Number(product?.stock ?? 0) <= 0) return 'sold_out';
+    return 'available';
+  };
 
   async function fetchJSON(url) {
     const res = await fetch(url, { cache: CACHE_BUST });
@@ -352,68 +357,249 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
   }
 
   /*** HOMEPAGE ***/
-  function renderHomepage(products) {
-    const grid = document.querySelector('.product-grid');
-    if (!grid) return;
+  function renderHomepage(products, releaseMode = 'available') {
+    const grid = $('#product-grid');
+    const comingSoonGrid = $('#coming-soon-grid');
+    const comingSoonList = $('#coming-soon-list');
+    const isComingSoonSplitView = releaseMode === 'coming_soon' && comingSoonGrid && comingSoonList;
+    const isComingSoonListOnly = releaseMode === 'coming_soon' && !comingSoonGrid && !!comingSoonList;
+    if (isComingSoonListOnly) {
+      comingSoonList.classList.add('product-grid');
+      comingSoonList.classList.remove('product-list');
+      comingSoonList.classList.remove('product-grid--list');
+    }
+    if (!grid && !isComingSoonSplitView && !isComingSoonListOnly) return;
+    const sortSelect = $('#sort-products');
+    const viewBtns = $$('[data-view-toggle]');
+    const typeBtns = $$('[data-product-type]');
+    const VIEW_KEY = 'eh_shop_view';
+    const tabs = $$('.filter-tab');
 
-    grid.innerHTML = '';
+    let currentFilter = 'all';
+    let currentProductType = 'new-arrivals';
+    let currentSort = (sortSelect?.value || 'featured').toLowerCase();
+    const showComingSoonBadge = releaseMode === 'coming_soon';
 
-    products.forEach((prod) => {
-      const first  = (prod.images && prod.images[0]) || prod.cover || '';
-      const second = (prod.images && (prod.images[1] || prod.images[0])) || prod.cover || first;
+    const sortedProducts = (items, sortMode) => {
+      const list = [...items];
+      switch (sortMode) {
+        case 'availability':
+          return list.sort((a, b) => {
+            const aSoldOut = getProductState(a) === 'sold_out' ? 1 : 0;
+            const bSoldOut = getProductState(b) === 'sold_out' ? 1 : 0;
+            return aSoldOut - bSoldOut;
+          });
+        case 'price-asc': return list.sort((a, b) => Number(a.price || 0) - Number(b.price || 0));
+        case 'price-desc': return list.sort((a, b) => Number(b.price || 0) - Number(a.price || 0));
+        case 'name-asc': return list.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')));
+        default: return list;
+      }
+    };
 
-      const stock = Number(prod.stock ?? 0);
-      const soldOut = stock <= 0;
+    const filteredProducts = (items, filterMode, productTypeMode) => {
+      let result = items;
 
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.tabIndex = 0;
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-label', `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
-      card.dataset.category = (prod.category || 'collection').toLowerCase();
+      if (filterMode !== 'all') {
+        result = result.filter((p) => (p.category || 'collection').toLowerCase() === filterMode);
+      }
 
-      const brand = prod.brand || (card.dataset.category === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
+      if (productTypeMode && productTypeMode !== 'new-arrivals') {
+        result = result.filter((p) => {
+          const type = (p.productType || p.type || '').toLowerCase();
+          return type === productTypeMode;
+        });
+      }
 
-      card.innerHTML = `
-        <div class="card-image-wrapper">
-          <img src="${first}" alt="${prod.title}" class="card-img primary" loading="lazy">
-          <img src="${second}" alt="${prod.title}" class="card-img secondary" loading="lazy">
-          ${soldOut ? '<span class="badge-soldout">Sold out</span>' : ''}
-        </div>
-        <div class="card-info">
-          <div class="card-brand">${brand}</div>
-          <h2 class="card-title">${prod.title ?? ''}</h2>
-          <div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>
-        </div>
-      `;
+      return result;
+    };
 
-      if (!soldOut) {
+    const renderCardsToGrid = (targetGrid, list, opts = {}) => {
+      if (!targetGrid) return;
+      targetGrid.innerHTML = '';
+      const { comingSoon = false } = opts;
+
+      list.forEach((prod) => {
+        const first = (prod.images && prod.images[0]) || prod.cover || '';
+        const state = getProductState(prod);
+        const badgeHtml = state === 'coming_soon'
+          ? '<span class="badge--comingsoon">COMING SOON</span>'
+          : (state === 'sold_out' ? '<span class="badge--soldout">SOLD OUT</span>' : '');
+
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
+        card.dataset.category = (prod.category || 'collection').toLowerCase();
+
+        const brand = prod.brand || (card.dataset.category === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
+
+        card.innerHTML = `
+          <div class="card-image-wrapper">
+            <img src="${first}" alt="${prod.title}" class="card-img primary" loading="lazy">
+            ${comingSoon ? '<span class="badge--comingsoon">COMING SOON</span>' : badgeHtml}
+          </div>
+          <div class="card-info">
+            <div class="card-brand">${brand}</div>
+            <h2 class="card-title">${prod.title ?? ''}</h2>
+            <div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>
+          </div>
+        `;
+
+        // Hover-cycle through all product images (desktop pointer devices).
+        const images = Array.isArray(prod.images) ? prod.images.filter(Boolean) : [];
+        if (images.length > 1) {
+          const primaryImg = card.querySelector('.card-img.primary');
+          let idx = 0;
+          let timer = null;
+
+          // Preload all images to reduce flicker while cycling.
+          images.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+          });
+
+          const stopCycle = () => {
+            if (timer) clearInterval(timer);
+            timer = null;
+            idx = 0;
+            if (primaryImg) primaryImg.src = images[0];
+          };
+
+          card.addEventListener('mouseenter', () => {
+            if (timer) return;
+            timer = setInterval(() => {
+              idx = (idx + 1) % images.length;
+              if (primaryImg) primaryImg.src = images[idx];
+            }, 700);
+          });
+
+          card.addEventListener('mouseleave', stopCycle);
+          card.addEventListener('blur', stopCycle);
+        }
+
         const go = () => location.assign(`product.html?id=${encodeURIComponent(prod.id)}`);
         card.addEventListener('click', go);
         card.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+
+        targetGrid.appendChild(card);
+      });
+    };
+
+    const renderRowsToList = (targetList, list) => {
+      if (!targetList) return;
+      targetList.innerHTML = '';
+
+      list.forEach((prod) => {
+        const state = getProductState(prod);
+        const img = (prod.images && prod.images[0]) || prod.cover || '';
+        const badgeHtml = state === 'coming_soon'
+          ? '<span class="badge--comingsoon">COMING SOON</span>'
+          : (state === 'sold_out' ? '<span class="badge--soldout">SOLD OUT</span>' : '');
+        const brand = prod.brand || ((prod.category || '').toLowerCase() === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
+
+        const row = document.createElement('article');
+        row.className = 'product-list-item';
+        row.tabIndex = 0;
+        row.setAttribute('role', 'button');
+        row.setAttribute('aria-label', `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
+        row.innerHTML = `
+          <div class="product-list-thumb">
+            <img src="${img}" alt="${prod.title}" loading="lazy">
+            ${badgeHtml}
+          </div>
+          <div class="product-list-info">
+            <div class="card-brand">${brand}</div>
+            <h2 class="card-title">${prod.title ?? ''}</h2>
+            <div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>
+          </div>
+        `;
+
+        const go = () => location.assign(`product.html?id=${encodeURIComponent(prod.id)}`);
+        row.addEventListener('click', go);
+        row.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+        targetList.appendChild(row);
+      });
+    };
+
+    const renderCards = () => {
+      const scopedProducts = products.filter((p) => {
+        const state = getProductState(p);
+        return releaseMode === 'coming_soon' ? state === 'coming_soon' : state !== 'coming_soon';
+      });
+
+      const visible = sortedProducts(
+        filteredProducts(scopedProducts, currentFilter, currentProductType),
+        currentSort
+      );
+
+      if (isComingSoonSplitView) {
+        renderCardsToGrid(comingSoonGrid, visible, { comingSoon: showComingSoonBadge });
+        renderRowsToList(comingSoonList, visible);
+      } else if (isComingSoonListOnly) {
+        renderCardsToGrid(comingSoonList, visible, { comingSoon: showComingSoonBadge });
       } else {
-        card.setAttribute('aria-disabled', 'true');
-        card.style.cursor = 'not-allowed';
+        renderCardsToGrid(grid, visible, { comingSoon: showComingSoonBadge });
       }
+    };
 
-      grid.appendChild(card);
-    });
+    const setView = (view) => {
+      const mode = view === 'list' ? 'list' : 'grid';
+      if (!isComingSoonSplitView && grid) {
+        grid.classList.toggle('product-grid--list', mode === 'list');
+      }
+      document.body.classList.remove('view--grid', 'view--list');
+      document.body.classList.add(`view--${mode}`);
+      viewBtns.forEach((btn) => {
+        const active = btn.dataset.viewToggle === mode;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+      try { localStorage.setItem(VIEW_KEY, mode); } catch (_) {}
+    };
 
-    // Simple filter buttons
-    const tabs = $$('.filter-tab');
+    renderCards();
+
     if (tabs.length) {
       tabs.forEach((tab) => {
         tab.addEventListener('click', () => {
-          const filter = (tab.dataset.filter || 'all').toLowerCase();
-          tabs.forEach((t) => t.classList.remove('active'));
-          tab.classList.add('active');
-
-          Array.from(grid.children).forEach((card) => {
-            const show = filter === 'all' || filter === card.dataset.category;
-            card.style.display = show ? '' : 'none';
+          currentFilter = (tab.dataset.filter || 'all').toLowerCase();
+          tabs.forEach((t) => {
+            const on = t === tab;
+            t.classList.toggle('active', on);
+            t.setAttribute('aria-pressed', String(on));
           });
+          renderCards();
         });
       });
+    }
+
+    if (typeBtns.length) {
+      typeBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentProductType = (btn.dataset.productType || 'new-arrivals').toLowerCase();
+          typeBtns.forEach((t) => {
+            const on = t === btn;
+            t.classList.toggle('is-active', on);
+            t.setAttribute('aria-pressed', String(on));
+          });
+          renderCards();
+        });
+      });
+    }
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', () => {
+        currentSort = (sortSelect.value || 'featured').toLowerCase();
+        renderCards();
+      });
+    }
+
+    if (viewBtns.length) {
+      viewBtns.forEach((btn) => {
+        btn.addEventListener('click', () => setView(btn.dataset.viewToggle || 'grid'));
+      });
+      setView('grid');
     }
   }
 
@@ -442,8 +628,46 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     $('#breadcrumb-title') && ($('#breadcrumb-title').textContent = product.title || '');
     $('#back-button')?.addEventListener('click', () => history.back());
     $('#product-brand') && ($('#product-brand').textContent = product.brand || 'einHaru Collective');
+    $('#product-collection') && ($('#product-collection').textContent =
+      ((product.category || '').toLowerCase() === 'vintage' ? 'einHaru Vintage' : 'einHaru Collection'));
     $('#product-title') && ($('#product-title').textContent = product.title || '');
+    const subtitleEl = $('#product-subtitle');
+    if (subtitleEl) {
+      const subtitle = (product.subtitle || '').trim();
+      if (subtitle) {
+        subtitleEl.textContent = subtitle;
+        subtitleEl.hidden = false;
+      } else {
+        subtitleEl.hidden = true;
+      }
+    }
     $('#product-price') && ($('#product-price').textContent = fmtPrice(product.price, product.currency || 'EUR'));
+    const shippingNudge = $('#shipping-nudge');
+    if (shippingNudge) {
+      const freeShippingThreshold = 100;
+      const currentPrice = Number(product.price || 0);
+      const remaining = Math.max(0, freeShippingThreshold - currentPrice);
+      shippingNudge.classList.remove('shipping-nudge--qualified');
+      if (remaining > 0) {
+        shippingNudge.textContent = `Add ${fmtPrice(remaining, product.currency || 'EUR')} more for free EU shipping — you're nearly there.`;
+      } else {
+        shippingNudge.textContent = 'You qualify for free EU shipping.';
+        shippingNudge.classList.add('shipping-nudge--qualified');
+      }
+    }
+    const stockStateEl = $('#product-stock-state');
+    if (stockStateEl) {
+      if (getProductState(product) === 'coming_soon') {
+        stockStateEl.className = 'stock-state stock-state--coming';
+        stockStateEl.textContent = 'Coming Soon';
+      } else if (getProductState(product) === 'sold_out') {
+        stockStateEl.className = 'stock-state stock-state--soldout';
+        stockStateEl.textContent = 'Sold Out';
+      } else {
+        stockStateEl.className = 'stock-state stock-state--in';
+        stockStateEl.textContent = 'In Stock';
+      }
+    }
 
     // Measurements / Size details (always visible)
     const measEl = $('#product-measurements');
@@ -464,7 +688,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     const descEl = $('#product-description');
     if (descEl) {
       const d = product.description;
-      const text = Array.isArray(d) ? d.join('\n\n') : (d || '');
+      const text = Array.isArray(d) ? d.join(' ') : (d || '');
       descEl.textContent = text;
     }
 
@@ -488,16 +712,32 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     const buyForm   = $('#add-to-cart-form');
     const addBtn    = $('[data-add-to-cart]');
     const stock = Number(product.stock ?? 0);
-const soldOut = stock <= 0;
+const state = getProductState(product);
+const isComingSoon = state === 'coming_soon';
+const isSoldOut = state === 'sold_out';
 
-// Render the new Size UI (one-size = non-interactive; Barrel Pants S disabled / M preselected)
+// Render size UI (one-size static, known sold-out size overrides)
 renderSizeUI(product);
+
+// If product is not purchasable, render all size chips as disabled/inactive.
+if (isComingSoon || isSoldOut) {
+  const sizeChipRow = $('#size-chip-row');
+  if (sizeChipRow) {
+    $$('.size-chip', sizeChipRow).forEach((chip) => {
+      chip.setAttribute('aria-disabled', 'true');
+      chip.removeAttribute('aria-pressed');
+    });
+  }
+}
 
 
     const buyBtn = (buyForm && (buyForm.querySelector('button[type="submit"], [data-buy-now]'))) || $('#buy-button');
-    if (!product.sellOnVintedOnly && soldOut) {
-      if (addBtn) { addBtn.disabled = true; addBtn.textContent = 'Sold out'; addBtn.classList.add('btn-disabled'); }
-      if (buyBtn) { buyBtn.disabled = true; buyBtn.textContent = 'Sold out'; buyBtn.classList.add('btn-disabled'); }
+    if (!product.sellOnVintedOnly && isComingSoon) {
+      if (addBtn) { addBtn.disabled = true; addBtn.textContent = 'Available Soon'; addBtn.classList.add('btn-disabled'); }
+      if (buyBtn) { buyBtn.disabled = true; buyBtn.textContent = 'Available Soon'; buyBtn.classList.add('btn-disabled'); }
+    } else if (!product.sellOnVintedOnly && isSoldOut) {
+      if (addBtn) { addBtn.disabled = true; addBtn.textContent = 'Sold Out'; addBtn.classList.add('btn-disabled'); }
+      if (buyBtn) { buyBtn.disabled = true; buyBtn.textContent = 'Sold Out'; buyBtn.classList.add('btn-disabled'); }
     }
 function getChosenSize(product) {
   const ov = SIZE_OVERRIDES[product.id];
@@ -530,7 +770,8 @@ function getChosenSize(product) {
 
       buyForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (Number(product.stock ?? 0) <= 0) return alert('This item is sold out.');
+        if (isComingSoon) return alert('This item will be available soon.');
+        if (isSoldOut) return alert('This item is sold out.');
         const promo =
     (sessionStorage.getItem('promo_code') || document.querySelector('#promo-code')?.value || '').trim();  // ⬅
   const shipping_country = 'DE';
@@ -558,9 +799,10 @@ function getChosenSize(product) {
     // Add to bag (mini-cart)
     if (addBtn && !product.sellOnVintedOnly) {
       addBtn.addEventListener('click', () => {
+        if (isComingSoon) return alert('This item will be available soon.');
+        if (isSoldOut) return alert('This item is sold out.');
         if (!window.Cart?.add) return alert('Cart unavailable.');
         if (!product.stripePriceId) return alert('This item cannot be checked out yet (missing Stripe Price).');
-        if (Number(product.stock ?? 0) <= 0) return alert('This item is sold out.');
 
         Cart.add({
           id: product.id,
@@ -699,6 +941,27 @@ if (!isMobile) {
     textEl.textContent = 'Free shipping within EU on orders over €100.';
   }
 
+  function initStickyLayout() {
+    const chrome = $('.site-chrome');
+    if (!chrome) return;
+
+    const setChromeHeight = () => {
+      document.documentElement.style.setProperty('--chrome-height', `${chrome.offsetHeight}px`);
+    };
+    setChromeHeight();
+
+    window.addEventListener('resize', () => {
+      setChromeHeight();
+    });
+
+    $('#banner-close')?.addEventListener('click', () => {
+      requestAnimationFrame(() => {
+        setChromeHeight();
+      });
+    });
+  }
+
+
   /*** INIT ***/
   async function init() {
     const year = String(new Date().getFullYear());
@@ -707,6 +970,7 @@ if (!isMobile) {
 
     window.Cart?.init?.();
     initBanner();
+    initStickyLayout();
     wirePromoUI();
 
     let products;
@@ -732,9 +996,11 @@ if (Array.isArray(products)) {
   });
 }
 
-    const path = location.pathname;
+    const path = location.pathname.toLowerCase();
+    const isComingSoonPage = path.includes('coming-soon');
     if (path.includes('product.html')) renderProductPage(products);
-    else renderHomepage(products);
+    else if (isComingSoonPage) renderHomepage(products, 'coming_soon');
+    else renderHomepage(products, 'available');
   }
 
   document.addEventListener('DOMContentLoaded', init);
@@ -759,8 +1025,6 @@ if (Array.isArray(products)) {
       btn.setAttribute('aria-expanded', String(!open));
       panel.hidden = open;
       if (icon) icon.textContent = open ? '+' : '–';
-      // make sure opened panel is visible under sticky header
-      panel.scrollIntoView({ block: 'nearest' });
     });
 
     // keyboard support
