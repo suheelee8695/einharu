@@ -49,8 +49,17 @@
     </section>
 
     <section class="faq-container">
+      <section class="event-upcoming" aria-label="Upcoming events">
+        <p class="event-placeholder">
+          No upcoming events scheduled right now. Follow
+          <a href="https://www.instagram.com/einharucollective"
+             target="_blank" rel="noopener">@einharucollective</a>
+          on Instagram to hear about the next Berlin pop-up first.
+        </p>
+      </section>
       <div class="events-grid">
         <article class="event-card">
+          <span class="event-past-label">Past event</span>
           <div class="event-card-meta">Berlin · 14 Dec 2025 · 2:00–8:00 PM</div>
           <h2>Joined 90MIL Christmas Market</h2>
           <p>Location: 90MIL Berlin. In-person curated edit and community event.</p>
@@ -75,5 +84,32 @@
       </nav>
     </div>
   </footer>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "einHaru Collective at 90MIL Christmas Market",
+    "startDate": "2025-12-14T14:00",
+    "endDate": "2025-12-14T20:00",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "90MIL Berlin",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "einHaru Collective",
+      "url": "https://www.einharu.com"
+    },
+    "description": "In-person curated edit and community event at 90MIL Berlin Christmas Market. Browse the einHaru edit, check fit in person, and meet the collection directly.",
+    "isAccessibleForFree": true
+  }
+  </script>
 </body>
 </html>
