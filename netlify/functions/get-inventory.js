@@ -1,31 +1,36 @@
 // netlify/functions/get-inventory.js
-const { getStore } = require('@netlify/blobs');
+// Returns live stock from Stripe Product metadata for a given priceId
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-function getInventoryStoreStrict() {
-  const siteID = process.env.NETLIFY_SITE_ID;
-  const token  = process.env.NETLIFY_BLOBS_TOKEN;
-  if (!siteID || !token) {
-    throw new Error(`Missing Blobs config. Have NETLIFY_SITE_ID=${!!siteID} NETLIFY_BLOBS_TOKEN=${!!token}`);
-  }
-  return getStore({ name: 'inventory', siteID, token });
-}
-
-exports.handler = async () => {
-  let sold = {};
+exports.handler = async (event) => {
   try {
-    const store = getInventoryStoreStrict();
-    sold = (await store.get('sold.json', { type: 'json' })) || {};
-    console.log('[inventory] sold count:', Object.keys(sold).length);
-  } catch (e) {
-    console.error('[inventory] error:', e && e.message);
-  }
+    const priceId = (event.queryStringParameters || {}).priceId;
+    if (!priceId) {
+      return {
+        statusCode: 400,
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ error: 'Missing priceId' })
+      };
+    }
 
-  return {
-    statusCode: 200,
-    headers: {
-      'content-type': 'application/json; charset=utf-8',
-      'cache-control': 'no-store, must-revalidate',
-    },
-    body: JSON.stringify({ sold }),
-  };
+    const price = await stripe.prices.retrieve(priceId, { expand: ['product'] });
+    const stock = parseInt(price.product?.metadata?.stock ?? '-1', 10);
+    const productName = price.product?.name || '';
+
+    return {
+      statusCode: 200,
+      headers: {
+        'content-type': 'application/json',
+        'cache-control': 'no-store, must-revalidate'
+      },
+      body: JSON.stringify({ priceId, stock, productName })
+    };
+  } catch (e) {
+    console.error('[get-inventory] error:', e.message);
+    return {
+      statusCode: 500,
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ error: e.message })
+    };
+  }
 };
