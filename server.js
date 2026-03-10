@@ -1,6 +1,6 @@
 // server.js — einHaru (CommonJS)
+// Stock is now managed in Stripe Product metadata, not products.json
 
-// 1) deps & config
 require('dotenv').config();
 const express = require('express');
 const cors    = require('cors');
@@ -8,149 +8,147 @@ const fs      = require('fs');
 const path    = require('path');
 const stripe  = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// 2) app constants
 const app  = express();
 const PORT = process.env.PORT || 4242;
-
-// Frontend origin (Local file server / Live site)
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://127.0.0.1:5500';
+const PRODUCTS_JSON_PATH    = process.env.PRODUCTS_JSON_PATH || path.resolve(__dirname, 'products.json');
+const PROCESSED_LEDGER_PATH = process.env.PROCESSED_LEDGER_PATH || path.resolve(__dirname, 'processed_sessions.json');
+const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET || '';
 
-// Local data files
-const PRODUCTS_JSON_PATH       = process.env.PRODUCTS_JSON_PATH       || path.resolve(__dirname, 'products.json');
-const PROCESSED_LEDGER_PATH    = process.env.PROCESSED_LEDGER_PATH    || path.resolve(__dirname, 'processed_sessions.json');
-const STRIPE_WEBHOOK_SECRET    = process.env.STRIPE_WEBHOOK_SECRET || '';
-
-// NOTE: Shipping rate environment variables are no longer used.
-// We previously relied on pre‑configured Shipping Rate IDs (SHR_* vars) to
-// determine shipping costs based on country and order total. The new
-// implementation computes shipping options directly in the checkout route
-// (see `/create-checkout-session`), so these variables are intentionally
-// omitted.  Keeping unused environment reads here could lead to
-// confusion about configuration.
-//
-// If you ever need to reintroduce dynamic Shipping Rates, you can add
-// environment variables here and reference them in your route handler.
+// NEW — Email alerts via nodemailer (optional, set ALERT_EMAIL + SMTP vars in .env)
+const ALERT_EMAIL = process.env.ALERT_EMAIL || '';
 
 console.log('[einHaru] Using products:', PRODUCTS_JSON_PATH);
-console.log('[einHaru] Webhook ledger:', PROCESSED_LEDGER_PATH);
 
-// 3) middleware (order matters)
-// - CORS first
-// Allow local development origins on common ports (5500, 5501). You can
-// adjust this list or set CLIENT_ORIGIN in your .env to match your local dev server.
 app.use(cors({
-  origin: [
-    CLIENT_ORIGIN,
-    'http://localhost:5500',
-    'http://127.0.0.1:5500',
-    'http://localhost:5501',
-    'http://127.0.0.1:5501'
-  ],
+  origin: [CLIENT_ORIGIN, 'http://localhost:5500', 'http://127.0.0.1:5500',
+           'http://localhost:5501', 'http://127.0.0.1:5501'],
   methods: ['GET', 'POST'],
   credentials: true
 }));
-
-// - Serve static files from this folder (index.html, product.html, etc.)
 app.use(express.static('.'));
-
-// - JSON body for everything EXCEPT /webhook (Stripe needs raw body)
 app.use((req, res, next) => {
   if (req.originalUrl === '/webhook') return next();
   return express.json()(req, res, next);
 });
 
-// 4) helpers (json i/o + stock updates)
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+
 function readJSON(file) {
-  try {
-    return JSON.parse(fs.readFileSync(file, 'utf8'));
-  } catch (e) {
-    if (e.code === 'ENOENT') return null;
-    throw e;
-  }
+  try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
+  catch (e) { if (e.code === 'ENOENT') return null; throw e; }
 }
 function writeJSON(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 }
-function loadLedger() {
-  return readJSON(PROCESSED_LEDGER_PATH) || { processed: [] };
-}
-function isProcessed(id) {
-  return loadLedger().processed.includes(id);
-}
+function loadLedger() { return readJSON(PROCESSED_LEDGER_PATH) || { processed: [] }; }
+function isProcessed(id) { return loadLedger().processed.includes(id); }
 function markProcessed(id) {
   const l = loadLedger();
-  if (!l.processed.includes(id)) {
-    l.processed.push(id);
-    writeJSON(PROCESSED_LEDGER_PATH, l);
-  }
+  if (!l.processed.includes(id)) { l.processed.push(id); writeJSON(PROCESSED_LEDGER_PATH, l); }
 }
-function updateStockFromLineItems(items) {
-  const products = readJSON(PRODUCTS_JSON_PATH);
-  if (!Array.isArray(products)) throw new Error(`Cannot read products at ${PRODUCTS_JSON_PATH}`);
 
-  const qtyByPrice = new Map();
-  for (const li of items) {
-    const priceId = li.price?.id || li.price || li.price_id;
-    const qty = Number(li.quantity || 0);
-    if (!priceId || !qty) continue;
-    qtyByPrice.set(priceId, (qtyByPrice.get(priceId) || 0) + qty);
+// NEW — Get stock from Stripe Product metadata
+async function getStripeStock(priceId) {
+  const price = await stripe.prices.retrieve(priceId, { expand: ['product'] });
+  const stock = parseInt(price.product?.metadata?.stock ?? '-1', 10);
+  return { stock, productId: price.product?.id, productName: price.product?.name };
+}
+
+// NEW — Set stock in Stripe Product metadata
+async function setStripeStock(productId, newStock) {
+  await stripe.products.update(productId, {
+    metadata: { stock: String(Math.max(0, newStock)) }
+  });
+  console.log(`[stock] Stripe product ${productId} stock → ${newStock}`);
+}
+
+// NEW — Decrement stock in Stripe, returns false if out of stock
+async function reserveStock(priceId) {
+  const { stock, productId, productName } = await getStripeStock(priceId);
+  if (stock < 0) {
+    // -1 means no stock tracking set up for this product — allow purchase
+    console.warn(`[stock] No metadata.stock on product for price ${priceId} — skipping check`);
+    return { ok: true, productId, productName, newStock: -1 };
   }
-
-  let changed = false;
-  for (const p of products) {
-    const dec = qtyByPrice.get(p.stripePriceId);
-    if (!dec) continue;
-    const cur = Number(p.stock ?? 0);
-    const next = Math.max(0, cur - dec);
-    if (next !== cur) { p.stock = next; changed = true; }
+  if (stock <= 0) {
+    return { ok: false, productId, productName, newStock: 0 };
   }
+  const newStock = stock - 1;
+  await setStripeStock(productId, newStock);
+  return { ok: true, productId, productName, newStock };
+}
 
-  if (changed) {
-    console.log('[stock] writing new stocks...');
-    for (const p of products) console.log(`[stock] ${p.id} "${p.title}" => stock: ${p.stock}`);
+// NEW — Restore stock in Stripe (called on session expiry)
+async function restoreStock(priceId) {
+  const { stock, productId, productName } = await getStripeStock(priceId);
+  if (stock < 0) return; // no tracking
+  const newStock = stock + 1;
+  await setStripeStock(productId, newStock);
+  console.log(`[stock] Restored: ${productName} → ${newStock}`);
+}
+
+// NEW — Mirror Stripe stock back to products.json (keeps frontend in sync)
+async function syncStockToJson(priceId, newStock) {
+  try {
+    const products = readJSON(PRODUCTS_JSON_PATH);
+    if (!Array.isArray(products)) return;
+    const p = products.find(p => p.stripePriceId === priceId);
+    if (!p) return;
+    p.stock = newStock;
     writeJSON(PRODUCTS_JSON_PATH, products);
+    console.log(`[stock] Synced products.json: ${p.title} → stock: ${newStock}`);
+  } catch (e) {
+    console.error('[stock] Failed to sync products.json:', e.message);
   }
-  return changed;
 }
 
-// -----------------------------------------------------------------------------
-// NOTE: chooseRateId() has been removed
-// The old chooseRateId() helper determined which Shipping Rate ID to use
-// based on the customer's country and order subtotal. As of the current
-// implementation, we compute shipping options directly when creating a
-// Checkout Session (see `/create-checkout-session` route below). This means
-// there is no need to select pre‑created Shipping Rate IDs. Removing
-// chooseRateId() cleans up unused code and reduces cognitive overhead.
+// NEW — Optional email alert when item sells out
+async function maybeSendSoldOutAlert(productName, priceId) {
+  if (!ALERT_EMAIL) return;
+  try {
+    const nodemailer = require('nodemailer');
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT || 587),
+      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+    });
+    await transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to: ALERT_EMAIL,
+      subject: `[einHaru] Sold out: ${productName}`,
+      text: `"${productName}" (Price ID: ${priceId}) just sold its last unit.\n\nLog in to Stripe to update stock if you restock.`
+    });
+    console.log(`[alert] Sold-out email sent for ${productName}`);
+  } catch (e) {
+    console.error('[alert] Email failed:', e.message);
+  }
+}
 
-// 6) routes
+// ─── ROUTES ──────────────────────────────────────────────────────────────────
 
-// Health check (optional)
 app.get('/health', (_req, res) => res.json({ ok: true, ts: Date.now() }));
 
-// Create Checkout Session (flat €5 shipping; free over €100)
+// NEW — Expose current stock from Stripe for the frontend
+app.get('/stock/:priceId', async (req, res) => {
+  try {
+    const { stock, productName } = await getStripeStock(req.params.priceId);
+    res.json({ priceId: req.params.priceId, stock, productName });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// CHANGED — Now checks and reserves Stripe stock before creating session
 app.post('/create-checkout-session', async (req, res) => {
   try {
-    const {
-      title,
-      price,
-      email,
-      customer_email,
-      items
-    } = req.body || {};
+    const { title, price, email, customer_email, items } = req.body || {};
 
-    console.log('[create-checkout-session] incoming:', {
-      itemsCount: Array.isArray(items) ? items.length : 0,
-      title,
-      price
-    });
-
-    // 1) Build line_items and compute subtotal (in cents) on the server
     let line_items = [];
-    let subtotal = 0; // in cents
+    let subtotal = 0;
+    const reservations = []; // track what we reserved so we can restore on error
 
     if (Array.isArray(items) && items.length) {
-      // Cart flow: items with { price: 'price_...', quantity }
-      // Normalize and validate
       const normalized = items.map(i => ({
         price: i.price || i.stripePriceId,
         quantity: Math.max(1, Math.min(9, Number(i.quantity ?? i.qty ?? 1)))
@@ -158,21 +156,36 @@ app.post('/create-checkout-session', async (req, res) => {
       if (normalized.some(n => !n.price)) {
         return res.status(400).json({ error: 'Missing Stripe Price ID in items.' });
       }
-      // Fetch each unique price once to determine unit_amount
+
+      // CHANGED — Check and reserve stock in Stripe BEFORE creating session
+      for (const item of normalized) {
+        for (let i = 0; i < item.quantity; i++) {
+          const result = await reserveStock(item.price);
+          if (!result.ok) {
+            // Restore anything already reserved in this loop
+            for (const r of reservations) await restoreStock(r);
+            return res.status(400).json({
+              error: `"${result.productName}" is sold out.`,
+              soldOut: true,
+              priceId: item.price
+            });
+          }
+          reservations.push(item.price);
+        }
+      }
+
+      // Fetch prices for subtotal
       const uniquePrices = [...new Set(normalized.map(n => n.price))];
       const priceMap = new Map();
       for (const pid of uniquePrices) {
         const p = await stripe.prices.retrieve(pid);
-        if (!p || typeof p.unit_amount !== 'number') {
-          return res.status(400).json({ error: `Invalid Stripe Price: ${pid}` });
-        }
         priceMap.set(pid, p.unit_amount);
       }
-      // Compute subtotal and prepare line_items (Stripe expects { price, quantity })
       subtotal = normalized.reduce((sum, n) => sum + priceMap.get(n.price) * n.quantity, 0);
       line_items = normalized;
+
     } else {
-      // Single product “Buy Now” fallback: create ad-hoc price_data
+      // Single product Buy Now fallback
       if (!title || typeof price !== 'number') {
         return res.status(400).json({ error: 'Invalid payload for single-item checkout' });
       }
@@ -188,7 +201,6 @@ app.post('/create-checkout-session', async (req, res) => {
       }];
     }
 
-    // 2) Decide on shipping options: €5 standard; free if subtotal ≥ €100
     const showFree = subtotal >= 10000;
     const shipping_options = [
       {
@@ -217,7 +229,11 @@ app.post('/create-checkout-session', async (req, res) => {
       });
     }
 
-    // 3) Create the checkout session
+    // CHANGED — Add metadata so webhook can restore stock if session expires
+    const priceIds = (Array.isArray(items) && items.length)
+      ? items.map(i => i.price || i.stripePriceId).filter(Boolean).join(',')
+      : '';
+
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],
@@ -227,26 +243,30 @@ app.post('/create-checkout-session', async (req, res) => {
       phone_number_collection: { enabled: true },
       shipping_address_collection: {
         allowed_countries: [
-          'DE','FR','NL','BE','LU','AT','IT','ES','PT','IE','FI','SE','DK','PL','CZ','HU','SK','SI','HR','RO','BG','EE','LV','LT','MT','CY'
+          'DE','FR','NL','BE','LU','AT','IT','ES','PT','IE','FI','SE','DK',
+          'PL','CZ','HU','SK','SI','HR','RO','BG','EE','LV','LT','MT','CY'
         ]
       },
       shipping_options,
+      // NEW — session expires in 30 minutes so stock isn't held indefinitely
+      expires_at: Math.floor(Date.now() / 1000) + (30 * 60),
+      // NEW — store price IDs in metadata so expired webhook can restore stock
+      metadata: { reserved_price_ids: priceIds },
       success_url: `${CLIENT_ORIGIN}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${CLIENT_ORIGIN}/cancel.html`
     });
 
-    res.json({ url: session.url, id: session.id, _debug: { subtotal, showFree } });
+    res.json({ url: session.url, id: session.id });
   } catch (e) {
     console.error('Create session error:', e);
     res.status(500).json({ error: e.message || 'Failed to create session' });
   }
 });
 
-// Retrieve a Checkout Session summary
+// Retrieve session summary (unchanged)
 app.get('/checkout-session/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const session = await stripe.checkout.sessions.retrieve(id, {
+    const session = await stripe.checkout.sessions.retrieve(req.params.id, {
       expand: ['line_items.data.price.product']
     });
     res.json({
@@ -265,52 +285,61 @@ app.get('/checkout-session/:id', async (req, res) => {
       }))
     });
   } catch (e) {
-    console.error('GET /checkout-session/:id error:', e);
     res.status(500).json({ error: 'Failed to retrieve checkout session' });
   }
 });
 
-// Stripe webhook (raw body required)
+// CHANGED — Webhook now handles session expiry (stock restore) in addition to completion
 app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
   let event;
   try {
-    const sig = req.headers['stripe-signature'];
-    event = stripe.webhooks.constructEvent(req.body, sig, STRIPE_WEBHOOK_SECRET);
+    event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], STRIPE_WEBHOOK_SECRET);
   } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
+    console.error('Webhook signature failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
   try {
     switch (event.type) {
+
+      // CHANGED — On completed payment: sync stock to products.json + send alerts
       case 'checkout.session.completed': {
         const session = event.data.object;
-        const sessionId = session.id;
-        if (isProcessed(sessionId)) { console.log('[webhook] already processed:', sessionId); break; }
+        if (isProcessed(session.id)) { console.log('[webhook] already processed:', session.id); break; }
 
-        let lineItems = [];
-        try {
-          const resp = await stripe.checkout.sessions.listLineItems(sessionId, { expand: ['data.price'], limit: 100 });
-          lineItems = resp.data || [];
-          console.log('[webhook] line items:', lineItems.map(li => ({
-            price: li.price?.id || li.price,
-            qty: li.quantity
-          })));
-        } catch (e) {
-          console.error('[webhook] listLineItems failed:', e);
-          throw e;
+        const resp = await stripe.checkout.sessions.listLineItems(session.id, {
+          expand: ['data.price.product'], limit: 100
+        });
+        const lineItems = resp.data || [];
+
+        for (const li of lineItems) {
+          const priceId = li.price?.id;
+          if (!priceId) continue;
+          const { stock, productName } = await getStripeStock(priceId);
+          // Sync to products.json
+          await syncStockToJson(priceId, stock);
+          // Alert if sold out
+          if (stock === 0) await maybeSendSoldOutAlert(productName, priceId);
         }
 
-        try {
-          const changed = updateStockFromLineItems(lineItems);
-          console.log(changed ? '[webhook] stock updated for session:' : '[webhook] no matching products for session:', sessionId);
-          markProcessed(sessionId);
-        } catch (e) {
-          console.error('[webhook] stock update failed:', e);
-          throw e;
+        markProcessed(session.id);
+        console.log('[webhook] Processed completed session:', session.id);
+        break;
+      }
+
+      // NEW — On session expired: restore reserved stock back to Stripe
+      case 'checkout.session.expired': {
+        const session = event.data.object;
+        const reservedIds = (session.metadata?.reserved_price_ids || '').split(',').filter(Boolean);
+        console.log('[webhook] Session expired, restoring stock for:', reservedIds);
+        for (const priceId of reservedIds) {
+          await restoreStock(priceId);
+          const { stock } = await getStripeStock(priceId);
+          await syncStockToJson(priceId, stock);
         }
         break;
       }
+
       default: break;
     }
     res.json({ received: true });
@@ -320,13 +349,9 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
   }
 });
 
-// Pretty product URL support for non-Netlify runtimes (local/Express).
-// Keeps clean URLs working:
-//   /:slug            -> /product.html?slug=:slug (served as product.html)
-//   /de/:slug         -> /de/product.html?slug=:slug
-// Also preserves legacy /products/:slug links via redirect.
+// Product slug routing (unchanged)
 const RESERVED_SLUGS = new Set([
-  'health', 'create-checkout-session', 'checkout-session', 'webhook',
+  'health', 'create-checkout-session', 'checkout-session', 'webhook', 'stock',
   'netlify', 'images', 'events', 'de',
   'index', 'index.html', 'about', 'about.html', 'faq', 'faq.html',
   'returns', 'returns.html', 'privacy', 'privacy.html', 'editorial', 'editorial.html',
@@ -334,33 +359,24 @@ const RESERVED_SLUGS = new Set([
   'product', 'product.html', 'korean-fashion-berlin', 'korean-fashion-berlin.html',
   'minimalist-fashion-berlin', 'minimalist-fashion-berlin.html',
   'seoul-berlin-minimalist-style-guide', 'seoul-berlin-minimalist-style-guide.html',
+  'buy-korean-fashion-europe', 'buy-korean-fashion-europe.html',
   'robots.txt', 'sitemap.xml', 'site.webmanifest', 'favicon.ico'
 ]);
 const isLikelyProductSlug = (slug) => {
   const s = String(slug || '').toLowerCase().trim();
-  if (!s) return false;
-  if (s.includes('.') || s.includes('/')) return false;
+  if (!s || s.includes('.') || s.includes('/')) return false;
   return !RESERVED_SLUGS.has(s);
 };
 
-app.get('/products/:slug', (req, res) => {
-  res.redirect(301, `/${encodeURIComponent(req.params.slug)}`);
-});
-app.get('/de/products/:slug', (req, res) => {
-  res.redirect(301, `/de/${encodeURIComponent(req.params.slug)}`);
-});
-
+app.get('/products/:slug', (req, res) => res.redirect(301, `/${encodeURIComponent(req.params.slug)}`));
+app.get('/de/products/:slug', (req, res) => res.redirect(301, `/de/${encodeURIComponent(req.params.slug)}`));
 app.get('/de/:slug', (req, res, next) => {
   if (!isLikelyProductSlug(req.params.slug)) return next();
   return res.sendFile(path.resolve(__dirname, 'de', 'product.html'));
 });
-
 app.get('/:slug', (req, res, next) => {
   if (!isLikelyProductSlug(req.params.slug)) return next();
   return res.sendFile(path.resolve(__dirname, 'product.html'));
 });
 
-// 7) start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
