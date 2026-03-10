@@ -71,6 +71,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.einharu.com/buy-korean-fashion-europe</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url><loc>https://www.einharu.com/events/</loc><lastmod>2026-03-07</lastmod></url>
   <url><loc>https://www.einharu.com/events/2025-12-14-berlin-90mil-christmas-market.html</loc><lastmod>2026-03-07</lastmod></url>
 
@@ -108,6 +113,11 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/koreanische-mode-berlin.html"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/korean-fashion-berlin.html"/>
     <lastmod>2026-03-07</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/de/koreanische-mode-berlin</loc>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
