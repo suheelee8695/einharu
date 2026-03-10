@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>einHaru — Inventory</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0e0e0e;
+      --white: #f7f6f4;
+      --grey-1: #1c1c1c;
+      --grey-2: #2e2e2e;
+      --grey-3: #535353;
+      --grey-4: #9a9a9a;
+      --grey-5: #d4d2cf;
+      --grey-6: #eceae7;
+      --accent: #c8a97e;
+      --red: #c0392b;
+      --green: #2d6a4f;
+      --yellow: #b5870a;
+      --mono: 'DM Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+    }
+
+    html { font-size: 14px; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--mono);
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── LOGIN SCREEN ── */
+    #login-screen {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--black);
+      z-index: 100;
+    }
+    #login-screen.hidden { display: none; }
+
+    .login-box {
+      width: 360px;
+      border: 1px solid var(--grey-2);
+      padding: 48px 40px;
+      position: relative;
+    }
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 40px; right: 40px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .login-wordmark {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      text-transform: lowercase;
+      margin-bottom: 8px;
+    }
+    .login-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-4);
+      margin-bottom: 40px;
+    }
+
+    .login-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .login-field label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-4);
+    }
+    .login-field input {
+      background: var(--grey-1);
+      border: 1px solid var(--grey-2);
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .login-field input:focus { border-color: var(--accent); }
+
+    .login-error {
+      font-size: 0.7rem;
+      color: var(--red);
+      letter-spacing: 0.05em;
+      min-height: 18px;
+      margin-bottom: 12px;
+    }
+
+    .btn-login {
+      width: 100%;
+      background: var(--accent);
+      color: var(--black);
+      border: none;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 13px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-login:hover { opacity: 0.85; }
+
+    /* ── MAIN APP ── */
+    #app { display: none; min-height: 100vh; }
+    #app.visible { display: block; }
+
+    /* ── HEADER ── */
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      border-bottom: 1px solid var(--grey-2);
+      position: sticky;
+      top: 0;
+      background: var(--black);
+      z-index: 10;
+    }
+    .header-left {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+    }
+    .header-wordmark {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--white);
+    }
+    .header-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .header-status {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--grey-4);
+    }
+    .status-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--grey-3);
+      margin-right: 6px;
+      vertical-align: middle;
+      transition: background 0.3s;
+    }
+    .status-dot.live { background: var(--green); }
+    .status-dot.error { background: var(--red); }
+
+    .btn-logout {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey-4);
+      background: none;
+      border: 1px solid var(--grey-2);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-logout:hover { color: var(--white); border-color: var(--grey-3); }
+
+    /* ── SUMMARY BAR ── */
+    .summary-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--grey-2);
+    }
+    .summary-stat {
+      padding: 28px 40px;
+      border-right: 1px solid var(--grey-2);
+    }
+    .summary-stat:last-child { border-right: none; }
+    .summary-stat-value {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .summary-stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-4);
+    }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--grey-2);
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .toolbar-left { display: flex; gap: 8px; align-items: center; }
+    .toolbar-right { display: flex; gap: 8px; align-items: center; }
+
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid var(--grey-2);
+      color: var(--grey-4);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { color: var(--white); border-color: var(--grey-3); }
+    .filter-btn.active { color: var(--black); background: var(--white); border-color: var(--white); }
+
+    .search-input {
+      background: var(--grey-1);
+      border: 1px solid var(--grey-2);
+      color: var(--white);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      padding: 7px 14px;
+      outline: none;
+      width: 220px;
+      transition: border-color 0.2s;
+    }
+    .search-input::placeholder { color: var(--grey-3); }
+    .search-input:focus { border-color: var(--accent); }
+
+    .btn-refresh {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid var(--grey-2);
+      color: var(--grey-4);
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-refresh:hover { color: var(--white); border-color: var(--grey-3); }
+    .btn-refresh.spinning .refresh-icon { animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── PRODUCT TABLE ── */
+    .inventory-table {
+      width: 100%;
+    }
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 56px 1fr 120px 100px 140px 160px;
+      padding: 12px 40px;
+      border-bottom: 1px solid var(--grey-2);
+      gap: 16px;
+      align-items: center;
+    }
+    .table-header-cell {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--grey-4);
+    }
+
+    .product-row {
+      display: grid;
+      grid-template-columns: 56px 1fr 120px 100px 140px 160px;
+      padding: 0 40px;
+      gap: 16px;
+      align-items: center;
+      border-bottom: 1px solid var(--grey-1);
+      min-height: 72px;
+      transition: background 0.15s;
+    }
+    .product-row:hover { background: var(--grey-1); }
+    .product-row.is-loading { opacity: 0.5; pointer-events: none; }
+
+    /* Thumbnail */
+    .product-thumb {
+      width: 44px;
+      height: 56px;
+      object-fit: cover;
+      filter: grayscale(20%);
+      display: block;
+      background: var(--grey-2);
+    }
+    .product-thumb-placeholder {
+      width: 44px; height: 56px;
+      background: var(--grey-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--grey-3);
+      font-size: 0.6rem;
+    }
+
+    /* Title / brand */
+    .product-info { min-width: 0; }
+    .product-title {
+      font-size: 0.82rem;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 3px;
+      letter-spacing: 0.02em;
+    }
+    .product-brand {
+      font-size: 0.65rem;
+      color: var(--grey-4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .product-type {
+      font-size: 0.6rem;
+      color: var(--grey-3);
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+
+    /* Price */
+    .product-price {
+      font-size: 0.82rem;
+      color: var(--grey-4);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid;
+    }
+    .status-badge.in-stock {
+      color: var(--green);
+      border-color: rgba(45, 106, 79, 0.4);
+      background: rgba(45, 106, 79, 0.08);
+    }
+    .status-badge.low-stock {
+      color: var(--yellow);
+      border-color: rgba(181, 135, 10, 0.4);
+      background: rgba(181, 135, 10, 0.08);
+    }
+    .status-badge.sold-out {
+      color: var(--red);
+      border-color: rgba(192, 57, 43, 0.3);
+      background: rgba(192, 57, 43, 0.06);
+    }
+    .status-badge.coming-soon {
+      color: var(--accent);
+      border-color: rgba(200, 169, 126, 0.4);
+      background: rgba(200, 169, 126, 0.08);
+    }
+    .status-dot-sm {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* Stock control */
+    .stock-control {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .stock-btn {
+      width: 30px; height: 30px;
+      background: var(--grey-2);
+      border: 1px solid var(--grey-2);
+      color: var(--white);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+      font-family: var(--mono);
+      flex-shrink: 0;
+    }
+    .stock-btn:hover:not(:disabled) { background: var(--grey-3); }
+    .stock-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .stock-count {
+      width: 48px;
+      text-align: center;
+      font-size: 0.95rem;
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--white);
+      background: var(--grey-1);
+      border-top: 1px solid var(--grey-2);
+      border-bottom: 1px solid var(--grey-2);
+      border-left: none;
+      border-right: none;
+      padding: 5px 0;
+      outline: none;
+    }
+    .stock-count:focus {
+      background: var(--grey-2);
+      color: var(--accent);
+    }
+    /* Remove number input arrows */
+    .stock-count::-webkit-outer-spin-button,
+    .stock-count::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .stock-count[type=number] { -moz-appearance: textfield; }
+
+    .stock-save {
+      margin-left: 8px;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--black);
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+    .stock-save.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .stock-save:hover { opacity: 0.8; }
+
+    /* ── LOADING STATE ── */
+    .loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+      gap: 16px;
+    }
+    .loading-bar {
+      width: 200px;
+      height: 1px;
+      background: var(--grey-2);
+      position: relative;
+      overflow: hidden;
+    }
+    .loading-bar::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--accent);
+      animation: load 1.2s ease infinite;
+    }
+    @keyframes load {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    .loading-text {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-4);
+    }
+
+    /* ── TOAST NOTIFICATIONS ── */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .toast {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      padding: 12px 18px;
+      border-left: 2px solid var(--accent);
+      background: var(--grey-1);
+      color: var(--white);
+      min-width: 260px;
+      animation: slideIn 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .toast.error { border-left-color: var(--red); }
+    .toast.success { border-left-color: var(--green); }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      padding: 60px 40px;
+      text-align: center;
+      color: var(--grey-3);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── LAST UPDATED ── */
+    .last-updated {
+      padding: 16px 40px;
+      font-size: 0.6rem;
+      color: var(--grey-3);
+      letter-spacing: 0.1em;
+      border-top: 1px solid var(--grey-2);
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--grey-2); }
+
+    @media (max-width: 900px) {
+      .summary-bar { grid-template-columns: repeat(2, 1fr); }
+      .table-header,
+      .product-row {
+        grid-template-columns: 44px 1fr 80px 140px;
+      }
+      .col-price, .col-type { display: none; }
+      .admin-header { padding: 16px 20px; }
+      .summary-stat { padding: 20px; }
+      .toolbar { padding: 12px 20px; }
+      .table-header { padding: 10px 20px; }
+      .product-row { padding: 0 20px; }
+      .last-updated { padding: 12px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-wordmark">einHaru</div>
+    <div class="login-sub">Inventory Management</div>
+    <div class="login-field">
+      <label for="login-pass">Password</label>
+      <input type="password" id="login-pass" placeholder="Enter admin password" autocomplete="current-password" />
+    </div>
+    <div class="login-error" id="login-error"></div>
+    <button class="btn-login" id="login-btn">Enter</button>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="app">
+
+  <header class="admin-header">
+    <div class="header-left">
+      <span class="header-wordmark">einHaru</span>
+      <span class="header-label">Inventory</span>
+    </div>
+    <div class="header-right">
+      <span class="header-status">
+        <span class="status-dot" id="connection-dot"></span>
+        <span id="connection-label">Connecting…</span>
+      </span>
+      <button class="btn-logout" id="logout-btn">Sign out</button>
+    </div>
+  </header>
+
+  <div class="summary-bar" id="summary-bar">
+    <div class="summary-stat">
+      <div class="summary-stat-value" id="stat-total">—</div>
+      <div class="summary-stat-label">Total products</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-stat-value" id="stat-instock">—</div>
+      <div class="summary-stat-label">In stock</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-stat-value" id="stat-soldout">—</div>
+      <div class="summary-stat-label">Sold out</div>
+    </div>
+    <div class="summary-stat">
+      <div class="summary-stat-value" id="stat-coming">—</div>
+      <div class="summary-stat-label">Coming soon</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="in-stock">In Stock</button>
+      <button class="filter-btn" data-filter="sold-out">Sold Out</button>
+      <button class="filter-btn" data-filter="coming-soon">Coming Soon</button>
+    </div>
+    <div class="toolbar-right">
+      <input type="search" class="search-input" id="search-input" placeholder="Search products…" />
+      <button class="btn-refresh" id="refresh-btn">
+        <span class="refresh-icon">↻</span>
+        <span>Refresh</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="table-header">
+    <div class="table-header-cell"></div>
+    <div class="table-header-cell">Product</div>
+    <div class="table-header-cell col-price">Price</div>
+    <div class="table-header-cell col-type">Status</div>
+    <div class="table-header-cell">Availability</div>
+    <div class="table-header-cell">Stock</div>
+  </div>
+
+  <div id="inventory-body">
+    <div class="loading-state">
+      <div class="loading-bar"></div>
+      <div class="loading-text">Loading inventory…</div>
+    </div>
+  </div>
+
+  <div class="last-updated" id="last-updated"></div>
+</div>
+
+<div id="toast-container"></div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────────────────
+  // Set your admin password here (or pull from a server endpoint)
+  const ADMIN_PASSWORD = 'einharu2024admin';
+
+  // Netlify function base path (works locally and in production)
+  const FUNCTIONS = '/.netlify/functions';
+
+  // Session key
+  const SESSION_KEY = 'eh_admin_auth';
+
+  // ── STATE ────────────────────────────────────────────────────────────────────
+  let allProducts = [];
+  let currentFilter = 'all';
+  let searchTerm = '';
+  let pendingChanges = new Map(); // priceId → newStock
+
+  // ── AUTH ─────────────────────────────────────────────────────────────────────
+  function isAuthed() { return sessionStorage.getItem(SESSION_KEY) === '1'; }
+  function setAuthed() { sessionStorage.setItem(SESSION_KEY, '1'); }
+  function clearAuth() { sessionStorage.removeItem(SESSION_KEY); }
+
+  document.getElementById('login-btn').addEventListener('click', attemptLogin);
+  document.getElementById('login-pass').addEventListener('keydown', e => {
+    if (e.key === 'Enter') attemptLogin();
+  });
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    clearAuth();
+    location.reload();
+  });
+
+  function attemptLogin() {
+    const pass = document.getElementById('login-pass').value;
+    const err  = document.getElementById('login-error');
+    if (pass === ADMIN_PASSWORD) {
+      setAuthed();
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('app').classList.add('visible');
+      loadInventory();
+    } else {
+      err.textContent = 'Incorrect password.';
+      document.getElementById('login-pass').value = '';
+      document.getElementById('login-pass').focus();
+    }
+  }
+
+  // ── INIT ─────────────────────────────────────────────────────────────────────
+  if (isAuthed()) {
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+    loadInventory();
+  }
+
+  // ── LOAD INVENTORY ───────────────────────────────────────────────────────────
+  async function loadInventory(silent = false) {
+    if (!silent) setConnectionStatus('loading');
+
+    try {
+      // Load products.json for display data
+      const res = await fetch('/products.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('Could not load products.json');
+      const products = await res.json();
+
+      // For each product with a stripePriceId, fetch live stock from Stripe via server
+      const enriched = await Promise.all(
+        products.map(async (p) => {
+          if (!p.stripePriceId) return { ...p, liveStock: p.stock ?? 0, stripeError: false };
+          try {
+            const r = await fetch(`${FUNCTIONS}/get-inventory?priceId=${p.stripePriceId}`, { cache: 'no-store' });
+            if (!r.ok) throw new Error('Stock fetch failed');
+            const data = await r.json();
+            return { ...p, liveStock: data.stock ?? p.stock ?? 0, stripeError: false };
+          } catch {
+            return { ...p, liveStock: p.stock ?? 0, stripeError: true };
+          }
+        })
+      );
+
+      allProducts = enriched;
+      updateSummary();
+      renderTable();
+      setConnectionStatus('live');
+
+      const now = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      document.getElementById('last-updated').textContent = `Last synced: ${now}`;
+
+    } catch (e) {
+      setConnectionStatus('error');
+      showToast('Failed to load inventory: ' + e.message, 'error');
+    }
+  }
+
+  // ── CONNECTION STATUS ─────────────────────────────────────────────────────────
+  function setConnectionStatus(state) {
+    const dot   = document.getElementById('connection-dot');
+    const label = document.getElementById('connection-label');
+    dot.className = 'status-dot';
+    if (state === 'live')    { dot.classList.add('live');  label.textContent = 'Live'; }
+    else if (state === 'error') { dot.classList.add('error'); label.textContent = 'Error'; }
+    else                        { label.textContent = 'Loading…'; }
+  }
+
+  // ── SUMMARY ───────────────────────────────────────────────────────────────────
+  function updateSummary() {
+    const available = allProducts.filter(p => p.releaseStatus !== 'coming_soon');
+    const inStock   = available.filter(p => (p.liveStock ?? 0) > 0);
+    const soldOut   = available.filter(p => (p.liveStock ?? 0) <= 0);
+    const coming    = allProducts.filter(p => p.releaseStatus === 'coming_soon');
+
+    document.getElementById('stat-total').textContent   = allProducts.length;
+    document.getElementById('stat-instock').textContent = inStock.length;
+    document.getElementById('stat-soldout').textContent = soldOut.length;
+    document.getElementById('stat-coming').textContent  = coming.length;
+  }
+
+  // ── FILTER + SEARCH ───────────────────────────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderTable();
+    });
+  });
+
+  document.getElementById('search-input').addEventListener('input', e => {
+    searchTerm = e.target.value.toLowerCase().trim();
+    renderTable();
+  });
+
+  document.getElementById('refresh-btn').addEventListener('click', () => {
+    const btn = document.getElementById('refresh-btn');
+    btn.classList.add('spinning');
+    loadInventory(true).finally(() => btn.classList.remove('spinning'));
+  });
+
+  function getFilteredProducts() {
+    return allProducts.filter(p => {
+      // Search
+      if (searchTerm) {
+        const haystack = `${p.title} ${p.brand} ${p.productType}`.toLowerCase();
+        if (!haystack.includes(searchTerm)) return false;
+      }
+      // Filter
+      const isComingSoon = p.releaseStatus === 'coming_soon';
+      const stock = p.liveStock ?? 0;
+      if (currentFilter === 'in-stock')   return !isComingSoon && stock > 0;
+      if (currentFilter === 'sold-out')   return !isComingSoon && stock <= 0;
+      if (currentFilter === 'coming-soon') return isComingSoon;
+      return true;
+    });
+  }
+
+  // ── RENDER TABLE ──────────────────────────────────────────────────────────────
+  function renderTable() {
+    const body = document.getElementById('inventory-body');
+    const filtered = getFilteredProducts();
+
+    if (!filtered.length) {
+      body.innerHTML = `<div class="empty-state">No products match this filter.</div>`;
+      return;
+    }
+
+    body.innerHTML = filtered.map(p => buildRow(p)).join('');
+
+    // Wire up controls after render
+    filtered.forEach(p => {
+      if (p.releaseStatus === 'coming_soon') return;
+      wireRowControls(p);
+    });
+  }
+
+  function getStatusBadge(p) {
+    if (p.releaseStatus === 'coming_soon') {
+      return `<span class="status-badge coming-soon"><span class="status-dot-sm"></span>Coming Soon</span>`;
+    }
+    const stock = p.liveStock ?? 0;
+    if (stock <= 0) return `<span class="status-badge sold-out"><span class="status-dot-sm"></span>Sold Out</span>`;
+    if (stock === 1) return `<span class="status-badge low-stock"><span class="status-dot-sm"></span>Low Stock</span>`;
+    return `<span class="status-badge in-stock"><span class="status-dot-sm"></span>In Stock</span>`;
+  }
+
+  function buildRow(p) {
+    const thumb = p.cover || (p.images && p.images[0]) || '';
+    const thumbHtml = thumb
+      ? `<img class="product-thumb" src="${thumb}" alt="${p.title}" loading="lazy" />`
+      : `<div class="product-thumb-placeholder">—</div>`;
+
+    const price = p.price ? `€${Number(p.price).toFixed(2).replace('.', ',')}` : '—';
+    const isComingSoon = p.releaseStatus === 'coming_soon';
+    const stock = p.liveStock ?? 0;
+
+    const stockControl = isComingSoon
+      ? `<span style="color:var(--grey-3);font-size:0.7rem;letter-spacing:0.1em">Upcoming</span>`
+      : `
+        <div class="stock-control">
+          <button class="stock-btn" data-action="dec" data-id="${p.id}" ${stock <= 0 ? 'disabled' : ''}>−</button>
+          <input
+            class="stock-count"
+            type="number"
+            min="0"
+            max="999"
+            value="${stock}"
+            data-id="${p.id}"
+            data-original="${stock}"
+          />
+          <button class="stock-btn" data-action="inc" data-id="${p.id}">+</button>
+          <button class="stock-save" data-id="${p.id}">Save</button>
+        </div>
+      `;
+
+    return `
+      <div class="product-row" id="row-${p.id}" data-id="${p.id}">
+        <div>${thumbHtml}</div>
+        <div class="product-info">
+          <div class="product-title" title="${p.title}">${p.title}</div>
+          <div class="product-brand">${p.brand || '—'}</div>
+          <div class="product-type">${p.productType || ''}</div>
+        </div>
+        <div class="product-price col-price">${price}</div>
+        <div class="col-type">${getStatusBadge(p)}</div>
+        <div>${getStatusBadge(p)}</div>
+        <div>${stockControl}</div>
+      </div>
+    `;
+  }
+
+  function wireRowControls(p) {
+    const row = document.getElementById(`row-${p.id}`);
+    if (!row) return;
+
+    const decBtn   = row.querySelector('[data-action="dec"]');
+    const incBtn   = row.querySelector('[data-action="inc"]');
+    const input    = row.querySelector('.stock-count');
+    const saveBtn  = row.querySelector('.stock-save');
+    if (!decBtn || !incBtn || !input || !saveBtn) return;
+
+    const markDirty = () => {
+      const val = parseInt(input.value, 10);
+      const original = parseInt(input.dataset.original, 10);
+      if (!isNaN(val) && val !== original) {
+        saveBtn.classList.add('visible');
+        pendingChanges.set(p.id, { priceId: p.stripePriceId, stock: val });
+      } else {
+        saveBtn.classList.remove('visible');
+        pendingChanges.delete(p.id);
+      }
+      decBtn.disabled = parseInt(input.value, 10) <= 0;
+    };
+
+    decBtn.addEventListener('click', () => {
+      const cur = parseInt(input.value, 10) || 0;
+      if (cur > 0) { input.value = cur - 1; markDirty(); }
+    });
+
+    incBtn.addEventListener('click', () => {
+      const cur = parseInt(input.value, 10) || 0;
+      input.value = cur + 1;
+      markDirty();
+    });
+
+    input.addEventListener('input', markDirty);
+
+    saveBtn.addEventListener('click', async () => {
+      const newStock = parseInt(input.value, 10);
+      if (isNaN(newStock) || newStock < 0) return;
+
+      row.classList.add('is-loading');
+      saveBtn.textContent = '…';
+
+      try {
+        const res = await fetch(`${FUNCTIONS}/admin-update-stock`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            priceId: p.stripePriceId,
+            stock: newStock,
+            adminKey: ADMIN_PASSWORD
+          })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Failed to update stock');
+        }
+
+        // Update local state
+        const product = allProducts.find(x => x.id === p.id);
+        if (product) product.liveStock = newStock;
+
+        input.dataset.original = newStock;
+        saveBtn.classList.remove('visible');
+        saveBtn.textContent = 'Save';
+        pendingChanges.delete(p.id);
+
+        updateSummary();
+        showToast(`✓ ${p.title} → stock: ${newStock}`, 'success');
+
+        // Re-render status badge
+        const statusCells = row.querySelectorAll('.status-badge');
+        statusCells.forEach(cell => {
+          const mockProduct = { ...p, liveStock: newStock };
+          cell.outerHTML = getStatusBadge(mockProduct);
+        });
+        decBtn.disabled = newStock <= 0;
+
+      } catch (e) {
+        showToast(e.message, 'error');
+        saveBtn.textContent = 'Save';
+      } finally {
+        row.classList.remove('is-loading');
+      }
+    });
+  }
+
+  // ── TOAST ────────────────────────────────────────────────────────────────────
+  function showToast(msg, type = 'info') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = msg;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 3500);
+  }
+
+  // ── WARN ON UNSAVED CHANGES ───────────────────────────────────────────────────
+  window.addEventListener('beforeunload', (e) => {
+    if (pendingChanges.size > 0) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+</script>
+</body>
+</html>
