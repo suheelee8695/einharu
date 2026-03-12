@@ -12,6 +12,8 @@
       try {
         var params = new URLSearchParams(window.location.search);
         var slug = (params.get('slug') || '').trim();
+        const canonicalEl = document.getElementById('canonical-link');
+        if (canonicalEl && slug) canonicalEl.setAttribute('href', `https://www.einharu.com/${slug}`);
         if (!slug) return;
         var canonical = 'https://www.einharu.com/' + encodeURIComponent(slug);
         var link = document.getElementById('canonical-link') || document.querySelector('link[rel="canonical"]');
