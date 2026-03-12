@@ -9,6 +9,24 @@
   node_bundler = "esbuild"
 
 [[redirects]]
+  from = "http://einharu.com/*"
+  to = "https://www.einharu.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.einharu.com/*"
+  to = "https://www.einharu.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://einharu.com/*"
+  to = "https://www.einharu.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/products/:slug"
   to = "/:slug"
   status = 301
