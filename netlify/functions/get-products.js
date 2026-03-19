@@ -2,14 +2,10 @@
 // Returns all products with name, slug, url, category, inStock, and stripeProductId.
 // inStock logic mirrors get-inventory.js: stock < 0 = unlimited (true), 0 = sold out (false), > 0 = in stock (true).
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const path = require('path');
-const fs = require('fs');
+const products = require('../../products.json');
 
 exports.handler = async () => {
   try {
-    const products = JSON.parse(
-      fs.readFileSync(path.join(__dirname, '..', '..', 'products.json'), 'utf8')
-    );
 
     const available = products.filter(p => p.stripePriceId);
     const comingSoon = products.filter(p => !p.stripePriceId);
