@@ -41,19 +41,19 @@ const LONDONFLAT_UPDATES = [
 // English names match HELDER brand convention: "Descriptive Title – Color"
 const HELDER_CREATES = [
   {
-    stripeName: 'Hole High-Neck Sleeveless Top \u2013 Black', // 홀하이넥슬리브리스Y/검
+    stripeName: 'High-Neck Sleeveless Top \u2013 Black', // 홀하이넥슬리브리스Y/검
     amount:     10500,               // 105.00 EUR
     stock:      3,
     jsonId:     'item-29',
-    slug:       'hole-high-neck-sleeveless-top-black',
+    slug:       'high-neck-sleeveless-top-black',
     productType: 'tops'
   },
   {
-    stripeName: 'Hole High-Neck Sleeveless Top \u2013 Ivory', // 홀하이넥슬리브리스Y/아
+    stripeName: 'High-Neck Sleeveless Top \u2013 Ivory', // 홀하이넥슬리브리스Y/아
     amount:     10500,               // 105.00 EUR
     stock:      2,
     jsonId:     'item-30',
-    slug:       'hole-high-neck-sleeveless-top-ivory',
+    slug:       'high-neck-sleeveless-top-ivory',
     productType: 'tops'
   },
   {
