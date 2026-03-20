@@ -1213,8 +1213,8 @@
   {
     "id": "item-cs-02",
     "title": "Beaker Pants",
-    "price": 0,
-    "stock": 0,
+    "price": 159,
+    "stock": 5,
     "category": "collection",
     "brand": "Londonflat",
     "currency": "EUR",
@@ -1247,13 +1247,14 @@
     ],
     "productType": "pants",
     "releaseStatus": "coming_soon",
-    "slug": "beaker-pants"
+    "slug": "beaker-pants",
+    "stripePriceId": "price_1TD6CkFPNKTl6gGp9ujf2lxt"
   },
   {
     "id": "item-cs-03",
     "title": "Bijo Shirt",
-    "price": 0,
-    "stock": 0,
+    "price": 109,
+    "stock": 3,
     "category": "collection",
     "brand": "Londonflat",
     "currency": "EUR",
@@ -1287,13 +1288,14 @@
     ],
     "productType": "tops",
     "releaseStatus": "coming_soon",
-    "slug": "bijo-shirt"
+    "slug": "bijo-shirt",
+    "stripePriceId": "price_1TD6CmFPNKTl6gGpb8e0jh5e"
   },
   {
     "id": "item-cs-04",
     "title": "Shearling Wrap Shirt",
-    "price": 0,
-    "stock": 0,
+    "price": 129,
+    "stock": 3,
     "category": "collection",
     "brand": "Londonflat",
     "currency": "EUR",
@@ -1326,6 +1328,7 @@
     ],
     "productType": "tops",
     "releaseStatus": "coming_soon",
-    "slug": "shearling-wrap-shirt"
+    "slug": "shearling-wrap-shirt",
+    "stripePriceId": "price_1TD6CoFPNKTl6gGpCO09kjV8"
   }
 ]
