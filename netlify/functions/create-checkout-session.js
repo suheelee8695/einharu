@@ -108,45 +108,58 @@ exports.handler = async (event) => {
       }];
     }
 
+    const EU_COUNTRIES = new Set([
+      'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT',
+      'LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'
+    ]);
+    const INTERNATIONAL_COUNTRIES = new Set([
+      'AU','CA','CH','GB','HK','JP','NO','NZ','SG','US','AE'
+    ]);
+    const ALLOWED_COUNTRIES = [...new Set(['DE', ...EU_COUNTRIES, ...INTERNATIONAL_COUNTRIES])];
+
     const VALID_COUPONS = (process.env.COUPON_CODES || '')
       .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
-    const FREE_COUNTRIES = (process.env.FREE_SHIP_COUNTRIES || '')
-      .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
-
     const code = (typeof promo_code === 'string' ? promo_code : '').trim().toUpperCase();
     const couponValid = !!code && VALID_COUPONS.includes(code);
     const shipCountry = (shipping_country || 'DE').toUpperCase();
-    const countryOk = !FREE_COUNTRIES.length || FREE_COUNTRIES.includes(shipCountry);
-    const allowFreeByCoupon = couponValid && countryOk;
-    const showFreeThreshold = subtotal >= 10000;
 
-    const shipping_options = [
-      {
-        shipping_rate_data: {
-          display_name: 'Standard Shipping',
-          type: 'fixed_amount',
-          fixed_amount: { amount: 500, currency: 'eur' },
-          delivery_estimate: {
-            minimum: { unit: 'business_day', value: 2 },
-            maximum: { unit: 'business_day', value: 7 }
-          }
+    const shippingTier = shipCountry === 'DE'
+      ? 'DE'
+      : (EU_COUNTRIES.has(shipCountry) ? 'EU' : 'INTL');
+
+    const shippingConfig = {
+      DE: {
+        label: 'Germany shipping',
+        amount: subtotal >= 8000 ? 0 : 490,
+        freeLabel: 'Free Germany shipping (orders over €80)'
+      },
+      EU: {
+        label: 'EU shipping',
+        amount: subtotal >= 15000 ? 0 : 990,
+        freeLabel: 'Free EU shipping (orders over €150)'
+      },
+      INTL: {
+        label: 'International shipping',
+        amount: 1890
+      }
+    }[shippingTier];
+
+    const shipping_options = [{
+      shipping_rate_data: {
+        display_name: couponValid && shippingTier !== 'INTL'
+          ? 'Free shipping (coupon)'
+          : (shippingConfig.amount === 0 ? shippingConfig.freeLabel : shippingConfig.label),
+        type: 'fixed_amount',
+        fixed_amount: {
+          amount: couponValid && shippingTier !== 'INTL' ? 0 : shippingConfig.amount,
+          currency: 'eur'
+        },
+        delivery_estimate: {
+          minimum: { unit: 'business_day', value: 2 },
+          maximum: { unit: 'business_day', value: shippingTier === 'INTL' ? 10 : 7 }
         }
       }
-    ];
-
-    if (allowFreeByCoupon || showFreeThreshold) {
-      shipping_options.push({
-        shipping_rate_data: {
-          display_name: allowFreeByCoupon ? 'Free Shipping (coupon)' : 'Free Shipping (orders over €100)',
-          type: 'fixed_amount',
-          fixed_amount: { amount: 0, currency: 'eur' },
-          delivery_estimate: {
-            minimum: { unit: 'business_day', value: 2 },
-            maximum: { unit: 'business_day', value: 7 }
-          }
-        }
-      });
-    }
+    }];
 
     const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'https://einharu.com';
     const priceIds = reservations.join(',');
@@ -159,10 +172,7 @@ exports.handler = async (event) => {
       billing_address_collection: 'required',
       phone_number_collection: { enabled: true },
       shipping_address_collection: {
-        allowed_countries: [
-          'DE','FR','NL','BE','LU','AT','IT','ES','PT','IE','FI','SE','DK',
-          'PL','CZ','HU','SK','SI','HR','RO','BG','EE','LV','LT','MT','CY'
-        ]
+        allowed_countries: ALLOWED_COUNTRIES
       },
       shipping_options,
       expires_at: Math.floor(Date.now() / 1000) + (30 * 60),
