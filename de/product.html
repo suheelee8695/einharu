@@ -41,9 +41,7 @@
 <body class="product-page">
   <!-- banner, header etc. if present -->
 <div class="site-banner" role="status" aria-live="polite" id="site-banner">
-  <div class="banner-text" id="banner-text">
-    Kostenloser Versand innerhalb Deutschlands ab 100 €.
-  </div>
+  <div class="banner-text" id="banner-text"></div>
   <button class="banner-close" aria-label="Banner schliessen" id="banner-close">×</button>
 </div>
 <header class="site-header">
@@ -92,7 +90,33 @@
           <span class="price-label">Preis:</span>
           <span id="product-price"></span>
         </div>
-        <p class="product-tax-note">inkl. MwSt. · Kostenloser EU-Versand ab 100 €</p>
+        <p class="product-tax-note">inkl. MwSt. · Versand aus Berlin, Deutschland</p>
+        <section class="shipping-policy-card" aria-label="Versand- und Rückgabeübersicht">
+          <div class="shipping-policy-card__row">
+            <strong>Deutschland</strong>
+            <span>4,90 €, kostenlos ab 80 €</span>
+          </div>
+          <div class="shipping-policy-card__row">
+            <strong>EU</strong>
+            <span>9,90 €, kostenlos ab 150 €</span>
+          </div>
+          <div class="shipping-policy-card__row">
+            <strong>International</strong>
+            <span>18,90 €</span>
+          </div>
+          <div class="shipping-policy-card__row shipping-policy-card__row--muted">
+            <strong>Rückgabe</strong>
+            <span>14 Tage ab Zustellung. Die Kosten für den Rückversand trägt die Kundschaft.</span>
+          </div>
+        </section>
+        <label class="shipping-country-picker">
+          <span>Versandziel</span>
+          <select data-ship-country aria-label="Versandziel">
+            <option value="DE">Deutschland</option>
+            <option value="FR">EU</option>
+            <option value="US">International</option>
+          </select>
+        </label>
         <div id="shipping-nudge" class="shipping-nudge" aria-live="polite"></div>
         <div id="product-stock-state" class="stock-state" aria-live="polite"></div>
 
@@ -127,8 +151,8 @@
 </form>
 
 <section class="trust-strip" aria-label="Store assurances">
-  <div class="trust-item">Kostenloser EU-Versand ab 100 €</div>
-  <div class="trust-item">14 Tage Rückgabe</div>
+  <div class="trust-item">Versand mit Tracking aus Berlin</div>
+  <div class="trust-item">14 Tage Rückgabe, Rückversand nicht kostenlos</div>
   <div class="trust-item">Sicherer Stripe-Checkout</div>
 </section>
 
@@ -207,6 +231,20 @@
     <div class="cart-drawer__list" data-cart-list></div>
     <footer class="cart-drawer__footer">
       <div class="cart-subtotal"><span>Zwischensumme</span><strong data-cart-subtotal>€0</strong></div>
+      <label class="shipping-country-picker shipping-country-picker--drawer">
+        <span>Versandziel</span>
+        <select data-ship-country aria-label="Versandziel">
+          <option value="DE">Deutschland</option>
+          <option value="FR">EU</option>
+          <option value="US">International</option>
+        </select>
+      </label>
+      <div class="cart-shipping-note" data-cart-shipping-note aria-live="polite">
+        Versand in Deutschland: 4,90 €, kostenlos ab 80 €.
+      </div>
+      <div class="cart-policy-note">
+        Rückgaben sind innerhalb von 14 Tagen nach Zustellung möglich. Die Kosten für den Rückversand trägt die Kundschaft.
+      </div>
       <div class="cart-promo">
   <label for="cart-promo-input" class="visually-hidden">Rabattcode</label>
   <input id="cart-promo-input" data-cart-promo-input placeholder="Rabattcode" autocomplete="off" class="promo-input">

@@ -20,7 +20,10 @@
         ? `EU shipping: €9.90. Add ${fmt(remaining)} more for free shipping over €150.`
         : 'EU shipping is free on this order.',
       shippingNoteIntl: 'International shipping: €18.90. Free shipping is not available.',
-      returnNote: 'Returns accepted within 14 days of delivery. Return shipping is paid by the customer.'
+      returnNote: 'Returns accepted within 14 days of delivery. Return shipping is paid by the customer.',
+      bannerDe: 'Germany shipping €4.90 · Free over €80',
+      bannerEu: 'EU shipping €9.90 · Free over €150',
+      bannerIntl: 'International shipping €18.90'
     },
     de: {
       outOfStock: 'Dieser Artikel ist ausverkauft.',
@@ -39,7 +42,10 @@
         ? `EU-Versand: 9,90 €. Noch ${fmt(remaining)} bis zum kostenlosen Versand ab 150 €.`
         : 'Der EU-Versand ist für diese Bestellung kostenlos.',
       shippingNoteIntl: 'Internationaler Versand: 18,90 €. Kostenloser Versand ist international nicht verfügbar.',
-      returnNote: 'Rückgaben sind innerhalb von 14 Tagen nach Zustellung möglich. Die Kosten für den Rückversand trägt die Kundschaft.'
+      returnNote: 'Rückgaben sind innerhalb von 14 Tagen nach Zustellung möglich. Die Kosten für den Rückversand trägt die Kundschaft.',
+      bannerDe: 'Versand in Deutschland 4,90 € · Kostenlos ab 80 €',
+      bannerEu: 'EU-Versand 9,90 € · Kostenlos ab 150 €',
+      bannerIntl: 'Internationaler Versand 18,90 €'
     }
   };
   const t = (key, ...args) => {
@@ -359,7 +365,15 @@ els.promoRemove?.addEventListener('click', () => {
   }
 
   function toast(msg){ console.warn(msg); /* hook UI here */ }
+  function renderBanner() {
+    const el = document.getElementById('banner-text');
+    if (!el) return;
+    const region = getShippingRegion(els.shipCountries?.[0]?.value || getShippingCountry());
+    el.textContent = region === 'DE' ? t('bannerDe') : region === 'EU' ? t('bannerEu') : t('bannerIntl');
+  }
+
   function renderShippingNote() {
+    renderBanner();
     if (!els.shippingNote) return;
     const rawSubtotal = subtotal();
     const region = getShippingRegion(els.shipCountries?.[0]?.value || getShippingCountry());
