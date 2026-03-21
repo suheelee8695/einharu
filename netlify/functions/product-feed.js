@@ -64,6 +64,9 @@ exports.handler = async () => {
         .join('\n      ');
       const category = GMC_CATEGORY[p.productType] || DEFAULT_CATEGORY;
       const availability = s.inStock ? 'in_stock' : 'out_of_stock';
+      const gender = p.productType === 'accessories' ? 'unisex' : 'female';
+      const rawSize = p.defaultSize || 'One Size';
+      const size = /best eu/i.test(rawSize) ? 'One Size' : rawSize;
 
       return `    <item>
       <g:id>${esc(p.slug)}</g:id>
@@ -78,6 +81,8 @@ exports.handler = async () => {
       <g:brand>${esc(p.brand || 'einHaru')}</g:brand>
       <g:google_product_category>${esc(category)}</g:google_product_category>
       <g:product_type>${esc(p.productType || 'clothing')}</g:product_type>
+      <g:gender>${gender}</g:gender>
+      <g:size>${esc(size)}</g:size>
       <g:shipping>
         <g:country>DE</g:country>
         <g:service>Standard Shipping</g:service>
