@@ -45,7 +45,7 @@
   <!-- banner, header etc. if present -->
 <div class="site-banner" role="status" aria-live="polite" id="site-banner">
   <div class="banner-text" id="banner-text">
-    Free shipping within EU on orders over €100.
+    Germany: €4.90 or free over €80. EU: €9.90 or free over €150. International: €18.90.
   </div>
   <button class="banner-close" aria-label="Dismiss banner" id="banner-close">×</button>
 </div>
@@ -95,7 +95,16 @@
           <span class="price-label">Price:</span>
           <span id="product-price"></span>
         </div>
-        <p class="product-tax-note">Incl. VAT · Free EU shipping on orders over €100</p>
+        <p class="product-tax-note">Incl. VAT · Ships from Berlin, Germany</p>
+
+        <label class="shipping-country-picker">
+          <span>Shipping destination</span>
+          <select data-ship-country aria-label="Shipping destination">
+            <option value="DE">Germany</option>
+            <option value="FR">EU</option>
+            <option value="US">International</option>
+          </select>
+        </label>
         <div id="shipping-nudge" class="shipping-nudge" aria-live="polite"></div>
         <div id="product-stock-state" class="stock-state" aria-live="polite"></div>
 
@@ -130,9 +139,9 @@
 </form>
 
 <section class="trust-strip" aria-label="Store assurances">
-  <div class="trust-item">Free EU Shipping Over €100</div>
-  <div class="trust-item">14-day Returns</div>
-  <div class="trust-item">Secure Stripe Checkout</div>
+  <div class="trust-item">Tracked shipping from Berlin</div>
+  <div class="trust-item">14-day returns, customer-paid shipping</div>
+  <div class="trust-item">Secure Stripe checkout</div>
 </section>
 
 <section class="accordion" id="accordion-details">
@@ -210,6 +219,20 @@
     <div class="cart-drawer__list" data-cart-list></div>
     <footer class="cart-drawer__footer">
       <div class="cart-subtotal"><span>Subtotal</span><strong data-cart-subtotal>€0</strong></div>
+      <label class="shipping-country-picker shipping-country-picker--drawer">
+        <span>Shipping destination</span>
+        <select data-ship-country aria-label="Shipping destination">
+          <option value="DE">Germany</option>
+          <option value="FR">EU</option>
+          <option value="US">International</option>
+        </select>
+      </label>
+      <div class="cart-shipping-note" data-cart-shipping-note aria-live="polite">
+        Germany shipping: €4.90, free over €80.
+      </div>
+      <div class="cart-policy-note">
+        Returns accepted within 14 days of delivery. Return shipping is paid by the customer.
+      </div>
       <div class="cart-promo">
   <label for="cart-promo-input" class="visually-hidden">Promo code</label>
   <input id="cart-promo-input" data-cart-promo-input placeholder="Promo code" autocomplete="off" class="promo-input">
