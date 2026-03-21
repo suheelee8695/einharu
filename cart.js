@@ -14,10 +14,10 @@
       checkout: 'Go to checkout',
       continueShopping: 'Continue shopping',
       shippingNoteDe: (remaining) => remaining > 0
-        ? `Germany shipping: €4.90. Add ${remaining} more for free shipping over €80.`
+        ? `Germany shipping: €4.90. Add ${fmt(remaining)} more for free shipping over €80.`
         : 'Germany shipping is free on this order.',
       shippingNoteEu: (remaining) => remaining > 0
-        ? `EU shipping: €9.90. Add ${remaining} more for free shipping over €150.`
+        ? `EU shipping: €9.90. Add ${fmt(remaining)} more for free shipping over €150.`
         : 'EU shipping is free on this order.',
       shippingNoteIntl: 'International shipping: €18.90. Free shipping is not available.',
       returnNote: 'Returns accepted within 14 days of delivery. Return shipping is paid by the customer.'
@@ -33,10 +33,10 @@
       checkout: 'Zur Kasse',
       continueShopping: 'Weiter einkaufen',
       shippingNoteDe: (remaining) => remaining > 0
-        ? `Versand in Deutschland: 4,90 €. Noch ${remaining} bis zum kostenlosen Versand ab 80 €.`
+        ? `Versand in Deutschland: 4,90 €. Noch ${fmt(remaining)} bis zum kostenlosen Versand ab 80 €.`
         : 'Der Versand in Deutschland ist für diese Bestellung kostenlos.',
       shippingNoteEu: (remaining) => remaining > 0
-        ? `EU-Versand: 9,90 €. Noch ${remaining} bis zum kostenlosen Versand ab 150 €.`
+        ? `EU-Versand: 9,90 €. Noch ${fmt(remaining)} bis zum kostenlosen Versand ab 150 €.`
         : 'Der EU-Versand ist für diese Bestellung kostenlos.',
       shippingNoteIntl: 'Internationaler Versand: 18,90 €. Kostenloser Versand ist international nicht verfügbar.',
       returnNote: 'Rückgaben sind innerhalb von 14 Tagen nach Zustellung möglich. Die Kosten für den Rückversand trägt die Kundschaft.'
@@ -365,10 +365,10 @@ els.promoRemove?.addEventListener('click', () => {
     const region = getShippingRegion(els.shipCountries?.[0]?.value || getShippingCountry());
     if (region === 'DE') {
       const remaining = Math.max(0, 80 - rawSubtotal);
-      els.shippingNote.textContent = t('shippingNoteDe', fmt(remaining));
+      els.shippingNote.textContent = t('shippingNoteDe', remaining);
     } else if (region === 'EU') {
       const remaining = Math.max(0, 150 - rawSubtotal);
-      els.shippingNote.textContent = t('shippingNoteEu', fmt(remaining));
+      els.shippingNote.textContent = t('shippingNoteEu', remaining);
     } else {
       els.shippingNote.textContent = t('shippingNoteIntl');
     }
