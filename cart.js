@@ -12,7 +12,15 @@
       subtotal: 'Subtotal',
       bag: 'Bag',
       checkout: 'Go to checkout',
-      continueShopping: 'Continue shopping'
+      continueShopping: 'Continue shopping',
+      shippingNoteDe: (remaining) => remaining > 0
+        ? `Germany shipping: €4.90. Add ${remaining} more for free shipping over €80.`
+        : 'Germany shipping is free on this order.',
+      shippingNoteEu: (remaining) => remaining > 0
+        ? `EU shipping: €9.90. Add ${remaining} more for free shipping over €150.`
+        : 'EU shipping is free on this order.',
+      shippingNoteIntl: 'International shipping: €18.90. Free shipping is not available.',
+      returnNote: 'Returns accepted within 14 days of delivery. Return shipping is paid by the customer.'
     },
     de: {
       outOfStock: 'Dieser Artikel ist ausverkauft.',
@@ -23,7 +31,15 @@
       subtotal: 'Zwischensumme',
       bag: 'Warenkorb',
       checkout: 'Zur Kasse',
-      continueShopping: 'Weiter einkaufen'
+      continueShopping: 'Weiter einkaufen',
+      shippingNoteDe: (remaining) => remaining > 0
+        ? `Versand in Deutschland: 4,90 €. Noch ${remaining} bis zum kostenlosen Versand ab 80 €.`
+        : 'Der Versand in Deutschland ist für diese Bestellung kostenlos.',
+      shippingNoteEu: (remaining) => remaining > 0
+        ? `EU-Versand: 9,90 €. Noch ${remaining} bis zum kostenlosen Versand ab 150 €.`
+        : 'Der EU-Versand ist für diese Bestellung kostenlos.',
+      shippingNoteIntl: 'Internationaler Versand: 18,90 €. Kostenloser Versand ist international nicht verfügbar.',
+      returnNote: 'Rückgaben sind innerhalb von 14 Tagen nach Zustellung möglich. Die Kosten für den Rückversand trägt die Kundschaft.'
     }
   };
   const t = (key, ...args) => {
@@ -33,6 +49,11 @@
   const els = {};
   const state = { items: [] }; // [{id,title,price,currency,size,qty,image,stripePriceId,stock?}]
   let lastFocused = null;
+  const SHIPPING_KEY = 'eh_shipping_country';
+  const EU_COUNTRIES = new Set([
+    'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT',
+    'LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'
+  ]);
 
   // ---- stock helpers
   const getStock = (i) => {
@@ -54,6 +75,18 @@ const setCoupon = (code) => {
     if (code && code.trim()) localStorage.setItem(COUPON_KEY, code.trim());
     else localStorage.removeItem(COUPON_KEY);
   } catch (_) {}
+};
+const getShippingCountry = () => {
+  try { return (localStorage.getItem(SHIPPING_KEY) || 'DE').toUpperCase(); } catch (_) { return 'DE'; }
+};
+const setShippingCountry = (code) => {
+  try { localStorage.setItem(SHIPPING_KEY, String(code || 'DE').toUpperCase()); } catch (_) {}
+};
+const getShippingRegion = (code) => {
+  const upper = String(code || 'DE').toUpperCase();
+  if (upper === 'DE') return 'DE';
+  if (EU_COUNTRIES.has(upper)) return 'EU';
+  return 'INTL';
 };
 
   // ---- storage
@@ -124,7 +157,7 @@ const setCoupon = (code) => {
     if (items.some(it => !it.price)) return toast('One or more items are not purchasable yet.');
 
     const selectedCountry =
-      (document.querySelector('[data-ship-country]')?.value || 'DE').toUpperCase();
+      ((els.shipCountries?.[0]?.value) || getShippingCountry()).toUpperCase();
     const rawSubtotal = subtotal();
     if (!Number.isFinite(rawSubtotal) || rawSubtotal <= 0) return toast('Your bag is empty.');
     const subtotalCents = Math.round(rawSubtotal * 100);
@@ -164,6 +197,8 @@ const setCoupon = (code) => {
     els.count = document.querySelector('[data-cart-count]');
     els.checkout = document.querySelector('[data-cart-checkout]');
     els.cont = document.querySelector('[data-cart-continue]');
+    els.shipCountries = Array.from(document.querySelectorAll('[data-ship-country]'));
+    els.shippingNote = document.querySelector('[data-cart-shipping-note]');
       // --- Promo UI elements ---
   els.promoInput  = document.querySelector('[data-cart-promo-input]');
   els.promoApply  = document.querySelector('[data-cart-apply-promo]');
@@ -180,6 +215,18 @@ const setCoupon = (code) => {
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
     els.checkout?.addEventListener('click', ()=>checkout());
     els.cont?.addEventListener('click', close);
+    if (els.shipCountries?.length) {
+      const current = getShippingCountry();
+      els.shipCountries.forEach((select) => {
+        select.value = current;
+        select.addEventListener('change', () => {
+          const next = select.value.toUpperCase();
+          setShippingCountry(next);
+          els.shipCountries.forEach((other) => { other.value = next; });
+          renderShippingNote();
+        });
+      });
+    }
     // ---- Promo: apply/remove
   els.promoApply?.addEventListener('click', (e) => {
   e.preventDefault();                
@@ -235,6 +282,7 @@ els.promoRemove?.addEventListener('click', () => {
     // badge + subtotal
     if (els.count) els.count.textContent = String(count());
     if (els.sub) els.sub.textContent = fmt(subtotal());
+    renderShippingNote();
 
     if (!els.list) return;
     if (!state.items.length) {
@@ -311,6 +359,20 @@ els.promoRemove?.addEventListener('click', () => {
   }
 
   function toast(msg){ console.warn(msg); /* hook UI here */ }
+  function renderShippingNote() {
+    if (!els.shippingNote) return;
+    const rawSubtotal = subtotal();
+    const region = getShippingRegion(els.shipCountries?.[0]?.value || getShippingCountry());
+    if (region === 'DE') {
+      const remaining = Math.max(0, 80 - rawSubtotal);
+      els.shippingNote.textContent = t('shippingNoteDe', fmt(remaining));
+    } else if (region === 'EU') {
+      const remaining = Math.max(0, 150 - rawSubtotal);
+      els.shippingNote.textContent = t('shippingNoteEu', fmt(remaining));
+    } else {
+      els.shippingNote.textContent = t('shippingNoteIntl');
+    }
+  }
   function reflectPromo() {
   const code = getCoupon();
   if (!els.promoNote || !els.promoCode || !els.promoInput) return;
@@ -325,14 +387,35 @@ els.promoRemove?.addEventListener('click', () => {
     els.promoInput.value = '';
   }
 }
-  function init(){
+function init(){
   cacheEls(); load(); bindUI(); render();
   reflectPromo(); // ← 추가: 처음 열릴 때 UI 반영
+  renderShippingNote();
+
+  // Auto-detect country on first visit (no stored preference yet)
+  if (!localStorage.getItem(SHIPPING_KEY)) {
+    fetch('/.netlify/functions/get-country')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data?.country) return;
+        setShippingCountry(data.country);
+        if (els.shipCountries?.length) {
+          els.shipCountries.forEach(s => { s.value = data.country; });
+        }
+        renderShippingNote();
+      })
+      .catch(() => {});
+  }
 
   // 다른 탭/창에서 쿠폰이나 카트가 바뀌면 동기화
   window.addEventListener('storage', (e) => {
-    if (e.key === STORAGE || e.key === 'eh_coupon') {
+    if (e.key === STORAGE || e.key === 'eh_coupon' || e.key === SHIPPING_KEY) {
       load(); render(); reflectPromo();
+      if (els.shipCountries?.length) {
+        const current = getShippingCountry();
+        els.shipCountries.forEach((select) => { select.value = current; });
+      }
+      renderShippingNote();
     }
   });
 }
