@@ -743,7 +743,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       list.forEach((prod) => {
         const first = (prod.images && prod.images[0]) || prod.cover || '';
         const state = getProductState(prod);
-        const showPrice = state !== 'coming_soon';
+        const showPrice = prod.price != null;
         const badgeHtml = state === 'coming_soon'
           ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
           : (state === 'sold_out' ? `<span class="badge--soldout">${t('badgeSoldOut')}</span>` : '');
@@ -820,7 +820,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
 
       list.forEach((prod) => {
         const state = getProductState(prod);
-        const showPrice = state !== 'coming_soon';
+        const showPrice = prod.price != null;
         const img = (prod.images && prod.images[0]) || prod.cover || '';
         const badgeHtml = state === 'coming_soon'
           ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
