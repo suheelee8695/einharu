@@ -68,6 +68,14 @@ exports.handler = async () => {
       const rawSize = p.defaultSize || 'One Size';
       const size = /best eu/i.test(rawSize) ? 'One Size' : rawSize;
 
+      // Extract color: try "Title - Color" suffix first, then known color words in title
+      const COLORS = ['Dark Blue', 'Dark Green', 'Dark Red', 'Black', 'White', 'Blue', 'Brown',
+        'Grey', 'Gray', 'Ivory', 'Wine', 'Red', 'Green', 'Pink', 'Beige', 'Cream', 'Navy', 'Stripe'];
+      const dashMatch = p.title.match(/\s[-–]\s*([^-–]+)$/);
+      const colorFromDash = dashMatch ? dashMatch[1].trim() : null;
+      const colorFromTitle = COLORS.find(c => new RegExp(`\\b${c}\\b`, 'i').test(p.title));
+      const color = colorFromDash || colorFromTitle || null;
+
       return `    <item>
       <g:id>${esc(p.slug)}</g:id>
       <g:title>${esc(p.title)}</g:title>
@@ -83,10 +91,47 @@ exports.handler = async () => {
       <g:product_type>${esc(p.productType || 'clothing')}</g:product_type>
       <g:gender>${gender}</g:gender>
       <g:size>${esc(size)}</g:size>
+      <g:age_group>adult</g:age_group>
+      ${color ? `<g:color>${esc(color)}</g:color>` : ''}
       <g:shipping>
         <g:country>DE</g:country>
         <g:service>Standard Shipping</g:service>
         <g:price>4.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>FR</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>AT</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>NL</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>BE</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>IT</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>ES</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>PL</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
       </g:shipping>
       <g:identifier_exists>no</g:identifier_exists>
     </item>`;
