@@ -1,0 +1,6 @@
+# Files excluded from Netlify deploys
+scripts/
+*.md
+.DS_Store
+deno.lock
+.github/
