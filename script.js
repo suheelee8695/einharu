@@ -735,10 +735,9 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       return result;
     };
 
-    const renderCardsToGrid = (targetGrid, list, opts = {}) => {
+    const renderCardsToGrid = (targetGrid, list) => {
       if (!targetGrid) return;
       targetGrid.innerHTML = '';
-      const { comingSoon = false } = opts;
 
       list.forEach((prod) => {
         const first = (prod.images && prod.images[0]) || prod.cover || '';
@@ -759,7 +758,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         card.innerHTML = `
           <div class="card-image-wrapper">
             <img src="${first}" alt="${buildProductImageAlt(prod, 0)}" class="card-img primary" loading="lazy">
-            ${comingSoon ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>` : badgeHtml}
+            ${badgeHtml}
           </div>
           <div class="card-info">
             <div class="card-brand">${brand}</div>
@@ -862,12 +861,12 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       );
 
       if (isComingSoonSplitView) {
-        renderCardsToGrid(comingSoonGrid, visible, { comingSoon: showComingSoonBadge });
+        renderCardsToGrid(comingSoonGrid, visible);
         renderRowsToList(comingSoonList, visible);
       } else if (isComingSoonListOnly) {
-        renderCardsToGrid(comingSoonList, visible, { comingSoon: showComingSoonBadge });
+        renderCardsToGrid(comingSoonList, visible);
       } else {
-        renderCardsToGrid(grid, visible, { comingSoon: showComingSoonBadge });
+        renderCardsToGrid(grid, visible);
       }
     };
 
