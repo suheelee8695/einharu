@@ -762,7 +762,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           </div>
           <div class="card-info">
             <div class="card-brand">${brand}</div>
-            <h2 class="card-title">${prod.title ?? ''}</h2>
+            <h2 class="card-title"><a href="${getProductPath(prod)}" tabindex="-1">${prod.title ?? ''}</a></h2>
             ${showPrice ? `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>` : ''}
           </div>
         `;
@@ -837,7 +837,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           </div>
           <div class="product-list-info">
             <div class="card-brand">${brand}</div>
-            <h2 class="card-title">${prod.title ?? ''}</h2>
+            <h2 class="card-title"><a href="${getProductPath(prod)}" tabindex="-1">${prod.title ?? ''}</a></h2>
             ${showPrice ? `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>` : ''}
           </div>
         `;

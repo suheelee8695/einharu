@@ -693,6 +693,10 @@ button.icon-btn::-moz-focus-inner {
   margin: 0;
   transition: color 0.2s ease;
 }
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+}
 .card-price {
   font-size: 0.75rem;
   font-weight: 500;

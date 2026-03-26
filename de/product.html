@@ -11,12 +11,24 @@
       try {
         var params = new URLSearchParams(window.location.search);
         var slug = (params.get('slug') || '').trim();
+        if (!slug) {
+          var parts = location.pathname.replace(/\/+$/, '').split('/').filter(Boolean);
+          var candidate = (parts.length === 2 && parts[0] === 'de') ? parts[1] : '';
+          if (candidate && !candidate.includes('.')) slug = decodeURIComponent(candidate);
+        }
         if (!slug) return;
-        var canonical = 'https://www.einharu.com/de/' + encodeURIComponent(slug);
-        var link = document.getElementById('canonical-link') || document.querySelector('link[rel="canonical"]');
+        var origin = 'https://www.einharu.com';
+        var canonical = origin + '/de/' + encodeURIComponent(slug);
+        var link = document.getElementById('canonical-link');
         if (link) link.setAttribute('href', canonical);
-        var og = document.getElementById('og-url') || document.querySelector('meta[property="og:url"]');
+        var og = document.getElementById('og-url');
         if (og) og.setAttribute('content', canonical);
+        var en = document.querySelector('link[hreflang="en"]');
+        if (en) en.setAttribute('href', origin + '/' + encodeURIComponent(slug));
+        var xd = document.querySelector('link[hreflang="x-default"]');
+        if (xd) xd.setAttribute('href', origin + '/' + encodeURIComponent(slug));
+        var de = document.querySelector('link[hreflang="de"]');
+        if (de) de.setAttribute('href', canonical);
       } catch (_) {}
     })();
   </script>
