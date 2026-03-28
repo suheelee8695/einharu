@@ -1,5 +1,142 @@
 [
   {
+    "id": "item-cs-02",
+    "title": "Beaker Pants",
+    "price": 159,
+    "stock": 5,
+    "category": "collection",
+    "brand": "Londonflat",
+    "currency": "EUR",
+    "fitNote": "Model is 177 cm and wears size S.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Waist: 41 cm",
+      "Rise: 29 cm",
+      "Hip: 53 cm",
+      "Thigh: 32 cm",
+      "Hem: 28 cm",
+      "Length: 107 cm",
+      "Measurements are taken flat (in cm). A 1–2 cm difference may occur depending on measuring method."
+    ],
+    "cover": "images/beaker-pants-1.webp",
+    "images": [
+      "images/beaker-pants-1.webp",
+      "images/beaker-pants-2.webp",
+      "images/beaker-pants-3.webp",
+      "images/beaker-pants-4.webp",
+      "images/beaker-pants-5.webp",
+      "images/beaker-pants-6.webp"
+    ],
+    "description": "Wide-leg trousers with a generous beaker silhouette, cut from a soft wool blend that falls with natural weight and movement. The waistband features pleat and strap detailing with a drawstring for an adjustable fit. From Korean label Londonflat.",
+    "materials": [
+      "Wool 50%",
+      "Polyester 50%"
+    ],
+    "care": [
+      "Hand wash cold",
+      "Do not bleach",
+      "Dry flat"
+    ],
+    "productType": "pants",
+    "releaseStatus": "available",
+    "slug": "beaker-pants",
+    "stripePriceId": "price_1TD6CkFPNKTl6gGp9ujf2lxt"
+  },
+  {
+    "id": "item-cs-03",
+    "title": "Bijo Shirt",
+    "price": 109,
+    "stock": 3,
+    "category": "collection",
+    "brand": "Londonflat",
+    "currency": "EUR",
+    "fitNote": "Model is 177 cm and wears size S.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Shoulder: 53 cm",
+      "Armhole: 23 cm",
+      "Sleeve length: 65 cm",
+      "Sleeve width: 20 cm",
+      "Sleeve hem: 11 cm",
+      "Chest: 60 cm",
+      "Hem: 60 cm",
+      "Length: 71 cm",
+      "Neck: 16.5 cm",
+      "Neck height: 9 cm",
+      "Measurements are taken flat (in cm). A 1–2 cm difference may occur depending on measuring method."
+    ],
+    "cover": "images/bijo-shirt-1.webp",
+    "images": [
+      "images/bijo-shirt-1.webp",
+      "images/bijo-shirt-2.webp",
+      "images/bijo-shirt-3.webp",
+      "images/bijo-shirt-4.webp",
+      "images/bijo-shirt-5.webp",
+      "images/bijo-shirt-6.webp"
+    ],
+    "description": "An oversized button-up shirt with a high wrap neckline that gives it an outerwear-like presence when worn alone. The bijo detail at the collar can be styled open or closed, shifting the mood from relaxed to refined. Cut from a fluid Nylon-Tencel blend with a smooth, breathable drape. From Korean label Londonflat.",
+    "materials": [
+      "Nylon 27%",
+      "Tencel 73%"
+    ],
+    "care": [
+      "Machine wash cold",
+      "Do not bleach",
+      "Low iron"
+    ],
+    "productType": "tops",
+    "releaseStatus": "available",
+    "slug": "bijo-shirt",
+    "stripePriceId": "price_1TD6CmFPNKTl6gGpb8e0jh5e"
+  },
+  {
+    "id": "item-cs-04",
+    "title": "Shearling Wrap Shirt",
+    "price": 129,
+    "stock": 3,
+    "category": "collection",
+    "brand": "Londonflat",
+    "currency": "EUR",
+    "fitNote": "Model is 177 cm and wears size S.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Shoulder: 52 cm",
+      "Armhole: 23.5 cm",
+      "Sleeve length: 63 cm",
+      "Sleeve width: 23.5 cm",
+      "Sleeve hem: 10.5 cm",
+      "Chest: 70 cm",
+      "Hem: 70 cm",
+      "Length: 79 cm",
+      "Neck: 17 cm",
+      "Wrap panel: 40.5 cm",
+      "Measurements are taken flat (in cm). A 1–2 cm difference may occur depending on measuring method."
+    ],
+    "cover": "images/shearling-wrap-shirt-1.webp",
+    "images": [
+      "images/shearling-wrap-shirt-1.webp",
+      "images/shearling-wrap-shirt-2.webp",
+      "images/shearling-wrap-shirt-3.webp",
+      "images/shearling-wrap-shirt-4.webp",
+      "images/shearling-wrap-shirt-5.webp",
+      "images/shearling-wrap-shirt-6.webp",
+      "images/shearling-wrap-shirt-7.webp"
+    ],
+    "description": "A sheer, lightweight wrap shirt with a softly translucent finish — gentle shirring follows the waistline naturally, while the wrap construction creates a fluid, feminine silhouette. The wrap panel detaches entirely for versatile styling. From Korean label Londonflat.",
+    "materials": [
+      "Polyester 100%"
+    ],
+    "care": [
+      "Dry clean recommended",
+      "Do not bleach",
+      "Do not tumble dry"
+    ],
+    "productType": "tops",
+    "releaseStatus": "available",
+    "slug": "shearling-wrap-shirt",
+    "stripePriceId": "price_1TD6CoFPNKTl6gGpCO09kjV8"
+  },
+  {
     "id": "item-28",
     "title": "Zip-Front Detachable Dungaree Dress",
     "price": 49,
@@ -1209,126 +1346,5 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "draped-scarf-knit-long-sleeve-black"
-  },
-  {
-    "id": "item-cs-02",
-    "title": "Beaker Pants",
-    "price": 159,
-    "stock": 5,
-    "category": "collection",
-    "brand": "Londonflat",
-    "currency": "EUR",
-    "fitNote": "Model is 177 cm and wears size S.",
-    "defaultSize": "One Size",
-    "sizeDetails": [
-      "Waist: 41 cm",
-      "Thigh: 29 cm",
-      "Hip: 53 cm",
-      "Rise: 32 cm",
-      "Hem: 28 cm",
-      "Length: 107 cm"
-    ],
-    "cover": "images/comingsoon01.webp",
-    "images": [
-      "images/comingsoon01.webp",
-      "images/comingsoon02.webp",
-      "images/comingsoon03.webp",
-      "images/comingsoon04.webp"
-    ],
-    "description": "Relaxed beaker silhouette pants from Londonflat. Upcoming drop preview.",
-    "materials": [
-      "Wool 50%",
-      "Polyester 50%"
-    ],
-    "care": [
-      "Hand wash cold",
-      "Do not bleach",
-      "Dry flat"
-    ],
-    "productType": "pants",
-    "releaseStatus": "coming_soon",
-    "slug": "beaker-pants",
-    "stripePriceId": "price_1TD6CkFPNKTl6gGp9ujf2lxt"
-  },
-  {
-    "id": "item-cs-03",
-    "title": "Bijo Shirt",
-    "price": 109,
-    "stock": 3,
-    "category": "collection",
-    "brand": "Londonflat",
-    "currency": "EUR",
-    "fitNote": "Model is 177 cm and wears size S.",
-    "defaultSize": "One Size",
-    "sizeDetails": [
-      "Shoulder: 53 cm",
-      "Sleeve: 23 cm",
-      "Armhole: 65 cm",
-      "Cuff: 20 cm",
-      "Sleeve opening: 11 cm",
-      "Chest: 60 cm",
-      "Hem: 60 cm",
-      "Length: 71 cm"
-    ],
-    "cover": "images/comingsoon05.webp",
-    "images": [
-      "images/comingsoon05.webp",
-      "images/comingsoon06.webp",
-      "images/comingsoon07.webp"
-    ],
-    "description": "Structured Londonflat shirt with clean proportions. Upcoming drop preview.",
-    "materials": [
-      "Nylon 27%",
-      "Tencel 73%"
-    ],
-    "care": [
-      "Machine wash cold",
-      "Do not bleach",
-      "Low iron"
-    ],
-    "productType": "tops",
-    "releaseStatus": "coming_soon",
-    "slug": "bijo-shirt",
-    "stripePriceId": "price_1TD6CmFPNKTl6gGpb8e0jh5e"
-  },
-  {
-    "id": "item-cs-04",
-    "title": "Shearling Wrap Shirt",
-    "price": 129,
-    "stock": 3,
-    "category": "collection",
-    "brand": "Londonflat",
-    "currency": "EUR",
-    "fitNote": "Model is 177 cm and wears size S.",
-    "defaultSize": "One Size",
-    "sizeDetails": [
-      "Shoulder: 52 cm",
-      "Sleeve: 23.5 cm",
-      "Armhole: 63 cm",
-      "Cuff: 23.5 cm",
-      "Sleeve opening: 10.5 cm",
-      "Chest: 70 cm",
-      "Hem: 70 cm",
-      "Length: 79 cm"
-    ],
-    "cover": "images/comingsoon08.webp",
-    "images": [
-      "images/comingsoon08.webp",
-      "images/comingsoon09.webp",
-      "images/comingsoon10.webp"
-    ],
-    "description": "Wrap-front shirt with shearling texture accents. Upcoming drop preview.",
-    "materials": [
-      "Polyester 100%"
-    ],
-    "care": [
-      "Dry clean recommended",
-      "Do not bleach",
-      "Do not tumble dry"
-    ],
-    "productType": "tops",
-    "releaseStatus": "coming_soon",
-    "slug": "shearling-wrap-shirt",
-    "stripePriceId": "price_1TD6CoFPNKTl6gGpCO09kjV8"
   }
 ]

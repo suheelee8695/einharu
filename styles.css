@@ -1306,6 +1306,21 @@ button.icon-btn::-moz-focus-inner {
   width: 50vw;
   justify-self: end;
 }
+.comingsoon-heading {
+  font-family: var(--body-font, Inter), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 28px;
+}
+.comingsoon-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 24px;
+}
 
 .comingsoon-page .comingsoon-images img {
   width: 100%;
