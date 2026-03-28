@@ -68,13 +68,13 @@ exports.handler = async () => {
       const rawSize = p.defaultSize || 'One Size';
       const size = /best eu/i.test(rawSize) ? 'One Size' : rawSize;
 
-      // Extract color: try "Title - Color" suffix first, then known color words in title
+      // Extract color: explicit field first, then "Title - Color" suffix, then known color words
       const COLORS = ['Dark Blue', 'Dark Green', 'Dark Red', 'Black', 'White', 'Blue', 'Brown',
         'Grey', 'Gray', 'Ivory', 'Wine', 'Red', 'Green', 'Pink', 'Beige', 'Cream', 'Navy', 'Stripe'];
       const dashMatch = p.title.match(/\s[-–]\s*([^-–]+)$/);
       const colorFromDash = dashMatch ? dashMatch[1].trim() : null;
       const colorFromTitle = COLORS.find(c => new RegExp(`\\b${c}\\b`, 'i').test(p.title));
-      const color = colorFromDash || colorFromTitle || null;
+      const color = p.color || colorFromDash || colorFromTitle || null;
 
       return `    <item>
       <g:id>${esc(p.slug)}</g:id>

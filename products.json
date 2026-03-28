@@ -37,6 +37,7 @@
       "Do not bleach",
       "Dry flat"
     ],
+    "color": "Charcoal",
     "productType": "pants",
     "releaseStatus": "available",
     "slug": "beaker-pants",
@@ -84,6 +85,7 @@
       "Do not bleach",
       "Low iron"
     ],
+    "color": "Light Ivory",
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "bijo-shirt",
@@ -131,6 +133,7 @@
       "Do not bleach",
       "Do not tumble dry"
     ],
+    "color": "Light Grey",
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "shearling-wrap-shirt",
