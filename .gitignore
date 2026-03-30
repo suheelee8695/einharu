@@ -9,3 +9,6 @@ processed_sessions.json
 # Claude Code local skills & config
 .claude/
 *.skill
+
+# Internal audit/planning docs
+GEO-AUDIT-REPORT.md
