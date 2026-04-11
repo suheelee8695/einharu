@@ -34,7 +34,7 @@ There are no automated tests. The `npm test` script exits with an error. QA is d
 - `styles.css` — All styles
 - `netlify/functions/` — Serverless backend functions
 - `products.json` — Product catalog (static; source of truth for product definitions)
-- `scripts/sync-inventory.js` — Nightly Notion→Stripe inventory sync (runs via GitHub Actions, not in browser)
+- `scripts/sync-inventory.js` — Inventory sync script (unused; kept for reference)
 
 **Internationalization:** `/de/` mirrors the English site. Language is detected via `document.documentElement.lang`. German pages are separate HTML files under `/de/`.
 
@@ -45,7 +45,6 @@ There are no automated tests. The `npm test` script exits with an error. QA is d
 - Live stock is stored in Stripe Product metadata (`.metadata.stock`)
   - `-1` = unlimited, `0` = sold out, `> 0` = available quantity
 - Stock is reserved when checkout session is created, restored if session expires (via Stripe webhook)
-- Nightly GitHub Action syncs Notion database → Stripe stock
 
 ### Checkout Flow
 1. Cart stored in `localStorage`
@@ -83,4 +82,3 @@ Required in `.env` (never committed):
 - `CLIENT_ORIGIN`
 - `ADMIN_KEY`
 - `PROCESSED_LEDGER_PATH`
-- `NOTION_API_KEY`, `NOTION_DATABASE_ID` (for sync script)
