@@ -1423,3 +1423,8 @@ if (Array.isArray(products)) {
     });
   });
 })();
+
+// Prevent right-click save on images
+document.addEventListener('contextmenu', (e) => {
+  if (e.target.tagName === 'IMG') e.preventDefault();
+});
