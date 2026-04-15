@@ -185,6 +185,24 @@
 
   <!-- Products — new arrivals first -->
   <url>
+    <loc>https://www.einharu.com/pin-tuck-wide-leg-trouser-black</loc>
+    <lastmod>2026-04-15</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/stand-collar-hem-tie-top-ivory</loc>
+    <lastmod>2026-04-15</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/stand-collar-hem-tie-top-black</loc>
+    <lastmod>2026-04-15</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://www.einharu.com/beaker-pants</loc>
     <lastmod>2026-03-30</lastmod>
     <priority>0.9</priority>

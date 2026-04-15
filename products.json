@@ -1,5 +1,140 @@
 [
   {
+    "id": "item-helder-01",
+    "title": "Pin Tuck Wide Leg Trouser Black",
+    "price": 119,
+    "stock": 2,
+    "category": "collection",
+    "brand": "HELDER",
+    "currency": "EUR",
+    "fitNote": "Works well EU 34–38. Rise varies by size, sits low on a 34, mid-rise on a 36–38. Relaxed wide leg with front pin tuck detail.",
+    "defaultSize": "S",
+    "sizeDetails": [
+      "Waist: 37.5 cm",
+      "Waist to crotch: 36 cm",
+      "Thigh: 37 cm",
+      "Hip: 52 cm",
+      "Length: 102 cm",
+      "Hem: 31 cm",
+      "Measurements are taken flat (in cm). A 1–2 cm difference may occur depending on measuring method."
+    ],
+    "cover": "images/pin-tuck-wide-leg-trouser-black-1.jpg",
+    "images": [
+      "images/pin-tuck-wide-leg-trouser-black-1.jpg",
+      "images/pin-tuck-wide-leg-trouser-black-2.jpg",
+      "images/pin-tuck-wide-leg-trouser-black-3.jpg",
+      "images/pin-tuck-wide-leg-trouser-black-4.jpg",
+      "images/pin-tuck-wide-leg-trouser-black-5.jpg",
+      "images/pin-tuck-wide-leg-trouser-black-6.jpg",
+      "images/pin-tuck-wide-leg-trouser-black-7.jpg",
+      "images/pin-tuck-wide-leg-trouser-black-8.jpg"
+    ],
+    "description": "Wide-leg trouser with front pin tuck detail. Clean back welt pocket, structured fall. Made in Korea.",
+    "materials": [
+      "Polyester 93%",
+      "Viscose 5.3%",
+      "Spandex 1.7%"
+    ],
+    "care": [
+      "Dry clean only"
+    ],
+    "color": "Black",
+    "productType": "pants",
+    "releaseStatus": "available",
+    "slug": "pin-tuck-wide-leg-trouser-black",
+    "stripePriceId": "price_1TMUWeFPNKTl6gGp5R3qfvOr"
+  },
+  {
+    "id": "item-helder-02",
+    "title": "Stand Collar Hem Tie Top Ivory",
+    "price": 105,
+    "stock": 2,
+    "category": "collection",
+    "brand": "HELDER",
+    "currency": "EUR",
+    "fitNote": "Works well EU 34–38. Oversized boxy crop with a structured stand collar and adjustable hem tie.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Shoulder: 58 cm",
+      "Neck height: 12 cm",
+      "Chest: 61 cm",
+      "Hem: 57 cm",
+      "Length: 57.5 cm",
+      "Measurements are taken flat (in cm). A 1–2 cm difference may occur depending on measuring method."
+    ],
+    "cover": "images/stand-collar-hem-tie-top-ivory-1.jpg",
+    "images": [
+      "images/stand-collar-hem-tie-top-ivory-1.jpg",
+      "images/stand-collar-hem-tie-top-ivory-2.jpg",
+      "images/stand-collar-hem-tie-top-ivory-3.jpg",
+      "images/stand-collar-hem-tie-top-ivory-4.jpg",
+      "images/stand-collar-hem-tie-top-ivory-5.jpg",
+      "images/stand-collar-hem-tie-top-ivory-6.jpg",
+      "images/stand-collar-hem-tie-top-ivory-7.jpg",
+      "images/stand-collar-hem-tie-top-ivory-8.jpg",
+      "images/stand-collar-hem-tie-top-ivory-9.jpg"
+    ],
+    "description": "Boxy cropped top with a stand collar, sleeveless cut, centre-front button closure, and a ribbon tie at the hem. Structured but light — works alone or layered. Made in Korea.",
+    "materials": [
+      "Wool 31%",
+      "Acrylic 26%",
+      "Polyester 43%"
+    ],
+    "care": [
+      "Dry clean only"
+    ],
+    "color": "Ivory",
+    "productType": "tops",
+    "releaseStatus": "available",
+    "slug": "stand-collar-hem-tie-top-ivory",
+    "stripePriceId": "price_1TMUe9FPNKTl6gGpJ1WejYzj"
+  },
+  {
+    "id": "item-helder-03",
+    "title": "Stand Collar Hem Tie Top Black",
+    "price": 105,
+    "stock": 3,
+    "category": "collection",
+    "brand": "HELDER",
+    "currency": "EUR",
+    "fitNote": "Works well EU 34–38. Oversized boxy crop with a structured stand collar and adjustable hem tie.",
+    "defaultSize": "One Size",
+    "sizeDetails": [
+      "Shoulder: 58 cm",
+      "Neck height: 12 cm",
+      "Chest: 61 cm",
+      "Hem: 57 cm",
+      "Length: 57.5 cm",
+      "Measurements are taken flat (in cm). A 1–2 cm difference may occur depending on measuring method."
+    ],
+    "cover": "images/stand-collar-hem-tie-top-black-1.jpg",
+    "images": [
+      "images/stand-collar-hem-tie-top-black-1.jpg",
+      "images/stand-collar-hem-tie-top-black-2.jpg",
+      "images/stand-collar-hem-tie-top-black-3.jpg",
+      "images/stand-collar-hem-tie-top-black-4.jpg",
+      "images/stand-collar-hem-tie-top-black-5.jpg",
+      "images/stand-collar-hem-tie-top-black-6.jpg",
+      "images/stand-collar-hem-tie-top-black-7.jpg",
+      "images/stand-collar-hem-tie-top-black-8.jpg",
+      "images/stand-collar-hem-tie-top-black-9.jpg"
+    ],
+    "description": "Boxy cropped top with a stand collar, sleeveless cut, centre-front button closure, and a ribbon tie at the hem. Structured but light — works alone or layered. Made in Korea.",
+    "materials": [
+      "Wool 31%",
+      "Acrylic 26%",
+      "Polyester 43%"
+    ],
+    "care": [
+      "Dry clean only"
+    ],
+    "color": "Black",
+    "productType": "tops",
+    "releaseStatus": "available",
+    "slug": "stand-collar-hem-tie-top-black",
+    "stripePriceId": "price_1TMUg0FPNKTl6gGpOFFztuUj"
+  },
+  {
     "id": "item-cs-02",
     "title": "Beaker Pants",
     "price": 159,
