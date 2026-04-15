@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title id="page-title">Product | einHaru Collective</title>
   <meta name="description" content="Shop curated minimalist fashion by einHaru Collective. Product details, fit notes, and EU shipping from Berlin." id="meta-description">
-  <meta name="robots" content="index, follow" id="meta-robots" />
+  <meta name="robots" content="noindex, follow" id="meta-robots" />
   <link rel="canonical" id="canonical-link">
   <script>
     (function () {
@@ -17,11 +17,9 @@
           var candidate = parts.length === 1 ? parts[0] : '';
           if (candidate && !candidate.includes('.')) slug = decodeURIComponent(candidate);
         }
-        if (!slug) {
-          var r = document.getElementById('meta-robots');
-          if (r) r.setAttribute('content', 'noindex, follow');
-          return;
-        }
+        if (!slug) return;
+        var r = document.getElementById('meta-robots');
+        if (r) r.setAttribute('content', 'index, follow');
         var origin = 'https://www.einharu.com';
         var canonical = origin + '/' + encodeURIComponent(slug);
         var link = document.getElementById('canonical-link');

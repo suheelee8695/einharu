@@ -143,15 +143,9 @@
   };
   const getProductPath = (product) => {
     const slug = String(product?.slug || '').trim();
-    if (slug) {
-      const isDe = location.pathname.toLowerCase().startsWith('/de/');
-      return isDe ? `/de/${encodeURIComponent(slug)}` : `/${encodeURIComponent(slug)}`;
-    }
-    const id = String(product?.id || '').trim();
+    if (!slug) return '/';
     const isDe = location.pathname.toLowerCase().startsWith('/de/');
-    return isDe
-      ? `/de/product.html?id=${encodeURIComponent(id)}`
-      : `/product.html?id=${encodeURIComponent(id)}`;
+    return isDe ? `/de/${encodeURIComponent(slug)}` : `/${encodeURIComponent(slug)}`;
   };
   const getAbsoluteProductUrl = (product) => {
     const urlSlug = String(getQuery('slug') || getSlugFromPathname() || '').trim();
@@ -955,19 +949,24 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       return;
     }
 
-    // Keep EN/DE switcher page-to-page on PDP (preserve slug/id query fallback).
+    // If loaded via legacy ?id= param, redirect to the clean slug URL.
+    if (!slug && id && product.slug) {
+      const isDe = location.pathname.toLowerCase().startsWith('/de/');
+      const cleanUrl = isDe
+        ? `/de/${encodeURIComponent(product.slug)}`
+        : `/${encodeURIComponent(product.slug)}`;
+      window.location.replace(cleanUrl);
+      return;
+    }
+
+    // Keep EN/DE switcher page-to-page on PDP.
+    const productSlug = product.slug || slug;
     const langLinks = $$('.language-switcher a');
-    if (langLinks.length) {
+    if (langLinks.length && productSlug) {
       langLinks.forEach((a) => {
         const label = (a.textContent || '').trim().toLowerCase();
-        if (slug) {
-          if (label === 'de') a.setAttribute('href', `/de/${encodeURIComponent(slug)}`);
-          if (label === 'en') a.setAttribute('href', `/${encodeURIComponent(slug)}`);
-        } else {
-          const query = `id=${encodeURIComponent(id)}`;
-          if (label === 'de') a.setAttribute('href', `/de/product.html?${query}`);
-          if (label === 'en') a.setAttribute('href', `/product.html?${query}`);
-        }
+        if (label === 'de') a.setAttribute('href', `/de/${encodeURIComponent(productSlug)}`);
+        if (label === 'en') a.setAttribute('href', `/${encodeURIComponent(productSlug)}`);
       });
     }
 
