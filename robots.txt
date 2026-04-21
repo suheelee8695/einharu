@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /product.html
 
 Sitemap: https://www.einharu.com/sitemap.xml

@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title id="page-title">Produkt | einHaru Collective</title>
   <meta name="description" content="Kuratierte minimalistische Mode von einHaru Collective. Produktdetails, Passformhinweise und EU-Versand aus Berlin." id="meta-description">
+  <meta name="robots" content="index, follow" id="meta-robots" />
   <link rel="canonical" href="https://www.einharu.com/de/product.html" id="canonical-link">
   <script>
     (function () {
@@ -16,7 +17,11 @@
           var candidate = (parts.length === 2 && parts[0] === 'de') ? parts[1] : '';
           if (candidate && !candidate.includes('.')) slug = decodeURIComponent(candidate);
         }
-        if (!slug) return;
+        if (!slug) {
+          var r = document.getElementById('meta-robots');
+          if (r) r.setAttribute('content', 'noindex, follow');
+          return;
+        }
         var origin = 'https://www.einharu.com';
         var canonical = origin + '/de/' + encodeURIComponent(slug);
         var link = document.getElementById('canonical-link');
