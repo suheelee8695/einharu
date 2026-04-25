@@ -135,6 +135,21 @@
   to = "/product.html?slug=:slug"
   status = 200
 
+# Security headers for all pages
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# HTML pages must not be cached so deploys take effect immediately
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 # CORS headers for functions (so frontend JS can call them)
 [[headers]]
   for = "/.netlify/functions/*"

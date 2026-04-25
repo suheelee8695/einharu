@@ -150,6 +150,16 @@
     <changefreq>yearly</changefreq>
   </url>
 
+  <!-- Impressum (German legal requirement) -->
+  <url>
+    <loc>https://www.einharu.com/impressum.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/impressum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/impressum.html"/>
+    <lastmod>2026-04-25</lastmod>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
   <!-- Privacy -->
   <url>
     <loc>https://www.einharu.com/privacy.html</loc>
@@ -204,7 +214,7 @@
   </url>
   <url>
     <loc>https://www.einharu.com/beaker-pants</loc>
-    <lastmod>2026-03-30</lastmod>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
