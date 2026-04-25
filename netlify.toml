@@ -86,8 +86,23 @@
   status = 200
 
 [[redirects]]
+  from = "/buy-korean-fashion-europe"
+  to = "/buy-korean-fashion-europe.html"
+  status = 200
+
+[[redirects]]
   from = "/korean-fashion-berlin"
   to = "/korean-fashion-berlin.html"
+  status = 200
+
+[[redirects]]
+  from = "/japanese-minimalist-fashion-europe"
+  to = "/japanese-minimalist-fashion-europe.html"
+  status = 200
+
+[[redirects]]
+  from = "/sizing-guide"
+  to = "/sizing-guide.html"
   status = 200
 
 [[redirects]]

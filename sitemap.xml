@@ -32,19 +32,35 @@
 
   <!-- SEO landing pages -->
   <url>
-    <loc>https://www.einharu.com/korean-fashion-berlin.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/korean-fashion-berlin.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/koreanische-mode-berlin.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/korean-fashion-berlin.html"/>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://www.einharu.com/korean-fashion-berlin</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/korean-fashion-berlin"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/koreanische-mode-berlin"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/korean-fashion-berlin"/>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/de/koreanische-mode-berlin.html</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/koreanische-mode-berlin.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/korean-fashion-berlin.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/korean-fashion-berlin.html"/>
+    <loc>https://www.einharu.com/japanese-minimalist-fashion-europe</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/japanese-minimalist-fashion-europe"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/japanese-minimalist-fashion-europe"/>
+    <lastmod>2026-04-25</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/sizing-guide</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/sizing-guide"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/sizing-guide"/>
+    <lastmod>2026-04-25</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/de/koreanische-mode-berlin</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/koreanische-mode-berlin"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/korean-fashion-berlin"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/korean-fashion-berlin"/>
     <lastmod>2026-03-30</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
@@ -66,9 +82,9 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/buy-korean-fashion-europe.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/buy-korean-fashion-europe.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/buy-korean-fashion-europe.html"/>
+    <loc>https://www.einharu.com/buy-korean-fashion-europe</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/buy-korean-fashion-europe"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/buy-korean-fashion-europe"/>
     <lastmod>2026-03-30</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
