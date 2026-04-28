@@ -2,22 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>New Arrivals — einHaru Collective</title>
+  <title>Coming Soon — einHaru Collective | Korean Minimalist Fashion Berlin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="New arrivals at einHaru Collective — Beaker Pants, Bijo Shirt and Shearling Wrap Shirt by Korean label Londonflat. Now available, EU shipping from Berlin." />
-  <link rel="canonical" href="https://www.einharu.com/coming-soon.html" />
-  <meta property="og:title" content="New Arrivals — einHaru Collective" />
-  <meta property="og:description" content="New arrivals at einHaru Collective — Beaker Pants, Bijo Shirt and Shearling Wrap Shirt by Korean label Londonflat. Now available, EU shipping from Berlin." />
+  <meta name="description" content="Something new is on its way at einHaru Collective. Berlin-based boutique for Korean minimalist fashion, shipping EU-wide. Browse our current collection while you wait." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.einharu.com/coming-soon" />
+
+  <meta property="og:title" content="Coming Soon — einHaru Collective | Korean Minimalist Fashion Berlin" />
+  <meta property="og:description" content="Something new is on its way at einHaru Collective. Berlin-based boutique for Korean minimalist fashion, shipping EU-wide. Browse our current collection while you wait." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.einharu.com/coming-soon.html" />
-  <meta property="og:image" content="https://www.einharu.com/images/og-home.jpg" />
+  <meta property="og:url" content="https://www.einharu.com/coming-soon" />
+  <meta property="og:image" content="https://www.einharu.com/images/shearling-wrap-shirt-1.webp" />
   <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="icon" href="/images/einharuheaderlogo.svg" />
   <link rel="manifest" href="site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Ovo&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "einHaru Collective",
+    "url": "https://www.einharu.com",
+    "description": "Berlin-based boutique curating minimalist Korean designers, shipping EU-wide",
+    "sameAs": ["https://www.instagram.com/einharucollective"]
+  }
+  </script>
 </head>
 <body class="comingsoon-page">
   <div class="site-banner" role="status" aria-live="polite" id="site-banner">
@@ -48,29 +62,14 @@
       <a href="index.html" class="back-btn" aria-label="Go back to shop">← Back</a>
     </div>
 
-    <section class="shop-layout" aria-label="New arrivals">
-      <section class="comingsoon-list" aria-label="New arrivals product list">
-        <h1 class="comingsoon-heading">Now Available</h1>
-        <div id="coming-soon-list" class="product-list" aria-label="New arrivals list view"></div>
-      </section>
+    <section class="comingsoon-empty" aria-label="Coming soon notice">
+      <h1 class="comingsoon-heading">Nothing new on the horizon just yet</h1>
+      <p class="comingsoon-subtext">Check back soon.</p>
+    </section>
 
-      <aside class="comingsoon-images" aria-label="New arrivals campaign images">
-        <img src="images/beaker-pants-1.webp" alt="Londonflat Beaker Pants look 1" loading="lazy" />
-        <img src="images/beaker-pants-2.webp" alt="Londonflat Beaker Pants look 2" loading="lazy" />
-        <img src="images/beaker-pants-3.webp" alt="Londonflat Beaker Pants look 3" loading="lazy" />
-        <img src="images/beaker-pants-4.webp" alt="Londonflat Beaker Pants look 4" loading="lazy" />
-        <img src="images/bijo-shirt-1.webp" alt="Londonflat Bijo Shirt look 1" loading="lazy" />
-        <img src="images/bijo-shirt-2.webp" alt="Londonflat Bijo Shirt look 2" loading="lazy" />
-        <img src="images/bijo-shirt-3.webp" alt="Londonflat Bijo Shirt look 3" loading="lazy" />
-        <img src="images/shearling-wrap-shirt-1.webp" alt="Londonflat Shearling Wrap Shirt look 1" loading="lazy" />
-        <img src="images/shearling-wrap-shirt-2.webp" alt="Londonflat Shearling Wrap Shirt look 2" loading="lazy" />
-        <img src="images/shearling-wrap-shirt-3.webp" alt="Londonflat Shearling Wrap Shirt look 3" loading="lazy" />
-        <div class="comingsoon-cta">
-          <a href="/beaker-pants" class="button-secondary">Shop Beaker Pants</a>
-          <a href="/bijo-shirt" class="button-secondary">Shop Bijo Shirt</a>
-          <a href="/shearling-wrap-shirt" class="button-secondary">Shop Shearling Wrap Shirt</a>
-        </div>
-      </aside>
+    <section class="comingsoon-drops" aria-label="Current collection">
+      <h2 class="comingsoon-drops-heading">Check out our newest drops</h2>
+      <section class="product-grid" id="newest-drops-grid" data-brands="Londonflat,HELDER" aria-label="Newest drops"></section>
     </section>
   </main>
 
@@ -90,6 +89,7 @@
       </nav>
     </div>
   </footer>
+
   <section class="cookie-bar" aria-label="Cookie notice">
     <p>
       We use cookies to enhance your experience. By continuing to browse, you agree to our
@@ -127,12 +127,6 @@
     </footer>
   </aside>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const y = document.getElementById('year2');
-      if (y) y.textContent = new Date().getFullYear();
-    });
-  </script>
   <script>
     window.EH_BACKEND = location.origin;
   </script>

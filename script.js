@@ -684,7 +684,8 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       comingSoonList.classList.remove('product-list');
       comingSoonList.classList.remove('product-grid--list');
     }
-    if (!grid && !isComingSoonSplitView && !isComingSoonListOnly) return;
+    const newestDropsGrid = $('#newest-drops-grid');
+    if (!grid && !isComingSoonSplitView && !isComingSoonListOnly && !newestDropsGrid) return;
     const sortSelect = $('#sort-products');
     const viewBtns = $$('[data-view-toggle]');
     const typeBtns = $$('[data-product-type]');
@@ -880,6 +881,16 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     };
 
     renderCards();
+
+    if (newestDropsGrid) {
+      const brandsAttr = newestDropsGrid.dataset.brands;
+      const brandFilter = brandsAttr ? brandsAttr.split(',').map(b => b.trim()) : null;
+      const available = products.filter(p =>
+        getProductState(p) !== 'coming_soon' &&
+        (!brandFilter || brandFilter.includes(p.brand))
+      ).slice(0, 6);
+      renderCardsToGrid(newestDropsGrid, available);
+    }
 
     if (typeBtns.length) {
       typeBtns.forEach((btn) => {

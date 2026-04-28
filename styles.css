@@ -1041,7 +1041,7 @@ button.icon-btn::-moz-focus-inner {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 32%;
+  object-position: center 65%;
   display: block;
 }
 
@@ -1076,8 +1076,8 @@ button.icon-btn::-moz-focus-inner {
 
 .homepage .coming-soon-banner {
   isolation: isolate;
-  height: 38vh;
-  min-height: 250px;
+  height: 25vh;
+  min-height: 180px;
 }
 
 .homepage .coming-soon-banner::before {
@@ -1108,6 +1108,10 @@ button.icon-btn::-moz-focus-inner {
 .homepage .coming-soon-collage__tile--a {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
+}
+
+.homepage .coming-soon-collage__tile--a img {
+  object-position: center 70%;
 }
 
 .homepage .coming-soon-collage__tile--b {
@@ -1157,6 +1161,34 @@ button.icon-btn::-moz-focus-inner {
   letter-spacing: 0.17em;
   text-transform: uppercase;
   font-weight: 500;
+}
+
+.homepage .coming-soon-banner-copy.banner-dm-sans {
+  font-family: 'DM Sans', sans-serif;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-20%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #fff;
+  text-shadow: none;
+  line-height: 1.1;
+}
+
+.homepage .coming-soon-banner-copy.banner-dm-sans strong {
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.homepage .coming-soon-banner-copy.banner-dm-sans span {
+  font-size: clamp(20px, 2.8vw, 40px);
+  font-weight: 300;
+  letter-spacing: 0.01em;
 }
 
 .homepage .coming-soon-banner-copy small {
@@ -1373,6 +1405,37 @@ button.icon-btn::-moz-focus-inner {
 .comingsoon-page .comingsoon-back .back-btn {
   margin-left: 0;
   font-size: 0.875rem;
+}
+
+.comingsoon-empty {
+  padding: 60px 24px 40px;
+  text-align: center;
+}
+
+.comingsoon-empty .comingsoon-heading {
+  margin: 0 0 12px;
+}
+
+.comingsoon-subtext {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted, #888);
+  margin: 0;
+}
+
+.comingsoon-drops {
+  padding: 0 24px 64px;
+}
+
+.comingsoon-drops-heading {
+  font-family: var(--body-font, Inter), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 28px;
 }
 
 .shop-header-right {
