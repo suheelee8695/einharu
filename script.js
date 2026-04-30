@@ -713,7 +713,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     };
 
     const filteredProducts = (items, filterMode, productTypeMode) => {
-      let result = items;
+      let result = items.filter((p) => getProductState(p) !== 'sold_out');
 
       if (filterMode !== 'all') {
         result = result.filter((p) => (p.category || 'collection').toLowerCase() === filterMode);
