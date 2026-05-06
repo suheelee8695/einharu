@@ -7,6 +7,30 @@ const products = require('../../products.json');
 
 const SITE = 'https://www.einharu.com';
 
+// GMC-optimized titles — used only in the feed, not on the website
+const GMC_TITLES = {
+  'stand-collar-hem-tie-top-black':          "einHaru Women's Stand Collar Tie Hem Crop Top – Black",
+  'beaker-pants':                             "einHaru Women's Beaker Wide Leg Tailored Pants – Charcoal",
+  'shearling-wrap-shirt':                     "einHaru Women's Shearling Wrap Oversized Shirt – Light Grey",
+  'bijo-shirt':                               "einHaru Women's Bijo Layered Minimal Shirt – White",
+  'pin-tuck-wide-leg-trouser-black':          "einHaru Women's Pin Tuck Wide Leg Trousers – Black",
+  'stand-collar-hem-tie-top-ivory':           "einHaru Women's Stand Collar Tie Hem Crop Top – Ivory Cotton",
+  'compact-leather-tote':                     "einHaru Women's Compact Leather Tote Bag – Brown",
+  'sleeveless-shirt-dress-with-tulle-overlay':"einHaru Sleeveless Shirt Dress with Tulle Overlay – Black",
+  'mesh-sheer-long-sleeve':                   "einHaru Women's Sheer Mesh Long Sleeve Top – Black",
+  'crinkled-tiered-long-skirt-black':         "einHaru Crinkled Tiered Maxi Skirt – Black",
+  'vegan-leather-v-neck-sleeveless-dress':    "einHaru Vegan Leather V-Neck Sleeveless Midi Dress – Black",
+  'double-layer-sheer-mesh-long-sleeve-black':"einHaru Double-Layer Sheer Mesh Long Sleeve Top – Black",
+  'draped-layered-top':                       "einHaru Women's Draped Layered Blouse Top – Black",
+  'mesh-cropped-tank-wine':                   "einHaru Women's Cropped Mesh Tank Top – Wine Red",
+  'fluid-wide-leg-pants-dark-blue':           "einHaru Fluid Wide-Leg Trousers – Dark Blue",
+  'soft-volume-gathered-dress-black':         "einHaru Soft Volume Gathered Midi Dress – Black",
+  'textured-leather-tote-bag':                "einHaru Textured Vegan Leather Tote Bag – Large",
+  'vegan-leather-glossy-trench-coat-black':   "einHaru Women's Glossy Vegan Leather Trench Coat – Black",
+  'washed-grey-raw-edge-denim-trousers':      "einHaru Women's Washed Grey Raw-Edge Denim Trousers",
+  'zip-front-detachable-dungaree-dress':      "einHaru Women's Zip-Front Detachable Dungaree Dress – Black",
+};
+
 // Google product category taxonomy paths by productType
 const GMC_CATEGORY = {
   dresses:    'Apparel & Accessories > Clothing > Dresses',
@@ -76,9 +100,10 @@ exports.handler = async () => {
       const colorFromTitle = COLORS.find(c => new RegExp(`\\b${c}\\b`, 'i').test(p.title));
       const color = p.color || colorFromDash || colorFromTitle || null;
 
+      const gmcTitle = GMC_TITLES[p.slug] || p.title;
       return `    <item>
       <g:id>${esc(p.slug)}</g:id>
-      <g:title>${esc(p.title)}</g:title>
+      <g:title>${esc(gmcTitle)}</g:title>
       <g:description>${esc(p.description || p.title)}</g:description>
       <g:link>${esc(`${SITE}/${p.slug}`)}</g:link>
       <g:image_link>${esc(imageUrl)}</g:image_link>
