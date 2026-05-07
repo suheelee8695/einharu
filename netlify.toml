@@ -141,6 +141,11 @@
   status = 200
 
 [[redirects]]
+  from = "/how-to-style-wide-leg-trousers"
+  to = "/how-to-style-wide-leg-trousers.html"
+  status = 200
+
+[[redirects]]
   from = "/de/:slug"
   to = "/de/product.html?slug=:slug"
   status = 200
