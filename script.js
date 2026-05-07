@@ -587,7 +587,40 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         url: productUrl,
         priceCurrency: product.currency || 'EUR',
         price: Number(product.price ?? 0).toFixed(2),
-        availability
+        availability,
+        shippingDetails: [
+          {
+            '@type': 'OfferShippingDetails',
+            shippingRate: { '@type': 'MonetaryAmount', value: '4.90', currency: 'EUR' },
+            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'DE' }
+          },
+          {
+            '@type': 'OfferShippingDetails',
+            shippingRate: { '@type': 'MonetaryAmount', value: '9.90', currency: 'EUR' },
+            shippingDestination: [
+              { '@type': 'DefinedRegion', addressCountry: 'AT' },
+              { '@type': 'DefinedRegion', addressCountry: 'FR' },
+              { '@type': 'DefinedRegion', addressCountry: 'NL' },
+              { '@type': 'DefinedRegion', addressCountry: 'BE' },
+              { '@type': 'DefinedRegion', addressCountry: 'IT' },
+              { '@type': 'DefinedRegion', addressCountry: 'ES' },
+              { '@type': 'DefinedRegion', addressCountry: 'PL' }
+            ]
+          },
+          {
+            '@type': 'OfferShippingDetails',
+            shippingRate: { '@type': 'MonetaryAmount', value: '18.90', currency: 'EUR' },
+            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'ZZ' }
+          }
+        ],
+        hasMerchantReturnPolicy: {
+          '@type': 'MerchantReturnPolicy',
+          applicableCountry: 'DE',
+          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+          merchantReturnDays: 14,
+          returnMethod: 'https://schema.org/ReturnByMail',
+          returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility'
+        }
       }
     };
 
