@@ -417,7 +417,8 @@
     "stripePriceId": "price_1SqInLFPNKTl6gGpG2EwqlIP",
     "productType": "tops",
     "releaseStatus": "available",
-    "slug": "double-layer-sheer-mesh-long-sleeve-blue"
+    "slug": "double-layer-sheer-mesh-long-sleeve-blue",
+    "googleMerchantExclude": true
   },
   {
     "id": "item-26",
@@ -509,6 +510,7 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "mesh-long-sleeve-and-layering-tube-set",
+    "googleMerchantExclude": true,
     "color": "Black"
   },
   {
@@ -637,7 +639,8 @@
     "stripePriceId": "price_1SE4IDFPNKTl6gGpguBOowG9",
     "productType": "outerwear",
     "releaseStatus": "available",
-    "slug": "vegan-leather-glossy-trench-coat-brown"
+    "slug": "vegan-leather-glossy-trench-coat-brown",
+    "googleMerchantExclude": true
   },
   {
     "id": "item-02",
@@ -690,7 +693,8 @@
     "stripePriceId": "price_1SE4IFFPNKTl6gGphE5adT1F",
     "productType": "tops",
     "releaseStatus": "available",
-    "slug": "bralette-layered-stripe-shirt"
+    "slug": "bralette-layered-stripe-shirt",
+    "googleMerchantExclude": true
   },
   {
     "id": "item-03",
@@ -827,6 +831,7 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "sheer-contrast-button-up-shirt",
+    "googleMerchantExclude": true,
     "color": "Ivory / Black"
   },
   {
@@ -916,6 +921,7 @@
     "productType": "pants",
     "releaseStatus": "available",
     "slug": "utility-strap-cargo-pants",
+    "googleMerchantExclude": true,
     "color": "Olive"
   },
   {
@@ -1040,6 +1046,7 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "crinkle-texture-button-shirt",
+    "googleMerchantExclude": true,
     "color": "Brown"
   },
   {
@@ -1083,7 +1090,8 @@
     "stripePriceId": "price_1SE4IOFPNKTl6gGpIslkFRZ4",
     "productType": "pants",
     "releaseStatus": "available",
-    "slug": "barrel-shaped-wide-leg-trousers-ivory"
+    "slug": "barrel-shaped-wide-leg-trousers-ivory",
+    "googleMerchantExclude": true
   },
   {
     "id": "item-12",
@@ -1123,6 +1131,7 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "3d-textured-ruffle-shirt",
+    "googleMerchantExclude": true,
     "color": "Black"
   },
   {
@@ -1164,7 +1173,8 @@
     "stripePriceId": "price_1SE4IQFPNKTl6gGpuBnkFKSL",
     "productType": "tops",
     "releaseStatus": "available",
-    "slug": "draped-scarf-knit-long-sleeve-grey"
+    "slug": "draped-scarf-knit-long-sleeve-grey",
+    "googleMerchantExclude": true
   },
   {
     "id": "item-14",
@@ -1463,7 +1473,8 @@
     "stripePriceId": "price_1SESgTFPNKTl6gGpr0Stqv8B",
     "productType": "pants",
     "releaseStatus": "available",
-    "slug": "fluid-wide-leg-pants-brown"
+    "slug": "fluid-wide-leg-pants-brown",
+    "googleMerchantExclude": true
   },
   {
     "id": "item-21",
@@ -1508,7 +1519,8 @@
     "stripePriceId": "price_1SEShTFPNKTl6gGp8xtzUhnX",
     "productType": "pants",
     "releaseStatus": "available",
-    "slug": "barrel-shaped-wide-leg-trousers-black"
+    "slug": "barrel-shaped-wide-leg-trousers-black",
+    "googleMerchantExclude": true
   },
   {
     "id": "item-22",
@@ -1549,6 +1561,7 @@
     "stripePriceId": "price_1SESkdFPNKTl6gGpOq2wO1EU",
     "productType": "tops",
     "releaseStatus": "available",
-    "slug": "draped-scarf-knit-long-sleeve-black"
+    "slug": "draped-scarf-knit-long-sleeve-black",
+    "googleMerchantExclude": true
   }
 ]

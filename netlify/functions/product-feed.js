@@ -58,7 +58,7 @@ function fmtPrice(amount) {
 exports.handler = async () => {
   try {
     const available = products.filter(
-      p => p.stripePriceId && p.releaseStatus === 'available'
+      p => p.stripePriceId && p.releaseStatus === 'available' && !p.googleMerchantExclude
     );
 
     // Fetch live stock for all products in parallel
