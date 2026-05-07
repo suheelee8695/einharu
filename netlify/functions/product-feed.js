@@ -29,6 +29,7 @@ const GMC_TITLES = {
   'vegan-leather-glossy-trench-coat-black':   "einHaru Women's Glossy Vegan Leather Trench Coat – Black",
   'washed-grey-raw-edge-denim-trousers':      "einHaru Women's Washed Grey Raw-Edge Denim Trousers",
   'zip-front-detachable-dungaree-dress':      "einHaru Women's Zip-Front Detachable Dungaree Dress – Black",
+  'mesh-cropped-tank-white':                  "einHaru Women's Cropped Mesh Tank Top – White",
 };
 
 // Google product category taxonomy paths by productType
