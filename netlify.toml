@@ -146,6 +146,11 @@
   status = 200
 
 [[redirects]]
+  from = "/quiet-luxury-fashion"
+  to = "/quiet-luxury-fashion.html"
+  status = 200
+
+[[redirects]]
   from = "/de/:slug"
   to = "/de/product.html?slug=:slug"
   status = 200
