@@ -151,6 +151,11 @@
   status = 200
 
 [[redirects]]
+  from = "/feed"
+  to = "/feed.xml"
+  status = 301
+
+[[redirects]]
   from = "/de/:slug"
   to = "/de/product.html?slug=:slug"
   status = 200
