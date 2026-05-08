@@ -161,6 +161,31 @@
   status = 200
 
 [[redirects]]
+  from = "/what-to-wear-berlin"
+  to = "/what-to-wear-berlin.html"
+  status = 200
+
+[[redirects]]
+  from = "/vegan-leather-fashion"
+  to = "/vegan-leather-fashion.html"
+  status = 200
+
+[[redirects]]
+  from = "/japanese-vs-korean-fashion"
+  to = "/japanese-vs-korean-fashion.html"
+  status = 200
+
+[[redirects]]
+  from = "/how-to-style-oversized-shirt"
+  to = "/how-to-style-oversized-shirt.html"
+  status = 200
+
+[[redirects]]
+  from = "/minimalist-summer-outfits"
+  to = "/minimalist-summer-outfits.html"
+  status = 200
+
+[[redirects]]
   from = "/feed"
   to = "/feed.xml"
   status = 301
