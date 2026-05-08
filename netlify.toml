@@ -151,6 +151,16 @@
   status = 200
 
 [[redirects]]
+  from = "/independent-fashion-boutiques-berlin"
+  to = "/independent-fashion-boutiques-berlin.html"
+  status = 200
+
+[[redirects]]
+  from = "/korean-minimalist-fashion-guide"
+  to = "/korean-minimalist-fashion-guide.html"
+  status = 200
+
+[[redirects]]
   from = "/feed"
   to = "/feed.xml"
   status = 301
