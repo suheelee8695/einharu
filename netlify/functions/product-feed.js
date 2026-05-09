@@ -32,16 +32,17 @@ const GMC_TITLES = {
   'mesh-cropped-tank-white':                  "einHaru Women's Cropped Mesh Tank Top – White",
 };
 
-// Google product category taxonomy paths by productType
+// Google Product Taxonomy numeric IDs — avoids Pinterest Warning 126 from separator-counting
+// Reference: https://www.google.com/basepages/producttype/taxonomy-with-ids.en-US.txt
 const GMC_CATEGORY = {
-  dresses:    'Apparel & Accessories > Clothing > Dresses',
-  tops:       'Apparel & Accessories > Clothing > Tops',
-  pants:      'Apparel & Accessories > Clothing > Pants',
-  skirts:     'Apparel & Accessories > Clothing > Skirts',
-  outerwear:  'Apparel & Accessories > Clothing > Outerwear',
-  accessories:'Apparel & Accessories > Handbags, Wallets & Cases',
+  dresses:    '2271',  // Apparel & Accessories > Clothing > Dresses
+  tops:       '212',   // Apparel & Accessories > Clothing > Tops & Shirts
+  pants:      '207',   // Apparel & Accessories > Clothing > Pants
+  skirts:     '5598',  // Apparel & Accessories > Clothing > Skirts
+  outerwear:  '5441',  // Apparel & Accessories > Clothing > Outerwear
+  accessories:'2563',  // Apparel & Accessories > Handbags, Wallets & Cases > Handbags
 };
-const DEFAULT_CATEGORY = 'Apparel & Accessories > Clothing';
+const DEFAULT_CATEGORY = '212'; // Apparel & Accessories > Clothing > Tops & Shirts
 
 function esc(str) {
   return String(str || '')
