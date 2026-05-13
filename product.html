@@ -7,6 +7,15 @@
   <meta name="description" content="Shop curated minimalist fashion by einHaru Collective. Product details, fit notes, and EU shipping from Berlin." id="meta-description">
   <meta name="robots" content="index, follow" id="meta-robots" />
   <link rel="canonical" id="canonical-link">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="" id="og-url">
+  <meta property="og:title" content="Product | einHaru Collective" id="og-title">
+  <meta property="og:description" content="Shop curated minimalist fashion by einHaru Collective." id="og-desc">
+  <meta property="og:image" content="" id="og-image">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" hreflang="en" href="" id="hreflang-en">
+  <link rel="alternate" hreflang="de" href="" id="hreflang-de">
+  <link rel="alternate" hreflang="x-default" href="" id="hreflang-xd">
   <script>
     (function () {
       try {
@@ -28,24 +37,15 @@
         if (link) link.setAttribute('href', canonical);
         var og = document.getElementById('og-url');
         if (og) og.setAttribute('content', canonical);
-        var en = document.querySelector('link[hreflang="en"]');
+        var en = document.getElementById('hreflang-en');
         if (en) en.setAttribute('href', canonical);
-        var xd = document.querySelector('link[hreflang="x-default"]');
+        var xd = document.getElementById('hreflang-xd');
         if (xd) xd.setAttribute('href', canonical);
-        var de = document.querySelector('link[hreflang="de"]');
+        var de = document.getElementById('hreflang-de');
         if (de) de.setAttribute('href', origin + '/de/' + encodeURIComponent(slug));
       } catch (_) {}
     })();
   </script>
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.einharu.com/product.html" id="og-url">
-  <meta property="og:title" content="Product | einHaru Collective" id="og-title">
-  <meta property="og:description" content="Shop curated minimalist fashion by einHaru Collective." id="og-desc">
-  <meta property="og:image" content="" id="og-image">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="alternate" hreflang="en" href="https://www.einharu.com/product.html">
-  <link rel="alternate" hreflang="de" href="https://www.einharu.com/de/product.html">
-  <link rel="alternate" hreflang="x-default" href="https://www.einharu.com/product.html">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="/images/einharuheaderlogo.svg">
   <link rel="manifest" href="/site.webmanifest">
