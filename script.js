@@ -565,7 +565,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     const desc = Array.isArray(product.description) ? product.description.join(' ') : (product.description || '');
     const availability = product.releaseStatus === 'coming_soon'
       ? 'https://schema.org/PreSale'
-      : (product._soldOut || product.releaseStatus !== 'available')
+      : (product._soldOut || product.releaseStatus !== 'available' || Number(product.stock ?? 1) === 0)
       ? 'https://schema.org/OutOfStock'
       : 'https://schema.org/InStock';
     const productLd = {
