@@ -191,6 +191,21 @@
   status = 301
 
 [[redirects]]
+  from = "/impressum.html"
+  to = "/impressum"
+  status = 301
+
+[[redirects]]
+  from = "/minimalist-fashion-berlin.html"
+  to = "/minimalist-fashion-berlin"
+  status = 301
+
+[[redirects]]
+  from = "/seoul-berlin-minimalist-style-guide.html"
+  to = "/seoul-berlin-minimalist-style-guide"
+  status = 301
+
+[[redirects]]
   from = "/de/product.html"
   to = "/de/"
   status = 301
