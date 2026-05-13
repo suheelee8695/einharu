@@ -24,7 +24,7 @@
 
   <!-- New Arrivals -->
   <url>
-    <loc>https://www.einharu.com/coming-soon.html</loc>
+    <loc>https://www.einharu.com/coming-soon</loc>
     <lastmod>2026-03-30</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
@@ -92,6 +92,23 @@
 
   <!-- Editorial -->
   <url>
+    <loc>https://www.einharu.com/editorial</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/editorial"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/editorial"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/editorial"/>
+    <lastmod>2026-03-30</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/de/editorial</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/editorial"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/editorial"/>
+    <lastmod>2026-03-30</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://www.einharu.com/what-to-wear-berlin</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/what-to-wear-berlin"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/what-to-wear-berlin"/>
@@ -132,37 +149,52 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/editorial.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/editorial.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/editorial.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/editorial.html"/>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://www.einharu.com/vegan-leather-fashion</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/vegan-leather-fashion"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/vegan-leather-fashion"/>
+    <lastmod>2026-05-08</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/de/editorial.html</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/editorial.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/editorial.html"/>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://www.einharu.com/japanese-vs-korean-fashion</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/japanese-vs-korean-fashion"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/japanese-vs-korean-fashion"/>
+    <lastmod>2026-05-08</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/how-to-style-oversized-shirt</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/how-to-style-oversized-shirt"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/how-to-style-oversized-shirt"/>
+    <lastmod>2026-05-08</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/minimalist-summer-outfits</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/minimalist-summer-outfits"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/minimalist-summer-outfits"/>
+    <lastmod>2026-05-08</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
 
   <!-- About -->
   <url>
-    <loc>https://www.einharu.com/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/about.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/about.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/about.html"/>
+    <loc>https://www.einharu.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/about"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/about"/>
     <lastmod>2026-03-30</lastmod>
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/de/about.html</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/about.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/about.html"/>
+    <loc>https://www.einharu.com/de/about</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/about"/>
     <lastmod>2026-03-30</lastmod>
     <priority>0.7</priority>
     <changefreq>yearly</changefreq>
@@ -170,18 +202,18 @@
 
   <!-- FAQ -->
   <url>
-    <loc>https://www.einharu.com/faq.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/faq.html"/>
+    <loc>https://www.einharu.com/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/faq"/>
     <lastmod>2026-03-30</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/de/faq.html</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/faq.html"/>
+    <loc>https://www.einharu.com/de/faq</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/faq"/>
     <lastmod>2026-03-30</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -189,19 +221,19 @@
 
   <!-- Returns -->
   <url>
-    <loc>https://www.einharu.com/returns.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/returns.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/returns.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/returns.html"/>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://www.einharu.com/returns</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/returns"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/returns"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/returns"/>
+    <lastmod>2026-05-13</lastmod>
     <priority>0.5</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/de/returns.html</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/returns.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/returns.html"/>
-    <lastmod>2026-03-30</lastmod>
+    <loc>https://www.einharu.com/de/returns</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/returns"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/returns"/>
+    <lastmod>2026-05-13</lastmod>
     <priority>0.5</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -218,18 +250,18 @@
 
   <!-- Privacy -->
   <url>
-    <loc>https://www.einharu.com/privacy.html</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/privacy.html"/>
+    <loc>https://www.einharu.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/privacy"/>
     <lastmod>2026-03-30</lastmod>
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/de/privacy.html</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/privacy.html"/>
+    <loc>https://www.einharu.com/de/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/privacy"/>
     <lastmod>2026-03-30</lastmod>
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
@@ -249,47 +281,7 @@
     <changefreq>never</changefreq>
   </url>
 
-  <!-- Editorial — What to Wear Berlin -->
-  <url>
-    <loc>https://www.einharu.com/what-to-wear-berlin</loc>
-    <lastmod>2026-05-08</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <!-- Editorial — Vegan Leather Fashion -->
-  <url>
-    <loc>https://www.einharu.com/vegan-leather-fashion</loc>
-    <lastmod>2026-05-08</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <!-- Editorial — Japanese vs Korean Fashion -->
-  <url>
-    <loc>https://www.einharu.com/japanese-vs-korean-fashion</loc>
-    <lastmod>2026-05-08</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <!-- Editorial — How to Style an Oversized Shirt -->
-  <url>
-    <loc>https://www.einharu.com/how-to-style-oversized-shirt</loc>
-    <lastmod>2026-05-08</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <!-- Editorial — Minimalist Summer Outfits -->
-  <url>
-    <loc>https://www.einharu.com/minimalist-summer-outfits</loc>
-    <lastmod>2026-05-08</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <!-- Products — new arrivals first -->
+  <!-- Products — available only -->
   <url>
     <loc>https://www.einharu.com/pin-tuck-wide-leg-trouser-black</loc>
     <lastmod>2026-04-15</lastmod>
@@ -333,19 +325,7 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/double-layer-sheer-mesh-long-sleeve-blue</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://www.einharu.com/double-layer-sheer-mesh-long-sleeve-black</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/mesh-long-sleeve-and-layering-tube-set</loc>
     <lastmod>2026-03-07</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
@@ -363,18 +343,6 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/vegan-leather-glossy-trench-coat-brown</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/bralette-layered-stripe-shirt</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://www.einharu.com/washed-grey-raw-edge-denim-trousers</loc>
     <lastmod>2026-03-07</lastmod>
     <priority>0.8</priority>
@@ -387,19 +355,7 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://www.einharu.com/sheer-contrast-button-up-shirt</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://www.einharu.com/vegan-leather-v-neck-sleeveless-dress</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/utility-strap-cargo-pants</loc>
     <lastmod>2026-03-07</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
@@ -412,30 +368,6 @@
   </url>
   <url>
     <loc>https://www.einharu.com/sleeveless-shirt-dress-with-tulle-overlay</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/crinkle-texture-button-shirt</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/barrel-shaped-wide-leg-trousers-ivory</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/3d-textured-ruffle-shirt</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/draped-scarf-knit-long-sleeve-grey</loc>
     <lastmod>2026-03-07</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
@@ -472,24 +404,6 @@
   </url>
   <url>
     <loc>https://www.einharu.com/mesh-cropped-tank-white</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/fluid-wide-leg-pants-brown</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/barrel-shaped-wide-leg-trousers-black</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/draped-scarf-knit-long-sleeve-black</loc>
     <lastmod>2026-03-07</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
