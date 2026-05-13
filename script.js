@@ -563,9 +563,11 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     };
     const images = Array.isArray(product.images) ? product.images.filter(Boolean).map(asAbs) : [];
     const desc = Array.isArray(product.description) ? product.description.join(' ') : (product.description || '');
-    const availability = (Number(product.stock ?? 0) > 0)
-      ? 'https://schema.org/InStock'
-      : 'https://schema.org/OutOfStock';
+    const availability = product.releaseStatus === 'coming_soon'
+      ? 'https://schema.org/PreSale'
+      : (product._soldOut || product.releaseStatus !== 'available')
+      ? 'https://schema.org/OutOfStock'
+      : 'https://schema.org/InStock';
     const productLd = {
       '@type': 'Product',
       '@id': `${productUrl}#product`,
@@ -1399,10 +1401,10 @@ try {
 
 // Mark sold items by stripePriceId
 if (Array.isArray(products)) {
-  products = products.map(p => (p.stripePriceId && soldMap[p.stripePriceId]) ? { ...p, stock: 0 } : p);
+  products = products.map(p => (p.stripePriceId && soldMap[p.stripePriceId]) ? { ...p, stock: 0, _soldOut: true } : p);
 } else if (products && typeof products === 'object') {
   Object.values(products).forEach(p => {
-    if (p.stripePriceId && soldMap[p.stripePriceId]) p.stock = 0;
+    if (p.stripePriceId && soldMap[p.stripePriceId]) { p.stock = 0; p._soldOut = true; }
   });
 }
 
