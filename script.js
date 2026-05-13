@@ -594,7 +594,12 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           {
             '@type': 'OfferShippingDetails',
             shippingRate: { '@type': 'MonetaryAmount', value: '4.90', currency: 'EUR' },
-            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'DE' }
+            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'DE' },
+            deliveryTime: {
+              '@type': 'ShippingDeliveryTime',
+              handlingTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 2, unitCode: 'DAY' },
+              transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 3, unitCode: 'DAY' }
+            }
           },
           {
             '@type': 'OfferShippingDetails',
@@ -607,12 +612,22 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
               { '@type': 'DefinedRegion', addressCountry: 'IT' },
               { '@type': 'DefinedRegion', addressCountry: 'ES' },
               { '@type': 'DefinedRegion', addressCountry: 'PL' }
-            ]
+            ],
+            deliveryTime: {
+              '@type': 'ShippingDeliveryTime',
+              handlingTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 2, unitCode: 'DAY' },
+              transitTime: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 7, unitCode: 'DAY' }
+            }
           },
           {
             '@type': 'OfferShippingDetails',
             shippingRate: { '@type': 'MonetaryAmount', value: '18.90', currency: 'EUR' },
-            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'ZZ' }
+            shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'ZZ' },
+            deliveryTime: {
+              '@type': 'ShippingDeliveryTime',
+              handlingTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 2, unitCode: 'DAY' },
+              transitTime: { '@type': 'QuantitativeValue', minValue: 7, maxValue: 21, unitCode: 'DAY' }
+            }
           }
         ],
         hasMerchantReturnPolicy: {
