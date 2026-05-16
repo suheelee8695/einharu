@@ -25,7 +25,7 @@ const GMC_TITLES = {
   'mesh-cropped-tank-wine':                   "einHaru Women's Cropped Mesh Tank Top – Wine Red",
   'fluid-wide-leg-pants-dark-blue':           "einHaru Fluid Wide-Leg Trousers – Dark Blue",
   'soft-volume-gathered-dress-black':         "einHaru Soft Volume Gathered Midi Dress – Black",
-  'textured-leather-tote-bag':                "einHaru Textured Vegan Leather Tote Bag – Large",
+  'textured-leather-tote-bag':                "einHaru Textured Genuine Leather Tote Bag – Black",
   'vegan-leather-glossy-trench-coat-black':   "einHaru Women's Glossy Vegan Leather Trench Coat – Black",
   'washed-grey-raw-edge-denim-trousers':      "einHaru Women's Washed Grey Raw-Edge Denim Trousers",
   'zip-front-detachable-dungaree-dress':      "einHaru Women's Zip-Front Detachable Dungaree Dress – Black",
@@ -240,6 +240,7 @@ exports.handler = async () => {
         <g:service>Standard Shipping</g:service>
         <g:price>9.90 EUR</g:price>
       </g:shipping>
+      ${p.item_group_id ? `<g:item_group_id>${esc(p.item_group_id)}</g:item_group_id>` : ''}
       <g:identifier_exists>no</g:identifier_exists>
     </item>`;
     }).join('\n');
