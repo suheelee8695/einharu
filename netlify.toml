@@ -17,6 +17,10 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+[[edge_functions]]
+  function = "product-meta"
+  path = "/:slug"
+
 [[redirects]]
   from = "http://einharu.com/*"
   to = "https://www.einharu.com/:splat"
