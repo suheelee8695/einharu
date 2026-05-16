@@ -160,6 +160,86 @@ exports.handler = async () => {
         <g:service>Standard Shipping</g:service>
         <g:price>9.90 EUR</g:price>
       </g:shipping>
+      <g:shipping>
+        <g:country>FI</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>SE</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>DK</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>PT</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>IE</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>GR</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>CZ</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>HU</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>RO</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>SK</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>SI</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>EE</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>LT</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>LV</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>HR</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
+      <g:shipping>
+        <g:country>LU</g:country>
+        <g:service>Standard Shipping</g:service>
+        <g:price>9.90 EUR</g:price>
+      </g:shipping>
       <g:identifier_exists>no</g:identifier_exists>
     </item>`;
     }).join('\n');

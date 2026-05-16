@@ -87,7 +87,8 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "stand-collar-hem-tie-top-ivory",
-    "stripePriceId": "price_1TMUe9FPNKTl6gGpJ1WejYzj"
+    "stripePriceId": "price_1TMUe9FPNKTl6gGpJ1WejYzj",
+    "item_group_id": "stand-collar-hem-tie-top"
   },
   {
     "id": "item-helder-03",
@@ -132,7 +133,8 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "stand-collar-hem-tie-top-black",
-    "stripePriceId": "price_1TMUg0FPNKTl6gGpOFFztuUj"
+    "stripePriceId": "price_1TMUg0FPNKTl6gGpOFFztuUj",
+    "item_group_id": "stand-collar-hem-tie-top"
   },
   {
     "id": "item-cs-02",
@@ -399,7 +401,8 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "double-layer-sheer-mesh-long-sleeve-blue",
-    "googleMerchantExclude": true
+    "googleMerchantExclude": true,
+    "item_group_id": "double-layer-sheer-mesh-long-sleeve"
   },
   {
     "id": "item-26",
@@ -442,7 +445,8 @@
     "stripePriceId": "price_1SppQAFPNKTl6gGpRhuFWtR8",
     "productType": "tops",
     "releaseStatus": "available",
-    "slug": "double-layer-sheer-mesh-long-sleeve-black"
+    "slug": "double-layer-sheer-mesh-long-sleeve-black",
+    "item_group_id": "double-layer-sheer-mesh-long-sleeve"
   },
   {
     "id": "item-25",
@@ -621,7 +625,8 @@
     "productType": "outerwear",
     "releaseStatus": "available",
     "slug": "vegan-leather-glossy-trench-coat-brown",
-    "googleMerchantExclude": true
+    "googleMerchantExclude": true,
+    "item_group_id": "vegan-leather-glossy-trench-coat"
   },
   {
     "id": "item-02",
@@ -1070,7 +1075,8 @@
     "productType": "pants",
     "releaseStatus": "available",
     "slug": "barrel-shaped-wide-leg-trousers-ivory",
-    "googleMerchantExclude": true
+    "googleMerchantExclude": true,
+    "item_group_id": "barrel-shaped-wide-leg-trousers"
   },
   {
     "id": "item-12",
@@ -1153,7 +1159,8 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "draped-scarf-knit-long-sleeve-grey",
-    "googleMerchantExclude": true
+    "googleMerchantExclude": true,
+    "item_group_id": "draped-scarf-knit-long-sleeve"
   },
   {
     "id": "item-14",
@@ -1196,7 +1203,8 @@
     "stripePriceId": "price_1SE4IRFPNKTl6gGpL4TCtT8f",
     "productType": "pants",
     "releaseStatus": "available",
-    "slug": "fluid-wide-leg-pants-dark-blue"
+    "slug": "fluid-wide-leg-pants-dark-blue",
+    "item_group_id": "fluid-wide-leg-pants"
   },
   {
     "id": "item-15",
@@ -1225,9 +1233,7 @@
       "images/fashion15-6.webp",
       "images/fashion15-7.webp"
     ],
-    "description": [
-      "A sleek cropped tank available in a rich wine tone or a clean white finish. Designed with minimal lines and subtle transparency, it’s the perfect layering piece to wear under blazers, over bralettes, or styled solo for a bold look. Its structured cropped silhouette adds a modern edge to both casual and evening outfits.\n\nMade in Korea\nAvailable in Wine or White\nStructured cropped fit with subtle transparency"
-    ],
+    "description": "A sleek cropped tank available in a rich wine tone or a clean white finish. Designed with minimal lines and subtle transparency, it’s the perfect layering piece to wear under blazers, over bralettes, or styled solo for a bold look. Its structured cropped silhouette adds a modern edge to both casual and evening outfits. Made in Korea Available in Wine or White Structured cropped fit with subtle transparency",
     "materials": [
       "Polyester 100%"
     ],
@@ -1240,7 +1246,8 @@
     "stripePriceId": "price_1SE4ISFPNKTl6gGpDbJMTEiZ",
     "productType": "tops",
     "releaseStatus": "available",
-    "slug": "mesh-cropped-tank-wine"
+    "slug": "mesh-cropped-tank-wine",
+    "item_group_id": "mesh-cropped-tank"
   },
   {
     "id": "item-16",
@@ -1266,9 +1273,7 @@
       "images/fashion16-5.webp",
       "images/fashion16-6.webp"
     ],
-    "description": [
-      "A sheer layering piece with a modern twist — this mesh long sleeve features a natural crinkled texture that adds depth and movement. Lightweight yet eye-catching, it’s designed to elevate simple outfits or create bold layered looks. Perfect for styling with bralettes, slip dresses, or structured outerwear.\n\nMade in Korea\nLightweight mesh fabric with crinkled finish\nSlim, sheer silhouette with stretch"
-    ],
+    "description": "A sheer layering piece with a modern twist — this mesh long sleeve features a natural crinkled texture that adds depth and movement. Lightweight yet eye-catching, it’s designed to elevate simple outfits or create bold layered looks. Perfect for styling with bralettes, slip dresses, or structured outerwear. Made in Korea Lightweight mesh fabric with crinkled finish Slim, sheer silhouette with stretch",
     "materials": [
       "Polyester 100%"
     ],
@@ -1363,7 +1368,8 @@
     "stripePriceId": "price_1SEScJFPNKTl6gGpgzgmncCt",
     "productType": "outerwear",
     "releaseStatus": "available",
-    "slug": "vegan-leather-glossy-trench-coat-black"
+    "slug": "vegan-leather-glossy-trench-coat-black",
+    "item_group_id": "vegan-leather-glossy-trench-coat"
   },
   {
     "id": "item-19",
@@ -1393,9 +1399,7 @@
       "images/fashion19-7.webp",
       "images/fashion19-8.webp"
     ],
-    "description": [
-      "A sleek cropped tank available in a rich wine tone or a clean white finish. Designed with minimal lines and subtle transparency, it’s the perfect layering piece to wear under blazers, over bralettes, or styled solo for a bold look. Its structured cropped silhouette adds a modern edge to both casual and evening outfits.\n\nMade in Korea\nAvailable in Wine or White\nStructured cropped fit with subtle transparency"
-    ],
+    "description": "A sleek cropped tank available in a rich wine tone or a clean white finish. Designed with minimal lines and subtle transparency, it’s the perfect layering piece to wear under blazers, over bralettes, or styled solo for a bold look. Its structured cropped silhouette adds a modern edge to both casual and evening outfits. Made in Korea Available in Wine or White Structured cropped fit with subtle transparency",
     "materials": [
       "Polyester 100%"
     ],
@@ -1408,7 +1412,8 @@
     "stripePriceId": "price_1SESewFPNKTl6gGplhKM8Jax",
     "productType": "tops",
     "releaseStatus": "available",
-    "slug": "mesh-cropped-tank-white"
+    "slug": "mesh-cropped-tank-white",
+    "item_group_id": "mesh-cropped-tank"
   },
   {
     "id": "item-20",
@@ -1453,7 +1458,8 @@
     "productType": "pants",
     "releaseStatus": "available",
     "slug": "fluid-wide-leg-pants-brown",
-    "googleMerchantExclude": true
+    "googleMerchantExclude": true,
+    "item_group_id": "fluid-wide-leg-pants"
   },
   {
     "id": "item-21",
@@ -1497,7 +1503,8 @@
     "productType": "pants",
     "releaseStatus": "available",
     "slug": "barrel-shaped-wide-leg-trousers-black",
-    "googleMerchantExclude": true
+    "googleMerchantExclude": true,
+    "item_group_id": "barrel-shaped-wide-leg-trousers"
   },
   {
     "id": "item-22",
@@ -1539,6 +1546,7 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "draped-scarf-knit-long-sleeve-black",
-    "googleMerchantExclude": true
+    "googleMerchantExclude": true,
+    "item_group_id": "draped-scarf-knit-long-sleeve"
   }
 ]
