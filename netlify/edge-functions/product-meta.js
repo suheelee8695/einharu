@@ -76,6 +76,15 @@ export default async function handler(req, context) {
   });
 
   let modified = html
+    // Fix robots: noindex → index, follow (handles both attribute orders)
+    .replace(
+      /(<meta\s+name="robots"[^>]*\scontent=")noindex("[^>]*>)/,
+      `$1index, follow$2`
+    )
+    .replace(
+      /(<meta\s+content=")noindex("\s+name="robots"[^>]*>)/,
+      `$1index, follow$2`
+    )
     .replace(/(<title[^>]*>)[^<]*(<\/title>)/, `$1${esc(title)}$2`)
     .replace(
       /(<meta\s+name="description"[^>]*\scontent=")[^"]*(")/,
