@@ -190,9 +190,14 @@
   status = 200
 
 [[redirects]]
+  from = "/feed.xml"
+  to = "/.netlify/functions/product-feed"
+  status = 200
+
+[[redirects]]
   from = "/feed"
-  to = "/feed.xml"
-  status = 301
+  to = "/.netlify/functions/product-feed"
+  status = 200
 
 [[redirects]]
   from = "/impressum.html"

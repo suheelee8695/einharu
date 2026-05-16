@@ -85,7 +85,7 @@ exports.handler = async () => {
       const s = stockMap.get(p.slug) || {};
       const imageUrl = `${SITE}/${(p.cover || (p.images && p.images[0]) || '')}`;
       const additionalImages = (p.images || [])
-        .slice(1, 4)
+        .slice(1, 10)
         .map(img => `<g:additional_image_link>${esc(`${SITE}/${img}`)}</g:additional_image_link>`)
         .join('\n      ');
       const category = GMC_CATEGORY[p.productType] || DEFAULT_CATEGORY;
