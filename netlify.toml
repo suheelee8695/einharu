@@ -21,6 +21,10 @@
   function = "product-meta"
   path = "/:slug"
 
+[[edge_functions]]
+  function = "product-meta"
+  path = "/de/:slug"
+
 [[redirects]]
   from = "http://einharu.com/*"
   to = "https://www.einharu.com/:splat"
@@ -199,6 +203,9 @@
   to = "/.netlify/functions/product-feed"
   status = 200
 
+# Canonicalize: force .html → clean URL (301 permanent)
+# Keeps indexed canonical consistent with what's exposed to crawlers and reduces
+# duplicate-URL drift across sitemap, internal links, and external backlinks.
 [[redirects]]
   from = "/impressum.html"
   to = "/impressum"
@@ -212,6 +219,143 @@
 [[redirects]]
   from = "/seoul-berlin-minimalist-style-guide.html"
   to = "/seoul-berlin-minimalist-style-guide"
+  status = 301
+
+[[redirects]]
+  from = "/about.html"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/faq.html"
+  to = "/faq"
+  status = 301
+
+[[redirects]]
+  from = "/returns.html"
+  to = "/returns"
+  status = 301
+
+[[redirects]]
+  from = "/editorial.html"
+  to = "/editorial"
+  status = 301
+
+[[redirects]]
+  from = "/coming-soon.html"
+  to = "/coming-soon"
+  status = 301
+
+[[redirects]]
+  from = "/buy-korean-fashion-europe.html"
+  to = "/buy-korean-fashion-europe"
+  status = 301
+
+[[redirects]]
+  from = "/korean-fashion-berlin.html"
+  to = "/korean-fashion-berlin"
+  status = 301
+
+[[redirects]]
+  from = "/japanese-minimalist-fashion-europe.html"
+  to = "/japanese-minimalist-fashion-europe"
+  status = 301
+
+[[redirects]]
+  from = "/sizing-guide.html"
+  to = "/sizing-guide"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-style-wide-leg-trousers.html"
+  to = "/how-to-style-wide-leg-trousers"
+  status = 301
+
+[[redirects]]
+  from = "/quiet-luxury-fashion.html"
+  to = "/quiet-luxury-fashion"
+  status = 301
+
+[[redirects]]
+  from = "/independent-fashion-boutiques-berlin.html"
+  to = "/independent-fashion-boutiques-berlin"
+  status = 301
+
+[[redirects]]
+  from = "/korean-minimalist-fashion-guide.html"
+  to = "/korean-minimalist-fashion-guide"
+  status = 301
+
+[[redirects]]
+  from = "/what-to-wear-berlin.html"
+  to = "/what-to-wear-berlin"
+  status = 301
+
+[[redirects]]
+  from = "/vegan-leather-fashion.html"
+  to = "/vegan-leather-fashion"
+  status = 301
+
+[[redirects]]
+  from = "/japanese-vs-korean-fashion.html"
+  to = "/japanese-vs-korean-fashion"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-style-oversized-shirt.html"
+  to = "/how-to-style-oversized-shirt"
+  status = 301
+
+[[redirects]]
+  from = "/minimalist-summer-outfits.html"
+  to = "/minimalist-summer-outfits"
+  status = 301
+
+[[redirects]]
+  from = "/de/about.html"
+  to = "/de/about"
+  status = 301
+
+[[redirects]]
+  from = "/de/faq.html"
+  to = "/de/faq"
+  status = 301
+
+[[redirects]]
+  from = "/de/returns.html"
+  to = "/de/returns"
+  status = 301
+
+[[redirects]]
+  from = "/de/editorial.html"
+  to = "/de/editorial"
+  status = 301
+
+[[redirects]]
+  from = "/de/koreanische-mode-berlin.html"
+  to = "/de/koreanische-mode-berlin"
+  status = 301
+
+# Noindex pages — 301 the .html copies to clean URLs so crawlers don't waste
+# budget on duplicate-content pairs even though both are noindex.
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+
+[[redirects]]
+  from = "/de/privacy.html"
+  to = "/de/privacy"
+  status = 301
+
+[[redirects]]
+  from = "/cancel.html"
+  to = "/cancel"
+  status = 301
+
+[[redirects]]
+  from = "/success.html"
+  to = "/success"
   status = 301
 
 [[redirects]]

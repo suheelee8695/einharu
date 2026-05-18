@@ -25,11 +25,18 @@ export default async function handler(req, context) {
     return context.next();
   }
 
-  // Only intercept single-segment paths (product slugs)
+  // Intercept single-segment (English) and /de/<slug> (German) product paths
   const segments = pathname.replace(/^\/+/, '').split('/').filter(Boolean);
-  if (segments.length !== 1) return context.next();
-
-  const slug = decodeURIComponent(segments[0]);
+  let lang, slug;
+  if (segments.length === 1) {
+    lang = 'en';
+    slug = decodeURIComponent(segments[0]);
+  } else if (segments.length === 2 && segments[0] === 'de') {
+    lang = 'de';
+    slug = decodeURIComponent(segments[1]);
+  } else {
+    return context.next();
+  }
 
   // Fetch products catalog from CDN-cached static file
   const productsUrl = new URL('/products.json', req.url);
@@ -45,7 +52,10 @@ export default async function handler(req, context) {
 
   const title = `${product.title} — einHaru`.slice(0, 60);
   const desc = buildDesc(product);
-  const canonical = `https://www.einharu.com/${product.slug}`;
+  const canonicalPath = lang === 'de' ? `/de/${product.slug}` : `/${product.slug}`;
+  const canonical = `https://www.einharu.com${canonicalPath}`;
+  const enUrl = `https://www.einharu.com/${product.slug}`;
+  const deUrl = `https://www.einharu.com/de/${product.slug}`;
   const firstImage = product.images && product.images.length > 0
     ? product.images[0]
     : product.cover;
@@ -111,8 +121,20 @@ export default async function handler(req, context) {
       `$1product$2`
     )
     .replace(
-      /<link rel="canonical"([^>]*)>/,
-      `<link rel="canonical"$1 href="${canonical}">`
+      /<link rel="canonical"[^>]*>/,
+      `<link rel="canonical" id="canonical-link" href="${canonical}">`
+    )
+    .replace(
+      /<link rel="alternate" hreflang="en"[^>]*>/,
+      `<link rel="alternate" hreflang="en" href="${enUrl}" id="hreflang-en">`
+    )
+    .replace(
+      /<link rel="alternate" hreflang="de"[^>]*>/,
+      `<link rel="alternate" hreflang="de" href="${deUrl}" id="hreflang-de">`
+    )
+    .replace(
+      /<link rel="alternate" hreflang="x-default"[^>]*>/,
+      `<link rel="alternate" hreflang="x-default" href="${enUrl}" id="hreflang-xd">`
     )
     .replace(
       '</head>',

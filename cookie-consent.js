@@ -50,7 +50,7 @@
           <h2>Your data, your choice.</h2>
           <p>
             Essential cookies keep the store, bag and checkout working. Optional cookies help us understand usage and remember preferences.
-            We do not use advertising cookies. Read our <a href="privacy.html">Privacy Policy</a>.
+            We do not use advertising cookies. Read our <a href="/privacy">Privacy Policy</a>.
           </p>
         </div>
         <div class="cookie-preferences__right">
