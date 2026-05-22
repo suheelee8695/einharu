@@ -2823,6 +2823,30 @@ button.icon-btn::-moz-focus-inner {
   }
 }
 
+.editorial-related-grid--two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 480px) {
+  .editorial-related-grid--two {
+    grid-template-columns: 1fr;
+  }
+}
+
+.discovery-product-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 680px) {
+  .discovery-product-pair {
+    grid-template-columns: 1fr;
+  }
+}
+
 .discovery-hero-visual,
 .discovery-image {
   position: relative;
