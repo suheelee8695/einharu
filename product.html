@@ -107,7 +107,7 @@
           <span class="price-label">Price:</span>
           <span id="product-price"></span>
         </div>
-        <p class="product-tax-note">Incl. VAT · Ships from Berlin, Germany</p>
+        <p class="product-tax-note">Final price · No VAT charged (§19 UStG) · Ships from Berlin, Germany</p>
 
         <div id="product-stock-state" class="stock-state" aria-live="polite"></div>
 
@@ -218,12 +218,12 @@
   </footer>
   <section class="cookie-bar" aria-label="Cookie notice">
     <p>
-      We use cookies to enhance your experience. By continuing to browse, you agree to our
+      We use essential cookies for the bag and checkout. Optional analytics cookies only load if you accept. Read our
       <a href="/privacy#cookies">Cookie Policy</a> and <a href="/privacy">Privacy Policy</a>.
     </p>
     <div class="cookie-bar-actions">
-      <button type="button" class="cookie-btn cookie-btn--ghost">Decline</button>
-      <button type="button" class="cookie-btn">Accept</button>
+      <button type="button" class="cookie-btn" data-cookie-action="reject">Reject all</button>
+      <button type="button" class="cookie-btn" data-cookie-action="accept">Accept all</button>
     </div>
   </section>
 <div class="cart-overlay" data-cart-overlay hidden></div>
@@ -246,6 +246,9 @@
       <div class="cart-shipping-note" data-cart-shipping-note aria-live="polite"></div>
       <div class="cart-policy-note">
         Returns accepted within 14 days of delivery. Return shipping is paid by the customer.
+      </div>
+      <div class="cart-policy-note">
+        EU dispute resolution: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/odr</a>
       </div>
       <div class="cart-promo">
   <label for="cart-promo-input" class="visually-hidden">Promo code</label>

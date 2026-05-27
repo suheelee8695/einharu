@@ -120,8 +120,8 @@
     const panel = document.querySelector('.cookie-preferences');
     const toast = document.querySelector('.cookie-toast');
 
-    const acceptBtn = bar.querySelector('.cookie-btn:not(.cookie-btn--ghost)');
-    const declineBtn = bar.querySelector('.cookie-btn--ghost');
+    const acceptBtn = bar.querySelector('[data-cookie-action="accept"]') || bar.querySelector('.cookie-btn:not(.cookie-btn--ghost)');
+    const declineBtn = bar.querySelector('[data-cookie-action="reject"]') || bar.querySelector('.cookie-btn--ghost');
 
     if (!acceptBtn || !declineBtn) return;
 

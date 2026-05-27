@@ -107,7 +107,7 @@
           <span class="price-label">Preis:</span>
           <span id="product-price"></span>
         </div>
-        <p class="product-tax-note">inkl. MwSt. · Versand aus Berlin, Deutschland</p>
+        <p class="product-tax-note">Endpreis · keine USt. gemäß §19 UStG · Versand aus Berlin, Deutschland</p>
 
         <label class="shipping-country-picker">
           <span>Versandziel</span>
@@ -218,12 +218,12 @@
   </footer>
   <section class="cookie-bar" aria-label="Cookie-Hinweis">
     <p>
-      Wir verwenden Cookies, um dein Erlebnis zu verbessern. Mit der weiteren Nutzung stimmst du unserer
-      <a href="/de/privacy#cookies">Cookie-Richtlinie</a> und <a href="/de/privacy">Datenschutzerklaerung</a>.
+      Wir verwenden essenzielle Cookies für Warenkorb und Checkout. Optionale Analyse-Cookies laden nur nach deiner Zustimmung. Mehr in der
+      <a href="/de/privacy#cookies">Cookie-Richtlinie</a> und <a href="/de/privacy">Datenschutzerklärung</a>.
     </p>
     <div class="cookie-bar-actions">
-      <button type="button" class="cookie-btn cookie-btn--ghost">Ablehnen</button>
-      <button type="button" class="cookie-btn">Akzeptieren</button>
+      <button type="button" class="cookie-btn" data-cookie-action="reject">Alles ablehnen</button>
+      <button type="button" class="cookie-btn" data-cookie-action="accept">Alles akzeptieren</button>
     </div>
   </section>
 <div class="cart-overlay" data-cart-overlay hidden></div>
@@ -248,6 +248,9 @@
       </div>
       <div class="cart-policy-note">
         Rückgaben sind innerhalb von 14 Tagen nach Zustellung möglich. Die Kosten für den Rückversand trägt die Kundschaft.
+      </div>
+      <div class="cart-policy-note">
+        EU-Streitbeilegung: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/odr</a>
       </div>
       <div class="cart-promo">
   <label for="cart-promo-input" class="visually-hidden">Rabattcode</label>
