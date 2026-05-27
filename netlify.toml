@@ -368,6 +368,17 @@
   to = "/"
   status = 301
 
+# Event page: consolidate the root-level duplicate to the /events/ canonical
+[[redirects]]
+  from = "/2025-12-14-berlin-90mil-christmas-market.html"
+  to = "/events/2025-12-14-berlin-90mil-christmas-market.html"
+  status = 301
+
+[[redirects]]
+  from = "/2025-12-14-berlin-90mil-christmas-market"
+  to = "/events/2025-12-14-berlin-90mil-christmas-market.html"
+  status = 301
+
 [[redirects]]
   from = "/de/:slug"
   to = "/de/product.html?slug=:slug"
@@ -386,6 +397,11 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # Content-Security-Policy: baseline that allows Stripe, Google Fonts, GTM/GA.
+    # Uses 'unsafe-inline' for compat with existing inline <script> and <style>
+    # blocks (cookie-consent, JSON-LD injected by edge fn, page-specific IO scripts).
+    # Tightening to nonces is possible later but requires touching every inline script.
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com; frame-src https://checkout.stripe.com https://js.stripe.com; connect-src 'self' https://api.stripe.com https://www.google-analytics.com https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self' https://checkout.stripe.com"
 
 # HTML pages must not be cached so deploys take effect immediately
 [[headers]]

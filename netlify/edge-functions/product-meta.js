@@ -133,13 +133,24 @@ export default async function handler(req, context) {
       /<link rel="alternate" hreflang="en"[^>]*>/,
       `<link rel="alternate" hreflang="en" href="${enUrl}" id="hreflang-en">`
     )
+    // hreflang="de" intentionally omitted: DE product pages are noindex'd
+    // until German copy is added (see robotsContent above). Pointing en→de
+    // to a noindex page is wasted markup. Restore once /de/<slug> has real
+    // localized content.
     .replace(
       /<link rel="alternate" hreflang="de"[^>]*>/,
-      `<link rel="alternate" hreflang="de" href="${deUrl}" id="hreflang-de">`
+      ''
     )
     .replace(
       /<link rel="alternate" hreflang="x-default"[^>]*>/,
       `<link rel="alternate" hreflang="x-default" href="${enUrl}" id="hreflang-xd">`
+    )
+    // Fill in main product image so the raw HTML response has real src + alt.
+    // Without this Googlebot's first pass sees <img src="" alt=""> and the
+    // image is invisible to Google Images. JS still re-renders client-side.
+    .replace(
+      /<img\s+id="main-image"[^>]*>/,
+      `<img id="main-image" src="${image}" alt="${esc(product.title + ' | einHaru Collective')}" loading="lazy">`
     )
     .replace(
       '</head>',

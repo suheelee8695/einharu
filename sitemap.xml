@@ -239,34 +239,7 @@
   </url>
 
   <!-- Impressum (German legal requirement) -->
-  <url>
-    <loc>https://www.einharu.com/impressum</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/impressum"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/impressum"/>
-    <lastmod>2026-04-25</lastmod>
-    <priority>0.3</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-
   <!-- Privacy -->
-  <url>
-    <loc>https://www.einharu.com/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/privacy"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/privacy"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/privacy"/>
-    <lastmod>2026-03-30</lastmod>
-    <priority>0.3</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/de/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/privacy"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/privacy"/>
-    <lastmod>2026-03-30</lastmod>
-    <priority>0.3</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-
   <!-- Events -->
   <url>
     <loc>https://www.einharu.com/events/</loc>
@@ -338,12 +311,6 @@
   </url>
   <url>
     <loc>https://www.einharu.com/crinkled-tiered-long-skirt-black</loc>
-    <lastmod>2026-03-07</lastmod>
-    <priority>0.8</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.einharu.com/washed-grey-raw-edge-denim-trousers</loc>
     <lastmod>2026-03-07</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
