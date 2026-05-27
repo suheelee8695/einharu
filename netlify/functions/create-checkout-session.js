@@ -23,7 +23,18 @@ async function reserveStock(priceId) {
   }
   if (stock <= 0) return { ok: false, productId, productName, newStock: 0 };
   await setStripeStock(productId, stock - 1);
-  return { ok: true, productId, productName, newStock: stock - 1 };
+  const newStock = stock - 1;
+  // Race-condition watchpoint: getStripeStock + setStripeStock is not atomic.
+  // If two requests both read stock=1 they'll both pass the check and both write 0,
+  // resulting in two reservations of one unit. We can't fix this without an atomic
+  // store, but logging the "last unit" event lets us spot the race in logs: if two
+  // entries appear for the same priceId within seconds, that's the signature.
+  if (newStock <= 0) {
+    console.warn('[stock-monitor] Last unit reserved — watch for race', {
+      priceId, productName, beforeStock: stock, ts: Date.now()
+    });
+  }
+  return { ok: true, productId, productName, newStock };
 }
 
 async function restoreStock(priceId) {
