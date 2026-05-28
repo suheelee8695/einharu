@@ -32,7 +32,8 @@
           return;
         }
         var origin = 'https://www.einharu.com';
-        var canonical = origin + '/de/' + encodeURIComponent(slug);
+        // Canonical points to EN page — no German copy yet, mirrors edge function behaviour
+        var canonical = origin + '/' + encodeURIComponent(slug);
         var link = document.getElementById('canonical-link');
         if (link) link.setAttribute('href', canonical);
         var og = document.getElementById('og-url');

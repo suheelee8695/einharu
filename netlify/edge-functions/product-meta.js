@@ -52,7 +52,9 @@ export default async function handler(req, context) {
 
   const title = `${product.title} — einHaru`.slice(0, 60);
   const desc = buildDesc(product);
-  const canonicalPath = lang === 'de' ? `/de/${product.slug}` : `/${product.slug}`;
+  // DE product pages have no German copy yet — point canonical to EN to avoid
+  // Google clustering noindex'd DE pages as duplicates of each other.
+  const canonicalPath = lang === 'de' ? `/${product.slug}` : `/${product.slug}`;
   const canonical = `https://www.einharu.com${canonicalPath}`;
   const enUrl = `https://www.einharu.com/${product.slug}`;
   const deUrl = `https://www.einharu.com/de/${product.slug}`;
