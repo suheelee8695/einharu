@@ -1114,6 +1114,13 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       descEl.textContent = text;
     }
 
+    // Editorial note (e.g. pairing suggestion) — rendered as HTML so links work
+    const editorialNoteEl = $('#product-editorial-note');
+    if (editorialNoteEl && product.editorialNote) {
+      editorialNoteEl.innerHTML = product.editorialNote;
+      editorialNoteEl.hidden = false;
+    }
+
     // Materials & Care
     const matEl = $('#product-materials');
     if (matEl) {
