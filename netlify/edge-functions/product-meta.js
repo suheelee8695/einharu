@@ -70,6 +70,8 @@ export default async function handler(req, context) {
     ? product.description.join(' ')
     : product.description;
 
+  const priceValidUntil = new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split('T')[0];
+
   const jsonLd = JSON.stringify({
     '@context': 'https://schema.org/',
     '@type': 'Product',
@@ -83,6 +85,7 @@ export default async function handler(req, context) {
       url: canonical,
       priceCurrency: product.currency || 'EUR',
       price: String(product.price),
+      priceValidUntil,
       availability,
       seller: { '@type': 'Organization', name: 'einHaru Collective' },
     },
