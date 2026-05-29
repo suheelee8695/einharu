@@ -409,6 +409,7 @@
     "releaseStatus": "available",
     "slug": "double-layer-sheer-mesh-long-sleeve-blue",
     "googleMerchantExclude": true,
+    "color": "Blue",
     "item_group_id": "double-layer-sheer-mesh-long-sleeve"
   },
   {
@@ -453,6 +454,7 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "double-layer-sheer-mesh-long-sleeve-black",
+    "color": "Black",
     "item_group_id": "double-layer-sheer-mesh-long-sleeve"
   },
   {
@@ -547,7 +549,8 @@
     "stripePriceId": "price_1SexfuFPNKTl6gGpmsHzzoLL",
     "productType": "dresses",
     "releaseStatus": "available",
-    "slug": "soft-volume-gathered-dress-black"
+    "slug": "soft-volume-gathered-dress-black",
+    "color": "Black"
   },
   {
     "id": "item-24",
@@ -590,7 +593,8 @@
     "stripePriceId": "price_1SexduFPNKTl6gGp5dM0JOxc",
     "productType": "skirts",
     "releaseStatus": "available",
-    "slug": "crinkled-tiered-long-skirt-black"
+    "slug": "crinkled-tiered-long-skirt-black",
+    "color": "Black"
   },
   {
     "id": "item-01",
@@ -633,6 +637,7 @@
     "releaseStatus": "available",
     "slug": "vegan-leather-glossy-trench-coat-brown",
     "googleMerchantExclude": true,
+    "color": "Brown",
     "item_group_id": "vegan-leather-glossy-trench-coat"
   },
   {
@@ -687,7 +692,8 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "bralette-layered-stripe-shirt",
-    "googleMerchantExclude": true
+    "googleMerchantExclude": true,
+    "color": "Ivory"
   },
   {
     "id": "item-03",
@@ -736,7 +742,8 @@
     "stripePriceId": "price_1SE4IGFPNKTl6gGpa6nu0FKo",
     "productType": "pants",
     "releaseStatus": "available",
-    "slug": "washed-grey-raw-edge-denim-trousers"
+    "slug": "washed-grey-raw-edge-denim-trousers",
+    "color": "Grey"
   },
   {
     "id": "item-04",
@@ -1083,6 +1090,7 @@
     "releaseStatus": "available",
     "slug": "barrel-shaped-wide-leg-trousers-ivory",
     "googleMerchantExclude": true,
+    "color": "Ivory",
     "item_group_id": "barrel-shaped-wide-leg-trousers"
   },
   {
@@ -1167,6 +1175,7 @@
     "releaseStatus": "available",
     "slug": "draped-scarf-knit-long-sleeve-grey",
     "googleMerchantExclude": true,
+    "color": "Grey",
     "item_group_id": "draped-scarf-knit-long-sleeve"
   },
   {
@@ -1211,6 +1220,7 @@
     "productType": "pants",
     "releaseStatus": "available",
     "slug": "fluid-wide-leg-pants-dark-blue",
+    "color": "Dark Blue",
     "item_group_id": "fluid-wide-leg-pants"
   },
   {
@@ -1254,6 +1264,7 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "mesh-cropped-tank-wine",
+    "color": "Wine",
     "item_group_id": "mesh-cropped-tank"
   },
   {
@@ -1376,6 +1387,7 @@
     "productType": "outerwear",
     "releaseStatus": "available",
     "slug": "vegan-leather-glossy-trench-coat-black",
+    "color": "Black",
     "item_group_id": "vegan-leather-glossy-trench-coat"
   },
   {
@@ -1420,6 +1432,7 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "mesh-cropped-tank-white",
+    "color": "White",
     "item_group_id": "mesh-cropped-tank"
   },
   {
@@ -1466,6 +1479,7 @@
     "releaseStatus": "available",
     "slug": "fluid-wide-leg-pants-brown",
     "googleMerchantExclude": true,
+    "color": "Brown",
     "item_group_id": "fluid-wide-leg-pants"
   },
   {
@@ -1511,6 +1525,7 @@
     "releaseStatus": "available",
     "slug": "barrel-shaped-wide-leg-trousers-black",
     "googleMerchantExclude": true,
+    "color": "Black",
     "item_group_id": "barrel-shaped-wide-leg-trousers"
   },
   {
@@ -1554,6 +1569,7 @@
     "releaseStatus": "available",
     "slug": "draped-scarf-knit-long-sleeve-black",
     "googleMerchantExclude": true,
+    "color": "Black",
     "item_group_id": "draped-scarf-knit-long-sleeve"
   }
 ]
