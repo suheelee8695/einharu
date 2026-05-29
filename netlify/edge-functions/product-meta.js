@@ -77,6 +77,7 @@ export default async function handler(req, context) {
     image: product.images.map((img) => `https://www.einharu.com/${img}`),
     description: rawDesc,
     brand: { '@type': 'Brand', name: product.brand },
+    sku: product.id,
     offers: {
       '@type': 'Offer',
       url: canonical,
@@ -153,6 +154,11 @@ export default async function handler(req, context) {
     .replace(
       /<img\s+id="main-image"[^>]*>/,
       `<img id="main-image" src="${image}" alt="${esc(product.title + ' | einHaru Collective')}" loading="eager" fetchpriority="high">`
+    )
+    // Inject product title into H1 so non-JS crawlers see a populated heading.
+    .replace(
+      /<h1\s+id="product-title"[^>]*><\/h1>/,
+      `<h1 id="product-title">${esc(product.title)}</h1>`
     )
     .replace(
       '</head>',
