@@ -1909,7 +1909,7 @@ button.icon-btn::-moz-focus-inner {
   }
 
   .product-collection-tag {
-    font-size: 0.6rem;
+    font-size: 0.72rem;
     padding: 3px 7px;
   }
 
@@ -4606,8 +4606,8 @@ textarea:focus-visible,
 
 .product-page .trust-strip .trust-item {
   padding: 9px 8px;
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 12px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #888;
   text-align: center;

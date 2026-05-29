@@ -476,7 +476,7 @@ function initMobileGallery(product, opts={}){
     const img = document.createElement('img');
     img.src = src;
     img.alt = `${product.title || 'Product'} image ${i+1}`;
-    img.loading = 'lazy';
+    img.loading = i === 0 ? 'eager' : 'lazy';
     slide.appendChild(img);
 
     const tapLeft = document.createElement('div');

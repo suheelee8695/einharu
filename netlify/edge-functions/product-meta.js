@@ -50,8 +50,8 @@ export default async function handler(req, context) {
   const upstream = await context.next();
   const html = await upstream.text();
 
-  const title = `${product.title} — einHaru`.slice(0, 60);
-  const desc = buildDesc(product);
+  const title = (product.seoTitle || `${product.title} — einHaru`).slice(0, 60);
+  const desc = product.seoDescription || buildDesc(product);
   // DE product pages have no German copy yet — point canonical to EN to avoid
   // Google clustering noindex'd DE pages as duplicates of each other.
   const canonicalPath = lang === 'de' ? `/${product.slug}` : `/${product.slug}`;
@@ -152,7 +152,7 @@ export default async function handler(req, context) {
     // image is invisible to Google Images. JS still re-renders client-side.
     .replace(
       /<img\s+id="main-image"[^>]*>/,
-      `<img id="main-image" src="${image}" alt="${esc(product.title + ' | einHaru Collective')}" loading="lazy">`
+      `<img id="main-image" src="${image}" alt="${esc(product.title + ' | einHaru Collective')}" loading="eager" fetchpriority="high">`
     )
     .replace(
       '</head>',
