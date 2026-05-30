@@ -10,9 +10,9 @@ const SITE = 'https://www.einharu.com';
 // GMC-optimized titles — used only in the feed, not on the website
 const GMC_TITLES = {
   'stand-collar-hem-tie-top-black':          "einHaru Women's Stand Collar Tie Hem Crop Top – Black",
-  'beaker-pants':                             "einHaru Women's Beaker Wide Leg Tailored Pants – Charcoal",
+  'beaker-pants':                             "Wide Leg Trousers Women — Minimalist Wool Blend Drawstring Pants | einHaru",
   'shearling-wrap-shirt':                     "einHaru Women's Shearling Wrap Oversized Shirt – Light Grey",
-  'bijo-shirt':                               "einHaru Women's Bijo Layered Minimal Shirt – White",
+  'bijo-shirt':                               "Oversized Minimalist Shirt Women — High Wrap Neckline Nylon-Tencel Blouse | einHaru",
   'pin-tuck-wide-leg-trouser-black':          "einHaru Women's Pin Tuck Wide Leg Trousers – Black",
   'stand-collar-hem-tie-top-ivory':           "einHaru Women's Stand Collar Tie Hem Crop Top – Ivory Cotton",
   'compact-leather-tote':                     "einHaru Women's Compact Leather Tote Bag – Brown",

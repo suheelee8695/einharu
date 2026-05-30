@@ -126,6 +126,58 @@
 
   <!-- Main -->
   <main class="homepage">
+    <!-- You & einHaru -->
+    <section class="community-section" aria-label="You and einHaru" hidden>
+      <div class="community-header">
+        <p class="community-eyebrow">You &amp; einHaru</p>
+      </div>
+      <div class="community-strip-outer" id="community-outer">
+        <div class="community-strip" id="community-strip">
+          <a class="community-tile" href="/stand-collar-hem-tie-top-black">
+            <img src="images/community-look-1.webp" alt="Stand Collar Hem Tie Top Black — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <a class="community-tile" href="/stand-collar-hem-tie-top-ivory">
+            <img src="images/community-look-2.webp" alt="Stand Collar Hem Tie Top Ivory — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <a class="community-tile" href="/beaker-pants">
+            <img src="images/community-look-3.webp" alt="Beaker Pants — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <a class="community-tile" href="/bijo-shirt">
+            <img src="images/community-look-4.webp" alt="Bijo Shirt — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <a class="community-tile" href="/stand-collar-hem-tie-top-ivory">
+            <img src="images/community-look-5.webp" alt="Stand Collar Hem Tie Top Ivory — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <!-- Duplicates for seamless infinite loop -->
+          <a class="community-tile" href="/stand-collar-hem-tie-top-black" aria-hidden="true" tabindex="-1">
+            <img src="images/community-look-1.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <a class="community-tile" href="/stand-collar-hem-tie-top-ivory" aria-hidden="true" tabindex="-1">
+            <img src="images/community-look-2.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <a class="community-tile" href="/beaker-pants" aria-hidden="true" tabindex="-1">
+            <img src="images/community-look-3.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <a class="community-tile" href="/bijo-shirt" aria-hidden="true" tabindex="-1">
+            <img src="images/community-look-4.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+          <a class="community-tile" href="/stand-collar-hem-tie-top-ivory" aria-hidden="true" tabindex="-1">
+            <img src="images/community-look-5.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop this look →</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Shop layout -->
     <section class="shop-layout" aria-label="Shop section">
       <aside class="shop-sidebar" aria-label="Shop category sidebar">
@@ -286,5 +338,40 @@
   <script src="cart.js" defer></script>
   <script src="script.js" defer></script>
   <script src="cookie-consent.js" defer></script>
+  <script>
+  (function () {
+    var strip = document.getElementById('community-strip');
+    var outer = document.getElementById('community-outer');
+    if (!strip || !outer) return;
+    var offset = 0;
+    var paused = false;
+    var SPEED = 0.9;
+    function halfWidth() { return strip.scrollWidth / 2; }
+    function tick() {
+      if (!paused) {
+        offset += SPEED;
+        if (offset >= halfWidth()) offset = 0;
+        strip.style.transform = 'translateX(-' + offset + 'px)';
+      }
+      requestAnimationFrame(tick);
+    }
+    outer.addEventListener('mouseenter', function () { paused = true; });
+    outer.addEventListener('mouseleave', function () { paused = false; });
+    var touchStartX = 0, touchStartOffset = 0;
+    strip.addEventListener('touchstart', function (e) {
+      paused = true;
+      touchStartX = e.touches[0].clientX;
+      touchStartOffset = offset;
+    }, { passive: true });
+    strip.addEventListener('touchmove', function (e) {
+      var delta = touchStartX - e.touches[0].clientX;
+      var half = halfWidth();
+      offset = ((touchStartOffset + delta) % half + half) % half;
+      strip.style.transform = 'translateX(-' + offset + 'px)';
+    }, { passive: true });
+    strip.addEventListener('touchend', function () { paused = false; }, { passive: true });
+    requestAnimationFrame(tick);
+  })();
+  </script>
 </body>
 </html>

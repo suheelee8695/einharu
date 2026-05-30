@@ -4690,3 +4690,90 @@ textarea:focus-visible,
     gap: 2px;
   }
 }
+
+/* === You & einHaru community strip === */
+.community-section {
+  padding: 56px 0 72px;
+  overflow: hidden;
+}
+
+.community-header {
+  padding: 0 var(--gutter);
+  margin-bottom: 28px;
+}
+
+.community-eyebrow {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.community-strip-outer {
+  overflow: hidden;
+}
+
+.community-strip {
+  display: flex;
+  gap: 10px;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.community-tile {
+  flex: 0 0 auto;
+  width: 32vw;
+  min-width: 220px;
+  max-width: 380px;
+  height: 420px;
+  position: relative;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.community-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.community-cta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  transform: translateY(100%);
+  transition: transform 0.28s ease;
+}
+
+.community-tile:hover .community-cta,
+.community-tile:focus-visible .community-cta {
+  transform: translateY(0);
+}
+
+.community-tile:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .community-section {
+    padding: 48px 0 64px;
+  }
+  .community-tile {
+    width: 74vw;
+    max-width: none;
+  }
+}
