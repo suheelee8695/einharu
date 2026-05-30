@@ -4768,6 +4768,11 @@ textarea:focus-visible,
   transform: scale(1.03);
 }
 
+.community-tile:nth-child(5) img,
+.community-tile:nth-child(10) img {
+  object-position: center 40%;
+}
+
 @media (max-width: 768px) {
   .community-section {
     padding: 48px 0 64px;
@@ -4775,5 +4780,9 @@ textarea:focus-visible,
   .community-tile {
     width: 74vw;
     max-width: none;
+  }
+  .community-tile:nth-child(5) img,
+  .community-tile:nth-child(10) img {
+    object-position: center 55%;
   }
 }
