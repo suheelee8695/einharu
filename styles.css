@@ -4770,7 +4770,7 @@ textarea:focus-visible,
 
 .community-tile:nth-child(5) img,
 .community-tile:nth-child(10) img {
-  object-position: center 40%;
+  object-position: center 75%;
 }
 
 @media (max-width: 768px) {
@@ -4783,6 +4783,6 @@ textarea:focus-visible,
   }
   .community-tile:nth-child(5) img,
   .community-tile:nth-child(10) img {
-    object-position: center 55%;
+    object-position: center 100%;
   }
 }
