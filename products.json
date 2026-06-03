@@ -42,7 +42,8 @@
     "productType": "pants",
     "releaseStatus": "available",
     "slug": "pin-tuck-wide-leg-trouser-black",
-    "stripePriceId": "price_1TMUWeFPNKTl6gGp5R3qfvOr"
+    "stripePriceId": "price_1TMUWeFPNKTl6gGp5R3qfvOr",
+    "identifier_exists": false
   },
   {
     "id": "item-helder-02",
@@ -88,7 +89,8 @@
     "releaseStatus": "available",
     "slug": "stand-collar-hem-tie-top-ivory",
     "stripePriceId": "price_1TMUe9FPNKTl6gGpJ1WejYzj",
-    "item_group_id": "stand-collar-hem-tie-top"
+    "item_group_id": "stand-collar-hem-tie-top",
+    "identifier_exists": false
   },
   {
     "id": "item-helder-03",
@@ -134,7 +136,8 @@
     "releaseStatus": "available",
     "slug": "stand-collar-hem-tie-top-black",
     "stripePriceId": "price_1TMUg0FPNKTl6gGpOFFztuUj",
-    "item_group_id": "stand-collar-hem-tie-top"
+    "item_group_id": "stand-collar-hem-tie-top",
+    "identifier_exists": false
   },
   {
     "id": "item-cs-02",
@@ -190,7 +193,8 @@
     "editorialNote": "The same considered proportion and relaxed drawstring waist appears in the <a href=\"/pin-tuck-wide-leg-trouser-black\">Pin Tuck Wide Leg Trouser</a> — a narrower silhouette for the same approach to tailoring.",
     "seoTitle": "Wide Leg Trousers Women — Quiet Luxury Beaker Pants | einHaru",
     "seoDescription": "Wide-leg wool trousers in a beaker silhouette. Considered proportions, clean minimalist lines — quiet luxury tailoring. einHaru Berlin. EU shipping.",
-    "stripePriceId": "price_1TD6CkFPNKTl6gGp9ujf2lxt"
+    "stripePriceId": "price_1TD6CkFPNKTl6gGp9ujf2lxt",
+    "identifier_exists": false
   },
   {
     "id": "item-cs-03",
@@ -252,7 +256,8 @@
     "slug": "bijo-shirt",
     "seoTitle": "Oversized Wrap Neckline Shirt Women — Minimalist Blouse | einHaru",
     "seoDescription": "Oversized button-up with a sculptural high wrap neckline. Nylon-Tencel blend, smooth and breathable. Minimalist women's shirt. einHaru Berlin. EU shipping.",
-    "stripePriceId": "price_1TD6CmFPNKTl6gGpb8e0jh5e"
+    "stripePriceId": "price_1TD6CmFPNKTl6gGpb8e0jh5e",
+    "identifier_exists": false
   },
   {
     "id": "item-cs-04",
@@ -316,7 +321,8 @@
     "slug": "shearling-wrap-shirt",
     "seoTitle": "Shearling Wrap Shirt — 2-Piece Set | einHaru",
     "seoDescription": "Sheer shirt with waist shirring, plus a detachable shearling wrap panel. Two looks in one. einHaru Berlin. EU shipping.",
-    "stripePriceId": "price_1TD6CoFPNKTl6gGpCO09kjV8"
+    "stripePriceId": "price_1TD6CoFPNKTl6gGpCO09kjV8",
+    "identifier_exists": false
   },
   {
     "id": "item-28",
@@ -365,7 +371,8 @@
     "productType": "dresses",
     "releaseStatus": "available",
     "slug": "zip-front-detachable-dungaree-dress",
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-27",
@@ -410,7 +417,8 @@
     "slug": "double-layer-sheer-mesh-long-sleeve-blue",
     "googleMerchantExclude": true,
     "color": "Blue",
-    "item_group_id": "double-layer-sheer-mesh-long-sleeve"
+    "item_group_id": "double-layer-sheer-mesh-long-sleeve",
+    "identifier_exists": false
   },
   {
     "id": "item-26",
@@ -455,7 +463,8 @@
     "releaseStatus": "available",
     "slug": "double-layer-sheer-mesh-long-sleeve-black",
     "color": "Black",
-    "item_group_id": "double-layer-sheer-mesh-long-sleeve"
+    "item_group_id": "double-layer-sheer-mesh-long-sleeve",
+    "identifier_exists": false
   },
   {
     "id": "item-25",
@@ -505,7 +514,8 @@
     "releaseStatus": "available",
     "slug": "mesh-long-sleeve-and-layering-tube-set",
     "googleMerchantExclude": true,
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-23",
@@ -550,7 +560,8 @@
     "productType": "dresses",
     "releaseStatus": "available",
     "slug": "soft-volume-gathered-dress-black",
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-24",
@@ -594,7 +605,8 @@
     "productType": "skirts",
     "releaseStatus": "available",
     "slug": "crinkled-tiered-long-skirt-black",
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-01",
@@ -638,7 +650,8 @@
     "slug": "vegan-leather-glossy-trench-coat-brown",
     "googleMerchantExclude": true,
     "color": "Brown",
-    "item_group_id": "vegan-leather-glossy-trench-coat"
+    "item_group_id": "vegan-leather-glossy-trench-coat",
+    "identifier_exists": false
   },
   {
     "id": "item-02",
@@ -693,7 +706,8 @@
     "releaseStatus": "available",
     "slug": "bralette-layered-stripe-shirt",
     "googleMerchantExclude": true,
-    "color": "Ivory"
+    "color": "Ivory",
+    "identifier_exists": false
   },
   {
     "id": "item-03",
@@ -743,7 +757,8 @@
     "productType": "pants",
     "releaseStatus": "available",
     "slug": "washed-grey-raw-edge-denim-trousers",
-    "color": "Grey"
+    "color": "Grey",
+    "identifier_exists": false
   },
   {
     "id": "item-04",
@@ -787,7 +802,8 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "draped-layered-top",
-    "color": "Dark Navy"
+    "color": "Dark Navy",
+    "identifier_exists": false
   },
   {
     "id": "item-05",
@@ -832,7 +848,8 @@
     "releaseStatus": "available",
     "slug": "sheer-contrast-button-up-shirt",
     "googleMerchantExclude": true,
-    "color": "Ivory / Black"
+    "color": "Ivory / Black",
+    "identifier_exists": false
   },
   {
     "id": "item-06",
@@ -877,7 +894,8 @@
     "productType": "dresses",
     "releaseStatus": "available",
     "slug": "vegan-leather-v-neck-sleeveless-dress",
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-07",
@@ -922,7 +940,8 @@
     "releaseStatus": "available",
     "slug": "utility-strap-cargo-pants",
     "googleMerchantExclude": true,
-    "color": "Olive"
+    "color": "Olive",
+    "identifier_exists": false
   },
   {
     "id": "item-08",
@@ -961,7 +980,8 @@
     "productType": "accessories",
     "releaseStatus": "available",
     "slug": "compact-leather-tote",
-    "color": "Brown"
+    "color": "Brown",
+    "identifier_exists": false
   },
   {
     "id": "item-09",
@@ -1003,7 +1023,8 @@
     "productType": "dresses",
     "releaseStatus": "available",
     "slug": "sleeveless-shirt-dress-with-tulle-overlay",
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-10",
@@ -1047,7 +1068,8 @@
     "releaseStatus": "available",
     "slug": "crinkle-texture-button-shirt",
     "googleMerchantExclude": true,
-    "color": "Brown"
+    "color": "Brown",
+    "identifier_exists": false
   },
   {
     "id": "item-11",
@@ -1091,7 +1113,8 @@
     "slug": "barrel-shaped-wide-leg-trousers-ivory",
     "googleMerchantExclude": true,
     "color": "Ivory",
-    "item_group_id": "barrel-shaped-wide-leg-trousers"
+    "item_group_id": "barrel-shaped-wide-leg-trousers",
+    "identifier_exists": false
   },
   {
     "id": "item-12",
@@ -1132,7 +1155,8 @@
     "releaseStatus": "available",
     "slug": "3d-textured-ruffle-shirt",
     "googleMerchantExclude": true,
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-13",
@@ -1176,7 +1200,8 @@
     "slug": "draped-scarf-knit-long-sleeve-grey",
     "googleMerchantExclude": true,
     "color": "Grey",
-    "item_group_id": "draped-scarf-knit-long-sleeve"
+    "item_group_id": "draped-scarf-knit-long-sleeve",
+    "identifier_exists": false
   },
   {
     "id": "item-14",
@@ -1221,7 +1246,8 @@
     "releaseStatus": "available",
     "slug": "fluid-wide-leg-pants-dark-blue",
     "color": "Dark Blue",
-    "item_group_id": "fluid-wide-leg-pants"
+    "item_group_id": "fluid-wide-leg-pants",
+    "identifier_exists": false
   },
   {
     "id": "item-15",
@@ -1265,7 +1291,8 @@
     "releaseStatus": "available",
     "slug": "mesh-cropped-tank-wine",
     "color": "Wine",
-    "item_group_id": "mesh-cropped-tank"
+    "item_group_id": "mesh-cropped-tank",
+    "identifier_exists": false
   },
   {
     "id": "item-16",
@@ -1305,7 +1332,8 @@
     "productType": "tops",
     "releaseStatus": "available",
     "slug": "mesh-sheer-long-sleeve",
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-17",
@@ -1343,7 +1371,8 @@
     "productType": "accessories",
     "releaseStatus": "available",
     "slug": "textured-leather-tote-bag",
-    "color": "Black"
+    "color": "Black",
+    "identifier_exists": false
   },
   {
     "id": "item-18",
@@ -1388,7 +1417,8 @@
     "releaseStatus": "available",
     "slug": "vegan-leather-glossy-trench-coat-black",
     "color": "Black",
-    "item_group_id": "vegan-leather-glossy-trench-coat"
+    "item_group_id": "vegan-leather-glossy-trench-coat",
+    "identifier_exists": false
   },
   {
     "id": "item-19",
@@ -1433,7 +1463,8 @@
     "releaseStatus": "available",
     "slug": "mesh-cropped-tank-white",
     "color": "White",
-    "item_group_id": "mesh-cropped-tank"
+    "item_group_id": "mesh-cropped-tank",
+    "identifier_exists": false
   },
   {
     "id": "item-20",
@@ -1480,7 +1511,8 @@
     "slug": "fluid-wide-leg-pants-brown",
     "googleMerchantExclude": true,
     "color": "Brown",
-    "item_group_id": "fluid-wide-leg-pants"
+    "item_group_id": "fluid-wide-leg-pants",
+    "identifier_exists": false
   },
   {
     "id": "item-21",
@@ -1526,7 +1558,8 @@
     "slug": "barrel-shaped-wide-leg-trousers-black",
     "googleMerchantExclude": true,
     "color": "Black",
-    "item_group_id": "barrel-shaped-wide-leg-trousers"
+    "item_group_id": "barrel-shaped-wide-leg-trousers",
+    "identifier_exists": false
   },
   {
     "id": "item-22",
@@ -1570,6 +1603,7 @@
     "slug": "draped-scarf-knit-long-sleeve-black",
     "googleMerchantExclude": true,
     "color": "Black",
-    "item_group_id": "draped-scarf-knit-long-sleeve"
+    "item_group_id": "draped-scarf-knit-long-sleeve",
+    "identifier_exists": false
   }
 ]
