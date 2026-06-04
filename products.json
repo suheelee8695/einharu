@@ -192,7 +192,7 @@
     "slug": "beaker-pants",
     "editorialNote": "The same considered proportion and relaxed drawstring waist appears in the <a href=\"/pin-tuck-wide-leg-trouser-black\">Pin Tuck Wide Leg Trouser</a> — a narrower silhouette for the same approach to tailoring.",
     "seoTitle": "Wide Leg Trousers Women — Quiet Luxury Beaker Pants | einHaru",
-    "seoDescription": "Wide-leg wool trousers in a beaker silhouette. Considered proportions, clean minimalist lines — quiet luxury tailoring. einHaru Berlin. EU shipping.",
+    "seoDescription": "Pleated wide leg barrel trousers in a structured wool blend — full through the thigh with a drawstring waist. Pairs with fitted knits or cropped tops. Ideal for everyday minimalist dressing or smart casual occasions. Shipped from Berlin.",
     "stripePriceId": "price_1TD6CkFPNKTl6gGp9ujf2lxt",
     "identifier_exists": false
   },
@@ -255,7 +255,7 @@
     "releaseStatus": "available",
     "slug": "bijo-shirt",
     "seoTitle": "Oversized Wrap Neckline Shirt Women — Minimalist Blouse | einHaru",
-    "seoDescription": "Oversized button-up with a sculptural high wrap neckline. Nylon-Tencel blend, smooth and breathable. Minimalist women's shirt. einHaru Berlin. EU shipping.",
+    "seoDescription": "An oversized stand collar shirt in Nylon-Tencel — wear open as a relaxed layer or closed for a clean, composed look. Lightweight and breathable. Suits casual days, weekend outings, or smart casual styling. Korean minimalist fashion from Berlin.",
     "stripePriceId": "price_1TD6CmFPNKTl6gGpb8e0jh5e",
     "identifier_exists": false
   },
@@ -320,7 +320,7 @@
     "releaseStatus": "available",
     "slug": "shearling-wrap-shirt",
     "seoTitle": "Shearling Wrap Shirt — 2-Piece Set | einHaru",
-    "seoDescription": "Sheer shirt with waist shirring, plus a detachable shearling wrap panel. Two looks in one. einHaru Berlin. EU shipping.",
+    "seoDescription": "A lightweight sheer shirt with a detachable shearling wrap panel — wear layered for texture and warmth, or the shirt alone in warmer months. Two looks in one piece. Great for transitional season dressing. Shipped from Berlin.",
     "stripePriceId": "price_1TD6CoFPNKTl6gGpCO09kjV8",
     "identifier_exists": false
   },
@@ -606,7 +606,8 @@
     "releaseStatus": "available",
     "slug": "crinkled-tiered-long-skirt-black",
     "color": "Black",
-    "identifier_exists": false
+    "identifier_exists": false,
+    "seoDescription": "A flowy black tiered maxi skirt in crinkle fabric — soft volume, natural movement, effortlessly minimal. Wear with a fitted tank or tucked blouse. Perfect for summer days, travel, or relaxed evening outfits. Shipped from Berlin."
   },
   {
     "id": "item-01",
@@ -1333,7 +1334,8 @@
     "releaseStatus": "available",
     "slug": "mesh-sheer-long-sleeve",
     "color": "Black",
-    "identifier_exists": false
+    "identifier_exists": false,
+    "seoDescription": "A see-through mesh long sleeve top for layering over a slip or bralette, or wearing alone as a statement piece. Lightweight polyester, minimal cut. Suits going-out looks, creative layering, or everyday minimalist outfits. From Berlin."
   },
   {
     "id": "item-17",
@@ -1418,7 +1420,8 @@
     "slug": "vegan-leather-glossy-trench-coat-black",
     "color": "Black",
     "item_group_id": "vegan-leather-glossy-trench-coat",
-    "identifier_exists": false
+    "identifier_exists": false,
+    "seoDescription": "A high-shine faux leather trench coat in black with a belted waist — structured, statement outerwear with a quiet luxury finish. Wear over tailoring or denim. Ideal for autumn and transitional weather. Shipped from Berlin."
   },
   {
     "id": "item-19",
