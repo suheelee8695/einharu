@@ -749,21 +749,24 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     const sortedProducts = (items, sortMode) => {
       const list = [...items];
       switch (sortMode) {
+        case 'price-asc': list.sort((a, b) => Number(a.price || 0) - Number(b.price || 0)); break;
+        case 'price-desc': list.sort((a, b) => Number(b.price || 0) - Number(a.price || 0)); break;
+        case 'name-asc': list.sort((a, b) => String(a.title || '').localeCompare(String(b.title || ''))); break;
         case 'availability':
-          return list.sort((a, b) => {
-            const aSoldOut = getProductState(a) === 'sold_out' ? 1 : 0;
-            const bSoldOut = getProductState(b) === 'sold_out' ? 1 : 0;
-            return aSoldOut - bSoldOut;
-          });
-        case 'price-asc': return list.sort((a, b) => Number(a.price || 0) - Number(b.price || 0));
-        case 'price-desc': return list.sort((a, b) => Number(b.price || 0) - Number(a.price || 0));
-        case 'name-asc': return list.sort((a, b) => String(a.title || '').localeCompare(String(b.title || '')));
-        default: return list;
+        default: break;
       }
+      // Always keep sold-out items at the end, preserving the chosen order otherwise.
+      // (Array.prototype.sort is stable, so the primary sort above is retained within each group.)
+      return list.sort((a, b) => {
+        const aSoldOut = getProductState(a) === 'sold_out' ? 1 : 0;
+        const bSoldOut = getProductState(b) === 'sold_out' ? 1 : 0;
+        return aSoldOut - bSoldOut;
+      });
     };
 
     const filteredProducts = (items, filterMode, productTypeMode) => {
-      let result = items.filter((p) => getProductState(p) !== 'sold_out');
+      // Sold-out items stay visible (sorted to the end) as a trust/social-proof signal.
+      let result = [...items];
 
       if (filterMode !== 'all') {
         result = result.filter((p) => (p.category || 'collection').toLowerCase() === filterMode);
