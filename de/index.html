@@ -94,7 +94,6 @@
   <!-- Site banner -->
   <div class="site-banner" role="status" aria-live="polite" id="site-banner">
     <div class="banner-text" id="banner-text"></div>
-    <button class="banner-close" aria-label="Banner schliessen" id="banner-close">×</button>
   </div>
 
   <div class="site-chrome">
@@ -143,15 +142,7 @@
       </aside>
 
       <div class="shop-main">
-        <a class="coming-soon-banner" href="/coming-soon" aria-label="Go to Coming-Soon-Seite">
-          <img src="../images/BannerUpdate%202.webp" alt="einHaru Collective" loading="lazy" />
-          <span class="coming-soon-banner-copy banner-dm-sans" aria-hidden="true">
-            <strong>einHaru</strong>
-            <span>Collective</span>
-          </span>
-        </a>
-
-        <section class="shop-main-controls" aria-label="Shop-Steuerung">
+<section class="shop-main-controls" aria-label="Shop-Steuerung">
           <div class="shop-header-right">
             <label for="sort-products" class="shop-sort-label">Sortieren</label>
             <select id="sort-products" class="shop-sort" aria-label="Produkte sortieren">
@@ -173,6 +164,58 @@
         <section class="product-grid" id="product-grid" aria-label="Produktgitter">
           <!-- Cards injected by script.js -->
         </section>
+      </div>
+    </section>
+
+    <!-- Worn by you — DE eyebrow string pending A2 approval -->
+    <section class="community-section" aria-label="Worn by you">
+      <div class="community-header">
+        <p class="community-eyebrow">Eure Looks</p>
+      </div>
+      <div class="community-strip-outer" id="community-outer">
+        <div class="community-strip" id="community-strip">
+          <a class="community-tile" href="/stand-collar-hem-tie-top-black">
+            <img src="../images/community-look-1.webp" alt="Stand Collar Hem Tie Top Black — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <a class="community-tile" href="/stand-collar-hem-tie-top-ivory">
+            <img src="../images/community-look-2.webp" alt="Stand Collar Hem Tie Top Ivory — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <a class="community-tile" href="/beaker-pants">
+            <img src="../images/community-look-3.webp" alt="Beaker Pants — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <a class="community-tile" href="/bijo-shirt">
+            <img src="../images/community-look-4.webp" alt="Bijo Shirt — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <a class="community-tile" href="/stand-collar-hem-tie-top-ivory">
+            <img src="../images/community-look-5.webp" alt="Stand Collar Hem Tie Top Ivory — einHaru Collective" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <!-- Duplicates for seamless infinite loop -->
+          <a class="community-tile" href="/stand-collar-hem-tie-top-black" aria-hidden="true" tabindex="-1">
+            <img src="../images/community-look-1.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <a class="community-tile" href="/stand-collar-hem-tie-top-ivory" aria-hidden="true" tabindex="-1">
+            <img src="../images/community-look-2.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <a class="community-tile" href="/beaker-pants" aria-hidden="true" tabindex="-1">
+            <img src="../images/community-look-3.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <a class="community-tile" href="/bijo-shirt" aria-hidden="true" tabindex="-1">
+            <img src="../images/community-look-4.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+          <a class="community-tile" href="/stand-collar-hem-tie-top-ivory" aria-hidden="true" tabindex="-1">
+            <img src="../images/community-look-5.webp" alt="" loading="lazy" />
+            <div class="community-cta">Shop den Look →</div>
+          </a>
+        </div>
       </div>
     </section>
   </main>

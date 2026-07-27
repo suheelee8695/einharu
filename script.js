@@ -793,15 +793,23 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         const showPrice = prod.price != null;
         const badgeHtml = state === 'coming_soon'
           ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
-          : (state === 'sold_out' ? `<span class="badge--soldout">${t('badgeSoldOut')}</span>` : '');
+          : '';
 
         const card = document.createElement('div');
-        card.className = 'product-card';
+        card.className = state === 'sold_out' ? 'product-card product-card--soldout' : 'product-card';
         card.tabIndex = 0;
         card.setAttribute('role', 'button');
-        card.setAttribute('aria-label', `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
+        card.setAttribute('aria-label',
+          state === 'sold_out'
+            ? `${prod.title}, ${t('soldOut')}`
+            : `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
         card.dataset.category = (prod.category || 'collection').toLowerCase();
         const brand = prod.brand || (card.dataset.category === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
+        const priceHtml = showPrice
+          ? (state === 'sold_out'
+              ? `<div class="card-price card-price--soldout">${t('soldOut')}</div>`
+              : `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>`)
+          : '';
 
         card.innerHTML = `
           <div class="card-image-wrapper">
@@ -811,7 +819,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           <div class="card-info">
             <div class="card-brand">${brand}</div>
             <h2 class="card-title"><a href="${getProductPath(prod)}" tabindex="-1">${prod.title ?? ''}</a></h2>
-            ${showPrice ? `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>` : ''}
+            ${priceHtml}
           </div>
         `;
 
@@ -871,13 +879,21 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         const img = (prod.images && prod.images[0]) || prod.cover || '';
         const badgeHtml = state === 'coming_soon'
           ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
-          : (state === 'sold_out' ? `<span class="badge--soldout">${t('badgeSoldOut')}</span>` : '');
+          : '';
         const brand = prod.brand || ((prod.category || '').toLowerCase() === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
+        const priceHtml = showPrice
+          ? (state === 'sold_out'
+              ? `<div class="card-price card-price--soldout">${t('soldOut')}</div>`
+              : `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>`)
+          : '';
         const row = document.createElement('article');
-        row.className = 'product-list-item';
+        row.className = state === 'sold_out' ? 'product-list-item product-card--soldout' : 'product-list-item';
         row.tabIndex = 0;
         row.setAttribute('role', 'button');
-        row.setAttribute('aria-label', `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
+        row.setAttribute('aria-label',
+          state === 'sold_out'
+            ? `${prod.title}, ${t('soldOut')}`
+            : `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
         row.innerHTML = `
           <div class="product-list-thumb">
             <img src="${img}" alt="${buildProductImageAlt(prod, 0)}" loading="lazy">
@@ -886,7 +902,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           <div class="product-list-info">
             <div class="card-brand">${brand}</div>
             <h2 class="card-title"><a href="${getProductPath(prod)}" tabindex="-1">${prod.title ?? ''}</a></h2>
-            ${showPrice ? `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>` : ''}
+            ${priceHtml}
           </div>
         `;
 
@@ -1362,19 +1378,8 @@ if (!isMobile) {
   /*** BANNER ***/
   function initBanner() {
     const banner = $('#site-banner');
-    const closeBtn = $('#banner-close');
     const textEl = $('#banner-text');
-    if (!banner || !closeBtn || !textEl) return;
-
-    if (sessionStorage.getItem('bannerDismissed')) {
-      banner.style.display = 'none';
-    }
-
-    closeBtn.addEventListener('click', () => {
-      banner.style.display = 'none';
-      sessionStorage.setItem('bannerDismissed', 'true');
-    });
-
+    if (!banner || !textEl) return;
     // Banner text is set dynamically by cart.js renderBanner()
   }
 
@@ -1391,11 +1396,6 @@ if (!isMobile) {
       setChromeHeight();
     });
 
-    $('#banner-close')?.addEventListener('click', () => {
-      requestAnimationFrame(() => {
-        setChromeHeight();
-      });
-    });
   }
 
 

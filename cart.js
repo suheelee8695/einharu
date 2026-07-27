@@ -43,8 +43,8 @@
         : 'Der EU-Versand ist für diese Bestellung kostenlos.',
       shippingNoteIntl: 'Internationaler Versand: 18,90 €. Kostenloser Versand ist international nicht verfügbar.',
       returnNote: 'Rückgaben sind innerhalb von 14 Tagen nach Zustellung möglich. Die Kosten für den Rückversand trägt die Kundschaft.',
-      bannerDe: 'Versand in Deutschland 4,90 € · Kostenlos ab 80 €',
-      bannerEu: 'EU-Versand 9,90 € · Kostenlos ab 150 €',
+      bannerDe: 'Versand 4,90 € · Gratis ab 80 €',
+      bannerEu: 'EU-Versand 9,90 € · Gratis ab 150 €',
       bannerIntl: 'Internationaler Versand 18,90 €'
     }
   };
