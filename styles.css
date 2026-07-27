@@ -4332,7 +4332,7 @@ textarea:focus-visible,
   /* 1) Breadcrumb: 한 줄/가로스크롤/말줄임 */
   .breadcrumb, nav[aria-label="Breadcrumb"] {
     position: sticky; top: 0; z-index: 15;
-    background: #fff; border-bottom: 1px solid #eee;
+    background: var(--bg); border-bottom: 1px solid var(--hairline);
     padding: 8px 12px;
   }
   .breadcrumb .trail, nav[aria-label="Breadcrumb"] > * {
@@ -4349,7 +4349,7 @@ textarea:focus-visible,
   body.pdp-mobile .pdp-gallery {
     position: relative;
     height: calc(100svh - 48px); /* 상단 breadcrumb 높이에 맞춰 조정 */
-    background: #fff;
+    background: var(--bg);
   }
   body.pdp-mobile .pdp-track {
     height: 100%;
@@ -4362,7 +4362,7 @@ textarea:focus-visible,
     flex: 0 0 100vw; height: 100%;
     scroll-snap-align: center;
     display: grid; place-items: center;
-    background: #fff;
+    background: var(--bg);
   }
   body.pdp-mobile .pdp-slide img {
     width: 100%; height: 100%; object-fit: contain;
@@ -4371,7 +4371,7 @@ textarea:focus-visible,
   /* 스크롤 힌트(양쪽 그라데이션) */
   body.pdp-mobile .pdp-hint {
     position: absolute; top: 0; bottom: 0; width: 44px; z-index: 5; pointer-events: none;
-    background: linear-gradient(to right, rgba(255,255,255,.9), rgba(255,255,255,0));
+    background: linear-gradient(to right, rgba(250,248,245,.9), rgba(250,248,245,0));
   }
   body.pdp-mobile .pdp-hint--left { left: 0; transform: scaleX(-1); display: none; }
   body.pdp-mobile .pdp-hint--right { right: 0; }
@@ -4405,8 +4405,8 @@ textarea:focus-visible,
     position: sticky;
     top: 0;                 /* 배너/헤더 위에는 이미 포함되어 있으니 0 */
     z-index: 20;
-    background: #fff;
-    border-bottom: 1px solid #eee;
+    background: var(--bg);
+    border-bottom: 1px solid var(--hairline);
     padding: 8px 12px;
     margin: 0 0 8px 0;
   }
@@ -4445,8 +4445,8 @@ textarea:focus-visible,
     position: sticky;
     top: 0;
     z-index: 30;
-    background: #fff;
-    border-bottom: 1px solid #eee;
+    background: var(--bg);
+    border-bottom: 1px solid var(--hairline);
 
     /* full-bleed trick */
     width: 100vw;

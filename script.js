@@ -339,7 +339,7 @@ function injectMobilePdpStyles(){
     .eh-inner{ padding-left:var(--eh-inner-pad); padding-right:var(--eh-inner-pad); }
 
     /* Breadcrumb (상단 고정 + 풀블리드) */
-    .eh-bc{ position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid #eee; }
+    .eh-bc{ position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--hairline); }
     .eh-bc .trail{ display:flex; gap:6px; white-space:nowrap; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; }
     .eh-bc .trail::-webkit-scrollbar{ display:none; }
     .eh-bc .current{ max-width:56vw; overflow:hidden; text-overflow:ellipsis; display:inline-block; }
@@ -357,7 +357,7 @@ function injectMobilePdpStyles(){
         calc(100svh - var(--eh-top-offset)),
         calc(100vw * (var(--eh-aspect-h) / var(--eh-aspect-w)))
       );
-      background:#fff;
+      background:var(--bg);
     }
     body.eh-pdp-mobile .eh-track{
       height:100%; display:flex; overflow-x:auto; overflow-y:hidden;
@@ -416,7 +416,7 @@ function injectMobilePdpStyles(){
     body.eh-pdp-mobile [data-product-info]{
       composes: eh-fullbleed eh-inner;
       padding-bottom: calc(24px + var(--eh-sticky-h));
-      background:#fff;
+      background:var(--bg);
     }
 
     .buy-now-sticky, .sticky-atc{ z-index:70; }
