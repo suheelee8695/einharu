@@ -83,6 +83,31 @@
   </script>
 
   <link href="styles.css" rel="stylesheet" />
+  <style>
+    .discovery-hero-visual img {
+      aspect-ratio: 3 / 4;
+      object-position: center top;
+    }
+    .discovery-site-preview {
+      margin: 12px 0 0;
+    }
+    .discovery-site-preview a {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+    }
+    .discovery-site-preview a img {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--hairline);
+    }
+    .discovery-site-preview .discovery-shop-btn {
+      display: block;
+      text-align: center;
+      margin-top: 6px;
+      margin-bottom: 48px;
+    }
+  </style>
 </head>
 <body class="discovery-page">
   <header class="site-header">
@@ -128,6 +153,21 @@
           <a href="#shop">How to Shop</a>
           <a href="#shop-now">Shop Now</a>
         </nav>
+      </div>
+    </section>
+
+    <section class="faq-container">
+      <figure class="discovery-hero-visual">
+        <img src="images/shearling-wrap-shirt-10.webp" alt="Shearling Wrap Shirt — Korean minimalist fashion, einHaru Collective Berlin" loading="eager" />
+        <figcaption class="discovery-image-actions">
+          <a href="/shearling-wrap-shirt" class="discovery-shop-btn">Shop Shearling Wrap Shirt</a>
+        </figcaption>
+      </figure>
+      <div class="discovery-site-preview">
+        <a href="/" aria-label="Browse the full einHaru shop">
+          <img src="images/websiteCards2.webp" alt="einHaru Collective — Korean and Japanese minimalist fashion, shop overview" loading="lazy" />
+          <span class="discovery-shop-btn">Browse the shop →</span>
+        </a>
       </div>
     </section>
 
