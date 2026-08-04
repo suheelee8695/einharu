@@ -2,8 +2,6 @@
   'use strict';
 
   const KEY = 'einharu_consent_v1';
-  const GA_ID = 'G-Z42LZ4WR68';
-  let gaLoaded = false;
 
   const readConsent = () => {
     try {
@@ -17,21 +15,16 @@
     localStorage.setItem(KEY, JSON.stringify({ ...data, ts: Date.now() }));
   };
 
-  const loadAnalytics = () => {
-    if (gaLoaded || !GA_ID) return;
-    gaLoaded = true;
+  const grantAnalytics = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', { analytics_storage: 'granted' });
+    }
+  };
 
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
-
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`;
-    script.onload = () => {
-      window.gtag('js', new Date());
-      window.gtag('config', GA_ID, { anonymize_ip: true });
-    };
-    document.head.appendChild(script);
+  const denyAnalytics = () => {
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', { analytics_storage: 'denied' });
+    }
   };
 
   const ensurePanel = () => {
@@ -173,7 +166,7 @@
       hideBanner();
       closePanel();
       showToast(message);
-      if (consent.analytics) loadAnalytics();
+      if (consent.analytics) grantAnalytics(); else denyAnalytics();
       window.dispatchEvent(new CustomEvent('einharu:consent-updated', { detail: consent }));
     };
 
@@ -222,7 +215,7 @@
       showBanner();
     } else {
       hideBanner();
-      if (consent.analytics) loadAnalytics();
+      if (consent.analytics) grantAnalytics(); else denyAnalytics();
       window.dispatchEvent(new CustomEvent('einharu:consent-updated', { detail: consent }));
     }
   };
