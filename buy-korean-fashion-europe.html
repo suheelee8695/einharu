@@ -107,6 +107,11 @@
       margin-top: 6px;
       margin-bottom: 48px;
     }
+    .discovery-hero-mobile-only { display: none; }
+    @media (max-width: 680px) {
+      .discovery-hero-mobile-only { display: block; margin: 0; }
+      .discovery-hero-desktop-only { display: none; }
+    }
   </style>
 </head>
 <body class="discovery-page">
@@ -139,11 +144,16 @@
         <div class="faq-eyebrow">Editorial Guide · <time datetime="2026-03-07">March 2026</time></div>
         <h1>Korean Fashion Europe: Where to Buy Independent Designs</h1>
       </div>
+      <figure class="discovery-hero-visual discovery-hero-mobile-only">
+        <img src="images/shearling-wrap-shirt-10.webp" alt="Shearling Wrap Shirt — Korean minimalist fashion, einHaru Collective Berlin" loading="eager" />
+        <figcaption class="discovery-image-actions">
+          <a href="/shearling-wrap-shirt" class="discovery-shop-btn">Shop Shearling Wrap Shirt</a>
+        </figcaption>
+      </figure>
       <div>
         <p class="faq-intro">
           Finding Korean and Japanese independent fashion in Europe has always been difficult. Most Seoul and Tokyo labels do not distribute outside Asia. What reaches Europe tends to arrive through large platforms that carry mass-market stock rather than the independent studios doing the most interesting work.
         </p>
-        <p class="ai-answer-bluf">einHaru Collective was built to close that gap. We are a <a href="/korean-fashion-berlin">Berlin-based online boutique curating Korean and Japanese minimalist fashion</a> from independent studios in Seoul and Tokyo, shipping EU-wide with free delivery over €80 (Germany) or €150 (EU).</p>
         <nav class="faq-jump" aria-label="Guide sections">
           <a href="#problem">The Problem With Buying From Asia</a>
           <a href="#different">What Makes Korean &amp; Japanese Fashion Different</a>
@@ -153,11 +163,12 @@
           <a href="#shop">How to Shop</a>
           <a href="#shop-now">Shop Now</a>
         </nav>
+        <p class="ai-answer-bluf">einHaru Collective was built to close that gap. We are a <a href="/korean-fashion-berlin">Berlin-based online boutique curating Korean and Japanese minimalist fashion</a> from independent studios in Seoul and Tokyo, shipping EU-wide with free delivery over €80 (Germany) or €150 (EU).</p>
       </div>
     </section>
 
     <section class="faq-container">
-      <figure class="discovery-hero-visual">
+      <figure class="discovery-hero-visual discovery-hero-desktop-only">
         <img src="images/shearling-wrap-shirt-10.webp" alt="Shearling Wrap Shirt — Korean minimalist fashion, einHaru Collective Berlin" loading="eager" />
         <figcaption class="discovery-image-actions">
           <a href="/shearling-wrap-shirt" class="discovery-shop-btn">Shop Shearling Wrap Shirt</a>
@@ -172,19 +183,6 @@
     </section>
 
     <section class="faq-layout faq-container">
-      <aside class="faq-sidebar" aria-label="Guide navigation">
-        <div class="faq-sidebar-title">On This Page</div>
-        <nav>
-          <a href="#problem" class="active">The Problem With Buying From Asia</a>
-          <a href="#different">What Makes Korean &amp; Japanese Fashion Different</a>
-          <a href="#edit">What We Carry</a>
-          <a href="#shipping">Shipping Across the EU</a>
-          <a href="#sizing">Sizing Guide</a>
-          <a href="#shop">How to Shop</a>
-          <a href="#shop-now">Shop Now</a>
-        </nav>
-      </aside>
-
       <div class="faq-content">
         <section class="faq-block" id="problem">
           <div class="faq-block-head"><span>01</span><h2>The Problem With Buying Korean Fashion From Europe</h2></div>
