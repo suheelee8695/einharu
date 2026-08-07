@@ -88,6 +88,36 @@
   </script>
 
   <link href="styles.css" rel="stylesheet" />
+  <style>
+    .discovery-hero-visual img {
+      aspect-ratio: 3 / 4;
+      object-position: center top;
+    }
+    .discovery-site-preview {
+      margin: 12px 0 0;
+    }
+    .discovery-site-preview a {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+    }
+    .discovery-site-preview a img {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--hairline);
+    }
+    .discovery-site-preview .discovery-shop-btn {
+      display: block;
+      text-align: center;
+      margin-top: 6px;
+      margin-bottom: 48px;
+    }
+    .discovery-hero-mobile-only { display: none; }
+    @media (max-width: 680px) {
+      .discovery-hero-mobile-only { display: block; margin: 0; }
+      .discovery-hero-desktop-only { display: none; }
+    }
+  </style>
   <!-- Google Consent Mode v2 -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -134,6 +164,12 @@
         <div class="faq-eyebrow">Editorial Guide · <time datetime="2026-04">April 2026</time></div>
         <h1>Korean Fashion in Berlin — A Practical Guide</h1>
       </div>
+      <figure class="discovery-hero-visual discovery-hero-mobile-only">
+        <img src="images/beaker-pants-1.webp" alt="Beaker Pants — Korean minimalist fashion, einHaru Collective Berlin" loading="eager" />
+        <figcaption class="discovery-image-actions">
+          <a href="/beaker-pants" class="discovery-shop-btn">Shop Beaker Pants</a>
+        </figcaption>
+      </figure>
       <div>
         <p class="faq-intro">
           Berlin has a small but genuine Korean fashion presence — more than most European cities, less than it deserves. What exists ranges from K-pop adjacent trend pieces to considered independent designers whose work sits comfortably alongside the best European labels. Finding the latter requires knowing where to look.
@@ -149,18 +185,22 @@
       </div>
     </section>
 
-    <section class="faq-layout faq-container">
-      <aside class="faq-sidebar" aria-label="Guide navigation">
-        <div class="faq-sidebar-title">On This Page</div>
-        <nav>
-          <a href="#landscape" class="active">The Landscape</a>
-          <a href="#labels">What to Expect from Korean Independent Labels</a>
-          <a href="#online">Shopping Korean Fashion Online from Berlin</a>
-          <a href="#stores">Korean Fashion in Berlin Concept Stores</a>
-          <a href="#buying">What to Know Before You Buy</a>
-        </nav>
-      </aside>
+    <section class="faq-container">
+      <figure class="discovery-hero-visual discovery-hero-desktop-only">
+        <img src="images/beaker-pants-1.webp" alt="Beaker Pants — Korean minimalist fashion, einHaru Collective Berlin" loading="eager" />
+        <figcaption class="discovery-image-actions">
+          <a href="/beaker-pants" class="discovery-shop-btn">Shop Beaker Pants</a>
+        </figcaption>
+      </figure>
+      <div class="discovery-site-preview">
+        <a href="/" aria-label="Browse the full einHaru shop">
+          <img src="images/websiteCards2.webp" alt="einHaru Collective — Korean and Japanese minimalist fashion, shop overview" loading="lazy" />
+          <span class="discovery-shop-btn">Browse the shop →</span>
+        </a>
+      </div>
+    </section>
 
+    <section class="faq-layout faq-container">
       <div class="faq-content">
         <section class="faq-block" id="landscape">
           <div class="faq-block-head"><span>01</span><h2>Korean Fashion in Berlin: The Landscape</h2></div>
