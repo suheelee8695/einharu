@@ -3159,6 +3159,10 @@ button.icon-btn::-moz-focus-inner {
   min-width: 0;
 }
 
+.faq-content:only-child {
+  grid-column: 1 / -1;
+}
+
 .faq-block {
   margin-bottom: 58px;
   scroll-margin-top: calc(var(--chrome-height, 84px) + 18px);
