@@ -146,8 +146,8 @@ exports.handler = async (event) => {
       },
       EU: {
         label: 'EU shipping',
-        amount: subtotal >= 15000 ? 0 : 990,
-        freeLabel: 'Free EU shipping (orders over €150)'
+        amount: subtotal >= 8000 ? 0 : 490,
+        freeLabel: 'Free EU shipping (orders over €80)'
       },
       INTL: {
         label: 'International shipping',

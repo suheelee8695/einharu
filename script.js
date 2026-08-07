@@ -25,7 +25,7 @@
       badgeComingSoon: 'COMING SOON',
       badgeSoldOut: 'SOLD OUT',
       shippingNudgeDe: (remaining) => `Shipping: €4.90 to Germany · Add ${remaining} more for free delivery.`,
-      shippingNudgeEu: (remaining) => `Shipping: €9.90 to EU · Add ${remaining} more for free delivery.`,
+      shippingNudgeEu: (remaining) => `Shipping: €4.90 to EU · Add ${remaining} more for free delivery.`,
       shippingQualifiedDe: 'Free shipping to Germany.',
       shippingQualifiedEu: 'Free shipping across the EU.',
       shippingIntl: 'Shipping: €18.90 internationally · Free shipping is available for Germany and EU orders.',
@@ -38,7 +38,7 @@
       alertSoldOut: 'This item is sold out.',
       alertCartUnavailable: 'Cart unavailable.',
       alertMissingStripe: 'This item cannot be checked out yet (missing Stripe Price).',
-      banner: 'Germany: €4.90 or free over €80. EU: €9.90 or free over €150. International: €18.90.'
+      banner: 'Germany: €4.90 or free over €80. EU: €4.90 or free over €80. International: €18.90.'
     },
     de: {
       bagEmpty: 'Dein Warenkorb ist leer.',
@@ -50,7 +50,7 @@
       badgeComingSoon: 'BALD VERFUEGBAR',
       badgeSoldOut: 'AUSVERKAUFT',
       shippingNudgeDe: (remaining) => `Versand: 4,90 € nach Deutschland · Noch ${remaining} bis zum kostenlosen Versand.`,
-      shippingNudgeEu: (remaining) => `Versand: 9,90 € in die EU · Noch ${remaining} bis zum kostenlosen Versand.`,
+      shippingNudgeEu: (remaining) => `Versand: 4,90 € in die EU · Noch ${remaining} bis zum kostenlosen Versand.`,
       shippingQualifiedDe: 'Kostenloser Versand nach Deutschland.',
       shippingQualifiedEu: 'Kostenloser Versand in die EU.',
       shippingIntl: 'Versand: 18,90 € international · Kostenloser Versand gilt für Deutschland und EU.',
@@ -63,7 +63,7 @@
       alertSoldOut: 'Dieser Artikel ist ausverkauft.',
       alertCartUnavailable: 'Warenkorb derzeit nicht verfuegbar.',
       alertMissingStripe: 'Dieser Artikel kann derzeit nicht zur Kasse gehen.',
-      banner: 'Deutschland: 4,90 € oder kostenlos ab 80 €. EU: 9,90 € oder kostenlos ab 150 €. International: 18,90 €.'
+      banner: 'Deutschland: 4,90 € oder kostenlos ab 80 €. EU: 4,90 € oder kostenlos ab 80 €. International: 18,90 €.'
     }
   };
   const t = (key, ...args) => {
@@ -72,7 +72,7 @@
   };
   const SHIPPING_REGIONS = {
     DE: { threshold: 80, price: 4.9, key: 'DE' },
-    EU: { threshold: 150, price: 9.9, key: 'EU' },
+    EU: { threshold: 80, price: 4.9, key: 'EU' },
     INTL: { threshold: null, price: 18.9, key: 'INTL' }
   };
   const SHIPPING_KEY = 'eh_shipping_country';
@@ -603,7 +603,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
           },
           {
             '@type': 'OfferShippingDetails',
-            shippingRate: { '@type': 'MonetaryAmount', value: '9.90', currency: 'EUR' },
+            shippingRate: { '@type': 'MonetaryAmount', value: '4.90', currency: 'EUR' },
             shippingDestination: [
               { '@type': 'DefinedRegion', addressCountry: 'AT' },
               { '@type': 'DefinedRegion', addressCountry: 'FR' },
