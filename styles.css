@@ -4649,6 +4649,10 @@ textarea:focus-visible,
   white-space: pre-line;
 }
 
+.product-material-note {
+  margin-top: 8px;
+}
+
 @media (max-width: 768px) {
   .product-page .sticky-panel {
     top: auto;

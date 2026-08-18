@@ -143,8 +143,18 @@
   <url>
     <loc>https://www.einharu.com/how-to-style-wide-leg-trousers</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/how-to-style-wide-leg-trousers"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/how-to-style-wide-leg-trousers"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/how-to-style-wide-leg-trousers"/>
-    <lastmod>2026-05-07</lastmod>
+    <lastmod>2026-08-18</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.einharu.com/de/how-to-style-wide-leg-trousers</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.einharu.com/de/how-to-style-wide-leg-trousers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.einharu.com/how-to-style-wide-leg-trousers"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.einharu.com/how-to-style-wide-leg-trousers"/>
+    <lastmod>2026-08-18</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>

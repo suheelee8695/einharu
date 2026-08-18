@@ -1146,6 +1146,12 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       matEl.innerHTML = '';
       const mats = Array.isArray(product.materials) ? product.materials.filter(Boolean) : [];
       mats.forEach((m) => { const div = document.createElement('div'); div.textContent = m; matEl.appendChild(div); });
+      if (product.materialNote) {
+        const noteDiv = document.createElement('div');
+        noteDiv.className = 'product-material-note';
+        noteDiv.textContent = product.materialNote;
+        matEl.appendChild(noteDiv);
+      }
     }
     const careEl = $('#product-care');
     if (careEl) {

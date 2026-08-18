@@ -6,6 +6,16 @@ function esc(str) {
     .replace(/>/g, '&gt;');
 }
 
+function buildTitle(product) {
+  // seoTitle is hand-authored copy — trust it in full rather than hard-slicing,
+  // which previously cut brand suffixes mid-word (e.g. "einHaru" -> "einHar").
+  if (product.seoTitle) return product.seoTitle;
+  const fallback = `${product.title} — einHaru Collective`;
+  if (fallback.length <= 60) return fallback;
+  const cut = fallback.slice(0, 60).lastIndexOf(' ');
+  return fallback.slice(0, cut > 30 ? cut : 60);
+}
+
 function buildDesc(product) {
   const raw = Array.isArray(product.description)
     ? product.description[0]
@@ -50,7 +60,7 @@ export default async function handler(req, context) {
   const upstream = await context.next();
   const html = await upstream.text();
 
-  const title = (product.seoTitle || `${product.title} — einHaru`).slice(0, 60);
+  const title = buildTitle(product);
   const desc = product.seoDescription || buildDesc(product);
   // DE product pages have no German copy yet — point canonical to EN to avoid
   // Google clustering noindex'd DE pages as duplicates of each other.
@@ -80,6 +90,9 @@ export default async function handler(req, context) {
     description: rawDesc,
     brand: { '@type': 'Brand', name: product.brand },
     sku: product.id,
+    ...(Array.isArray(product.materials) && product.materials.length > 0
+      ? { material: product.materials.join(', ') }
+      : {}),
     offers: {
       '@type': 'Offer',
       url: canonical,
