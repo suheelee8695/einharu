@@ -110,7 +110,9 @@ exports.handler = async () => {
       <g:link>${esc(`${SITE}/${p.slug}`)}</g:link>
       <g:image_link>${esc(imageUrl)}</g:image_link>
       ${additionalImages}
-      <g:price>${fmtPrice(p.price)}</g:price>
+      ${p.compareAtPrice != null && Number(p.compareAtPrice) > Number(p.price)
+        ? `<g:price>${fmtPrice(p.compareAtPrice)}</g:price>\n      <g:sale_price>${fmtPrice(p.price)}</g:sale_price>`
+        : `<g:price>${fmtPrice(p.price)}</g:price>`}
       <g:availability>${availability}</g:availability>
       <g:condition>new</g:condition>
       <g:brand>${esc(p.brand || 'einHaru')}</g:brand>

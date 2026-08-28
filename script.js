@@ -24,6 +24,9 @@
       backToShop: 'Back to shop',
       badgeComingSoon: 'COMING SOON',
       badgeSoldOut: 'SOLD OUT',
+      badgeSale: 'SALE',
+      badgeLastPiece: 'LAST PIECE',
+      stockLastPiece: 'Only 1 left',
       shippingNudgeDe: (remaining) => `Shipping: €4.90 to Germany · Add ${remaining} more for free delivery.`,
       shippingNudgeEu: (remaining) => `Shipping: €4.90 to EU · Add ${remaining} more for free delivery.`,
       shippingQualifiedDe: 'Free shipping to Germany.',
@@ -49,6 +52,9 @@
       backToShop: 'Zurück zum Shop',
       badgeComingSoon: 'BALD VERFUEGBAR',
       badgeSoldOut: 'AUSVERKAUFT',
+      badgeSale: 'SALE',
+      badgeLastPiece: 'LETZTES STUECK',
+      stockLastPiece: 'Nur noch 1 Stück verfügbar',
       shippingNudgeDe: (remaining) => `Versand: 4,90 € nach Deutschland · Noch ${remaining} bis zum kostenlosen Versand.`,
       shippingNudgeEu: (remaining) => `Versand: 4,90 € in die EU · Noch ${remaining} bis zum kostenlosen Versand.`,
       shippingQualifiedDe: 'Kostenloser Versand nach Deutschland.',
@@ -163,6 +169,10 @@
     if (Number(product?.stock ?? 0) <= 0) return 'sold_out';
     return 'available';
   };
+  const isOnSale = (product) =>
+    product?.compareAtPrice != null && Number(product.compareAtPrice) > Number(product?.price ?? 0);
+  const isLastPiece = (product, state) =>
+    (state ?? getProductState(product)) === 'available' && Number(product?.stock ?? 0) === 1;
   const normalizeAssetPath = (val) => {
     if (typeof val !== 'string') return val;
     const s = val.trim();
@@ -791,9 +801,13 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         const first = (prod.images && prod.images[0]) || prod.cover || '';
         const state = getProductState(prod);
         const showPrice = prod.price != null;
-        const badgeHtml = state === 'coming_soon'
-          ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
-          : '';
+        const onSale = state === 'available' && isOnSale(prod);
+        const lastPiece = isLastPiece(prod, state);
+        const badgeHtml = [
+          state === 'coming_soon' ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>` : '',
+          onSale ? `<span class="badge--sale">${t('badgeSale')}</span>` : '',
+          lastPiece ? `<span class="badge--lastpiece">${t('badgeLastPiece')}</span>` : ''
+        ].join('');
 
         const card = document.createElement('div');
         card.className = state === 'sold_out' ? 'product-card product-card--soldout' : 'product-card';
@@ -802,13 +816,17 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         card.setAttribute('aria-label',
           state === 'sold_out'
             ? `${prod.title}, ${t('soldOut')}`
-            : `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
+            : onSale
+              ? `${prod.title}, ${fmtPrice(prod.compareAtPrice, prod.currency || 'EUR')} ${fmtPrice(prod.price, prod.currency || 'EUR')}, ${t('badgeSale')}`
+              : `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
         card.dataset.category = (prod.category || 'collection').toLowerCase();
         const brand = prod.brand || (card.dataset.category === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
         const priceHtml = showPrice
           ? (state === 'sold_out'
               ? `<div class="card-price card-price--soldout">${t('soldOut')}</div>`
-              : `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>`)
+              : onSale
+                ? `<div class="card-price"><span class="card-price-was">${fmtPrice(prod.compareAtPrice, prod.currency || 'EUR')}</span><span class="card-price-now">${fmtPrice(prod.price, prod.currency || 'EUR')}</span></div>`
+                : `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>`)
           : '';
 
         card.innerHTML = `
@@ -877,14 +895,20 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         const state = getProductState(prod);
         const showPrice = prod.price != null;
         const img = (prod.images && prod.images[0]) || prod.cover || '';
-        const badgeHtml = state === 'coming_soon'
-          ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>`
-          : '';
+        const onSale = state === 'available' && isOnSale(prod);
+        const lastPiece = isLastPiece(prod, state);
+        const badgeHtml = [
+          state === 'coming_soon' ? `<span class="badge--comingsoon">${t('badgeComingSoon')}</span>` : '',
+          onSale ? `<span class="badge--sale">${t('badgeSale')}</span>` : '',
+          lastPiece ? `<span class="badge--lastpiece">${t('badgeLastPiece')}</span>` : ''
+        ].join('');
         const brand = prod.brand || ((prod.category || '').toLowerCase() === 'vintage' ? 'Vintage One-Off' : 'einHaru Collective');
         const priceHtml = showPrice
           ? (state === 'sold_out'
               ? `<div class="card-price card-price--soldout">${t('soldOut')}</div>`
-              : `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>`)
+              : onSale
+                ? `<div class="card-price"><span class="card-price-was">${fmtPrice(prod.compareAtPrice, prod.currency || 'EUR')}</span><span class="card-price-now">${fmtPrice(prod.price, prod.currency || 'EUR')}</span></div>`
+                : `<div class="card-price">${fmtPrice(prod.price, prod.currency || 'EUR')}</div>`)
           : '';
         const row = document.createElement('article');
         row.className = state === 'sold_out' ? 'product-list-item product-card--soldout' : 'product-list-item';
@@ -893,7 +917,9 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
         row.setAttribute('aria-label',
           state === 'sold_out'
             ? `${prod.title}, ${t('soldOut')}`
-            : `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
+            : onSale
+              ? `${prod.title}, ${fmtPrice(prod.compareAtPrice, prod.currency || 'EUR')} ${fmtPrice(prod.price, prod.currency || 'EUR')}, ${t('badgeSale')}`
+              : `${prod.title}, ${fmtPrice(prod.price, prod.currency || 'EUR')}`);
         row.innerHTML = `
           <div class="product-list-thumb">
             <img src="${img}" alt="${buildProductImageAlt(prod, 0)}" loading="lazy">
@@ -1073,6 +1099,15 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       }
     }
     $('#product-price') && ($('#product-price').textContent = fmtPrice(product.price, product.currency || 'EUR'));
+    const productPriceWasEl = $('#product-price-was');
+    if (productPriceWasEl) {
+      if (isOnSale(product)) {
+        productPriceWasEl.textContent = fmtPrice(product.compareAtPrice, product.currency || 'EUR');
+        productPriceWasEl.hidden = false;
+      } else {
+        productPriceWasEl.hidden = true;
+      }
+    }
     const updateProductShippingUI = () => {
       const shippingNudge = $('#shipping-nudge');
       if (!shippingNudge) return;
@@ -1098,12 +1133,16 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
     });
     const stockStateEl = $('#product-stock-state');
     if (stockStateEl) {
-      if (getProductState(product) === 'coming_soon') {
+      const productState = getProductState(product);
+      if (productState === 'coming_soon') {
         stockStateEl.className = 'stock-state stock-state--coming';
         stockStateEl.textContent = t('stockComing');
-      } else if (getProductState(product) === 'sold_out') {
+      } else if (productState === 'sold_out') {
         stockStateEl.className = 'stock-state stock-state--soldout';
         stockStateEl.textContent = t('stockSoldOut');
+      } else if (isLastPiece(product, productState)) {
+        stockStateEl.className = 'stock-state stock-state--lastpiece';
+        stockStateEl.textContent = t('stockLastPiece');
       } else {
         stockStateEl.className = 'stock-state stock-state--in';
         stockStateEl.textContent = t('stockIn');

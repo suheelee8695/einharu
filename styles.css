@@ -645,6 +645,29 @@ button.icon-btn::-moz-focus-inner {
   display: none;
 }
 
+.badge--sale {
+  position: absolute; top: 8px; left: 8px;
+  color: var(--bg);
+  background: var(--ink);
+  font-size: 10px; line-height: 1;
+  padding: 6px 8px;
+  text-transform: uppercase; letter-spacing: .08em;
+  opacity: .95; pointer-events: none;
+  z-index: 2;
+}
+
+.badge--lastpiece {
+  position: absolute; top: 8px; right: 8px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  font-size: 10px; line-height: 1;
+  padding: 5px 7px;
+  text-transform: uppercase; letter-spacing: .08em;
+  pointer-events: none;
+  z-index: 2;
+}
+
 .product-card--soldout .card-image-wrapper {
   opacity: 0.55;
 }
@@ -721,6 +744,15 @@ button.icon-btn::-moz-focus-inner {
 }
 .card-price--soldout {
   color: var(--ink-muted);
+}
+.card-price-was {
+  color: var(--ink-muted);
+  text-decoration: line-through;
+  font-variant-numeric: tabular-nums;
+  margin-right: 6px;
+}
+.card-price-now {
+  color: var(--ink);
 }
 
 /* List view (single class toggle on .product-grid) */
@@ -1809,6 +1841,12 @@ button.icon-btn::-moz-focus-inner {
 .price-line #product-price {
   font-size: 1.35rem;
   font-weight: 500;
+}
+.price-line #product-price-was {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  text-decoration: line-through;
+  font-variant-numeric: tabular-nums;
 }
 
 .product-tax-note {
@@ -4610,6 +4648,8 @@ textarea:focus-visible,
 .product-page .stock-state--soldout::before { background: #c9c9c9; }
 .product-page .stock-state--coming { color: #8a8a8a; }
 .product-page .stock-state--coming::before { background: #b2b2b2; }
+.product-page .stock-state--lastpiece { color: var(--ink); }
+.product-page .stock-state--lastpiece::before { background: var(--ink); }
 
 .product-page .trust-strip {
   display: grid;
