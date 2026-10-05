@@ -16,13 +16,13 @@
       shippingNoteDe: (remaining) => remaining > 0
         ? `Germany shipping: €4.90. Add ${fmt(remaining)} more for free shipping over €80.`
         : 'Germany shipping is free on this order.',
-      shippingNoteEu: (remaining) => remaining > 0
-        ? `EU shipping: €4.90. Add ${fmt(remaining)} more for free shipping over €80.`
-        : 'EU shipping is free on this order.',
+      shippingNoteNear: (remaining) => remaining > 0
+        ? `Switzerland/UK/Norway shipping: €4.90. Add ${fmt(remaining)} more for free shipping over €80.`
+        : 'Switzerland/UK/Norway shipping is free on this order.',
       shippingNoteIntl: 'International shipping: €18.90. Free shipping is not available.',
       returnNote: 'Returns accepted within 14 days of delivery. Return shipping is paid by the customer.',
       bannerDe: 'Germany shipping €4.90 · Free over €80',
-      bannerEu: 'EU shipping €4.90 · Free over €80',
+      bannerNear: 'Switzerland/UK/Norway shipping €4.90 · Free over €80',
       bannerIntl: 'International shipping €18.90'
     },
     de: {
@@ -38,13 +38,13 @@
       shippingNoteDe: (remaining) => remaining > 0
         ? `Versand in Deutschland: 4,90 €. Noch ${fmt(remaining)} bis zum kostenlosen Versand ab 80 €.`
         : 'Der Versand in Deutschland ist für diese Bestellung kostenlos.',
-      shippingNoteEu: (remaining) => remaining > 0
-        ? `EU-Versand: 4,90 €. Noch ${fmt(remaining)} bis zum kostenlosen Versand ab 80 €.`
-        : 'Der EU-Versand ist für diese Bestellung kostenlos.',
+      shippingNoteNear: (remaining) => remaining > 0
+        ? `Versand Schweiz/UK/Norwegen: 4,90 €. Noch ${fmt(remaining)} bis zum kostenlosen Versand ab 80 €.`
+        : 'Der Versand in die Schweiz/UK/Norwegen ist für diese Bestellung kostenlos.',
       shippingNoteIntl: 'Internationaler Versand: 18,90 €. Kostenloser Versand ist international nicht verfügbar.',
       returnNote: 'Rückgaben sind innerhalb von 14 Tagen nach Zustellung möglich. Die Kosten für den Rückversand trägt die Kundschaft.',
       bannerDe: 'Versand 4,90 € · Gratis ab 80 €',
-      bannerEu: 'EU-Versand 4,90 € · Gratis ab 80 €',
+      bannerNear: 'Versand Schweiz/UK/Norwegen 4,90 € · Gratis ab 80 €',
       bannerIntl: 'Internationaler Versand 18,90 €'
     }
   };
@@ -56,10 +56,8 @@
   const state = { items: [] }; // [{id,title,price,currency,size,qty,image,stripePriceId,stock?}]
   let lastFocused = null;
   const SHIPPING_KEY = 'eh_shipping_country';
-  const EU_COUNTRIES = new Set([
-    'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT',
-    'LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'
-  ]);
+  // Non-EU, no equivalent packaging-EPR obligation — see create-checkout-session.js
+  const NEAR_COUNTRIES = new Set(['CH', 'GB', 'NO', 'IS', 'LI']);
 
   // ---- stock helpers
   const getStock = (i) => {
@@ -91,7 +89,7 @@ const setShippingCountry = (code) => {
 const getShippingRegion = (code) => {
   const upper = String(code || 'DE').toUpperCase();
   if (upper === 'DE') return 'DE';
-  if (EU_COUNTRIES.has(upper)) return 'EU';
+  if (NEAR_COUNTRIES.has(upper)) return 'NEAR';
   return 'INTL';
 };
 
@@ -369,7 +367,7 @@ els.promoRemove?.addEventListener('click', () => {
     const el = document.getElementById('banner-text');
     if (!el) return;
     const region = getShippingRegion(els.shipCountries?.[0]?.value || getShippingCountry());
-    el.textContent = region === 'DE' ? t('bannerDe') : region === 'EU' ? t('bannerEu') : t('bannerIntl');
+    el.textContent = region === 'DE' ? t('bannerDe') : region === 'NEAR' ? t('bannerNear') : t('bannerIntl');
   }
 
   function renderShippingNote() {
@@ -380,9 +378,9 @@ els.promoRemove?.addEventListener('click', () => {
     if (region === 'DE') {
       const remaining = Math.max(0, 80 - rawSubtotal);
       els.shippingNote.textContent = t('shippingNoteDe', remaining);
-    } else if (region === 'EU') {
+    } else if (region === 'NEAR') {
       const remaining = Math.max(0, 80 - rawSubtotal);
-      els.shippingNote.textContent = t('shippingNoteEu', remaining);
+      els.shippingNote.textContent = t('shippingNoteNear', remaining);
     } else {
       els.shippingNote.textContent = t('shippingNoteIntl');
     }

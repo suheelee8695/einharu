@@ -28,10 +28,10 @@
       badgeLastPiece: 'LAST PIECE',
       stockLastPiece: 'Only 1 left',
       shippingNudgeDe: (remaining) => `Shipping: €4.90 to Germany · Add ${remaining} more for free delivery.`,
-      shippingNudgeEu: (remaining) => `Shipping: €4.90 to EU · Add ${remaining} more for free delivery.`,
+      shippingNudgeNear: (remaining) => `Shipping: €4.90 to Switzerland, UK & Norway · Add ${remaining} more for free delivery.`,
       shippingQualifiedDe: 'Free shipping to Germany.',
-      shippingQualifiedEu: 'Free shipping across the EU.',
-      shippingIntl: 'Shipping: €18.90 internationally · Free shipping is available for Germany and EU orders.',
+      shippingQualifiedNear: 'Free shipping to Switzerland, UK & Norway.',
+      shippingIntl: 'Shipping: €18.90 internationally · Free shipping is available for Germany and nearby countries.',
       stockComing: 'Coming Soon',
       stockSoldOut: 'Sold Out',
       stockIn: 'In Stock',
@@ -41,7 +41,7 @@
       alertSoldOut: 'This item is sold out.',
       alertCartUnavailable: 'Cart unavailable.',
       alertMissingStripe: 'This item cannot be checked out yet (missing Stripe Price).',
-      banner: 'Germany: €4.90 or free over €80. EU: €4.90 or free over €80. International: €18.90.'
+      banner: 'Germany: €4.90 or free over €80. Nearby (CH/UK/NO): €4.90 or free over €80. International: €18.90.'
     },
     de: {
       bagEmpty: 'Dein Warenkorb ist leer.',
@@ -56,10 +56,10 @@
       badgeLastPiece: 'LETZTES STUECK',
       stockLastPiece: 'Nur noch 1 Stück verfügbar',
       shippingNudgeDe: (remaining) => `Versand: 4,90 € nach Deutschland · Noch ${remaining} bis zum kostenlosen Versand.`,
-      shippingNudgeEu: (remaining) => `Versand: 4,90 € in die EU · Noch ${remaining} bis zum kostenlosen Versand.`,
+      shippingNudgeNear: (remaining) => `Versand: 4,90 € in die Schweiz, UK & Norwegen · Noch ${remaining} bis zum kostenlosen Versand.`,
       shippingQualifiedDe: 'Kostenloser Versand nach Deutschland.',
-      shippingQualifiedEu: 'Kostenloser Versand in die EU.',
-      shippingIntl: 'Versand: 18,90 € international · Kostenloser Versand gilt für Deutschland und EU.',
+      shippingQualifiedNear: 'Kostenloser Versand in die Schweiz, UK & Norwegen.',
+      shippingIntl: 'Versand: 18,90 € international · Kostenloser Versand gilt für Deutschland und ausgewählte Länder.',
       stockComing: 'Bald verfuegbar',
       stockSoldOut: 'Ausverkauft',
       stockIn: 'Auf Lager',
@@ -69,7 +69,7 @@
       alertSoldOut: 'Dieser Artikel ist ausverkauft.',
       alertCartUnavailable: 'Warenkorb derzeit nicht verfuegbar.',
       alertMissingStripe: 'Dieser Artikel kann derzeit nicht zur Kasse gehen.',
-      banner: 'Deutschland: 4,90 € oder kostenlos ab 80 €. EU: 4,90 € oder kostenlos ab 80 €. International: 18,90 €.'
+      banner: 'Deutschland: 4,90 € oder kostenlos ab 80 €. Nahe Länder (CH/UK/NO): 4,90 € oder kostenlos ab 80 €. International: 18,90 €.'
     }
   };
   const t = (key, ...args) => {
@@ -78,18 +78,16 @@
   };
   const SHIPPING_REGIONS = {
     DE: { threshold: 80, price: 4.9, key: 'DE' },
-    EU: { threshold: 80, price: 4.9, key: 'EU' },
+    NEAR: { threshold: 80, price: 4.9, key: 'NEAR' },
     INTL: { threshold: null, price: 18.9, key: 'INTL' }
   };
   const SHIPPING_KEY = 'eh_shipping_country';
-  const EU_COUNTRIES = new Set([
-    'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT',
-    'LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'
-  ]);
+  // Non-EU, no equivalent packaging-EPR obligation — see create-checkout-session.js
+  const NEAR_COUNTRIES = new Set(['CH', 'GB', 'NO', 'IS', 'LI']);
   const detectShippingRegion = (countryCode) => {
     const code = String(countryCode || 'DE').toUpperCase();
     if (code === 'DE') return 'DE';
-    if (EU_COUNTRIES.has(code)) return 'EU';
+    if (NEAR_COUNTRIES.has(code)) return 'NEAR';
     return 'INTL';
   };
   const getSelectedShippingCountry = () => {
@@ -105,9 +103,9 @@
     if (remaining > 0) {
       return region === 'DE'
         ? t('shippingNudgeDe', fmtPrice(remaining, currency))
-        : t('shippingNudgeEu', fmtPrice(remaining, currency));
+        : t('shippingNudgeNear', fmtPrice(remaining, currency));
     }
-    return region === 'DE' ? t('shippingQualifiedDe') : t('shippingQualifiedEu');
+    return region === 'DE' ? t('shippingQualifiedDe') : t('shippingQualifiedNear');
   };
 
   /*** HELPERS ***/
@@ -615,13 +613,11 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
             '@type': 'OfferShippingDetails',
             shippingRate: { '@type': 'MonetaryAmount', value: '4.90', currency: 'EUR' },
             shippingDestination: [
-              { '@type': 'DefinedRegion', addressCountry: 'AT' },
-              { '@type': 'DefinedRegion', addressCountry: 'FR' },
-              { '@type': 'DefinedRegion', addressCountry: 'NL' },
-              { '@type': 'DefinedRegion', addressCountry: 'BE' },
-              { '@type': 'DefinedRegion', addressCountry: 'IT' },
-              { '@type': 'DefinedRegion', addressCountry: 'ES' },
-              { '@type': 'DefinedRegion', addressCountry: 'PL' }
+              { '@type': 'DefinedRegion', addressCountry: 'CH' },
+              { '@type': 'DefinedRegion', addressCountry: 'GB' },
+              { '@type': 'DefinedRegion', addressCountry: 'NO' },
+              { '@type': 'DefinedRegion', addressCountry: 'IS' },
+              { '@type': 'DefinedRegion', addressCountry: 'LI' }
             ],
             deliveryTime: {
               '@type': 'ShippingDeliveryTime',
@@ -1115,7 +1111,7 @@ document.documentElement.style.setProperty('--eh-top-offset', `${headerH + banne
       const subtotal = Number(product.price || 0);
       const qualified = region === 'DE'
         ? subtotal >= SHIPPING_REGIONS.DE.threshold
-        : (region === 'EU' ? subtotal >= SHIPPING_REGIONS.EU.threshold : false);
+        : (region === 'NEAR' ? subtotal >= SHIPPING_REGIONS.NEAR.threshold : false);
       shippingNudge.textContent = getShippingMessage(subtotal, product.currency || 'EUR');
       shippingNudge.classList.toggle('shipping-nudge--qualified', qualified);
       shippingNudge.classList.toggle('shipping-nudge--neutral', region === 'INTL');

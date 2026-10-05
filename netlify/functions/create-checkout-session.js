@@ -119,14 +119,17 @@ exports.handler = async (event) => {
       }];
     }
 
-    const EU_COUNTRIES = new Set([
-      'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT',
-      'LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'
-    ]);
+    // EU packaging EPR law requires in-country registration for every EU
+    // member state shipped to — only Germany is registered. Other EU states
+    // are deliberately excluded from ALLOWED_COUNTRIES below.
+    // NEAR_COUNTRIES are non-EU and carry no equivalent EPR obligation
+    // (Switzerland: no such law; Norway/Iceland/Liechtenstein: EEA de minimis
+    // exemption; UK: separate domestic pEPR scheme).
+    const NEAR_COUNTRIES = new Set(['CH', 'GB', 'NO', 'IS', 'LI']);
     const INTERNATIONAL_COUNTRIES = new Set([
-      'AU','CA','CH','GB','HK','JP','NO','NZ','SG','US','AE'
+      'AU','CA','HK','JP','NZ','SG','US','AE'
     ]);
-    const ALLOWED_COUNTRIES = [...new Set(['DE', ...EU_COUNTRIES, ...INTERNATIONAL_COUNTRIES])];
+    const ALLOWED_COUNTRIES = ['DE', ...NEAR_COUNTRIES, ...INTERNATIONAL_COUNTRIES];
 
     const VALID_COUPONS = (process.env.COUPON_CODES || '')
       .split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
@@ -136,7 +139,7 @@ exports.handler = async (event) => {
 
     const shippingTier = shipCountry === 'DE'
       ? 'DE'
-      : (EU_COUNTRIES.has(shipCountry) ? 'EU' : 'INTL');
+      : (NEAR_COUNTRIES.has(shipCountry) ? 'NEAR' : 'INTL');
 
     const shippingConfig = {
       DE: {
@@ -144,10 +147,10 @@ exports.handler = async (event) => {
         amount: subtotal >= 8000 ? 0 : 490,
         freeLabel: 'Free Germany shipping (orders over €80)'
       },
-      EU: {
-        label: 'EU shipping',
+      NEAR: {
+        label: 'Europe shipping',
         amount: subtotal >= 8000 ? 0 : 490,
-        freeLabel: 'Free EU shipping (orders over €80)'
+        freeLabel: 'Free Europe shipping (orders over €80)'
       },
       INTL: {
         label: 'International shipping',
